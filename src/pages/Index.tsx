@@ -393,11 +393,11 @@ const Index = () => {
       sessions: [
         {
           name: "4H ASIA REVERSAL",
-          time: "10p→6p sweep",
+          time: "6p→2a sweep",
           setup: "22:00 (ASIA) sweeps 18:00 (Pre-ASIA)",
           target: "London expansion 2-6am",
           entry: "LON-SB window (3-4am)",
-          hours: "H1(6a) setup → H2(7a) quiet → H3(8a) news → H4(9a) delivery"
+          hours: "H1(2a) setup → H2(3a) quiet → H3(4a) delivery → H4(5a) continuation"
         },
         {
           name: "4H LONDON REVERSAL",
