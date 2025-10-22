@@ -1,1 +1,4 @@
 project_id = "bjmllyubebutamxbzooa"
+
+[functions.mecha-ai]
+verify_jwt = false

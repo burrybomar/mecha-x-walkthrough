@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { 
-  Play, Pause, RotateCcw, TrendingUp, TrendingDown, 
+  TrendingUp, TrendingDown, 
   Zap, Target, Clock, BarChart3, MessageCircle,
   Activity, Book, Eye, Layers, GitCompare, Workflow,
-  ArrowUpDown, CheckCircle2, AlertCircle, Info
+  ArrowUpDown, CheckCircle2, AlertCircle, Info, RotateCcw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import mechaxLogo from '@/assets/mecha-x-logo.png';
+import { AITooltip } from '@/components/AITooltip';
+import mechaxLogo from '@/assets/mecha-x-logo.gif';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -26,14 +26,6 @@ const Index = () => {
   const [userProgress, setUserProgress] = useState(0);
   const [completedSections, setCompletedSections] = useState(new Set<string>());
   const [currentTime, setCurrentTime] = useState(new Date());
-  
-  // Animation states
-  const [isPatternAnimating, setIsPatternAnimating] = useState(false);
-  const [patternStep, setPatternStep] = useState(0);
-  const [isPhaseAnimating, setIsPhaseAnimating] = useState(false);
-  const [phaseStep, setPhaseStep] = useState(0);
-  const [isSMTAnimating, setIsSMTAnimating] = useState(false);
-  const [smtStep, setSMTStep] = useState(0);
 
   // Real-time clock
   useEffect(() => {
@@ -58,71 +50,6 @@ const Index = () => {
     }
   };
 
-  // Pattern animation (C1→C2→C3)
-  const animatePattern = () => {
-    setIsPatternAnimating(true);
-    setPatternStep(0);
-    const interval = setInterval(() => {
-      setPatternStep(prev => {
-        if (prev >= 2) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsPatternAnimating(false);
-            markComplete('pattern');
-          }, 1000);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 1500);
-  };
-
-  // Phase animation
-  const animatePhase = () => {
-    setIsPhaseAnimating(true);
-    setPhaseStep(0);
-    const interval = setInterval(() => {
-      setPhaseStep(prev => {
-        if (prev >= 4) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsPhaseAnimating(false);
-            markComplete('phase');
-          }, 1000);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 1200);
-  };
-
-  // SMT animation
-  const animateSMT = () => {
-    setIsSMTAnimating(true);
-    setSMTStep(0);
-    const interval = setInterval(() => {
-      setSMTStep(prev => {
-        if (prev >= 2) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsSMTAnimating(false);
-            markComplete('smt');
-          }, 1000);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 1500);
-  };
-
-  const resetAnimations = () => {
-    setIsPatternAnimating(false);
-    setPatternStep(0);
-    setIsPhaseAnimating(false);
-    setPhaseStep(0);
-    setIsSMTAnimating(false);
-    setSMTStep(0);
-  };
 
   // Tab configuration
   const tabConfig: Record<TabKey, TabConfig> = {
@@ -646,37 +573,30 @@ const Index = () => {
                 {selectedTab === 'pattern' && (
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border">
-                      <div className="flex items-center justify-center space-x-4 mb-6">
-                        <Button onClick={animatePattern} disabled={isPatternAnimating} size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                          {isPatternAnimating ? <Pause className="w-5 h-5 mr-2" /> : <Play className="w-5 h-5 mr-2" />}
-                          Watch Demo
-                        </Button>
-                        <Button variant="outline" onClick={resetAnimations}>
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Reset
-                        </Button>
-                      </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {content.pattern.steps.map((step, i) => (
                           <motion.div
                             key={i}
-                            className={`p-5 rounded-xl border-2 ${
-                              patternStep >= i ? 'border-emerald-500 bg-emerald-100 shadow-xl' : 'border-slate-200 bg-white/80'
-                            }`}
-                            animate={{ scale: patternStep >= i ? 1.05 : 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.2 }}
+                            whileHover={{ scale: 1.05 }}
+                            className="p-5 rounded-xl border-2 border-emerald-200 bg-white/90 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer"
                           >
                             <div className="flex items-center space-x-2 mb-3">
-                              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${
-                                patternStep >= i ? 'bg-emerald-500 text-white' : 'bg-slate-300 text-slate-600'
-                              }`}>
+                              <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl">
                                 {step.emoji}
                               </div>
-                              <h3 className="font-bold">{step.name}</h3>
+                              <AITooltip term={step.name}>
+                                <h3 className="font-bold">{step.name}</h3>
+                              </AITooltip>
                             </div>
                             <p className="text-sm mb-2">{step.what}</p>
-                            <div className="bg-white/80 p-2 rounded text-xs">
+                            <div className="bg-emerald-50 p-2 rounded text-xs">
                               <strong>Rule:</strong> {step.rule}
+                            </div>
+                            <div className="mt-2 text-xs text-slate-600">
+                              <strong>Example:</strong> {step.example}
                             </div>
                           </motion.div>
                         ))}
@@ -697,32 +617,27 @@ const Index = () => {
                 {selectedTab === 'phases' && (
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border">
-                      <div className="flex items-center justify-center space-x-4 mb-6">
-                        <Button onClick={animatePhase} disabled={isPhaseAnimating} size="lg" className="bg-cyan-600 hover:bg-cyan-700">
-                          {isPhaseAnimating ? <Pause className="w-5 h-5 mr-2" /> : <Play className="w-5 h-5 mr-2" />}
-                          Watch Cycle
-                        </Button>
-                        <Button variant="outline" onClick={resetAnimations}>
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Reset
-                        </Button>
-                      </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                         {content.phases.phases.map((phase, i) => (
                           <motion.div
                             key={i}
-                            className={`p-4 rounded-xl border-2 ${
-                              phaseStep >= i ? `border-cyan-500 bg-gradient-to-br ${phase.color} text-white shadow-xl` : 'border-slate-200 bg-white'
-                            }`}
-                            animate={{ scale: phaseStep >= i ? 1.05 : 1 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: i * 0.1 }}
+                            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                            className={`p-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-gradient-to-br ${phase.color} hover:text-white hover:shadow-xl transition-all cursor-pointer group`}
                           >
-                            <div className={`p-2 rounded-lg mb-2 ${phaseStep >= i ? 'bg-white/20' : 'bg-cyan-100'}`}>
+                            <div className="p-2 rounded-lg mb-2 bg-cyan-100 group-hover:bg-white/20 transition-colors">
                               {phase.icon}
                             </div>
-                            <h3 className="font-bold mb-1">{phase.name}</h3>
-                            <p className={`text-xs mb-2 ${phaseStep >= i ? 'text-white/90' : 'text-slate-600'}`}>{phase.what}</p>
-                            <div className={`text-xs ${phaseStep >= i ? 'text-white/80' : 'text-slate-500'}`}>
+                            <AITooltip term={phase.name}>
+                              <h3 className="font-bold mb-1">{phase.name}</h3>
+                            </AITooltip>
+                            <p className="text-xs mb-2 text-slate-600 group-hover:text-white/90 transition-colors">{phase.what}</p>
+                            <div className="text-xs text-slate-500 group-hover:text-white/80 transition-colors">
+                              <strong>Signal:</strong> {phase.signal}
+                            </div>
+                            <div className="text-xs text-slate-500 group-hover:text-white/80 mt-1 transition-colors">
                               Next: {phase.next}
                             </div>
                           </motion.div>
@@ -732,11 +647,17 @@ const Index = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {content.phases.strength.levels.map((lvl, i) => (
-                        <div key={i} className="bg-white p-4 rounded-xl border shadow-sm">
+                        <motion.div 
+                          key={i} 
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="bg-white p-4 rounded-xl border shadow-sm hover:shadow-lg transition-shadow"
+                        >
                           <Badge className={`${lvl.color} border-0 mb-2`}>{lvl.score}</Badge>
                           <h3 className="font-bold mb-1">{lvl.name}</h3>
                           <p className="text-sm text-slate-600">{lvl.desc}</p>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
@@ -746,32 +667,24 @@ const Index = () => {
                 {selectedTab === 'smt' && (
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border">
-                      <div className="flex items-center justify-center space-x-4 mb-6">
-                        <Button onClick={animateSMT} disabled={isSMTAnimating} size="lg" className="bg-orange-600 hover:bg-orange-700">
-                          {isSMTAnimating ? <Pause className="w-5 h-5 mr-2" /> : <Play className="w-5 h-5 mr-2" />}
-                          Watch SMT
-                        </Button>
-                        <Button variant="outline" onClick={resetAnimations}>
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Reset
-                        </Button>
-                      </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         {content.smt.modes.map((mode, i) => (
                           <motion.div
                             key={i}
-                            className={`p-5 rounded-xl border-2 ${
-                              smtStep >= i ? 'border-orange-500 bg-orange-100 shadow-xl' : 'border-slate-200 bg-white'
-                            }`}
-                            animate={{ scale: smtStep >= i ? 1.05 : 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.2 }}
+                            whileHover={{ scale: 1.03 }}
+                            className="p-5 rounded-xl border-2 border-orange-200 bg-white hover:border-orange-500 hover:shadow-xl transition-all cursor-pointer"
                           >
-                            <h3 className="font-bold text-lg mb-2">{mode.name}</h3>
+                            <AITooltip term={mode.detection}>
+                              <h3 className="font-bold text-lg mb-2 text-orange-900">{mode.name}</h3>
+                            </AITooltip>
                             <div className="space-y-2 text-sm">
-                              <div><strong>Setup:</strong> {mode.setup}</div>
-                              <div><strong>Example:</strong> {mode.example}</div>
-                              <div><strong>Detection:</strong> {mode.detection}</div>
-                              <div className="bg-white/80 p-2 rounded"><strong>Logic:</strong> {mode.logic}</div>
+                              <div className="bg-orange-50 p-2 rounded"><strong>Setup:</strong> {mode.setup}</div>
+                              <div className="bg-orange-50 p-2 rounded"><strong>Example:</strong> {mode.example}</div>
+                              <div className="bg-orange-50 p-2 rounded"><strong>Detection:</strong> {mode.detection}</div>
+                              <div className="bg-orange-100 p-2 rounded"><strong>Logic:</strong> {mode.logic}</div>
                             </div>
                           </motion.div>
                         ))}
@@ -788,15 +701,23 @@ const Index = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {content.smt.types.map((type, i) => (
-                        <div key={i} className="bg-white p-4 rounded-xl border shadow-sm">
+                        <motion.div 
+                          key={i} 
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="bg-white p-4 rounded-xl border shadow-sm hover:shadow-lg transition-shadow"
+                        >
                           <div className="flex items-center justify-between mb-2">
                             <Badge className="bg-orange-500 text-white border-0">{type.label}</Badge>
                             <span className="text-xs">{type.strength}</span>
                           </div>
-                          <h3 className="font-bold mb-1">{type.name}</h3>
+                          <AITooltip term={type.label}>
+                            <h3 className="font-bold mb-1">{type.name}</h3>
+                          </AITooltip>
                           <p className="text-xs text-slate-600 mb-2">{type.condition}</p>
                           <p className="text-xs text-orange-700">→ {type.bias}</p>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
