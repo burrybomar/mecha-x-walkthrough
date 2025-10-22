@@ -178,28 +178,28 @@ const Index = () => {
       subtitle: "The foundation of every setup",
       steps: [
         {
-          name: "C1 Liquidity",
+          name: "C1 Setup",
           emoji: "🎯",
-          what: "Creates the sweep target",
-          rule: "Must touch a POI (FVG, iFVG, OB)",
-          example: "High touches order block = BSL created"
+          what: "First candle touching POI",
+          rule: "Left candle touches FVG, iFVG, or OB",
+          example: "C1 high touches order block above"
         },
         {
-          name: "C2 Sweep",
+          name: "C2 Swing",
           emoji: "⚡",
-          what: "Takes liquidity + closes inside",
-          rule: "Wick exceeds C1 AND body closes inside C1-C2 range",
-          example: "Wick hits 100.50, body closes 100.40"
+          what: "Middle candle = THE SWING",
+          rule: "BULLISH: C2 lower than C1 & C3 (swing low). BEARISH: C2 higher than C1 & C3 (swing high)",
+          example: "Bullish: C2 sweeps SSL below with wick, middle candle is the swing point"
         },
         {
           name: "C3 Confirmation",
           emoji: "✅",
-          what: "Creates expectation zone",
-          rule: "Market won't reverse without this swing",
-          example: "Break of C3 zone = pattern invalid"
+          what: "Right candle confirms reversal",
+          rule: "Closes opposite direction from sweep",
+          example: "C3 higher than C2 = bullish reversal confirmed"
         }
       ],
-      critical: "C2 MUST close back inside C1-C2 range. This proves manipulation, not breakout."
+      critical: "C2 is ALWAYS the middle candle and THE SWING POINT. 3 candles total: C1→C2 (swing)→C3"
     },
     phases: {
       title: "Phase System",
@@ -522,26 +522,35 @@ const Index = () => {
               <CardContent>
                 {/* OVERVIEW */}
                 {selectedTab === 'overview' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {content.overview.features.map((feat, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200"
-                      >
-                        <div className="flex items-start space-x-3">
-                          <div className="p-2 bg-blue-500 text-white rounded-lg">
-                            {feat.icon}
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-2xl">
+                      <h3 className="text-2xl font-bold mb-2">💡 Hover over any underlined term for AI explanations!</h3>
+                      <p className="text-blue-100">Interactive tooltips powered by your knowledge base</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {content.overview.features.map((feat, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-shadow"
+                        >
+                          <div className="flex items-start space-x-3">
+                            <div className="p-2 bg-blue-500 text-white rounded-lg">
+                              {feat.icon}
+                            </div>
+                            <div>
+                              <AITooltip term={feat.text}>
+                                <h3 className="font-bold text-slate-900">{feat.text}</h3>
+                              </AITooltip>
+                              <p className="text-sm text-slate-600 mt-1">{feat.detail}</p>
+                            </div>
                           </div>
-                          <div>
-                            <h3 className="font-bold text-slate-900">{feat.text}</h3>
-                            <p className="text-sm text-slate-600 mt-1">{feat.detail}</p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -766,6 +775,12 @@ const Index = () => {
                       description="Asia, London, and NY session windows with key timing"
                     />
                     
+                    <DiagramViewer 
+                      diagramType="framework"
+                      title="4-Layer Trading Framework"
+                      description="From directional thesis to precise entry execution"
+                    />
+                    
                     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border">
                       <h3 className="font-bold text-lg mb-4">{content.models.framework.title}</h3>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -781,28 +796,43 @@ const Index = () => {
                       </div>
                     </div>
 
-                    {content.models.sessions.map((sess, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="bg-white p-5 rounded-xl border shadow-lg"
-                      >
-                        <h3 className="font-bold text-lg mb-3 text-indigo-900">{sess.name}</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          <div className="space-y-2 text-sm">
-                            <div className="bg-indigo-50 p-2 rounded"><strong>Time:</strong> {sess.time}</div>
-                            <div className="bg-indigo-50 p-2 rounded"><strong>Setup:</strong> {sess.setup}</div>
-                            <div className="bg-indigo-50 p-2 rounded"><strong>Target:</strong> {sess.target}</div>
-                          </div>
-                          <div className="space-y-2 text-sm">
-                            <div className="bg-purple-50 p-2 rounded"><strong>Entry:</strong> {sess.entry}</div>
-                            <div className="bg-purple-50 p-2 rounded"><strong>Hours:</strong> {sess.hours}</div>
-                          </div>
+                    {content.models.sessions.map((sess, i) => {
+                      const diagramType = sess.name === "4H ASIA REVERSAL" ? "asiaRev" 
+                        : sess.name === "4H LONDON REVERSAL" ? "londonRev" 
+                        : "nyamSB";
+                      
+                      return (
+                        <div key={i} className="space-y-4">
+                          <DiagramViewer 
+                            diagramType={diagramType}
+                            title={sess.name}
+                            description={sess.setup}
+                          />
+                          
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="bg-white p-5 rounded-xl border shadow-lg"
+                          >
+                            <AITooltip term={sess.name}>
+                              <h3 className="font-bold text-lg mb-3 text-indigo-900">{sess.name}</h3>
+                            </AITooltip>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              <div className="space-y-2 text-sm">
+                                <div className="bg-indigo-50 p-2 rounded"><strong>Time:</strong> {sess.time}</div>
+                                <div className="bg-indigo-50 p-2 rounded"><strong>Setup:</strong> {sess.setup}</div>
+                                <div className="bg-indigo-50 p-2 rounded"><strong>Target:</strong> {sess.target}</div>
+                              </div>
+                              <div className="space-y-2 text-sm">
+                                <div className="bg-purple-50 p-2 rounded"><strong>Entry:</strong> {sess.entry}</div>
+                                <div className="bg-purple-50 p-2 rounded"><strong>Hours:</strong> {sess.hours}</div>
+                              </div>
+                            </div>
+                          </motion.div>
                         </div>
-                      </motion.div>
-                    ))}
+                      );
+                    })}
 
                     <div className="bg-slate-100 p-4 rounded-xl border">
                       <strong className="text-slate-800">Futures Times (NYC):</strong>
@@ -814,6 +844,12 @@ const Index = () => {
                 {/* TOOLTIPS */}
                 {selectedTab === 'tooltips' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="tooltipAnatomy"
+                      title="Tooltip Structure Breakdown"
+                      description="Understanding each section of MECHA-X intelligence tooltips"
+                    />
+                    
                     <div className="space-y-3">
                       {content.tooltips.anatomy.map((item, i) => (
                         <motion.div
@@ -853,6 +889,12 @@ const Index = () => {
                 {/* TERMS */}
                 {selectedTab === 'terms' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="terms"
+                      title="Essential Trading Terms Visual Guide"
+                      description="Quick visual reference for key MECHA-X terminology"
+                    />
+                    
                     <div>
                       <h3 className="font-bold text-lg mb-3">Core Terms</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -864,10 +906,12 @@ const Index = () => {
                             transition={{ delay: i * 0.03 }}
                             className="bg-gradient-to-r from-pink-50 to-purple-50 p-3 rounded-xl border"
                           >
-                            <div className="flex items-start space-x-2">
+                             <div className="flex items-start space-x-2">
                               <Badge className="bg-pink-500 text-white border-0 font-mono text-xs">{item.term}</Badge>
                               <div className="flex-1">
-                                <h4 className="font-bold text-sm">{item.def}</h4>
+                                <AITooltip term={item.term}>
+                                  <h4 className="font-bold text-sm">{item.def}</h4>
+                                </AITooltip>
                                 <p className="text-xs text-slate-600 mt-1">{item.use}</p>
                               </div>
                             </div>
@@ -887,10 +931,12 @@ const Index = () => {
                             transition={{ delay: i * 0.03 }}
                             className="bg-gradient-to-r from-indigo-50 to-blue-50 p-3 rounded-xl border"
                           >
-                            <div className="flex items-start space-x-2">
+                             <div className="flex items-start space-x-2">
                               <Badge className="bg-indigo-500 text-white border-0 font-mono text-xs">{item.term}</Badge>
                               <div className="flex-1">
-                                <h4 className="font-bold text-sm">{item.def}</h4>
+                                <AITooltip term={item.term}>
+                                  <h4 className="font-bold text-sm">{item.def}</h4>
+                                </AITooltip>
                                 <p className="text-xs text-slate-600 mt-1">{item.use}</p>
                               </div>
                             </div>
