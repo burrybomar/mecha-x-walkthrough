@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AITooltip } from '@/components/AITooltip';
+import { DiagramViewer } from '@/components/DiagramViewer';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
@@ -546,32 +547,53 @@ const Index = () => {
 
                 {/* VISUAL */}
                 {selectedTab === 'visual' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {content.visual.elements.map((el, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        className="bg-gradient-to-br from-slate-50 to-blue-50 p-4 rounded-xl border"
-                      >
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className="text-blue-600">{el.icon}</div>
-                          <h3 className="font-bold">{el.name}</h3>
-                        </div>
-                        <div className="space-y-2 text-sm">
-                          <div><strong className="text-blue-700">What:</strong> {el.what}</div>
-                          <div><strong className="text-emerald-700">Why:</strong> {el.why}</div>
-                          <div><strong className="text-purple-700">How:</strong> {el.how}</div>
-                        </div>
-                      </motion.div>
-                    ))}
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <DiagramViewer 
+                        diagramType="liquidity"
+                        title="BSL/SSL Liquidity Zones"
+                        description="Where institutions hunt for stops"
+                      />
+                      <DiagramViewer 
+                        diagramType="cisd"
+                        title="CISD Momentum Shift"
+                        description="Change in State of Delivery pattern"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {content.visual.elements.map((el, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                          className="bg-gradient-to-br from-slate-50 to-blue-50 p-4 rounded-xl border"
+                        >
+                          <div className="flex items-center space-x-2 mb-2">
+                            <div className="text-blue-600">{el.icon}</div>
+                            <h3 className="font-bold">{el.name}</h3>
+                          </div>
+                          <div className="space-y-2 text-sm">
+                            <div><strong className="text-blue-700">What:</strong> {el.what}</div>
+                            <div><strong className="text-emerald-700">Why:</strong> {el.why}</div>
+                            <div><strong className="text-purple-700">How:</strong> {el.how}</div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
                 {/* PATTERN */}
                 {selectedTab === 'pattern' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="pattern"
+                      title="C1→C2→C3 Visual Pattern"
+                      description="The core sweep pattern showing liquidity manipulation"
+                    />
+                    
                     <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {content.pattern.steps.map((step, i) => (
@@ -616,6 +638,12 @@ const Index = () => {
                 {/* PHASES */}
                 {selectedTab === 'phases' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="phases"
+                      title="5-Phase Market Cycle"
+                      description="How price moves through reversal, expansion, continuation, consolidation, and retracement"
+                    />
+                    
                     <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                         {content.phases.phases.map((phase, i) => (
@@ -666,6 +694,12 @@ const Index = () => {
                 {/* SMT */}
                 {selectedTab === 'smt' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="smt"
+                      title="SMT Divergence Detection"
+                      description="Structural comparison between correlated assets (ES vs NQ)"
+                    />
+                    
                     <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         {content.smt.modes.map((mode, i) => (
@@ -726,6 +760,12 @@ const Index = () => {
                 {/* MODELS */}
                 {selectedTab === 'models' && (
                   <div className="space-y-6">
+                    <DiagramViewer 
+                      diagramType="sessions"
+                      title="24-Hour Session Timeline"
+                      description="Asia, London, and NY session windows with key timing"
+                    />
+                    
                     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border">
                       <h3 className="font-bold text-lg mb-4">{content.models.framework.title}</h3>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
