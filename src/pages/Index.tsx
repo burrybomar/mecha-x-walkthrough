@@ -566,12 +566,12 @@ const Index = () => {
                       <h3 className="text-white text-xl font-bold mb-4 text-center">Visual Reference Gallery</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden">
+                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
                             <img 
                               src={htfEdgeCandles} 
                               alt="HTF Candles"
                               loading="lazy"
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
                             />
                           </div>
                           <div className="p-3 text-center">
@@ -579,12 +579,12 @@ const Index = () => {
                           </div>
                         </div>
                         <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden">
+                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
                             <img 
                               src={bslSslChart} 
                               alt="BSL/SSL Lines"
                               loading="lazy"
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
                             />
                           </div>
                           <div className="p-3 text-center">
@@ -592,12 +592,12 @@ const Index = () => {
                           </div>
                         </div>
                         <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden">
+                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
                             <img 
                               src={c2LabelsChart} 
                               alt="C2 Labels"
                               loading="lazy"
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
                             />
                           </div>
                           <div className="p-3 text-center">
@@ -605,12 +605,12 @@ const Index = () => {
                           </div>
                         </div>
                         <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden">
+                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
                             <img 
                               src={cisdChart} 
                               alt="CISD Lines"
                               loading="lazy"
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
                             />
                           </div>
                           <div className="p-3 text-center">
