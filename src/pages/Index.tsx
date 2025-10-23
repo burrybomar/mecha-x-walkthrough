@@ -533,7 +533,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Subtle Background Logo with Gradient Overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0 opacity-[0.25]">
           <img 
             src={mechaxLogo} 
             alt="" 
@@ -541,7 +541,7 @@ const Index = () => {
             style={{ imageRendering: 'crisp-edges' }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/75 to-background/70"></div>
       </div>
 
       {/* Content */}
