@@ -74,6 +74,12 @@ const Index = () => {
 
     try {
       const element = fullContentRef.current;
+      
+      // Temporarily make visible for rendering
+      element.style.display = 'block';
+      element.style.position = 'absolute';
+      element.style.left = '-9999px';
+      
       const opt = {
         margin: 10,
         filename: `MECHA-X-Complete-Guide.pdf`,
@@ -83,6 +89,9 @@ const Index = () => {
       };
 
       await html2pdf().set(opt).from(element).save();
+      
+      // Hide again after export
+      element.style.display = 'none';
       
       toast({
         title: "PDF Downloaded!",
@@ -94,6 +103,11 @@ const Index = () => {
         description: "There was an error generating the PDF. Please try again.",
         variant: "destructive",
       });
+      
+      // Ensure it's hidden even if export fails
+      if (fullContentRef.current) {
+        fullContentRef.current.style.display = 'none';
+      }
     } finally {
       setIsExporting(false);
     }
@@ -1255,7 +1269,7 @@ const Index = () => {
       </main>
 
       {/* Hidden Full Content for PDF Export */}
-      <div ref={fullContentRef} className="hidden print:block">
+      <div ref={fullContentRef} style={{ display: 'none' }} className="print:block bg-white text-black">
         <div className="space-y-8 p-8">
           {/* Overview Section */}
           <div className="break-after-page">
