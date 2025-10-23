@@ -8,6 +8,8 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Zap,
   Target,
@@ -32,13 +34,38 @@ const Index = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
 
-  const SettingRow = ({ title, description }: { title: string; description: string }) => (
-    <div className="flex items-center justify-between py-3 px-4 hover:bg-muted/50 rounded-md transition-colors">
-      <div className="flex-1">
-        <Label className="text-sm font-medium cursor-pointer">{title}</Label>
-        <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
-      </div>
+  const ToggleSetting = ({ label }: { label: string }) => (
+    <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
+      <Label className="text-sm cursor-pointer">{label}</Label>
       <Switch className="ml-4" />
+    </div>
+  );
+
+  const NumberSetting = ({ label, defaultValue }: { label: string; defaultValue: number }) => (
+    <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
+      <Label className="text-sm">{label}</Label>
+      <Input type="number" defaultValue={defaultValue} className="w-20 h-8 text-xs" />
+    </div>
+  );
+
+  const ColorSetting = ({ label, defaultColor }: { label: string; defaultColor: string }) => (
+    <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
+      <Label className="text-sm">{label}</Label>
+      <Input type="color" defaultValue={defaultColor} className="w-20 h-8 cursor-pointer" />
+    </div>
+  );
+
+  const SelectSetting = ({ label, options, defaultValue }: { label: string; options: string[]; defaultValue: string }) => (
+    <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
+      <Label className="text-sm">{label}</Label>
+      <Select defaultValue={defaultValue}>
+        <SelectTrigger className="w-32 h-8 text-xs">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent className="bg-card border-border z-50">
+          {options.map(opt => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
+        </SelectContent>
+      </Select>
     </div>
   );
 
@@ -143,16 +170,14 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">Display Settings</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="Show HTF Candles" description="Toggle higher timeframe candle overlay" />
-                      <SettingRow title="Show Chart Mapping" description="BSL/SSL lines, EQ, and dividers" />
-                      <SettingRow title="Show Liquidity Sweeps" description="LTF + HTF sweep detection" />
-                      <SettingRow title="Show C2 Labels" description="Pattern reversal markers" />
-                      <SettingRow title="Show CISD" description="Change in State of Delivery projections" />
-                      <SettingRow title="Show iFVG" description="Inverse Fair Value Gap zones" />
-                      <SettingRow title="Show SMT" description="Smart Money Technique divergence" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="Show HTF Candles" />
+                    <ToggleSetting label="Show Chart Mapping" />
+                    <ToggleSetting label="Show Liquidity Sweeps" />
+                    <ToggleSetting label="Show C2 Labels" />
+                    <ToggleSetting label="Show CISD" />
+                    <ToggleSetting label="Show iFVG" />
+                    <ToggleSetting label="Show SMT" />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -160,13 +185,11 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">HTF Setup</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="HTF Mode" description="Auto or Manual timeframe selection" />
-                      <SettingRow title="Auto HTF Count" description="Number of HTFs in Auto mode (1-4)" />
-                      <SettingRow title="HTF Shift Type" description="Live or Historical offset" />
-                      <SettingRow title="Historical Shift" description="Number of candles to offset" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <SelectSetting label="HTF Mode" options={["Auto", "Manual"]} defaultValue="Auto" />
+                    <NumberSetting label="Auto HTF Count" defaultValue={3} />
+                    <SelectSetting label="HTF Shift Type" options={["Live", "Historical"]} defaultValue="Live" />
+                    <NumberSetting label="Historical Shift" defaultValue={0} />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -174,17 +197,15 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">HTF Candles (Manual Mode)</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-4">
+                  <AccordionContent className="px-2 pb-2">
+                    <div className="space-y-3">
                       {[1, 2, 3, 4].map((num) => (
-                        <div key={num} className="border border-border rounded-lg p-3">
-                          <h4 className="font-medium mb-2 text-sm">HTF {num}</h4>
-                          <div className="space-y-1">
-                            <SettingRow title="Enable" description={`Turn HTF ${num} on/off`} />
-                            <SettingRow title="Timeframe" description="Select timeframe (60=1H, 240=4H)" />
-                            <SettingRow title="Candle Count" description="Number of candles to display" />
-                            <SettingRow title="Offset" description="Historical shift amount" />
-                          </div>
+                        <div key={num} className="border border-border rounded p-2">
+                          <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">HTF {num}</h4>
+                          <ToggleSetting label="Enable" />
+                          <SelectSetting label="Timeframe" options={["60", "240", "D", "W"]} defaultValue="240" />
+                          <NumberSetting label="Candle Count" defaultValue={10} />
+                          <NumberSetting label="Offset" defaultValue={0} />
                         </div>
                       ))}
                     </div>
@@ -195,14 +216,12 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">Chart Mapping</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="BSL Color" description="Buyside liquidity line color" />
-                      <SettingRow title="SSL Color" description="Sellside liquidity line color" />
-                      <SettingRow title="Show EQ" description="Equilibrium (50%) line" />
-                      <SettingRow title="Show Dividers" description="Session/day separators" />
-                      <SettingRow title="Draw on Liquidity (DOL)" description="Show C1 target levels" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ColorSetting label="BSL Color" defaultColor="#00ff00" />
+                    <ColorSetting label="SSL Color" defaultColor="#ff0000" />
+                    <ToggleSetting label="Show EQ" />
+                    <ToggleSetting label="Show Dividers" />
+                    <ToggleSetting label="Draw on Liquidity (DOL)" />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -210,14 +229,12 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">Liquidity Sweeps</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="LTF Sweeps" description="Lower timeframe sweep detection" />
-                      <SettingRow title="HTF Sweeps" description="Higher timeframe sweep detection" />
-                      <SettingRow title="Valid Sweep Color" description="Color for confirmed sweeps" />
-                      <SettingRow title="Invalid Sweep Color" description="Color for failed sweeps" />
-                      <SettingRow title="Sweep Lookback" description="Candles to scan for sweeps" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="LTF Sweeps" />
+                    <ToggleSetting label="HTF Sweeps" />
+                    <ColorSetting label="Valid Sweep Color" defaultColor="#00ff00" />
+                    <ColorSetting label="Invalid Sweep Color" defaultColor="#808080" />
+                    <NumberSetting label="Sweep Lookback" defaultValue={50} />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -225,14 +242,12 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">C2 Pattern Detection</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="Show C2 Labels" description="Display C2 reversal markers" />
-                      <SettingRow title="C2 Label Size" description="Text size for labels" />
-                      <SettingRow title="Show C3 Box" description="C3 expansion zone visualization" />
-                      <SettingRow title="C2 Bull Color" description="Bullish C2 label color" />
-                      <SettingRow title="C2 Bear Color" description="Bearish C2 label color" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="Show C2 Labels" />
+                    <SelectSetting label="C2 Label Size" options={["Small", "Normal", "Large"]} defaultValue="Normal" />
+                    <ToggleSetting label="Show C3 Box" />
+                    <ColorSetting label="C2 Bull Color" defaultColor="#00ff00" />
+                    <ColorSetting label="C2 Bear Color" defaultColor="#ff0000" />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -240,17 +255,19 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">CISD Configuration</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="CISD Detection" description="Enable state change detection" />
-                      <SettingRow title="Show Projections" description="Multi-target projection lines" />
-                      <SettingRow title="Bull CISD 1x" description="Bullish 1x target" />
-                      <SettingRow title="Bull CISD 2x" description="Bullish 2x target" />
-                      <SettingRow title="Bull CISD 2.5x" description="Bullish 2.5x target" />
-                      <SettingRow title="Bull CISD 3.5x" description="Bullish 3.5x target" />
-                      <SettingRow title="Bull CISD 4x" description="Bullish 4x target" />
-                      <SettingRow title="Bear CISD Targets" description="Bearish projections (1x-4x)" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="CISD Detection" />
+                    <ToggleSetting label="Show Projections" />
+                    <ToggleSetting label="Bull CISD 1x" />
+                    <ToggleSetting label="Bull CISD 2x" />
+                    <ToggleSetting label="Bull CISD 2.5x" />
+                    <ToggleSetting label="Bull CISD 3.5x" />
+                    <ToggleSetting label="Bull CISD 4x" />
+                    <ToggleSetting label="Bear CISD 1x" />
+                    <ToggleSetting label="Bear CISD 2x" />
+                    <ToggleSetting label="Bear CISD 2.5x" />
+                    <ToggleSetting label="Bear CISD 3.5x" />
+                    <ToggleSetting label="Bear CISD 4x" />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -258,14 +275,12 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">iFVG Settings</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="iFVG Detection" description="Enable iFVG marking" />
-                      <SettingRow title="iFVG Box Style" description="Visualization style" />
-                      <SettingRow title="Bull iFVG Color" description="Bullish iFVG color" />
-                      <SettingRow title="Bear iFVG Color" description="Bearish iFVG color" />
-                      <SettingRow title="iFVG Transparency" description="Box fill opacity (0-100)" />
-                    </div>
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="iFVG Detection" />
+                    <SelectSetting label="iFVG Box Style" options={["Box", "Line", "Both"]} defaultValue="Box" />
+                    <ColorSetting label="Bull iFVG Color" defaultColor="#00ffff" />
+                    <ColorSetting label="Bear iFVG Color" defaultColor="#ff00ff" />
+                    <NumberSetting label="iFVG Transparency" defaultValue={80} />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -273,16 +288,17 @@ const Index = () => {
                   <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
                     <span className="font-semibold">Alerts & Sessions</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <div className="space-y-1">
-                      <SettingRow title="Alert on Valid Sweep" description="Notify when sweep confirms" />
-                      <SettingRow title="Alert on CISD" description="Notify on state change" />
-                      <SettingRow title="Alert on iFVG" description="Notify on iFVG formation" />
-                      <SettingRow title="Show Sessions" description="Display Asia/London/NY windows" />
-                      <SettingRow title="Show Silver Bullet" description="1H SB windows (10-11 AM, 2-3 PM)" />
-                      <SettingRow title="Show Macro Windows" description="20min macro entry windows" />
-                      <SettingRow title="SMT Mode" description="Binary or Triad comparison" />
-                      <SettingRow title="SMT Assets" description="Assets for SMT analysis" />
+                  <AccordionContent className="px-2 pb-2">
+                    <ToggleSetting label="Alert on Valid Sweep" />
+                    <ToggleSetting label="Alert on CISD" />
+                    <ToggleSetting label="Alert on iFVG" />
+                    <ToggleSetting label="Show Sessions" />
+                    <ToggleSetting label="Show Silver Bullet" />
+                    <ToggleSetting label="Show Macro Windows" />
+                    <SelectSetting label="SMT Mode" options={["Binary", "Triad"]} defaultValue="Binary" />
+                    <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
+                      <Label className="text-sm">SMT Assets</Label>
+                      <Input type="text" placeholder="ES,NQ,YM" className="w-32 h-8 text-xs" />
                     </div>
                   </AccordionContent>
                 </AccordionItem>
