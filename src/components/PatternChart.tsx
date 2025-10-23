@@ -15,14 +15,14 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
           {/* C1 - Setup candle */}
           <div className="flex flex-col items-center gap-2">
             <div className="relative">
-              {/* POI Line - Always above for bullish, below for bearish */}
-              <div className={`absolute ${isBullish ? '-top-4' : '-bottom-4'} left-1/2 -translate-x-1/2 w-32 h-0.5 bg-purple-400`}>
-                <span className={`absolute left-0 ${isBullish ? '-top-5' : '-bottom-5'} text-[10px] text-purple-400 font-bold whitespace-nowrap`}>POI (FVG/OB)</span>
+              {/* POI Line - Below for bullish (price comes down to it), above for bearish (price comes up to it) */}
+              <div className={`absolute ${isBullish ? '-bottom-4' : '-top-4'} left-1/2 -translate-x-1/2 w-32 h-0.5 bg-purple-400`}>
+                <span className={`absolute left-0 ${isBullish ? '-bottom-5' : '-top-5'} text-[10px] text-purple-400 font-bold whitespace-nowrap`}>POI (FVG/OB)</span>
               </div>
               {/* Candle */}
               <div className="w-12 bg-slate-600 h-24 rounded-sm relative">
                 {/* Wick */}
-                <div className={`absolute left-1/2 -translate-x-1/2 w-0.5 bg-slate-400 ${isBullish ? 'h-6 -top-6' : 'h-6 -bottom-6'}`}></div>
+                <div className={`absolute left-1/2 -translate-x-1/2 w-0.5 bg-slate-400 ${isBullish ? 'h-6 -bottom-6' : 'h-6 -top-6'}`}></div>
               </div>
             </div>
             <div className="text-center">
