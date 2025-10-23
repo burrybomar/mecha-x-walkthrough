@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 
 // Import chart images
 import chartC2Labels from "@/assets/c2-labels-chart.png";
