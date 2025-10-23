@@ -9,7 +9,7 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
   if (type === 'c1c2c3-bullish' || type === 'c1c2c3-bearish') {
     const isBullish = type === 'c1c2c3-bullish';
     return (
-      <div className="bg-slate-900/50 backdrop-blur rounded-xl p-6 border border-cyan-500/30">
+      <div className="bg-slate-900/90 backdrop-blur rounded-xl p-6 border border-slate-700/50">
         <h4 className="text-cyan-400 font-bold text-center mb-4">{title}</h4>
         <div className="flex items-end justify-center gap-8 h-48">
           {/* C1 - Setup candle */}
@@ -82,7 +82,7 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
 
   if (type === 'smt-divergence') {
     return (
-      <div className="bg-slate-900/50 backdrop-blur rounded-xl p-6 border border-purple-500/30">
+      <div className="bg-slate-900/90 backdrop-blur rounded-xl p-6 border border-slate-700/50">
         <h4 className="text-purple-400 font-bold text-center mb-4">{title}</h4>
         <div className="space-y-6">
           {/* Primary Asset (swept) */}
@@ -141,7 +141,7 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
 
   if (type === 'sessions-timeline') {
     return (
-      <div className="bg-slate-900/50 backdrop-blur rounded-xl p-6 border border-pink-500/30">
+      <div className="bg-slate-900/90 backdrop-blur rounded-xl p-6 border border-slate-700/50">
         <h4 className="text-pink-400 font-bold text-center mb-6">{title}</h4>
         <div className="space-y-4">
           {/* Timeline */}

@@ -49,15 +49,16 @@ export const SimpleChart = ({ type, title }: SimpleChartProps) => {
           data: [
             { time: '1', price: 100 },
             { time: '2', price: 95 },
-            { time: '3', price: 90 },
-            { time: '4', price: 93 },
-            { time: '5', price: 105 },
-            { time: '6', price: 110 },
-            { time: '7', price: 115 },
-            { time: '8', price: 120 },
+            { time: '3', price: 88 }, // Sweep low
+            { time: '4', price: 92 },  // Reaction up
+            { time: '5', price: 105 }, // Strong move
+            { time: '6', price: 112 },
+            { time: '7', price: 108 }, // Retest CISD
+            { time: '8', price: 118 }, // Continue
           ],
           lines: [
-            { y: 90, label: 'CISD Zone', color: '#f97316' }
+            { y: 92, label: 'CISD', color: '#f59e0b' },
+            { y: 88, label: 'Sweep', color: '#ef4444' }
           ]
         };
       
@@ -83,28 +84,28 @@ export const SimpleChart = ({ type, title }: SimpleChartProps) => {
   const { data, lines } = getChartData();
 
   return (
-    <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-      <div className="aspect-[4/3] p-4 bg-gradient-to-br from-slate-950 to-blue-950">
+    <div className="bg-slate-900/90 backdrop-blur rounded-xl overflow-hidden border border-slate-700/50 hover:border-slate-600/70 transition-all">
+      <div className="aspect-[4/3] p-4">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" />
             <XAxis 
               dataKey="time" 
-              stroke="rgba(255,255,255,0.5)"
-              tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+              stroke="rgba(148,163,184,0.4)"
+              tick={{ fill: 'rgba(148,163,184,0.6)', fontSize: 11 }}
             />
             <YAxis 
-              stroke="rgba(255,255,255,0.5)"
-              tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+              stroke="rgba(148,163,184,0.4)"
+              tick={{ fill: 'rgba(148,163,184,0.6)', fontSize: 11 }}
               domain={['dataMin - 5', 'dataMax + 5']}
             />
             <Line 
               type="monotone" 
               dataKey="price" 
-              stroke="#22d3ee" 
-              strokeWidth={2}
-              dot={{ fill: '#22d3ee', r: 4 }}
-              activeDot={{ r: 6 }}
+              stroke="#06b6d4" 
+              strokeWidth={2.5}
+              dot={{ fill: '#06b6d4', r: 3 }}
+              activeDot={{ r: 5 }}
             />
             {lines.map((line, idx) => (
               <ReferenceLine 
@@ -112,22 +113,22 @@ export const SimpleChart = ({ type, title }: SimpleChartProps) => {
                 y={line.y} 
                 stroke={line.color}
                 strokeWidth={2}
-                strokeDasharray="5 5"
+                strokeDasharray="4 4"
               >
                 <Label 
                   value={line.label} 
                   position="right" 
                   fill={line.color}
-                  fontSize={11}
-                  fontWeight="bold"
+                  fontSize={10}
+                  fontWeight="600"
                 />
               </ReferenceLine>
             ))}
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="p-3 text-center bg-slate-900/50">
-        <p className="text-white text-sm font-semibold">{title}</p>
+      <div className="px-3 py-2 text-center border-t border-slate-700/50 bg-slate-900/50">
+        <p className="text-slate-300 text-xs font-medium">{title}</p>
       </div>
     </div>
   );

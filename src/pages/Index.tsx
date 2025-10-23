@@ -698,14 +698,6 @@ const Index = () => {
                       </p>
                     </div>
 
-                    {/* Mini Visual Previews */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                      <SimpleChart type="htf" title="HTF Analysis" />
-                      <SimpleChart type="liquidity" title="BSL/SSL" />
-                      <SimpleChart type="cisd" title="CISD Zones" />
-                      <SimpleChart type="ifvg" title="iFVG" />
-                    </div>
-
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {content.overview.features.map((feat, i) => (
                         <motion.div
