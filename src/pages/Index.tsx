@@ -13,6 +13,7 @@ import { AITooltip } from '@/components/AITooltip';
 import { DiagramViewer } from '@/components/DiagramViewer';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
 import bslSslChart from '@/assets/bsl-ssl-chart.png';
+import htfEdgeCandles from '@/assets/htf-chart-edge.png';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -563,6 +564,7 @@ const Index = () => {
                         <img 
                           src={bslSslChart} 
                           alt="BSL/SSL Liquidity Zones - Professional trading chart" 
+                          loading="lazy"
                           className="w-full rounded-lg border shadow-lg"
                         />
                         <div className="text-center">
@@ -575,6 +577,21 @@ const Index = () => {
                         title="CISD Momentum Shift"
                         description="Change in State of Delivery pattern"
                       />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="space-y-3">
+                        <img 
+                          src={htfEdgeCandles} 
+                          alt="HTF candles on chart edge - higher timeframe context overlay" 
+                          loading="lazy"
+                          className="w-full rounded-lg border shadow-lg"
+                        />
+                        <div className="text-center">
+                          <h3 className="font-semibold text-lg">HTF Candles on Chart Edge</h3>
+                          <p className="text-sm text-slate-600">Higher timeframe context on the right edge</p>
+                        </div>
+                      </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
