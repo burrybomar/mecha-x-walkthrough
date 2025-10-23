@@ -560,44 +560,47 @@ const Index = () => {
                 {/* VISUAL */}
                 {selectedTab === 'visual' && (
                   <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-3">
-                        <img 
-                          src={bslSslChart} 
-                          alt="BSL/SSL Liquidity Zones - Professional trading chart" 
-                          loading="lazy"
-                          className="w-full rounded-lg border shadow-lg"
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
+                          <img 
+                            src={bslSslChart} 
+                            alt="BSL/SSL Liquidity Zones" 
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         <div className="text-center">
-                          <h3 className="font-semibold text-lg">BSL/SSL Liquidity Zones</h3>
-                          <p className="text-sm text-slate-600">Where institutions hunt for stops</p>
+                          <h3 className="font-semibold text-sm">BSL/SSL Liquidity Zones</h3>
+                          <p className="text-xs text-slate-600">Stop hunt zones</p>
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <img 
-                          src={cisdChart} 
-                          alt="CISD - Change in State of Delivery momentum shift pattern" 
-                          loading="lazy"
-                          className="w-full rounded-lg border shadow-lg"
-                        />
+                      <div className="space-y-2">
+                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
+                          <img 
+                            src={cisdChart} 
+                            alt="CISD Momentum Shift" 
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         <div className="text-center">
-                          <h3 className="font-semibold text-lg">CISD Momentum Shift</h3>
-                          <p className="text-sm text-slate-600">Change in State of Delivery pattern</p>
+                          <h3 className="font-semibold text-sm">CISD Momentum Shift</h3>
+                          <p className="text-xs text-slate-600">Delivery pattern</p>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 gap-4">
-                      <div className="space-y-3">
-                        <img 
-                          src={htfEdgeCandles} 
-                          alt="HTF candles on chart edge - higher timeframe context overlay" 
-                          loading="lazy"
-                          className="w-full rounded-lg border shadow-lg"
-                        />
+                      <div className="space-y-2">
+                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
+                          <img 
+                            src={htfEdgeCandles} 
+                            alt="HTF Chart Edge" 
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         <div className="text-center">
-                          <h3 className="font-semibold text-lg">HTF Candles on Chart Edge</h3>
-                          <p className="text-sm text-slate-600">Higher timeframe context on the right edge</p>
+                          <h3 className="font-semibold text-sm">HTF Candles on Edge</h3>
+                          <p className="text-xs text-slate-600">Timeframe context</p>
                         </div>
                       </div>
                     </div>
