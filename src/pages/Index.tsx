@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { AITooltip } from "@/components/AITooltip";
-import mechaxLogo from "@/assets/mecha-x-logo.png";
+import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 
@@ -364,7 +364,21 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/20 to-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background Logo with Gradient Overlay */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.35]">
+          <img 
+            src={mechaxLogo} 
+            alt="" 
+            className="w-full h-full object-cover object-center"
+            style={{ imageRendering: 'crisp-edges' }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/65 via-background/70 to-background/65"></div>
+      </div>
+
+      <div className="relative z-10">
       {/* Header */}
       <header className="border-b border-border/50 bg-background/60 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -372,16 +386,16 @@ const Index = () => {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent blur-xl opacity-40 animate-pulse" />
-                <img src={mechaxLogo} alt="MECHA-X" className="w-10 h-10 relative z-10 rounded-xl" />
+                <img src={mechaxLogo} alt="MECHA-X" className="w-12 h-12 relative z-10 rounded-xl" />
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-mono">
                   MECHA-X
                 </h1>
-                <p className="text-xs text-muted-foreground">Trading Intelligence</p>
+                <p className="text-xs text-muted-foreground font-mono">Trading Intelligence</p>
               </div>
             </div>
-            <Badge variant="secondary" className="gap-2">
+            <Badge variant="secondary" className="gap-2 font-mono">
               <Activity className="w-3 h-3 text-primary animate-pulse" />
               <span className="font-mono">Live</span>
             </Badge>
@@ -519,16 +533,17 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border/50 bg-secondary/20 py-8 px-4 mt-16">
         <div className="container mx-auto text-center space-y-4">
-          <p className="text-2xl font-bold">MECHA-X</p>
+          <p className="text-2xl font-bold font-mono">MECHA-X</p>
           <div className="h-0.5 w-16 bg-primary rounded-full mx-auto" />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground font-mono">
             Created by <span className="text-primary font-bold">OxQQQ</span>
           </p>
-          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs text-muted-foreground max-w-2xl mx-auto font-mono">
             Multi-timeframe analysis with HTF candles, liquidity detection, C1→C2→C3 patterns, CISD zones, iFVG patterns, and SMT divergence logic for systematic trading.
           </p>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
