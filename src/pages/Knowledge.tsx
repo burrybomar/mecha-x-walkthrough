@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Book, Clock, TrendingUp, Target, Layers, Timer, ArrowLeft } from "lucide-react";
+import { Book, Clock, TrendingUp, Target, Layers, Timer, ArrowLeft, Settings } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -24,6 +24,12 @@ const Knowledge = () => {
       gradient: "from-blue-500 via-cyan-500 to-blue-600",
     },
     {
+      id: "profiling-models",
+      icon: <Target className="w-5 h-5" />,
+      label: "1H/4H Models",
+      gradient: "from-emerald-500 via-teal-500 to-emerald-600",
+    },
+    {
       id: "liquidity",
       icon: <Layers className="w-5 h-5" />,
       label: "IRL/ERL Liquidity",
@@ -40,6 +46,12 @@ const Knowledge = () => {
       icon: <Timer className="w-5 h-5" />,
       label: "Time & Range",
       gradient: "from-orange-500 via-yellow-500 to-orange-600",
+    },
+    {
+      id: "settings",
+      icon: <Book className="w-5 h-5" />,
+      label: "Settings Guide",
+      gradient: "from-indigo-500 via-violet-500 to-indigo-600",
     },
   ];
 
@@ -82,7 +94,7 @@ const Knowledge = () => {
         {/* Content */}
         <main className="container mx-auto px-4 py-12">
           <Tabs defaultValue="ttrades" className="w-full">
-            <TabsList className="flex w-full overflow-x-auto mb-8 lg:grid lg:grid-cols-5">
+            <TabsList className="flex w-full overflow-x-auto mb-8 lg:grid lg:grid-cols-7">
               {topics.map((topic) => (
                 <TabsTrigger 
                   key={topic.id} 
@@ -642,6 +654,418 @@ const Knowledge = () => {
                           <h4 className="font-semibold mb-2">Quality Filter</h4>
                           <p className="text-muted-foreground">
                             Only trade OBs that engage with clear POIs and form quickly within the candle's time window.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* 1H/4H Profiling Models */}
+            <TabsContent value="profiling-models" className="space-y-6">
+              <Card className="border-emerald-500/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
+                    <Target className="w-5 h-5 sm:w-6 sm:h-6" />
+                    1H/4H Profiling Models
+                  </CardTitle>
+                  <CardDescription>
+                    Entry system and target zones - CISD retest entries with defined accumulation, manipulation, and distribution zones
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="entry">
+                      <AccordionTrigger>Entry Strategy</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">CISD Retest Entry</h4>
+                          <p className="text-muted-foreground">
+                            After CISD forms and price expands, wait for price to retest the CISD level. This retest provides the optimal entry point with favorable risk/reward.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Why Retest Works</h4>
+                          <p className="text-muted-foreground">
+                            • CISD level acts as new support/resistance<br/>
+                            • Retest confirms the level is respected<br/>
+                            • Provides better entry than chasing the initial move<br/>
+                            • Allows tight stop loss placement below/above CISD
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Entry Timing</h4>
+                          <p className="text-muted-foreground">
+                            Best executed on 1H or 4H timeframes. Watch for price to pull back to CISD zone, show rejection (wick), then continuation candle in direction of trend.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="targets">
+                      <AccordionTrigger>Target Zones (1x-4x)</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                          <h4 className="font-semibold mb-2 text-emerald-600 dark:text-emerald-400">Primary Targets: 1x & 2-2.5x</h4>
+                          <p className="text-muted-foreground mb-2">
+                            These are your main take-profit zones. Most moves complete within this range.
+                          </p>
+                          <p className="text-muted-foreground">
+                            • <strong>1x:</strong> First target - conservative, high probability<br/>
+                            • <strong>2-2.5x:</strong> Extended target - manipulation zone completion
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-2">1x - 1.5x: Accumulation/Re-accumulation Zone</h4>
+                          <p className="text-muted-foreground">
+                            This is where smart money accumulates positions. Price often consolidates here before the next leg. If you're in the trade, consider:
+                          </p>
+                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                            <li>Taking partial profits at 1x</li>
+                            <li>Moving stop to breakeven</li>
+                            <li>Watching for continuation patterns</li>
+                            <li>Expecting some sideways movement (re-accumulation)</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-2">2x - 2.5x: Manipulation Zone</h4>
+                          <p className="text-muted-foreground">
+                            The manipulation zone where price often creates final traps before reversal or distribution. Key characteristics:
+                          </p>
+                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                            <li>Price sweeps highs/lows to grab liquidity</li>
+                            <li>Creates false breakouts</li>
+                            <li>Ideal zone to take majority of profits</li>
+                            <li>Often the last push before reversal</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-2">3.5x - 4x: Expansion/Distribution Zone</h4>
+                          <p className="text-muted-foreground">
+                            Extended targets only hit during major expansion moves. This is where institutions distribute positions:
+                          </p>
+                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                            <li>Rare - only 20-30% of trades reach here</li>
+                            <li>High risk - reversal likely imminent</li>
+                            <li>If you're still holding, exit immediately</li>
+                            <li>Don't chase if you missed the entry</li>
+                          </ul>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="execution">
+                      <AccordionTrigger>Trade Execution Plan</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Step-by-Step Process</h4>
+                          <ol className="list-decimal list-inside text-muted-foreground space-y-2">
+                            <li>Wait for valid CISD formation after sweep</li>
+                            <li>Wait for price to retest CISD level</li>
+                            <li>Confirm rejection at CISD (wick formation)</li>
+                            <li>Enter on next continuation candle</li>
+                            <li>Place stop below/above CISD level</li>
+                            <li>First target: 1x (take 50% profit)</li>
+                            <li>Second target: 2-2.5x (take remaining 50%)</li>
+                            <li>If momentum is strong, hold runner to 3.5-4x</li>
+                          </ol>
+                        </div>
+
+                        <div className="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+                          <h4 className="font-semibold mb-2">⚠️ Risk Management</h4>
+                          <p className="text-muted-foreground">
+                            • Never risk more than 1-2% per trade<br/>
+                            • Move stop to breakeven at 1x target<br/>
+                            • Take majority of profits at 2-2.5x<br/>
+                            • Don't hold into distribution zone (3.5-4x) expecting more
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Settings Guide */}
+            <TabsContent value="settings" className="space-y-6">
+              <Card className="border-indigo-500/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
+                    <Settings className="w-5 h-5 sm:w-6 sm:h-6" />
+                    MECHA-X Settings Guide
+                  </CardTitle>
+                  <CardDescription>
+                    Complete reference for all TradingView script settings and inputs
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="display">
+                      <AccordionTrigger>Display Settings</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Font</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Options:</strong> Default, Monospace<br/>
+                            Choose "Monospace" for cleaner, more technical appearance. Affects all labels and text.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Text Size</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Options:</strong> Tiny, Small, Normal, Large, Huge, Auto<br/>
+                            Global text sizing for all labels. Use "Auto" for responsive sizing based on chart zoom.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="htf-setup">
+                      <AccordionTrigger>HTF Setup</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Mode: Auto vs Manual</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Auto:</strong> Intelligently selects HTFs based on your chart timeframe<br/>
+                            • 5min chart → shows 1H, 4H, Daily<br/>
+                            • 15min chart → shows 4H, Daily, Weekly<br/>
+                            <strong>Manual:</strong> Configure up to 4 custom HTF layers with full control
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">TF 1-4 (Manual Mode)</h4>
+                          <p className="text-muted-foreground">
+                            For each timeframe slot:<br/>
+                            • <strong>Show:</strong> Enable/disable this HTF layer<br/>
+                            • <strong>Timeframe:</strong> Select specific timeframe (15m, 1H, 4H, 1D, 1W, etc.)<br/>
+                            • <strong>Bars:</strong> Number of HTF candles to display (1-60)<br/>
+                            • <strong>Map:</strong> Show BSL/SSL lines and EQ levels for this HTF
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="htf-candles">
+                      <AccordionTrigger>HTF Candles Display</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Colors</h4>
+                          <p className="text-muted-foreground">
+                            • <strong>Bull:</strong> Color for bullish HTF candles (default: green)<br/>
+                            • <strong>Bear:</strong> Color for bearish HTF candles (default: black)<br/>
+                            • <strong>Wick:</strong> Color for candle wicks and borders
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Position & Size</h4>
+                          <p className="text-muted-foreground">
+                            • <strong>Offset:</strong> Distance from price action (default: 25)<br/>
+                            • <strong>Gap:</strong> Space between HTF candles (1-4)<br/>
+                            • <strong>Width:</strong> Candle width (Tiny, Small, Medium, Large, Huge)
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Bias Arrow</h4>
+                          <p className="text-muted-foreground">
+                            Optional bias arrow above HTF candles showing directional trend (↑/↓). Configure bull/bear colors.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Labels</h4>
+                          <p className="text-muted-foreground">
+                            Position HTF interval labels (15m, 4H, MON, etc.) Above, Below, or Inside candles. Adjust size and color.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="chart-mapping">
+                      <AccordionTrigger>Chart Mapping</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">BSL/SSL Lines</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Enable:</strong> Show Buyside/Sellside Liquidity lines<br/>
+                            <strong>Style:</strong> Line style (Solid/Dashed/Dotted)<br/>
+                            <strong>Width:</strong> Line thickness (0-4)<br/>
+                            <strong>Labels:</strong> Show "BSL/SSL" text labels<br/>
+                            <strong>Count:</strong> Number of highs/lows to track (1-20 each)
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Dividers (Open/Close Lines)</h4>
+                          <p className="text-muted-foreground">
+                            Vertical lines marking HTF candle opens/closes:<br/>
+                            • <strong>Auto Hierarchy:</strong> Different styles based on timeframe importance<br/>
+                            • <strong>≤1H:</strong> Scalping TFs (1m-1H) - dotted<br/>
+                            • <strong>4-8H:</strong> Session-based intraday - dashed<br/>
+                            • <strong>1D:</strong> Daily structure - solid<br/>
+                            • <strong>1W+:</strong> Macro TFs - bold solid
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">EQ (Equilibrium) Lines</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Enable:</strong> Show 50% equilibrium levels<br/>
+                            <strong>Style & Width:</strong> Customize appearance<br/>
+                            <strong>Labels:</strong> Show "EQ" text with time context<br/>
+                            <strong>Count:</strong> Number of EQ levels to display (1-20)
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="liquidity-sweeps">
+                      <AccordionTrigger>Liquidity Sweeps</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Enable Settings</h4>
+                          <p className="text-muted-foreground">
+                            • <strong>Enable:</strong> Master toggle for sweep detection<br/>
+                            • <strong>LTF:</strong> Show lower timeframe sweeps<br/>
+                            • <strong>HTF:</strong> Show higher timeframe sweeps<br/>
+                            • <strong>Live:</strong> Show real-time sweeps (unconfirmed)
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Valid Sweeps</h4>
+                          <p className="text-muted-foreground">
+                            Sweeps that hold and form reversals:<br/>
+                            • Configurable line style, width, color<br/>
+                            • Default: Solid black line<br/>
+                            • These are confirmed sweep patterns
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Invalid Sweeps</h4>
+                          <p className="text-muted-foreground">
+                            Sweeps that fail (price continues through):<br/>
+                            • Optional display<br/>
+                            • Separate LTF/HTF toggles<br/>
+                            • Different styling (usually gray/dashed)<br/>
+                            • Shows failed setups for learning
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="pattern-detection">
+                      <AccordionTrigger>Pattern Detection</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">C2 Labels</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Show:</strong> Display C2 (reversal candle) labels<br/>
+                            <strong>Size:</strong> Label size (Tiny to Huge)<br/>
+                            <strong>Color:</strong> Label color (default: black)<br/>
+                            C2 marks the exact candle where sweep reversed
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">C3 Labels</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Show:</strong> Display C3 (expansion candle) labels<br/>
+                            <strong>Size:</strong> Label size<br/>
+                            <strong>Color:</strong> Label color (default: purple)<br/>
+                            C3 marks the expansion candle after reversal
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">C3 Expectation Box</h4>
+                          <p className="text-muted-foreground">
+                            Optional box showing expected C3 expansion range:<br/>
+                            • Bull box (green) for upward expansion<br/>
+                            • Bear box (red) for downward expansion<br/>
+                            • Breaks indicate failed expansion
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">SMT (Smart Money Technique)</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Enable:</strong> Turn on SMT divergence detection<br/>
+                            <strong>Mode:</strong> Binary (2 assets) or Triad (3 assets)<br/>
+                            <strong>Asset Override:</strong> Manually specify correlated assets<br/>
+                            • Binary: 1 primary + 1 correlated<br/>
+                            • Triad: 1 primary + 2 correlated (algorithm picks strongest)
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="cisd-settings">
+                      <AccordionTrigger>CISD Settings</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">CISD Line</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Enable:</strong> Show CISD detection<br/>
+                            <strong>Style & Width:</strong> Line appearance<br/>
+                            <strong>Bull/Bear Colors:</strong> Separate colors for direction
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">CISD Label</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Text:</strong> Label text (default: "CISD")<br/>
+                            <strong>Size:</strong> Label size<br/>
+                            <strong>Colors:</strong> Different colors for bull/bear CISD
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Projections</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Enable:</strong> Show target projection lines<br/>
+                            <strong>Bullish Targets:</strong> Comma-separated (e.g., "1,2,2.5,3.5,4")<br/>
+                            <strong>Bearish Targets:</strong> Same format<br/>
+                            <strong>Style:</strong> Projection line appearance<br/>
+                            <strong>Colors:</strong> Separate bull/bear projection colors
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="ifvg-settings">
+                      <AccordionTrigger>iFVG Settings</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">iFVG Display</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Show:</strong> Enable iFVG box detection<br/>
+                            <strong>Bull Color:</strong> Bullish iFVG box color (default: green transparent)<br/>
+                            <strong>Bear Color:</strong> Bearish iFVG box color (default: red transparent)<br/>
+                            <br/>
+                            iFVGs only appear after valid sweeps - they mark the gap that formed during the reversal phase.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="alerts-sessions">
+                      <AccordionTrigger>Alerts & Sessions</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Alerts</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Formation:</strong> Alert when new sweep forms<br/>
+                            <strong>Failure:</strong> Alert when sweep invalidates<br/>
+                            <br/>
+                            Set up TradingView alerts using these conditions to get notified of key events.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Session Models Table</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Show:</strong> Display session models info table<br/>
+                            <strong>Position:</strong> Top Left/Right, Bottom Left/Right<br/>
+                            <strong>Size:</strong> Table size (Tiny, Small, Normal, Large)<br/>
+                            <br/>
+                            Shows current session, time remaining, and active Silver Bullet/Macro windows.
                           </p>
                         </div>
                       </AccordionContent>
