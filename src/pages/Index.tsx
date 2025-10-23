@@ -729,12 +729,13 @@ const Index = () => {
                 {/* HTF */}
                 {selectedTab === "htf" && (
                   <div className="space-y-8">
-                    {/* Image Gallery Section */}
-                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
-                      <h3 className="text-white text-xl font-bold mb-4 text-center">HTF Configuration Gallery</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <SimpleChart type="htf" title="HTF Candles" />
-                      </div>
+                    {/* Visual Section */}
+                    <div className="mb-8">
+                      <SimpleChart 
+                        type="htf" 
+                        title="Higher Timeframe Analysis" 
+                        description="Multi-timeframe structure without switching charts - see 4H/Daily levels on your 5min timeframe"
+                      />
                     </div>
 
                     {/* Mode Details Section */}
@@ -808,12 +809,13 @@ const Index = () => {
                 {/* LIQUIDITY */}
                 {selectedTab === "liquidity" && (
                   <div className="space-y-8">
-                    {/* Image Gallery Section */}
-                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
-                      <h3 className="text-white text-xl font-bold mb-4 text-center">Liquidity Lines Gallery</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <SimpleChart type="liquidity" title="BSL/SSL Lines" />
-                      </div>
+                    {/* Visual Section */}
+                    <div className="mb-8">
+                      <SimpleChart 
+                        type="liquidity" 
+                        title="Buy Side & Sell Side Liquidity" 
+                        description="BSL above highs & SSL below lows - where smart money hunts retail stops"
+                      />
                     </div>
 
                     {/* Types Section */}
@@ -1000,12 +1002,13 @@ const Index = () => {
                 {/* CISD */}
                 {selectedTab === "cisd" && (
                   <div className="space-y-6">
-                    {/* Image Gallery Section */}
-                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
-                      <h3 className="text-white text-xl font-bold mb-4 text-center">CISD Formation Gallery</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <SimpleChart type="cisd" title="CISD Lines" />
-                      </div>
+                    {/* Visual Section */}
+                    <div className="mb-8">
+                      <SimpleChart 
+                        type="cisd" 
+                        title="Change In State of Delivery" 
+                        description="Momentum shift after liquidity sweep - CISD zones provide high-probability entries"
+                      />
                     </div>
 
                     {/* Components Section */}
@@ -1046,12 +1049,13 @@ const Index = () => {
                 {/* iFVG */}
                 {selectedTab === "ifvg" && (
                   <div className="space-y-6">
-                    {/* Image Gallery Section */}
-                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
-                      <h3 className="text-white text-xl font-bold mb-4 text-center">iFVG Pattern Gallery</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <SimpleChart type="ifvg" title="iFVG Pattern" />
-                      </div>
+                    {/* Visual Section */}
+                    <div className="mb-8">
+                      <SimpleChart 
+                        type="ifvg" 
+                        title="Inverted Fair Value Gap" 
+                        description="Gap filled aggressively in opposite direction - signals institutional positioning"
+                      />
                     </div>
 
                     {/* Mechanics Section */}
