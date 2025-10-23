@@ -36,6 +36,7 @@ const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isExporting, setIsExporting] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const fullContentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   // Real-time clock
@@ -61,21 +62,21 @@ const Index = () => {
     }
   };
 
-  // PDF Export function
+  // PDF Export function - exports ALL tabs
   const exportToPDF = async () => {
-    if (!contentRef.current) return;
+    if (!fullContentRef.current) return;
     
     setIsExporting(true);
     toast({
-      title: "Generating PDF...",
-      description: "Please wait while we prepare your guide.",
+      title: "Generating Complete PDF...",
+      description: "Please wait while we prepare your full guide with all sections.",
     });
 
     try {
-      const element = contentRef.current;
+      const element = fullContentRef.current;
       const opt = {
         margin: 10,
-        filename: `MECHA-X-Guide-${selectedTab}.pdf`,
+        filename: `MECHA-X-Complete-Guide.pdf`,
         image: { type: 'jpeg' as const, quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, logging: false },
         jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
@@ -85,7 +86,7 @@ const Index = () => {
       
       toast({
         title: "PDF Downloaded!",
-        description: `${tabConfig[selectedTab].title} section saved successfully.`,
+        description: "Complete MECHA-X guide with all sections saved successfully.",
       });
     } catch (error) {
       toast({
@@ -1252,6 +1253,202 @@ const Index = () => {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      {/* Hidden Full Content for PDF Export */}
+      <div ref={fullContentRef} className="hidden print:block">
+        <div className="space-y-8 p-8">
+          {/* Overview Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.overview.title}</h1>
+            <p className="text-xl mb-6">{content.overview.subtitle}</p>
+            <div className="space-y-4">
+              {content.overview.features.map((feat, i) => (
+                <div key={i} className="p-4 border-2 rounded-lg">
+                  <h3 className="font-bold text-lg mb-2">{feat.text}</h3>
+                  <p>{feat.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Visual Guide Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.visual.title}</h1>
+            <p className="text-xl mb-6">{content.visual.subtitle}</p>
+            <div className="space-y-4">
+              {content.visual.elements.map((el, i) => (
+                <div key={i} className="p-4 border-2 rounded-lg">
+                  <h3 className="font-bold text-lg mb-2">{el.name}</h3>
+                  <p className="mb-2"><strong>What:</strong> {el.what}</p>
+                  <p className="mb-2"><strong>Why:</strong> {el.why}</p>
+                  <p><strong>How:</strong> {el.how}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pattern Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.pattern.title}</h1>
+            <p className="text-xl mb-6">{content.pattern.subtitle}</p>
+            <div className="space-y-4">
+              {content.pattern.steps.map((step, i) => (
+                <div key={i} className="p-4 border-2 rounded-lg">
+                  <h3 className="font-bold text-lg mb-2">{step.emoji} {step.name}</h3>
+                  <p className="mb-2"><strong>What:</strong> {step.what}</p>
+                  <p className="mb-2"><strong>Rule:</strong> {step.rule}</p>
+                  <p><strong>Example:</strong> {step.example}</p>
+                </div>
+              ))}
+              <div className="p-4 bg-gray-100 rounded-lg mt-4">
+                <p className="font-bold">{content.pattern.critical}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Phases Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.phases.title}</h1>
+            <p className="text-xl mb-6">{content.phases.subtitle}</p>
+            <div className="space-y-4">
+              {content.phases.phases.map((phase, i) => (
+                <div key={i} className="p-4 border-2 rounded-lg">
+                  <h3 className="font-bold text-lg mb-2">{phase.name}</h3>
+                  <p className="mb-2"><strong>What:</strong> {phase.what}</p>
+                  <p className="mb-2"><strong>Next:</strong> {phase.next}</p>
+                  <p><strong>Signal:</strong> {phase.signal}</p>
+                </div>
+              ))}
+              <div className="mt-6">
+                <h3 className="font-bold text-xl mb-4">{content.phases.strength.title}</h3>
+                {content.phases.strength.levels.map((level, i) => (
+                  <div key={i} className="p-3 border rounded-lg mb-2">
+                    <p><strong>{level.score} {level.name}:</strong> {level.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* SMT Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.smt.title}</h1>
+            <p className="text-xl mb-6">{content.smt.subtitle}</p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-xl mb-4">Modes</h3>
+                {content.smt.modes.map((mode, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-4">
+                    <h4 className="font-bold text-lg mb-2">{mode.name}</h4>
+                    <p className="mb-2"><strong>Setup:</strong> {mode.setup}</p>
+                    <p className="mb-2"><strong>Example:</strong> {mode.example}</p>
+                    <p className="mb-2"><strong>Detection:</strong> {mode.detection}</p>
+                    <p><strong>Logic:</strong> {mode.logic}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <h3 className="font-bold text-xl mb-4">Types</h3>
+                {content.smt.types.map((type, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-4">
+                    <h4 className="font-bold text-lg mb-2">{type.label} - {type.name}</h4>
+                    <p className="mb-2"><strong>Strength:</strong> {type.strength}</p>
+                    <p className="mb-2"><strong>Condition:</strong> {type.condition}</p>
+                    <p><strong>Bias:</strong> {type.bias}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="p-4 bg-gray-100 rounded-lg">
+                <p className="font-bold">{content.smt.key}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Models Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.models.title}</h1>
+            <p className="text-xl mb-6">{content.models.subtitle}</p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-xl mb-4">{content.models.framework.title}</h3>
+                {content.models.framework.layers.map((layer, i) => (
+                  <div key={i} className="p-3 border rounded-lg mb-2">
+                    <p><strong>Layer {layer.num} - {layer.name}:</strong> {layer.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <h3 className="font-bold text-xl mb-4">Session Models</h3>
+                {content.models.sessions.map((session, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-4">
+                    <h4 className="font-bold text-lg mb-2">{session.name}</h4>
+                    <p className="mb-2"><strong>Time:</strong> {session.time}</p>
+                    <p className="mb-2"><strong>Setup:</strong> {session.setup}</p>
+                    <p className="mb-2"><strong>Target:</strong> {session.target}</p>
+                    <p className="mb-2"><strong>Entry:</strong> {session.entry}</p>
+                    <p><strong>Hours:</strong> {session.hours}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="p-4 bg-gray-100 rounded-lg">
+                <p className="font-bold">Futures Times: {content.models.futuresTimes}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tooltips Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.tooltips.title}</h1>
+            <p className="text-xl mb-6">{content.tooltips.subtitle}</p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-xl mb-4">Tooltip Anatomy</h3>
+                {content.tooltips.anatomy.map((item, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-4">
+                    <h4 className="font-bold text-lg mb-2">{item.section}</h4>
+                    <p className="mb-2"><strong>Shows:</strong> {item.shows}</p>
+                    <p><strong>Example:</strong> {item.example}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <h3 className="font-bold text-xl mb-4">{content.tooltips.htfLabels.title}</h3>
+                {content.tooltips.htfLabels.examples.map((item, i) => (
+                  <div key={i} className="p-3 border rounded-lg mb-2">
+                    <p><strong>{item.label}:</strong> {item.means}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Terms Section */}
+          <div className="break-after-page">
+            <h1 className="text-4xl font-bold mb-4">{content.terms.title}</h1>
+            <p className="text-xl mb-6">{content.terms.subtitle}</p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-xl mb-4">Core Terminology</h3>
+                {content.terms.core.map((item, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-3">
+                    <h4 className="font-bold text-lg mb-2">{item.term} - {item.def}</h4>
+                    <p><strong>Use:</strong> {item.use}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <h3 className="font-bold text-xl mb-4">Advanced Terms</h3>
+                {content.terms.advanced.map((item, i) => (
+                  <div key={i} className="p-4 border-2 rounded-lg mb-3">
+                    <h4 className="font-bold text-lg mb-2">{item.term} - {item.def}</h4>
+                    <p><strong>Use:</strong> {item.use}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="bg-gradient-to-br from-foreground via-primary to-foreground text-primary-foreground py-12 px-4 mt-16 border-t-4 border-primary">
