@@ -14,6 +14,7 @@ import { DiagramViewer } from '@/components/DiagramViewer';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
 import bslSslChart from '@/assets/bsl-ssl-chart.png';
 import htfEdgeCandles from '@/assets/htf-chart-edge.png';
+import cisdChart from '@/assets/cisd-chart.png';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -572,11 +573,18 @@ const Index = () => {
                           <p className="text-sm text-slate-600">Where institutions hunt for stops</p>
                         </div>
                       </div>
-                      <DiagramViewer 
-                        diagramType="cisd"
-                        title="CISD Momentum Shift"
-                        description="Change in State of Delivery pattern"
-                      />
+                      <div className="space-y-3">
+                        <img 
+                          src={cisdChart} 
+                          alt="CISD - Change in State of Delivery momentum shift pattern" 
+                          loading="lazy"
+                          className="w-full rounded-lg border shadow-lg"
+                        />
+                        <div className="text-center">
+                          <h3 className="font-semibold text-lg">CISD Momentum Shift</h3>
+                          <p className="text-sm text-slate-600">Change in State of Delivery pattern</p>
+                        </div>
+                      </div>
                     </div>
                     
                     <div className="grid grid-cols-1 gap-4">
