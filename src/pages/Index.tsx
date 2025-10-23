@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -40,6 +40,18 @@ interface SectionConfig {
 
 const Index = () => {
   const [selectedSection, setSelectedSection] = useState<SectionKey | null>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
+
+  const handleSectionClick = (key: SectionKey) => {
+    setSelectedSection(selectedSection === key ? null : key);
+    
+    // Scroll to details section after a brief delay to allow rendering
+    setTimeout(() => {
+      if (selectedSection !== key && detailsRef.current) {
+        detailsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
 
   const sections: Record<SectionKey, SectionConfig> = {
     overview: {
@@ -410,7 +422,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              onClick={() => setSelectedSection(selectedSection === key ? null : key)}
+              onClick={() => handleSectionClick(key)}
               className="cursor-pointer group"
             >
               <Card className="h-full border-2 border-border hover:border-primary/50 transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden">
@@ -450,10 +462,11 @@ const Index = () => {
         {/* Expanded Section Details */}
         {selectedSection && (
           <motion.div
+            ref={detailsRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="mb-16"
+            className="mb-16 scroll-mt-24"
           >
             <Card className="border-2 border-primary/30 bg-card/80 backdrop-blur-sm overflow-hidden">
               <div className={`h-1 bg-gradient-to-r ${sections[selectedSection].gradient}`} />
