@@ -522,10 +522,19 @@ const Index = () => {
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Click any section above to dive deep into time-based HTF sweep patterns
           </p>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Multi-Timeframe</Badge>
-            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Time-Based</Badge>
-            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">HTF Sweep Framework</Badge>
+          <div className="flex flex-col items-center gap-4">
+            <Button 
+              size="lg"
+              onClick={() => navigate("/knowledge")}
+              className="font-mono"
+            >
+              Browse Full Knowledge Base
+            </Button>
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Multi-Timeframe</Badge>
+              <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Time-Based</Badge>
+              <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">HTF Sweep Framework</Badge>
+            </div>
           </div>
         </motion.div>
       </main>
