@@ -547,11 +547,11 @@ const Index = () => {
       {/* Content */}
       <div className="relative z-10">
         {/* Header */}
-        <header className="border-b-2 border-primary/20 bg-card/95 backdrop-blur-md sticky top-0 z-50 shadow-lg">
+        <header className="border-b-2 border-primary/20 bg-background/80 backdrop-blur-md sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 sm:w-14 sm:h-14" />
+              <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg" />
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">MECHA-X</h1>
                 <p className="text-xs text-primary font-bold">Trading Guide</p>
