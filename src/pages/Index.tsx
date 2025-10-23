@@ -560,71 +560,50 @@ const Index = () => {
                 {/* VISUAL */}
                 {selectedTab === 'visual' && (
                   <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="space-y-2">
-                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
-                          <img 
-                            src={bslSslChart} 
-                            alt="BSL/SSL Liquidity Zones" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="text-center">
-                          <h3 className="font-semibold text-sm">BSL/SSL Liquidity Zones</h3>
-                          <p className="text-xs text-slate-600">Stop hunt zones</p>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
-                          <img 
-                            src={cisdChart} 
-                            alt="CISD Momentum Shift" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="text-center">
-                          <h3 className="font-semibold text-sm">CISD Momentum Shift</h3>
-                          <p className="text-xs text-slate-600">Delivery pattern</p>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="aspect-[4/3] overflow-hidden rounded-lg border shadow-lg">
-                          <img 
-                            src={htfEdgeCandles} 
-                            alt="HTF Chart Edge" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="text-center">
-                          <h3 className="font-semibold text-sm">HTF Candles on Edge</h3>
-                          <p className="text-xs text-slate-600">Timeframe context</p>
-                        </div>
-                      </div>
-                    </div>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {content.visual.elements.map((el, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.05 }}
-                          className="bg-gradient-to-br from-slate-50 to-blue-50 p-4 rounded-xl border"
-                        >
-                          <div className="flex items-center space-x-2 mb-2">
-                            <div className="text-blue-600">{el.icon}</div>
-                            <h3 className="font-bold">{el.name}</h3>
-                          </div>
-                          <div className="space-y-2 text-sm">
-                            <div><strong className="text-blue-700">What:</strong> {el.what}</div>
-                            <div><strong className="text-emerald-700">Why:</strong> {el.why}</div>
-                            <div><strong className="text-purple-700">How:</strong> {el.how}</div>
-                          </div>
-                        </motion.div>
-                      ))}
+                      {content.visual.elements.map((el, i) => {
+                        // Determine which image to show based on element name
+                        let elementImage = null;
+                        if (el.name === "HTF Candles") {
+                          elementImage = htfEdgeCandles;
+                        } else if (el.name === "BSL/SSL Lines") {
+                          elementImage = bslSslChart;
+                        } else if (el.name === "CISD Lines") {
+                          elementImage = cisdChart;
+                        }
+
+                        return (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.05 }}
+                            className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border overflow-hidden"
+                          >
+                            {elementImage && (
+                              <div className="aspect-[16/9] overflow-hidden border-b">
+                                <img 
+                                  src={elementImage} 
+                                  alt={el.name}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            )}
+                            <div className="p-4">
+                              <div className="flex items-center space-x-2 mb-2">
+                                <div className="text-blue-600">{el.icon}</div>
+                                <h3 className="font-bold">{el.name}</h3>
+                              </div>
+                              <div className="space-y-2 text-sm">
+                                <div><strong className="text-blue-700">What:</strong> {el.what}</div>
+                                <div><strong className="text-emerald-700">Why:</strong> {el.why}</div>
+                                <div><strong className="text-purple-700">How:</strong> {el.how}</div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
