@@ -58,60 +58,60 @@ const Index = () => {
 
   const sections: Record<SectionKey, SectionConfig> = {
     overview: {
-      title: "Getting Started",
+      title: "System Overview",
       icon: <Sparkles className="w-8 h-8" />,
       gradient: "from-primary via-accent to-primary",
-      description: "Time-based HTF sweep framework overview",
-      stats: { label: "Components", value: "6 Core" },
+      description: "HTF sweep framework with multi-timeframe liquidity detection",
+      stats: { label: "Components", value: "7 Core" },
     },
     htf: {
-      title: "HTF Analysis",
+      title: "HTF Sweeps",
       icon: <BarChart3 className="w-8 h-8" />,
       gradient: "from-blue-500 via-cyan-500 to-blue-600",
-      description: "Higher timeframe structure on any chart",
-      stats: { label: "Timeframes", value: "Up to 3" },
+      description: "Higher timeframe candles overlay any chart (Auto/Manual)",
+      stats: { label: "Mode", value: "Auto/Manual" },
     },
     liquidity: {
-      title: "Liquidity Zones",
+      title: "BSL/SSL Lines",
       icon: <Target className="w-8 h-8" />,
       gradient: "from-emerald-500 via-teal-500 to-emerald-600",
-      description: "BSL/SSL sweep detection system",
-      stats: { label: "Detection", value: "Auto" },
+      description: "Buyside/Sellside liquidity sweep detection (LTF + HTF)",
+      stats: { label: "Types", value: "Valid/Invalid" },
     },
     patterns: {
-      title: "C1→C2→C3",
+      title: "C2 Labels",
       icon: <Workflow className="w-8 h-8" />,
       gradient: "from-cyan-500 via-blue-500 to-cyan-600",
-      description: "Core 3-candle reversal patterns",
-      stats: { label: "Signals", value: "Real-time" },
+      description: "C2 reversal → C3 expansion pattern detection",
+      stats: { label: "Pattern", value: "C1→C2→C3" },
     },
     cisd: {
-      title: "CISD Momentum",
+      title: "CISD Projections",
       icon: <Zap className="w-8 h-8" />,
       gradient: "from-orange-500 via-amber-500 to-orange-600",
-      description: "Change in State of Delivery zones",
-      stats: { label: "Projections", value: "1x-2.5x" },
+      description: "Change in State of Delivery with multi-target projections",
+      stats: { label: "Targets", value: "1x-4x" },
     },
     ifvg: {
-      title: "iFVG Gaps",
+      title: "iFVG Detection",
       icon: <Layers className="w-8 h-8" />,
       gradient: "from-indigo-500 via-purple-500 to-indigo-600",
-      description: "Inverted Fair Value Gap patterns",
-      stats: { label: "Type", value: "Reversal" },
+      description: "Inverse Fair Value Gaps after valid sweeps",
+      stats: { label: "Context", value: "Post-Sweep" },
     },
     smt: {
-      title: "SMT Divergence",
+      title: "SMT Analysis",
       icon: <GitCompare className="w-8 h-8" />,
       gradient: "from-purple-500 via-pink-500 to-purple-600",
-      description: "Smart Money Technique analysis",
-      stats: { label: "Modes", value: "Binary/Triad" },
+      description: "Smart Money Technique divergence (Binary/Triad)",
+      stats: { label: "Modes", value: "2 or 3 Assets" },
     },
     sessions: {
-      title: "Session Models",
+      title: "Session Windows",
       icon: <Clock className="w-8 h-8" />,
       gradient: "from-pink-500 via-rose-500 to-pink-600",
-      description: "4H time-based session pattern recognition",
-      stats: { label: "Models", value: "Asia/Lon/NY" },
+      description: "Asia/London/NY + Silver Bullet & Macro timing",
+      stats: { label: "Sessions", value: "4H Windows" },
     },
   };
 
@@ -122,12 +122,13 @@ const Index = () => {
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: <BarChart3 />, title: "HTF Candles", desc: "See 4H/Daily on 5min chart" },
-                { icon: <Target />, title: "Liquidity Zones", desc: "BSL/SSL detection" },
-                { icon: <Workflow />, title: "C1→C2→C3", desc: "Automated pattern detection" },
-                { icon: <Zap />, title: "CISD Zones", desc: "Momentum shift signals" },
-                { icon: <GitCompare />, title: "SMT Logic", desc: "Divergence analysis" },
-                { icon: <Clock />, title: "Session Models", desc: "4H pattern recognition" },
+                { icon: <BarChart3 />, title: "HTF Sweeps", desc: "Display 4H/Daily candles on any timeframe" },
+                { icon: <Target />, title: "BSL/SSL Lines", desc: "Liquidity sweep detection" },
+                { icon: <Workflow />, title: "C2 Labels", desc: "Reversal → Expansion patterns" },
+                { icon: <Zap />, title: "CISD", desc: "State change with projections" },
+                { icon: <Layers />, title: "iFVG", desc: "Inverse Fair Value Gaps" },
+                { icon: <GitCompare />, title: "SMT", desc: "Binary/Triad divergence" },
+                { icon: <Clock />, title: "Sessions", desc: "Asia/London/NY windows" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -161,13 +162,13 @@ const Index = () => {
           <div className="space-y-8">
             <SimpleChart 
               type="htf" 
-              title="Higher Timeframe Analysis" 
-              description="Multi-timeframe structure without switching charts - see 4H/Daily levels on your 5min timeframe"
+              title="HTF Sweep Detection" 
+              description="Overlay higher timeframe candles on any chart - Auto mode intelligently selects HTFs, Manual mode gives full control (up to 4 timeframes)"
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { title: "Auto Mode", desc: "Intelligent HTF selection based on chart timeframe" },
-                { title: "Manual Mode", desc: "Up to 3 custom HTF configurations with full control" },
+                { title: "Auto Mode", desc: "Smart HTF selection: 5min chart → shows 1H, 4H, Daily automatically", detail: "15min → 4H, Daily, Weekly" },
+                { title: "Manual Mode", desc: "Configure up to 4 custom HTFs with candle count, mapping, and offset control", detail: "Full customization of display" },
               ].map((mode, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <CardHeader>
@@ -190,20 +191,22 @@ const Index = () => {
           <div className="space-y-8">
             <SimpleChart 
               type="liquidity" 
-              title="Buy Side & Sell Side Liquidity" 
-              description="BSL above highs & SSL below lows - where smart money hunts retail stops"
+              title="BSL/SSL Sweep Detection" 
+              description="Buyside Liquidity (BSL) above highs, Sellside Liquidity (SSL) below lows - tracks both LTF and HTF sweeps with valid/invalid states"
             />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { title: "BSL", color: "from-blue-500 to-cyan-500", desc: "Buy Side Liquidity above swing highs" },
-                { title: "SSL", color: "from-red-500 to-rose-500", desc: "Sell Side Liquidity below swing lows" },
-                { title: "Sweep", color: "from-purple-500 to-pink-500", desc: "Liquidity hunt then reversal" },
+                { title: "BSL (Buyside)", color: "from-emerald-500 to-teal-500", desc: "Liquidity above swing highs - bearish target", detail: "Price sweeps highs to grab buy stops" },
+                { title: "SSL (Sellside)", color: "from-red-500 to-rose-500", desc: "Liquidity below swing lows - bullish target", detail: "Price sweeps lows to grab sell stops" },
+                { title: "Valid Sweeps", color: "from-blue-500 to-cyan-500", desc: "Sweep holds → price reverses from liquidity zone", detail: "C2 formed, no invalidation" },
+                { title: "Invalid Sweeps", color: "from-gray-500 to-gray-600", desc: "Sweep fails → price continues through zone", detail: "Invalidated by next candle" },
               ].map((type, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <div className={`h-2 bg-gradient-to-r ${type.color}`} />
                   <CardHeader>
                     <CardTitle>{type.title}</CardTitle>
                     <CardDescription>{type.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{type.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
@@ -215,14 +218,14 @@ const Index = () => {
         return (
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <PatternChart type="c1c2c3-bullish" title="Bullish C1→C2→C3" />
-              <PatternChart type="c1c2c3-bearish" title="Bearish C1→C2→C3" />
+              <PatternChart type="c1c2c3-bullish" title="Bullish Sweep → C2 → C3" />
+              <PatternChart type="c1c2c3-bearish" title="Bearish Sweep → C2 → C3" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { emoji: "🎯", title: "C1 Setup", desc: "First candle touching POI zone" },
-                { emoji: "⚡", title: "C2 Swing", desc: "Middle candle = THE SWING POINT" },
-                { emoji: "✅", title: "C3 Confirm", desc: "Right candle confirms reversal" },
+                { emoji: "🎯", title: "C1 (Sweep)", desc: "First candle creates liquidity sweep (BSL/SSL)", detail: "High/Low gets taken out" },
+                { emoji: "⚡", title: "C2 (Reversal)", desc: "Second candle closes INSIDE C1 range = reversal", detail: "This is the swing point - gets labeled" },
+                { emoji: "✅", title: "C3 (Expansion)", desc: "Third candle expands toward target (OLHC/OHLC)", detail: "If C3 doesn't reach target, C4 continues" },
               ].map((step, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <CardHeader>
@@ -231,9 +234,20 @@ const Index = () => {
                       {step.title}
                     </CardTitle>
                     <CardDescription>{step.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{step.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+              <h3 className="font-bold text-lg mb-2">C2 Label Detection</h3>
+              <p className="text-sm text-muted-foreground mb-3">Automatic labeling of C2 reversal candles after valid sweeps</p>
+              <div className="space-y-2 text-sm">
+                <p>• <strong>Valid Sweep Required:</strong> C2 only forms after confirmed liquidity sweep</p>
+                <p>• <strong>Reversal Criteria:</strong> C2 must close back inside C1 range (not continue sweep)</p>
+                <p>• <strong>C3 Expectation:</strong> After C2 forms, C3 should expand (optional C3 box visualization)</p>
+                <p>• <strong>Draw on Liquidity:</strong> C1 becomes the DOL (target) for the reversal move</p>
+              </div>
             </div>
           </div>
         );
@@ -243,14 +257,14 @@ const Index = () => {
           <div className="space-y-8">
             <SimpleChart 
               type="cisd" 
-              title="CISD Momentum Zones" 
-              description="Change in State of Delivery - momentum shift confirmation zones"
+              title="CISD (Change in State of Delivery)" 
+              description="Momentum shift confirmation after valid sweep - detects when market changes from lower lows to higher lows (or vice versa) with multi-target projections (1x, 2x, 2.5x, 3.5x, 4x)"
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { title: "Formation", desc: "CISD forms after liquidity sweep and structure shift" },
-                { title: "Projections", desc: "Target levels at 1.0x, 2.0x, and 2.5x extensions" },
-                { title: "Retest", desc: "Valid zones often get retested before major move" },
+                { title: "Detection", desc: "CISD forms after valid sweep when price structure changes", detail: "Lower lows → Higher lows (bullish) or Higher highs → Lower highs (bearish)" },
+                { title: "Projections", desc: "Multi-target system: 1x, 2x, 2.5x, 3.5x, 4x extensions from CISD level", detail: "Configurable bull/bear targets" },
+                { title: "Confirmation", desc: "CISD line + label marks the exact level where state changed", detail: "Use as entry confirmation zone" },
               ].map((item, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <CardHeader>
@@ -259,6 +273,7 @@ const Index = () => {
                       {item.title}
                     </CardTitle>
                     <CardDescription>{item.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{item.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
@@ -271,14 +286,14 @@ const Index = () => {
           <div className="space-y-8">
             <SimpleChart 
               type="ifvg" 
-              title="iFVG Patterns" 
-              description="Inverted Fair Value Gap - gap filled aggressively in opposite direction"
+              title="iFVG (Inverse Fair Value Gap)" 
+              description="Special FVG that forms AFTER a valid sweep - price creates gap then aggressively fills it in opposite direction, signaling institutional positioning"
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { title: "Formation", desc: "FVG inverted by aggressive opposite move" },
-                { title: "Signal", desc: "Institutions positioning for real direction" },
-                { title: "Entry", desc: "iFVG zones = high-probability entry areas" },
+                { title: "Post-Sweep Context", desc: "iFVG only detected after valid C2 sweep formation", detail: "Not just any FVG - must follow sweep" },
+                { title: "Reversal Signal", desc: "Gap filled aggressively opposite to sweep direction", detail: "Bull sweep → Bearish iFVG (and vice versa)" },
+                { title: "Entry Zone", desc: "iFVG box marks high-probability entry area", detail: "Combines with C3 expansion confirmation" },
               ].map((item, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <CardHeader>
@@ -287,6 +302,7 @@ const Index = () => {
                       {item.title}
                     </CardTitle>
                     <CardDescription>{item.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{item.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
@@ -299,8 +315,8 @@ const Index = () => {
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { title: "Binary Mode", desc: "1 Primary + 1 Correlated (ES vs NQ)" },
-                { title: "Triad Mode", desc: "1 Primary + 2 Correlated (ES vs NQ + YM)" },
+                { title: "Binary Mode (2 Assets)", desc: "Compare 1 primary asset vs 1 correlated asset", detail: "Example: ES (primary) vs NQ (correlated) - simple divergence detection" },
+                { title: "Triad Mode (3 Assets)", desc: "Compare 1 primary vs 2 correlated assets", detail: "Example: ES vs NQ + YM - algorithm switches between assets for strength confirmation" },
               ].map((mode, i) => (
                 <Card key={i} className="border-2 border-border hover:border-primary/50 transition-all">
                   <CardHeader>
@@ -309,16 +325,19 @@ const Index = () => {
                       {mode.title}
                     </CardTitle>
                     <CardDescription>{mode.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{mode.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
             </div>
             <div className="p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
-              <h3 className="font-bold text-lg mb-2">Key Signals</h3>
+              <h3 className="font-bold text-lg mb-2">Smart Money Divergence</h3>
+              <p className="text-sm text-muted-foreground mb-4">When one asset makes new high/low but correlated asset doesn't = divergence = potential reversal</p>
               <div className="space-y-2 text-sm">
-                <p><Badge variant="destructive">PSP-REV</Badge> Primary swept + closed inside, correlated failed</p>
-                <p><Badge className="bg-amber-500">PSP-CONT</Badge> Divergence present but bias conflicts</p>
-                <p><Badge variant="destructive">CIC-REV</Badge> 2 assets diverged + bias confirms</p>
+                <p>• <strong>Binary:</strong> Simple A vs B comparison</p>
+                <p>• <strong>Triad:</strong> A vs (B or C) - algorithm picks strongest correlation</p>
+                <p>• <strong>Auto-detection:</strong> System suggests correlated pairs</p>
+                <p>• <strong>Manual override:</strong> Specify exact assets to compare</p>
               </div>
             </div>
           </div>
@@ -330,21 +349,24 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { 
-                  title: "ASIA REVERSAL", 
-                  time: "6p→2a sweep",
-                  desc: "22:00 ASIA sweeps 18:00 Pre-ASIA, target London expansion",
+                  title: "Asia Reversal", 
+                  time: "18:00-22:00 (6pm-10pm)",
+                  desc: "If Asia candles reverse, expect London expansion and NY continuation",
+                  detail: "Indices: 18:00 or 22:00 reversal | Forex: 17:00 or 21:00",
                   color: "from-purple-500 to-purple-600" 
                 },
                 { 
-                  title: "LONDON REVERSAL", 
-                  time: "2a→10p sweep",
-                  desc: "02:00 LON sweeps 22:00 ASIA = TRAP, NY reverses",
+                  title: "London Reversal", 
+                  time: "2:00-6:00 AM",
+                  desc: "Classic pattern: London reverses, NY expands the move",
+                  detail: "Indices: Focus 2:00-6:00 window | Forex: Focus 1:00-5:00 window",
                   color: "from-blue-500 to-blue-600" 
                 },
                 { 
-                  title: "NYAM-SB", 
-                  time: "10-11am window",
-                  desc: "Optimal NY entry during 10am hour, most reliable 1H setup",
+                  title: "NY Reversal", 
+                  time: "6:00-10:00 AM",
+                  desc: "When Asia/London fail, NY handles the reversal (common on news days)",
+                  detail: "Indices: 6:00-10:00 window | Forex: 5:00-9:00 window",
                   color: "from-emerald-500 to-emerald-600" 
                 },
               ].map((session, i) => (
@@ -352,11 +374,30 @@ const Index = () => {
                   <div className={`h-2 bg-gradient-to-r ${session.color}`} />
                   <CardHeader>
                     <CardTitle className="text-base">{session.title}</CardTitle>
-                    <Badge variant="secondary" className="w-fit mb-2">{session.time}</Badge>
+                    <Badge variant="secondary" className="w-fit mb-2 font-mono text-xs">{session.time}</Badge>
                     <CardDescription>{session.desc}</CardDescription>
+                    <p className="text-xs text-muted-foreground mt-2">{session.detail}</p>
                   </CardHeader>
                 </Card>
               ))}
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-r from-pink-500/10 to-rose-500/10 border border-pink-500/20">
+              <h3 className="font-bold text-lg mb-2">Silver Bullet & Macro Windows</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+                <div>
+                  <p className="font-semibold mb-2">Silver Bullet Hours:</p>
+                  <p>• 3-4am (London SB)</p>
+                  <p>• 10-11am (NY AM SB) ⭐</p>
+                  <p>• 2-3pm (NY PM SB)</p>
+                </div>
+                <div>
+                  <p className="font-semibold mb-2">Key Macro Windows:</p>
+                  <p>• 2:03-2:40am (Pre-London)</p>
+                  <p>• 8:50-9:00am (Pre-Open)</p>
+                  <p>• 9:50-10:15am (Post-Open)</p>
+                  <p>• 12:25-1:35pm (Lunch)</p>
+                </div>
+              </div>
             </div>
           </div>
         );
