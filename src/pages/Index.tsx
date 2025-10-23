@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -7,10 +7,13 @@ import {
   Zap, Target, Clock, BarChart3, MessageCircle,
   Activity, Book, Eye, Layers, GitCompare, Workflow,
   ArrowUpDown, CheckCircle2, AlertCircle, Info, RotateCcw,
-  ArrowRight, Circle, ChevronRight, TrendingUpDown, Search, Crosshair
+  ArrowRight, Circle, ChevronRight, TrendingUpDown, Search, Crosshair,
+  Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AITooltip } from '@/components/AITooltip';
+import { useToast } from '@/hooks/use-toast';
+import html2pdf from 'html2pdf.js';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
 import bslSslChart from '@/assets/bsl-ssl-chart.png';
 import htfEdgeCandles from '@/assets/htf-chart-edge.png';
@@ -31,6 +34,9 @@ const Index = () => {
   const [userProgress, setUserProgress] = useState(0);
   const [completedSections, setCompletedSections] = useState(new Set<string>());
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isExporting, setIsExporting] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   // Real-time clock
   useEffect(() => {
@@ -52,6 +58,43 @@ const Index = () => {
     if (!completedSections.has(section)) {
       setCompletedSections(prev => new Set([...prev, section]));
       setUserProgress(prev => Math.min(prev + 12, 100));
+    }
+  };
+
+  // PDF Export function
+  const exportToPDF = async () => {
+    if (!contentRef.current) return;
+    
+    setIsExporting(true);
+    toast({
+      title: "Generating PDF...",
+      description: "Please wait while we prepare your guide.",
+    });
+
+    try {
+      const element = contentRef.current;
+      const opt = {
+        margin: 10,
+        filename: `MECHA-X-Guide-${selectedTab}.pdf`,
+        image: { type: 'jpeg' as const, quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+      
+      toast({
+        title: "PDF Downloaded!",
+        description: `${tabConfig[selectedTab].title} section saved successfully.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Export Failed",
+        description: "There was an error generating the PDF. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -438,7 +481,20 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              <motion.button
+                onClick={exportToPDF}
+                disabled={isExporting}
+                className="flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-full border-2 border-accent/50 hover:border-accent hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Download className="w-4 h-4" />
+                <span className="text-sm font-bold hidden sm:inline">
+                  {isExporting ? 'Exporting...' : 'PDF'}
+                </span>
+              </motion.button>
+              
               <div className="flex items-center space-x-2 bg-secondary px-4 py-2 rounded-full border border-primary/30">
                 <div className={`w-2 h-2 rounded-full ${session.color} ${session.active ? 'animate-pulse' : ''}`}></div>
                 <span className="text-sm font-bold text-foreground">{session.name}</span>
@@ -536,6 +592,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
+            ref={contentRef}
           >
             <Card className="shadow-2xl border-2 border-primary/20 bg-card/95 backdrop-blur-sm rounded-2xl overflow-hidden">
               <CardHeader className="pb-6 bg-gradient-to-r from-secondary to-accent/30 border-b-2 border-primary/20">
