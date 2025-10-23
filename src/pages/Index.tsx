@@ -6,7 +6,8 @@ import {
   TrendingUp, TrendingDown, 
   Zap, Target, Clock, BarChart3, MessageCircle,
   Activity, Book, Eye, Layers, GitCompare, Workflow,
-  ArrowUpDown, CheckCircle2, AlertCircle, Info, RotateCcw
+  ArrowUpDown, CheckCircle2, AlertCircle, Info, RotateCcw,
+  ArrowRight, Circle, ChevronRight, TrendingUpDown, Search, Crosshair
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AITooltip } from '@/components/AITooltip';
@@ -421,24 +422,24 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       {/* Header */}
-      <header className="border-b bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-lg">
+      <header className="border-b bg-card/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img src={mechaxLogo} alt="MECHA-X Logo" className="w-10 h-10 sm:w-12 sm:h-12" />
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl font-bold text-foreground">
                   MECHA-X Guide
                 </h1>
-                <p className="text-xs text-slate-600 font-mono">v3.0</p>
+                <p className="text-xs text-muted-foreground font-mono">v3.0</p>
               </div>
             </div>
             
             <div className="flex items-center space-x-2 sm:space-x-4">
               <div className="flex items-center space-x-1 sm:space-x-2">
                 <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${session.color} ${session.active ? 'animate-pulse' : ''}`}></div>
-                <span className="text-xs sm:text-sm font-mono">{session.name}</span>
-                <span className="text-xs text-slate-500 hidden sm:inline">
+                <span className="text-xs sm:text-sm text-muted-foreground">{session.name}</span>
+                <span className="text-xs text-muted-foreground hidden sm:inline">
                   {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' })} EST
                 </span>
               </div>
@@ -448,10 +449,10 @@ const Index = () => {
           
           <div className="mt-2">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs text-slate-600">Progress</span>
-              <span className="text-xs text-slate-600">{userProgress}%</span>
+              <span className="text-xs text-muted-foreground">Progress</span>
+              <span className="text-xs text-muted-foreground">{userProgress}%</span>
             </div>
-            <Progress value={userProgress} className="h-1.5" />
+            <Progress value={userProgress} className="h-2" />
           </div>
         </div>
       </header>
@@ -464,17 +465,17 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 mb-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
             Complete MECHA-X Guide
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             Master every component, pattern, and signal. Interactive demos included.
           </p>
         </motion.div>
 
         {/* Tabs */}
         <nav className="mb-6" aria-label="Guide sections">
-          <div className="bg-white rounded-xl border shadow-lg p-2">
+          <div className="bg-card rounded-xl border shadow-sm p-2">
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
               {(Object.entries(tabConfig) as [TabKey, TabConfig][]).map(([key, config]) => (
                 <motion.button
@@ -485,8 +486,8 @@ const Index = () => {
                   }}
                   className={`p-2 sm:p-3 rounded-lg transition-all ${
                     selectedTab === key 
-                      ? `bg-gradient-to-br ${config.color} text-white shadow-lg` 
-                      : 'bg-slate-50 hover:bg-slate-100 text-slate-700'
+                      ? 'bg-primary text-primary-foreground shadow-md border-2' 
+                      : 'bg-secondary hover:bg-muted text-foreground'
                   }`}
                   whileTap={{ scale: 0.95 }}
                   aria-label={`View ${config.title} section`}
@@ -510,10 +511,10 @@ const Index = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="shadow-xl border-0 bg-white/95">
-              <CardHeader className="pb-4">
+            <Card className="shadow-sm border bg-card">
+              <CardHeader className="pb-4 bg-secondary/30">
                 <div className="flex items-center space-x-3">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${tabConfig[selectedTab].color} text-white shadow-lg`}>
+                  <div className="p-3 rounded-xl bg-primary text-primary-foreground shadow-lg">
                     {tabConfig[selectedTab].icon}
                   </div>
                   <div>
@@ -526,9 +527,11 @@ const Index = () => {
                 {/* OVERVIEW */}
                 {selectedTab === 'overview' && (
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-2xl">
-                      <h3 className="text-2xl font-bold mb-2">💡 Hover over any underlined term for AI explanations!</h3>
-                      <p className="text-blue-100">Interactive tooltips powered by your knowledge base</p>
+                    <div className="bg-primary text-primary-foreground p-6 rounded-2xl border-2">
+                      <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                        💡 <Zap className="w-6 h-6" /> Hover over any underlined term for AI explanations!
+                      </h3>
+                      <p className="text-primary-foreground/80 text-center">Interactive tooltips powered by your knowledge base</p>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -538,17 +541,19 @@ const Index = () => {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.1 }}
-                          className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-shadow"
+                          whileHover={{ scale: 1.03, y: -5 }}
+                          className="bg-card p-4 rounded-xl border-2 border-border hover:border-primary hover:shadow-md transition-all cursor-pointer group relative"
                         >
+                          <div className="absolute top-0 left-0 w-2 h-full bg-primary rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                           <div className="flex items-start space-x-3">
-                            <div className="p-2 bg-blue-500 text-white rounded-lg">
+                            <div className="p-2 bg-primary text-primary-foreground rounded-lg group-hover:scale-110 transition-transform">
                               {feat.icon}
                             </div>
                             <div>
                               <AITooltip term={feat.text}>
-                                <h3 className="font-bold text-slate-900">{feat.text}</h3>
+                                <h3 className="font-bold text-foreground">{feat.text}</h3>
                               </AITooltip>
-                              <p className="text-sm text-slate-600 mt-1">{feat.detail}</p>
+                              <p className="text-sm text-muted-foreground mt-1">{feat.detail}</p>
                             </div>
                           </div>
                         </motion.div>
@@ -661,7 +666,62 @@ const Index = () => {
                 {/* PATTERN */}
                 {selectedTab === 'pattern' && (
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border">
+                    {/* Flow Diagram */}
+                    <div className="bg-muted p-6 rounded-xl border-2 border-primary">
+                      <h3 className="text-lg font-bold mb-4 text-center">C1 → C2 → C3 Flow</h3>
+                      <div className="flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+                        <motion.div 
+                          className="flex-1 min-w-[100px] max-w-[200px] bg-card p-4 rounded-xl border-2 border-primary shadow-lg hover:scale-105 transition-transform"
+                          initial={{ opacity: 0, x: -50 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <div className="text-center">
+                            <div className="w-12 h-12 mx-auto bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl mb-2 font-bold">
+                              C1
+                            </div>
+                            <p className="text-xs font-bold mb-1">Touch POI</p>
+                            <p className="text-xs text-muted-foreground">Setup candle</p>
+                          </div>
+                        </motion.div>
+                        
+                        <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-primary flex-shrink-0" />
+                        
+                        <motion.div 
+                          className="flex-1 min-w-[100px] max-w-[200px] bg-card p-4 rounded-xl border-2 border-primary shadow-lg hover:scale-105 transition-transform"
+                          initial={{ opacity: 0, x: -50 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          <div className="text-center">
+                            <div className="w-12 h-12 mx-auto bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl mb-2 font-bold">
+                              C2
+                            </div>
+                            <p className="text-xs font-bold mb-1">Sweep & Return</p>
+                            <p className="text-xs text-muted-foreground">Must close inside C1-C2 range</p>
+                          </div>
+                        </motion.div>
+                        
+                        <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-primary flex-shrink-0" />
+                        
+                        <motion.div 
+                          className="flex-1 min-w-[100px] max-w-[200px] bg-card p-4 rounded-xl border-2 border-primary shadow-lg hover:scale-105 transition-transform"
+                          initial={{ opacity: 0, x: -50 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.6 }}
+                        >
+                          <div className="text-center">
+                            <div className="w-12 h-12 mx-auto bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl mb-2 font-bold">
+                              C3
+                            </div>
+                            <p className="text-xs font-bold mb-1">Expectation</p>
+                            <p className="text-xs text-muted-foreground">Continuation candle</p>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+
+                    <div className="bg-secondary/30 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {content.pattern.steps.map((step, i) => (
                           <motion.div
@@ -669,34 +729,44 @@ const Index = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.2 }}
-                            whileHover={{ scale: 1.05 }}
-                            className="p-5 rounded-xl border-2 border-emerald-200 bg-white/90 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer"
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            className="p-5 rounded-xl border-2 border-border bg-card hover:border-primary hover:shadow-xl transition-all cursor-pointer group relative"
                           >
+                            <div className="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                             <div className="flex items-center space-x-2 mb-3">
-                              <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl">
+                              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
                                 {step.emoji}
                               </div>
                               <AITooltip term={step.name}>
-                                <h3 className="font-bold">{step.name}</h3>
+                                <h3 className="font-bold flex items-center gap-1">
+                                  <Target className="w-4 h-4" />
+                                  {step.name}
+                                </h3>
                               </AITooltip>
                             </div>
-                            <p className="text-sm mb-2">{step.what}</p>
-                            <div className="bg-emerald-50 p-2 rounded text-xs">
-                              <strong>Rule:</strong> {step.rule}
+                            <p className="text-sm mb-2 text-muted-foreground">{step.what}</p>
+                            <div className="bg-secondary p-2 rounded text-xs border-l-2 border-primary">
+                              <strong className="flex items-center gap-1">
+                                <CheckCircle2 className="w-3 h-3" />
+                                Rule:
+                              </strong> {step.rule}
                             </div>
-                            <div className="mt-2 text-xs text-slate-600">
-                              <strong>Example:</strong> {step.example}
+                            <div className="mt-2 text-xs text-muted-foreground">
+                              <strong className="flex items-center gap-1">
+                                <Info className="w-3 h-3" />
+                                Example:
+                              </strong> {step.example}
                             </div>
                           </motion.div>
                         ))}
                       </div>
 
-                      <div className="mt-6 bg-red-50 border border-red-200 p-4 rounded-xl">
+                      <div className="mt-6 bg-destructive/10 border-2 border-destructive p-4 rounded-xl">
                         <div className="flex items-center space-x-2 mb-2">
-                          <AlertCircle className="w-5 h-5 text-red-600" />
-                          <strong className="text-red-900">Critical:</strong>
+                          <AlertCircle className="w-5 h-5 text-destructive" />
+                          <strong className="text-destructive">Critical:</strong>
                         </div>
-                        <p className="text-red-800 text-sm">{content.pattern.critical}</p>
+                        <p className="text-destructive text-sm">{content.pattern.critical}</p>
                       </div>
                     </div>
                   </div>
@@ -705,7 +775,7 @@ const Index = () => {
                 {/* PHASES */}
                 {selectedTab === 'phases' && (
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border">
+                    <div className="bg-secondary/30 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                         {content.phases.phases.map((phase, i) => (
                           <motion.div
@@ -713,41 +783,68 @@ const Index = () => {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.1 }}
-                            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                            className={`p-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-gradient-to-br ${phase.color} hover:text-white hover:shadow-xl transition-all cursor-pointer group`}
+                            whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
+                            className="p-4 rounded-xl border-2 border-border bg-card hover:bg-primary hover:text-primary-foreground hover:shadow-xl transition-all cursor-pointer group relative overflow-hidden"
                           >
-                            <div className="p-2 rounded-lg mb-2 bg-cyan-100 group-hover:bg-white/20 transition-colors">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="p-2 rounded-lg mb-2 bg-muted group-hover:bg-background/20 transition-colors">
                               {phase.icon}
                             </div>
                             <AITooltip term={phase.name}>
-                              <h3 className="font-bold mb-1">{phase.name}</h3>
+                              <h3 className="font-bold mb-1 flex items-center gap-1">
+                                <Circle className="w-3 h-3" />
+                                {phase.name}
+                              </h3>
                             </AITooltip>
-                            <p className="text-xs mb-2 text-slate-600 group-hover:text-white/90 transition-colors">{phase.what}</p>
-                            <div className="text-xs text-slate-500 group-hover:text-white/80 transition-colors">
-                              <strong>Signal:</strong> {phase.signal}
+                            <p className="text-xs mb-2 text-muted-foreground group-hover:text-primary-foreground/90 transition-colors">{phase.what}</p>
+                            <div className="text-xs text-muted-foreground group-hover:text-primary-foreground/80 transition-colors">
+                              <strong className="flex items-center gap-1">
+                                <Zap className="w-3 h-3" />
+                                Signal:
+                              </strong> {phase.signal}
                             </div>
-                            <div className="text-xs text-slate-500 group-hover:text-white/80 mt-1 transition-colors">
-                              Next: {phase.next}
+                            <div className="text-xs text-muted-foreground group-hover:text-primary-foreground/80 mt-1 transition-colors">
+                              <strong className="flex items-center gap-1">
+                                <ArrowRight className="w-3 h-3" />
+                                Next:
+                              </strong> {phase.next}
                             </div>
                           </motion.div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {content.phases.strength.levels.map((lvl, i) => (
-                        <motion.div 
-                          key={i} 
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          className="bg-white p-4 rounded-xl border shadow-sm hover:shadow-lg transition-shadow"
-                        >
-                          <Badge className={`${lvl.color} border-0 mb-2`}>{lvl.score}</Badge>
-                          <h3 className="font-bold mb-1">{lvl.name}</h3>
-                          <p className="text-sm text-slate-600">{lvl.desc}</p>
-                        </motion.div>
-                      ))}
+                    {/* Strength Indicators */}
+                    <div className="bg-primary text-primary-foreground p-6 rounded-xl border-2">
+                      <h3 className="text-xl font-bold mb-4 text-center">Validation Strength System</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {content.phases.strength.levels.map((lvl, i) => (
+                          <motion.div 
+                            key={i} 
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="bg-card p-4 rounded-xl border-2 shadow-sm hover:shadow-lg hover:border-primary transition-all group cursor-pointer"
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge className={`${lvl.color} border-0`}>{lvl.score}</Badge>
+                              <div className="flex gap-1">
+                                {[...Array(3)].map((_, idx) => (
+                                  <div 
+                                    key={idx} 
+                                    className={`w-2 h-8 rounded ${idx < (i + 1) ? 'bg-primary' : 'bg-muted'}`}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                            <h3 className="font-bold mb-1 flex items-center gap-2">
+                              <Activity className="w-4 h-4 text-primary" />
+                              {lvl.name}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">{lvl.desc}</p>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -755,12 +852,15 @@ const Index = () => {
                 {/* SMT */}
                 {selectedTab === 'smt' && (
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl border">
-                      <h3 className="text-xl font-bold mb-2 text-center">SMT Divergence Detection</h3>
-                      <p className="text-sm text-slate-600 text-center mb-4">Structural comparison between correlated assets</p>
+                    <div className="bg-primary text-primary-foreground p-6 rounded-2xl border-2">
+                      <h3 className="text-xl font-bold mb-2 text-center flex items-center justify-center gap-2">
+                        <GitCompare className="w-6 h-6" />
+                        SMT Divergence Detection
+                      </h3>
+                      <p className="text-sm text-primary-foreground/80 text-center mb-4">Structural comparison between correlated assets</p>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border">
+                    <div className="bg-secondary/30 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         {content.smt.modes.map((mode, i) => (
                           <motion.div
@@ -768,28 +868,49 @@ const Index = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.2 }}
-                            whileHover={{ scale: 1.03 }}
-                            className="p-5 rounded-xl border-2 border-orange-200 bg-white hover:border-orange-500 hover:shadow-xl transition-all cursor-pointer"
+                            whileHover={{ scale: 1.03, y: -5 }}
+                            className="p-5 rounded-xl border-2 border-border bg-card hover:border-primary hover:shadow-xl transition-all cursor-pointer group relative"
                           >
+                            <div className="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                             <AITooltip term={mode.detection}>
-                              <h3 className="font-bold text-lg mb-2 text-orange-900">{mode.name}</h3>
+                              <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
+                                <TrendingUpDown className="w-5 h-5 text-primary" />
+                                {mode.name}
+                              </h3>
                             </AITooltip>
                             <div className="space-y-2 text-sm">
-                              <div className="bg-orange-50 p-2 rounded"><strong>Setup:</strong> {mode.setup}</div>
-                              <div className="bg-orange-50 p-2 rounded"><strong>Example:</strong> {mode.example}</div>
-                              <div className="bg-orange-50 p-2 rounded"><strong>Detection:</strong> {mode.detection}</div>
-                              <div className="bg-orange-100 p-2 rounded"><strong>Logic:</strong> {mode.logic}</div>
+                              <div className="bg-muted p-2 rounded border-l-2 border-primary">
+                                <strong className="flex items-center gap-1">
+                                  <Crosshair className="w-3 h-3" />
+                                  Setup:
+                                </strong> {mode.setup}
+                              </div>
+                              <div className="bg-muted p-2 rounded border-l-2 border-accent">
+                                <strong className="flex items-center gap-1">
+                                  <Info className="w-3 h-3" />
+                                  Example:
+                                </strong> {mode.example}
+                              </div>
+                              <div className="bg-muted p-2 rounded border-l-2 border-accent">
+                                <strong className="flex items-center gap-1">
+                                  <Search className="w-3 h-3" />
+                                  Detection:
+                                </strong> {mode.detection}
+                              </div>
+                              <div className="bg-secondary p-2 rounded border-l-2 border-primary">
+                                <strong>Logic:</strong> {mode.logic}
+                              </div>
                             </div>
                           </motion.div>
                         ))}
                       </div>
 
-                      <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl">
+                      <div className="bg-accent border-2 border-primary p-4 rounded-xl">
                         <div className="flex items-center space-x-2 mb-2">
-                          <Info className="w-5 h-5 text-yellow-600" />
-                          <strong className="text-yellow-900">Key Concept:</strong>
+                          <Info className="w-5 h-5 text-accent-foreground" />
+                          <strong className="text-accent-foreground">Key Concept:</strong>
                         </div>
-                        <p className="text-yellow-800 text-sm">{content.smt.key}</p>
+                        <p className="text-muted-foreground text-sm">{content.smt.key}</p>
                       </div>
                     </div>
 
@@ -800,17 +921,24 @@ const Index = () => {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.1 }}
-                          className="bg-white p-4 rounded-xl border shadow-sm hover:shadow-lg transition-shadow"
+                          className="bg-card p-4 rounded-xl border-2 border-border shadow-sm hover:shadow-lg hover:border-primary transition-all group cursor-pointer relative"
                         >
+                          <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full" />
                           <div className="flex items-center justify-between mb-2">
-                            <Badge className="bg-orange-500 text-white border-0">{type.label}</Badge>
-                            <span className="text-xs">{type.strength}</span>
+                            <Badge className="bg-primary text-primary-foreground border-0">{type.label}</Badge>
+                            <span className="text-xs font-bold text-muted-foreground">{type.strength}</span>
                           </div>
                           <AITooltip term={type.label}>
-                            <h3 className="font-bold mb-1">{type.name}</h3>
+                            <h3 className="font-bold mb-1 flex items-center gap-1">
+                              <Target className="w-4 h-4 text-primary" />
+                              {type.name}
+                            </h3>
                           </AITooltip>
-                          <p className="text-xs text-slate-600 mb-2">{type.condition}</p>
-                          <p className="text-xs text-orange-700">→ {type.bias}</p>
+                          <p className="text-xs text-muted-foreground mb-2">{type.condition}</p>
+                          <p className="text-xs text-foreground font-bold flex items-center gap-1">
+                            <ArrowRight className="w-3 h-3" />
+                            {type.bias}
+                          </p>
                         </motion.div>
                       ))}
                     </div>
@@ -820,49 +948,115 @@ const Index = () => {
                 {/* MODELS */}
                 {selectedTab === 'models' && (
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border">
-                      <h3 className="font-bold text-lg mb-4">{content.models.framework.title}</h3>
+                    {/* Framework */}
+                    <div className="bg-primary text-primary-foreground p-6 rounded-2xl border-2">
+                      <h3 className="font-bold text-lg mb-4 flex items-center gap-2 justify-center">
+                        <BarChart3 className="w-6 h-6" />
+                        {content.models.framework.title}
+                      </h3>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         {content.models.framework.layers.map((layer, i) => (
-                          <div key={i} className="bg-white p-4 rounded-xl border shadow-sm">
-                            <div className="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-lg mb-2">
+                          <motion.div 
+                            key={i} 
+                            className="bg-background/10 p-4 rounded-xl border border-background/20 hover:bg-background/20 transition-all cursor-pointer"
+                            whileHover={{ scale: 1.05, y: -5 }}
+                          >
+                            <div className="w-10 h-10 bg-background text-foreground rounded-full flex items-center justify-center font-bold text-lg mb-2">
                               {layer.num}
                             </div>
                             <h4 className="font-bold text-sm mb-1">{layer.name}</h4>
-                            <p className="text-xs text-slate-600">{layer.desc}</p>
+                            <p className="text-xs text-primary-foreground/80">{layer.desc}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Session Timeline */}
+                    <div className="bg-muted p-6 rounded-xl border-2">
+                      <h3 className="font-bold text-lg mb-4 text-center flex items-center justify-center gap-2">
+                        <Clock className="w-5 h-5" />
+                        Trading Session Timeline
+                      </h3>
+                      <div className="flex items-center justify-between mb-6 relative">
+                        <div className="absolute top-1/2 left-0 right-0 h-1 bg-primary -translate-y-1/2" />
+                        {content.models.sessions.map((sess, i) => (
+                          <div key={i} className="relative z-10 flex flex-col items-center">
+                            <motion.div 
+                              className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold shadow-lg mb-2 cursor-pointer"
+                              whileHover={{ scale: 1.2 }}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: i * 0.2 }}
+                            >
+                              {i + 1}
+                            </motion.div>
+                            <span className="text-xs font-bold bg-card px-2 py-1 rounded shadow">{sess.time.split(' ')[0]}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
+                    {/* Session Details */}
                     {content.models.sessions.map((sess, i) => (
                       <motion.div
                         key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="bg-white p-5 rounded-xl border shadow-lg"
-                          >
-                            <AITooltip term={sess.name}>
-                              <h3 className="font-bold text-lg mb-3 text-indigo-900">{sess.name}</h3>
-                            </AITooltip>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                              <div className="space-y-2 text-sm">
-                                <div className="bg-indigo-50 p-2 rounded"><strong>Time:</strong> {sess.time}</div>
-                                <div className="bg-indigo-50 p-2 rounded"><strong>Setup:</strong> {sess.setup}</div>
-                                <div className="bg-indigo-50 p-2 rounded"><strong>Target:</strong> {sess.target}</div>
-                              </div>
-                              <div className="space-y-2 text-sm">
-                                <div className="bg-purple-50 p-2 rounded"><strong>Entry:</strong> {sess.entry}</div>
-                                <div className="bg-purple-50 p-2 rounded"><strong>Hours:</strong> {sess.hours}</div>
-                              </div>
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="bg-card p-5 rounded-xl border-2 border-border shadow-lg hover:border-primary transition-all group relative"
+                      >
+                        <div className="absolute top-0 left-0 w-2 h-full bg-primary rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <AITooltip term={sess.name}>
+                          <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                            <Clock className="w-5 h-5 text-primary" />
+                            {sess.name}
+                          </h3>
+                        </AITooltip>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="space-y-2 text-sm">
+                            <div className="bg-secondary p-2 rounded border-l-2 border-primary">
+                              <strong className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                Time:
+                              </strong> {sess.time}
                             </div>
+                            <div className="bg-secondary p-2 rounded border-l-2 border-accent">
+                              <strong className="flex items-center gap-1">
+                                <Crosshair className="w-3 h-3" />
+                                Setup:
+                              </strong> {sess.setup}
+                            </div>
+                            <div className="bg-secondary p-2 rounded border-l-2 border-primary">
+                              <strong className="flex items-center gap-1">
+                                <Target className="w-3 h-3" />
+                                Target:
+                              </strong> {sess.target}
+                            </div>
+                          </div>
+                          <div className="space-y-2 text-sm">
+                            <div className="bg-muted p-2 rounded border-l-2 border-accent">
+                              <strong className="flex items-center gap-1">
+                                <Zap className="w-3 h-3" />
+                                Entry:
+                              </strong> {sess.entry}
+                            </div>
+                            <div className="bg-muted p-2 rounded border-l-2 border-primary">
+                              <strong className="flex items-center gap-1">
+                                <Activity className="w-3 h-3" />
+                                Hours:
+                              </strong> {sess.hours}
+                            </div>
+                          </div>
+                        </div>
                       </motion.div>
                     ))}
 
-                    <div className="bg-slate-100 p-4 rounded-xl border">
-                      <strong className="text-slate-800">Futures Times (NYC):</strong>
-                      <p className="text-sm text-slate-700 font-mono mt-1">{content.models.futuresTimes}</p>
+                    <div className="bg-secondary p-4 rounded-xl border-2">
+                      <strong className="text-foreground flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        Futures Times (NYC):
+                      </strong>
+                      <p className="text-sm text-muted-foreground font-mono mt-1">{content.models.futuresTimes}</p>
                     </div>
                   </div>
                 )}
