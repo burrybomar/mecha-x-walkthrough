@@ -155,6 +155,198 @@ const Index = () => {
           </div>
         );
 
+      case "liquidity":
+        return (
+          <div className="space-y-6">
+            <Card className="border-2 border-emerald-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
+                    <Target className="w-5 h-5" />
+                  </div>
+                  BSL/SSL Liquidity Sweeps
+                </CardTitle>
+                <CardDescription>Buyside and Sellside Liquidity detection with sweep validation</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">What are BSL/SSL Lines?</h4>
+                  <p className="text-sm text-muted-foreground">BSL (Buyside Liquidity) marks highs where stop losses sit above. SSL (Sellside Liquidity) marks lows where stops sit below. These are key levels that price targets to "sweep" liquidity.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Valid vs Invalid Sweeps</h4>
+                  <p className="text-sm text-muted-foreground"><strong>Valid:</strong> Price sweeps the level and reverses (holds). <strong>Invalid:</strong> Price sweeps but continues through without reversing. Only valid sweeps are high-probability setups.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">LTF vs HTF Sweeps</h4>
+                  <p className="text-sm text-muted-foreground"><strong>LTF:</strong> Lower timeframe sweeps (chart TF). <strong>HTF:</strong> Higher timeframe sweeps (4H, Daily, etc.). HTF sweeps are more significant and reliable.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "patterns":
+        return (
+          <div className="space-y-6">
+            <PatternChart type="c1c2c3-bullish" title="C2 Pattern - Bullish Reversal" />
+            <Card className="border-2 border-cyan-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 text-white">
+                    <Workflow className="w-5 h-5" />
+                  </div>
+                  C2 Pattern Detection
+                </CardTitle>
+                <CardDescription>Reversal candle identification at liquidity sweeps</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">C2 (Reversal Candle)</h4>
+                  <p className="text-sm text-muted-foreground">The C2 label marks the exact candle where price swept liquidity and reversed. This is your key entry candle - the reversal point after the sweep.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">C3 (Expansion Candle)</h4>
+                  <p className="text-sm text-muted-foreground">C3 marks the expansion candle that confirms the reversal. Shows momentum building in the reversal direction. The C3 expectation box shows where price should expand to.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">SMT Divergence</h4>
+                  <p className="text-sm text-muted-foreground">Smart Money Technique - detects divergence between correlated assets. Binary mode uses 2 assets, Triad uses 3. SMT at sweeps confirms smart money positioning.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "cisd":
+        return (
+          <div className="space-y-6">
+            <SimpleChart 
+              type="cisd" 
+              title="CISD Detection" 
+              description="Change in State of Delivery - marks when market shifts from one phase to another"
+            />
+            <Card className="border-2 border-orange-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 text-white">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                  CISD (Change in State of Delivery)
+                </CardTitle>
+                <CardDescription>Market phase transitions with target projections</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">What is CISD?</h4>
+                  <p className="text-sm text-muted-foreground">CISD marks the level where market shifts from one delivery phase to another. After a sweep, CISD forms at the reversal point and becomes your entry level for retests.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Target Projections</h4>
+                  <p className="text-sm text-muted-foreground">From CISD level, projections show expected target levels: <strong>1x</strong> (first TP), <strong>2-2.5x</strong> (main target), <strong>3.5-4x</strong> (extension). These are based on the range size.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Entry Strategy</h4>
+                  <p className="text-sm text-muted-foreground">Enter on <strong>retest of CISD level</strong> after it forms. Wait for price to pull back to CISD, then enter on confirmation (engulfing, wick rejection, etc.).</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "ifvg":
+        return (
+          <div className="space-y-6">
+            <Card className="border-2 border-indigo-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  iFVG (Inverse Fair Value Gap)
+                </CardTitle>
+                <CardDescription>Fair value gaps that form after valid sweeps</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">What is an iFVG?</h4>
+                  <p className="text-sm text-muted-foreground">An iFVG is a fair value gap (price inefficiency) that forms during the reversal phase after a valid liquidity sweep. It's the "gap" left behind as price quickly reverses.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">How to Use iFVGs</h4>
+                  <p className="text-sm text-muted-foreground">iFVGs act as support/resistance zones. <strong>Bullish iFVGs</strong> (green boxes) provide support on pullbacks. <strong>Bearish iFVGs</strong> (red boxes) provide resistance on rallies. Enter when price retests the iFVG.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">iFVG + CISD Combo</h4>
+                  <p className="text-sm text-muted-foreground">Best entries occur when CISD level aligns with an iFVG. This gives you both a state change level AND a fair value gap for confluence.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "smt":
+        return (
+          <div className="space-y-6">
+            <Card className="border-2 border-purple-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+                    <GitCompare className="w-5 h-5" />
+                  </div>
+                  SMT (Smart Money Technique)
+                </CardTitle>
+                <CardDescription>Divergence detection between correlated assets</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">What is SMT?</h4>
+                  <p className="text-sm text-muted-foreground">SMT detects when correlated assets (like ES, NQ, YM) diverge at highs or lows. When one makes a new high/low but the others don't, it shows smart money positioning for reversal.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Binary vs Triad Mode</h4>
+                  <p className="text-sm text-muted-foreground"><strong>Binary:</strong> Compares 2 assets. <strong>Triad:</strong> Compares 3 assets (algorithm picks the strongest divergence). Triad provides more confirmation but is stricter.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">How to Use SMT</h4>
+                  <p className="text-sm text-muted-foreground">Look for SMT divergence at BSL/SSL sweeps. If price sweeps liquidity AND shows SMT divergence with correlated assets, it's a high-confidence reversal setup.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "sessions":
+        return (
+          <div className="space-y-6">
+            <Card className="border-2 border-pink-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-white">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  Sessions & Time Windows
+                </CardTitle>
+                <CardDescription>Trading session tracking with Silver Bullet and Macro windows</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">Session Models Table</h4>
+                  <p className="text-sm text-muted-foreground">Shows current session (Asian, London, New York), time remaining in session, and which Silver Bullet or Macro window is active. Helps time your entries.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Silver Bullet Windows</h4>
+                  <p className="text-sm text-muted-foreground">Specific time windows with highest probability setups: <strong>3:00-4:00 AM EST</strong> (London SB) and <strong>10:00-11:00 AM EST</strong> (NY AM SB). Look for sweeps during these times.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Macro Windows</h4>
+                  <p className="text-sm text-muted-foreground">Short 15-minute windows of high volatility within each session. Macros are when smart money typically makes moves. Combine with HTF sweep setups.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
       case "settings":
         return (
           <div className="space-y-4">
