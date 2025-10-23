@@ -420,39 +420,49 @@ const Index = () => {
   const session = getCurrentSession();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-card/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-3">
+      <header className="border-b-2 border-primary/20 bg-card backdrop-blur-md sticky top-0 z-50 shadow-lg">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img src={mechaxLogo} alt="MECHA-X Logo" className="w-10 h-10 sm:w-12 sm:h-12" />
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+                <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 sm:w-14 sm:h-14 relative z-10" />
+              </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-foreground">
-                  MECHA-X Guide
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+                  MECHA-X
                 </h1>
-                <p className="text-xs text-muted-foreground font-mono">v3.0</p>
+                <p className="text-xs text-primary font-bold">Trading Guide v3.0</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${session.color} ${session.active ? 'animate-pulse' : ''}`}></div>
-                <span className="text-xs sm:text-sm text-muted-foreground">{session.name}</span>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 bg-secondary px-4 py-2 rounded-full border border-primary/30">
+                <div className={`w-2 h-2 rounded-full ${session.color} ${session.active ? 'animate-pulse' : ''}`}></div>
+                <span className="text-sm font-bold text-foreground">{session.name}</span>
                 <span className="text-xs text-muted-foreground hidden sm:inline">
-                  {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' })} EST
+                  {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' })}
                 </span>
               </div>
-              <Badge variant="outline" className="font-mono text-xs">OxQQQ</Badge>
+              <Badge className="bg-primary text-primary-foreground font-bold border-0">OxQQQ</Badge>
             </div>
           </div>
           
-          <div className="mt-2">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs text-muted-foreground">Progress</span>
-              <span className="text-xs text-muted-foreground">{userProgress}%</span>
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-bold text-foreground">Guide Progress</span>
+              <span className="text-sm font-bold text-primary">{userProgress}%</span>
             </div>
-            <Progress value={userProgress} className="h-2" />
+            <div className="relative h-3 bg-secondary rounded-full overflow-hidden border border-primary/30">
+              <motion.div 
+                className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-accent rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${userProgress}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -461,22 +471,28 @@ const Index = () => {
       <main className="container mx-auto px-4 py-6 sm:py-8">
         {/* Hero */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 relative"
         >
-          <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 blur-3xl -z-10"></div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-4 tracking-tight">
             Complete MECHA-X Guide
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Master every component, pattern, and signal. Interactive demos included.
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Master every component, pattern, and signal with interactive AI-powered tooltips
           </p>
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <Badge className="bg-primary text-primary-foreground border-0 px-4 py-2 text-sm">Multi-Timeframe Analysis</Badge>
+            <Badge className="bg-accent text-accent-foreground border-0 px-4 py-2 text-sm">AI Tooltips</Badge>
+          </div>
         </motion.div>
 
         {/* Tabs */}
-        <nav className="mb-6" aria-label="Guide sections">
-          <div className="bg-card rounded-xl border shadow-sm p-2">
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+        <nav className="mb-8" aria-label="Guide sections">
+          <div className="bg-card rounded-2xl border-2 border-primary/20 shadow-xl p-3 backdrop-blur-sm">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
               {(Object.entries(tabConfig) as [TabKey, TabConfig][]).map(([key, config]) => (
                 <motion.button
                   key={key}
@@ -484,17 +500,27 @@ const Index = () => {
                     setSelectedTab(key);
                     markComplete(key);
                   }}
-                  className={`p-2 sm:p-3 rounded-lg transition-all ${
+                  className={`p-4 rounded-xl transition-all relative overflow-hidden group ${
                     selectedTab === key 
-                      ? 'bg-primary text-primary-foreground shadow-md border-2' 
-                      : 'bg-secondary hover:bg-muted text-foreground'
+                      ? 'bg-primary text-primary-foreground shadow-lg scale-105 border-2 border-primary' 
+                      : 'bg-secondary/50 hover:bg-secondary text-foreground border-2 border-transparent hover:border-primary/30'
                   }`}
                   whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: selectedTab === key ? 1.05 : 1.03 }}
                   aria-label={`View ${config.title} section`}
                 >
-                  <div className="flex flex-col items-center space-y-1">
-                    {config.icon}
-                    <span className="font-medium text-xs">{config.title}</span>
+                  {selectedTab === key && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <div className="relative z-10 flex flex-col items-center space-y-2">
+                    <div className={`${selectedTab === key ? 'scale-110' : ''} transition-transform`}>
+                      {config.icon}
+                    </div>
+                    <span className="font-bold text-xs leading-tight">{config.title}</span>
                   </div>
                 </motion.button>
               ))}
@@ -511,19 +537,19 @@ const Index = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="shadow-sm border bg-card">
-              <CardHeader className="pb-4 bg-secondary/30">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 rounded-xl bg-primary text-primary-foreground shadow-lg">
+            <Card className="shadow-2xl border-2 border-primary/20 bg-card/95 backdrop-blur-sm rounded-2xl overflow-hidden">
+              <CardHeader className="pb-6 bg-gradient-to-r from-secondary to-accent/30 border-b-2 border-primary/20">
+                <div className="flex items-center space-x-4">
+                  <div className="p-4 rounded-2xl bg-primary text-primary-foreground shadow-xl">
                     {tabConfig[selectedTab].icon}
                   </div>
-                  <div>
-                    <CardTitle className="text-2xl">{content[selectedTab].title}</CardTitle>
-                    <CardDescription className="text-base">{content[selectedTab].subtitle}</CardDescription>
+                  <div className="flex-1">
+                    <CardTitle className="text-3xl font-bold text-foreground">{content[selectedTab].title}</CardTitle>
+                    <CardDescription className="text-lg text-muted-foreground">{content[selectedTab].subtitle}</CardDescription>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-8">
                 {/* OVERVIEW */}
                 {selectedTab === 'overview' && (
                   <div className="space-y-6">
@@ -1102,25 +1128,30 @@ const Index = () => {
 
                 {/* TERMS */}
                 {selectedTab === 'terms' && (
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     <div>
-                      <h3 className="font-bold text-lg mb-3">Core Terms</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <h3 className="font-bold text-2xl mb-6 text-foreground flex items-center gap-2">
+                        <Book className="w-6 h-6 text-primary" />
+                        Core Terminology
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {content.terms.core.map((item, i) => (
                           <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.03 }}
-                            className="bg-gradient-to-r from-pink-50 to-purple-50 p-3 rounded-xl border"
+                            whileHover={{ scale: 1.02, y: -3 }}
+                            className="bg-card p-4 rounded-xl border-2 border-primary/20 hover:border-primary hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
                           >
-                             <div className="flex items-start space-x-2">
-                              <Badge className="bg-pink-500 text-white border-0 font-mono text-xs">{item.term}</Badge>
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-bl-full" />
+                            <div className="flex items-start space-x-3 relative z-10">
+                              <Badge className="bg-primary text-primary-foreground border-0 font-mono text-xs shrink-0">{item.term}</Badge>
                               <div className="flex-1">
                                 <AITooltip term={item.term}>
-                                  <h4 className="font-bold text-sm">{item.def}</h4>
+                                  <h4 className="font-bold text-base mb-1 text-foreground">{item.def}</h4>
                                 </AITooltip>
-                                <p className="text-xs text-slate-600 mt-1">{item.use}</p>
+                                <p className="text-sm text-muted-foreground">{item.use}</p>
                               </div>
                             </div>
                           </motion.div>
@@ -1129,23 +1160,28 @@ const Index = () => {
                     </div>
 
                     <div>
-                      <h3 className="font-bold text-lg mb-3">Advanced Terms</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <h3 className="font-bold text-2xl mb-6 text-foreground flex items-center gap-2">
+                        <Target className="w-6 h-6 text-accent" />
+                        Advanced Terms
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {content.terms.advanced.map((item, i) => (
                           <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.03 }}
-                            className="bg-gradient-to-r from-indigo-50 to-blue-50 p-3 rounded-xl border"
+                            whileHover={{ scale: 1.02, y: -3 }}
+                            className="bg-gradient-to-br from-secondary to-accent/30 p-4 rounded-xl border-2 border-accent/30 hover:border-accent hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
                           >
-                             <div className="flex items-start space-x-2">
-                              <Badge className="bg-indigo-500 text-white border-0 font-mono text-xs">{item.term}</Badge>
+                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="flex items-start space-x-3 relative z-10">
+                              <Badge className="bg-accent text-accent-foreground border-0 font-mono text-xs shrink-0">{item.term}</Badge>
                               <div className="flex-1">
                                 <AITooltip term={item.term}>
-                                  <h4 className="font-bold text-sm">{item.def}</h4>
+                                  <h4 className="font-bold text-base mb-1 text-foreground">{item.def}</h4>
                                 </AITooltip>
-                                <p className="text-xs text-slate-600 mt-1">{item.use}</p>
+                                <p className="text-sm text-muted-foreground">{item.use}</p>
                               </div>
                             </div>
                           </motion.div>
@@ -1161,18 +1197,29 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-slate-800 to-indigo-800 text-white py-8 px-4 mt-12">
-        <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <img src={mechaxLogo} alt="MECHA-X Logo" className="w-8 h-8" />
-            <span className="text-xl font-bold">MECHA-X v3.0</span>
+      <footer className="bg-gradient-to-br from-foreground via-primary to-foreground text-primary-foreground py-12 px-4 mt-16 border-t-4 border-primary">
+        <div className="container mx-auto">
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-accent/30 blur-lg rounded-full"></div>
+                <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 relative z-10" />
+              </div>
+              <span className="text-3xl font-bold tracking-tight">MECHA-X v3.0</span>
+            </div>
+            <div className="h-0.5 w-24 bg-accent rounded-full"></div>
+            <p className="text-lg">
+              Created by <span className="text-accent font-bold">OxQQQ</span>
+            </p>
+            <p className="text-sm opacity-75 max-w-2xl">
+              Trading concepts from ICT, TTrades, GxT, ElevenTrades, Afyz, AMtrades
+            </p>
+            <div className="flex gap-3 mt-4">
+              <Badge className="bg-accent/20 text-primary-foreground border border-accent">Multi-Timeframe</Badge>
+              <Badge className="bg-accent/20 text-primary-foreground border border-accent">AI-Powered</Badge>
+              <Badge className="bg-accent/20 text-primary-foreground border border-accent">Interactive</Badge>
+            </div>
           </div>
-          <p className="text-slate-300 text-sm mb-2">
-            Created by <span className="text-emerald-400 font-semibold">OxQQQ</span>
-          </p>
-          <p className="text-xs text-slate-400">
-            Concepts from ICT, TTrades, GxT, ElevenTrades, Afyz, AMtrades
-          </p>
         </div>
       </footer>
     </div>
