@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Fresh blue/teal palette - modern & sleek */
-    --background: 165 60% 98%; /* #F4FCFB very light mint */
+    --background: 0 0% 99%; /* #FCFCFC neutral white */
     --foreground: 203 33% 22%; /* #243C4C dark blue */
 
     --card: 0 0% 100%; /* pure white for cards */
