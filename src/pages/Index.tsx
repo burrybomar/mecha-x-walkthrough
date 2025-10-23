@@ -551,10 +551,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
-                <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 sm:w-14 sm:h-14 relative z-10" />
-              </div>
+              <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 sm:w-14 sm:h-14" />
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">MECHA-X</h1>
                 <p className="text-xs text-primary font-bold">Trading Guide</p>
