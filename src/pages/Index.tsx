@@ -530,9 +530,24 @@ const Index = () => {
   const session = getCurrentSession();
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b-2 border-primary/20 bg-card backdrop-blur-md sticky top-0 z-50 shadow-lg">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Subtle Background Logo with Gradient Overlay */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.03]">
+          <img 
+            src={mechaxLogo} 
+            alt="" 
+            className="w-full h-full object-cover object-center"
+            style={{ imageRendering: 'crisp-edges' }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="border-b-2 border-primary/20 bg-card/95 backdrop-blur-md sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -542,7 +557,7 @@ const Index = () => {
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">MECHA-X</h1>
-                <p className="text-xs text-primary font-bold">Trading Guide v3.0</p>
+                <p className="text-xs text-primary font-bold">Trading Guide</p>
               </div>
             </div>
 
@@ -1457,7 +1472,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-accent/30 blur-lg rounded-full"></div>
                 <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 relative z-10" />
               </div>
-              <span className="text-3xl font-bold tracking-tight">MECHA-X v3.0</span>
+              <span className="text-3xl font-bold tracking-tight">MECHA-X</span>
             </div>
             <div className="h-0.5 w-24 bg-accent rounded-full"></div>
             <p className="text-lg">
@@ -1475,6 +1490,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
