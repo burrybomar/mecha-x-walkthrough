@@ -1467,13 +1467,7 @@ const Index = () => {
       <footer className="bg-gradient-to-br from-secondary/30 via-accent/20 to-secondary/30 text-foreground py-12 px-4 mt-16 border-t-2 border-primary/20">
         <div className="container mx-auto">
           <div className="flex flex-col items-center text-center space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full"></div>
-                <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 relative z-10" />
-              </div>
-              <span className="text-3xl font-bold tracking-tight">MECHA-X</span>
-            </div>
+            <span className="text-3xl font-bold tracking-tight">MECHA-X</span>
             <div className="h-0.5 w-24 bg-primary rounded-full"></div>
             <p className="text-lg">
               Created by <span className="text-primary font-bold">OxQQQ</span>
