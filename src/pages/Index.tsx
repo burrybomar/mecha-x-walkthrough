@@ -34,10 +34,7 @@ import { AITooltip } from "@/components/AITooltip";
 import { useToast } from "@/hooks/use-toast";
 import html2pdf from "html2pdf.js";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
-import bslSslChart from "@/assets/bsl-ssl-chart.png";
-import htfEdgeCandles from "@/assets/htf-chart-edge.png";
-import cisdChart from "@/assets/cisd-chart.png";
-import c2LabelsChart from "@/assets/c2-labels-chart.png";
+import { SimpleChart } from "@/components/SimpleChart";
 
 type TabKey =
   | "overview"
@@ -735,19 +732,7 @@ const Index = () => {
                     <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
                       <h3 className="text-white text-xl font-bold mb-4 text-center">HTF Configuration Gallery</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
-                            <img
-                              src={htfEdgeCandles}
-                              alt="HTF Candles"
-                              loading="lazy"
-                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                            />
-                          </div>
-                          <div className="p-3 text-center">
-                            <p className="text-white text-sm font-semibold">HTF Candles</p>
-                          </div>
-                        </div>
+                        <SimpleChart type="htf" title="HTF Candles" />
                       </div>
                     </div>
 
@@ -826,19 +811,7 @@ const Index = () => {
                     <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
                       <h3 className="text-white text-xl font-bold mb-4 text-center">Liquidity Lines Gallery</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
-                            <img
-                              src={bslSslChart}
-                              alt="BSL/SSL Lines"
-                              loading="lazy"
-                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                            />
-                          </div>
-                          <div className="p-3 text-center">
-                            <p className="text-white text-sm font-semibold">BSL/SSL Lines</p>
-                          </div>
-                        </div>
+                        <SimpleChart type="liquidity" title="BSL/SSL Lines" />
                       </div>
                     </div>
 
@@ -1024,19 +997,7 @@ const Index = () => {
                     <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
                       <h3 className="text-white text-xl font-bold mb-4 text-center">CISD Formation Gallery</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
-                            <img
-                              src={cisdChart}
-                              alt="CISD Lines"
-                              loading="lazy"
-                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                            />
-                          </div>
-                          <div className="p-3 text-center">
-                            <p className="text-white text-sm font-semibold">CISD Lines</p>
-                          </div>
-                        </div>
+                        <SimpleChart type="cisd" title="CISD Lines" />
                       </div>
                     </div>
 
@@ -1082,19 +1043,7 @@ const Index = () => {
                     <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
                       <h3 className="text-white text-xl font-bold mb-4 text-center">iFVG Pattern Gallery</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
-                          <div className="aspect-[4/3] overflow-hidden bg-white/5">
-                            <img
-                              src={c2LabelsChart}
-                              alt="iFVG Pattern"
-                              loading="lazy"
-                              className="w-full h-full object-contain hover:scale-110 transition-transform duration-300"
-                            />
-                          </div>
-                          <div className="p-3 text-center">
-                            <p className="text-white text-sm font-semibold">iFVG Pattern</p>
-                          </div>
-                        </div>
+                        <SimpleChart type="ifvg" title="iFVG Pattern" />
                       </div>
                     </div>
 
