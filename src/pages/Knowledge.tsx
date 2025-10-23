@@ -82,15 +82,15 @@ const Knowledge = () => {
         {/* Content */}
         <main className="container mx-auto px-4 py-12">
           <Tabs defaultValue="ttrades" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 mb-8">
+            <TabsList className="flex w-full overflow-x-auto mb-8 lg:grid lg:grid-cols-5">
               {topics.map((topic) => (
                 <TabsTrigger 
                   key={topic.id} 
                   value={topic.id}
-                  className="gap-2 data-[state=active]:bg-primary/10"
+                  className="gap-2 data-[state=active]:bg-primary/10 whitespace-nowrap flex-shrink-0"
                 >
                   {topic.icon}
-                  <span className="hidden sm:inline">{topic.label}</span>
+                  <span className="text-xs sm:text-sm">{topic.label}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -99,126 +99,122 @@ const Knowledge = () => {
             <TabsContent value="ttrades" className="space-y-6">
               <Card className="border-primary/20">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono">
-                    <TrendingUp className="w-6 h-6" />
-                    TTrades Model Overview
+                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
+                    TTrades Foundation
                   </CardTitle>
                   <CardDescription>
-                    Comprehensive framework for identifying swings, confirmations, and entry points
+                    Core swing framework - how to spot reversals and time your entries
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="concepts">
-                      <AccordionTrigger>Core Concepts</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Building Blocks</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
                           <h4 className="font-semibold mb-2">Opposing Candles</h4>
-                          <p className="text-muted-foreground">Using opposing candles to identify reversal points and point of interest zones.</p>
+                          <p className="text-muted-foreground">When a candle closes opposite to the prior move, that's your reversal signal. Mark these - they're your entry zones.</p>
                         </div>
                         <div>
                           <h4 className="font-semibold mb-2">Fair Value Gaps (FVG)</h4>
-                          <p className="text-muted-foreground">Identifying and trading imbalances in price delivery for entry opportunities.</p>
+                          <p className="text-muted-foreground">Price gaps = imbalances = magnets. Price loves to fill these. Use them as entry targets when combined with swing points.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Equilibrium</h4>
-                          <p className="text-muted-foreground">Understanding discount and premium zones to determine optimal entry locations.</p>
+                          <h4 className="font-semibold mb-2">Discount vs Premium</h4>
+                          <p className="text-muted-foreground">Buy low, sell high. Discount = below equilibrium (buy zone). Premium = above equilibrium (sell zone). Simple.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="swings">
-                      <AccordionTrigger>Swing Highs & Lows</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Reading Swings</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Candle 2 Closure</h4>
-                          <p className="text-muted-foreground">The reversal candle closure pattern that signals swing formation.</p>
+                          <h4 className="font-semibold mb-2">Candle 2 - The Reversal</h4>
+                          <p className="text-muted-foreground">Second candle closes back inside the range? That's your reversal. This is where the swing forms.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Candle 3 Closure</h4>
-                          <p className="text-muted-foreground">Conditional rule for swing confirmation and continuation expectations.</p>
+                          <h4 className="font-semibold mb-2">Candle 3 - The Expansion</h4>
+                          <p className="text-muted-foreground">After the reversal, candle 3 should expand toward your target. If it doesn't reach, candle 4 will continue.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Wicks & Equilibrium</h4>
-                          <p className="text-muted-foreground">Understanding order flow through wick analysis and equilibrium zones.</p>
+                          <h4 className="font-semibold mb-2">Wicks Show The Story</h4>
+                          <p className="text-muted-foreground">Big wick = failed attempt. Small wick = strong direction. Watch where wicks form relative to equilibrium.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="confirmation">
-                      <AccordionTrigger>CISD Confirmation & Projection</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>CISD - Your Confirmation Tool</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Swing Confirmation</h4>
-                          <p className="text-muted-foreground">Using CISD (Change in State of Delivery) to confirm valid swing points and determine targets.</p>
+                          <h4 className="font-semibold mb-2">What Is CISD?</h4>
+                          <p className="text-muted-foreground">Change in State of Delivery. When price shifts from making lower lows to higher lows (or vice versa), that's your confirmation the swing is valid.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Ideal Formation</h4>
-                          <p className="text-muted-foreground">Identifying the ideal swing formation for high-probability setups.</p>
+                          <h4 className="font-semibold mb-2">How To Use It</h4>
+                          <p className="text-muted-foreground">Wait for CISD before entering. No CISD = no trade. It confirms the structure changed and gives you your target projection.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="poi">
-                      <AccordionTrigger>Point of Interest (POI)</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Where To Enter (POI)</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Opposing Candles POI</h4>
-                          <p className="text-muted-foreground">Using opposing candles to mark zones of interest for entries.</p>
+                          <h4 className="font-semibold mb-2">Opposing Candles</h4>
+                          <p className="text-muted-foreground">These are your entry zones. Price reversed here once, it'll likely react again.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Highs & Lows POI</h4>
-                          <p className="text-muted-foreground">Leveraging swing highs and lows as key reference points.</p>
+                          <h4 className="font-semibold mb-2">Swing Highs/Lows</h4>
+                          <p className="text-muted-foreground">Previous swing points = future reaction zones. Mark them, use them.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Fair Value Gaps POI</h4>
-                          <p className="text-muted-foreground">FVGs serve as high-probability zones for price reaction.</p>
+                          <h4 className="font-semibold mb-2">FVG as Entry</h4>
+                          <p className="text-muted-foreground">Price gaps are magnets. When combined with a swing point, they're gold.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="calendar">
-                      <AccordionTrigger>Economic Calendar</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>News & Timing</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Applying the Economic Calendar</h4>
-                          <p className="text-muted-foreground">Understanding how news events affect market structure and timing.</p>
+                          <h4 className="font-semibold mb-2">High-Impact News</h4>
+                          <p className="text-muted-foreground">News creates volatility = sweeps liquidity = forms swings. Watch the calendar, trade the reaction.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Monday Rule</h4>
-                          <p className="text-muted-foreground">Special considerations for Monday trading and weekly bias development.</p>
+                          <h4 className="font-semibold mb-2">Monday Setup</h4>
+                          <p className="text-muted-foreground">Monday sets the weekly tone. Look for manipulation early week, expansion mid-to-late week.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="analysis">
-                      <AccordionTrigger>Multi-Timeframe Analysis</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Top-Down Analysis</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Daily Chart Analysis</h4>
-                          <p className="text-muted-foreground">Identifying daily swing points for directional bias.</p>
+                          <h4 className="font-semibold mb-2">Weekly → Daily Direction</h4>
+                          <p className="text-muted-foreground">Weekly gives you the big picture. Daily gives you the swing. Trade with the HTF, time with the LTF.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Weekly Profile</h4>
-                          <p className="text-muted-foreground">Blending weekly profiles with daily swing points for higher timeframe context.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Hourly Confirmation</h4>
-                          <p className="text-muted-foreground">Using hourly timeframes to confirm swing formation and time entries.</p>
+                          <h4 className="font-semibold mb-2">4H/1H Entry Timing</h4>
+                          <p className="text-muted-foreground">Lower timeframes confirm your entry. Wait for CISD on 4H/1H before pulling the trigger.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="entries">
-                      <AccordionTrigger>Entry Logic & OSOK Model</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Execution (OSOK)</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">OSOK Entries</h4>
-                          <p className="text-muted-foreground">One Shot One Kill entry model for precision trading.</p>
+                          <h4 className="font-semibold mb-2">One Shot, One Kill</h4>
+                          <p className="text-muted-foreground">One entry per setup. Either it works or it doesn't. No averaging down, no hoping. Precision.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Fractal Model</h4>
-                          <p className="text-muted-foreground">A model for any timeframe - applying the same principles across different time horizons.</p>
+                          <h4 className="font-semibold mb-2">Works On Any Timeframe</h4>
+                          <p className="text-muted-foreground">Same logic scales. Daily, 4H, 1H - swings form the same way. Pick your timeframe, apply the rules.</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
@@ -231,132 +227,124 @@ const Knowledge = () => {
             <TabsContent value="4h-profiling" className="space-y-6">
               <Card className="border-blue-500/20">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono">
-                    <Clock className="w-6 h-6" />
-                    4H Candle Profiling
+                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
+                    <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
+                    4H Session Playbook
                   </CardTitle>
                   <CardDescription>
-                    The mechanical way to read price action and anticipate session behavior
+                    Mechanical session-by-session guide - know which 4H candle will reverse and expand
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="overview">
-                      <AccordionTrigger>Framework Overview</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>The Core Idea</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Thought Process</h4>
+                          <h4 className="font-semibold mb-2">Simple Logic</h4>
                           <p className="text-muted-foreground">
-                            If we can profile weekly candles—where one day's reversal leads to another day's expansion—we can apply the same logic to 4H candles within the daily range. When one 4H candle reverses, creating the second candle of the swing point, the following candle is expected to expand.
+                            Daily candle = 6 × 4H candles. One session reverses (wick), next session expands (body). Identify which 4H candle reverses, trade the expansion that follows.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Wick vs Body</h4>
+                          <h4 className="font-semibold mb-2">Wick = Reversal, Body = Expansion</h4>
                           <p className="text-muted-foreground">
-                            • Wick = Reversal phase<br/>
-                            • Body = Expansion phase<br/>
-                            The goal: identify the reversal, then trade the expansion.
+                            When a 4H candle forms a wick, that's the reversal. The body of the next candle(s) = your expansion/trade opportunity.
                           </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="structure">
-                      <AccordionTrigger>Daily Range Structure</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Key 4H Windows</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Indices (6 × 4H candles)</h4>
+                          <h4 className="font-semibold mb-2">Indices - 3 Key Windows</h4>
                           <p className="text-muted-foreground">
-                            • 2:00 AM - 6:00 AM<br/>
-                            • 6:00 AM - 10:00 AM<br/>
-                            • 10:00 AM - 2:00 PM (Close before 12:00 PM NY Lunch)
+                            • 2:00-6:00 AM (London open)<br/>
+                            • 6:00-10:00 AM (NY pre-market/open)<br/>
+                            • 10:00-2:00 PM (NY AM - close before lunch 12PM)
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Forex</h4>
+                          <h4 className="font-semibold mb-2">Forex - Same Idea, Different Times</h4>
                           <p className="text-muted-foreground">
-                            • 1:00 AM - 5:00 AM<br/>
-                            • 5:00 AM - 9:00 AM<br/>
-                            • 9:00 AM - 1:00 PM (On 10:00 AM news days)
+                            • 1:00-5:00 AM<br/>
+                            • 5:00-9:00 AM<br/>
+                            • 9:00-1:00 PM (especially on 10AM news days)
                           </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="patterns">
-                      <AccordionTrigger>Reversal Patterns</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Session Patterns (When To Trade)</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Asia Reversal Pattern</h4>
+                          <h4 className="font-semibold mb-2">Asia Reversal → London/NY Expansion</h4>
                           <p className="text-muted-foreground">
-                            If Asia candles reverse, expect London expansion and NY continuation.<br/>
-                            • Indices: Reversal within 18:00 or 22:00 candle<br/>
-                            • Forex: Reversal within 17:00 or 21:00 candle
+                            If Asia (18:00 or 22:00 candle) reverses, London and NY will expand that move.<br/>
+                            Trade London open and NY continuation.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">London Reversal Pattern</h4>
+                          <h4 className="font-semibold mb-2">London Reversal → NY Expansion</h4>
                           <p className="text-muted-foreground">
-                            On classic buy days, expect London reversal with NY continuation.<br/>
-                            • Indices: 2:00 AM - 6:00 AM window (focus on 2:00 AM candle)<br/>
-                            • Forex: 1:00 AM - 5:00 AM window (focus on 1:00 AM candle)
+                            Most common. London 2AM-6AM candle forms the reversal wick, NY session expands.<br/>
+                            Enter on NY open continuation.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">NY Reversal Pattern</h4>
+                          <h4 className="font-semibold mb-2">NY Reversal (News Days)</h4>
                           <p className="text-muted-foreground">
-                            When London and Asia fail, NY handles reversals (common on news days).<br/>
-                            • Indices: 6:00 AM - 10:00 AM reversal into expansion<br/>
-                            • Forex: 5:00 AM - 9:00 AM reversal into expansion
+                            When Asia/London fail to reverse, NY will handle it (usually around news).<br/>
+                            6AM-10AM or 10AM candle reverses, then expands into close.
                           </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="entries-4h">
-                      <AccordionTrigger>Entry Ideas</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>How To Enter</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Reversal Candle Entry</h4>
-                          <p className="text-muted-foreground">Use CISD as confluence for reversal candle entries.</p>
+                          <h4 className="font-semibold mb-2">On Reversal Candles</h4>
+                          <p className="text-muted-foreground">Wait for CISD confirmation on M15. Then enter the reversal candle's OB/FVG.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Continuation Candle Entry</h4>
-                          <p className="text-muted-foreground">Use Orderblocks as confluence for continuation candle entries.</p>
+                          <h4 className="font-semibold mb-2">On Continuation Candles</h4>
+                          <p className="text-muted-foreground">After reversal confirmed, enter continuation candle OBs toward your target.</p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Key Focus</h4>
+                          <h4 className="font-semibold mb-2">Timing Is Everything</h4>
                           <p className="text-muted-foreground">
-                            • Observe the open of the 4H candle<br/>
-                            • Watch for M15 reversal confirmation<br/>
-                            • Enter on next continuation candle
+                            • Watch 4H open<br/>
+                            • Drop to M15 for CISD<br/>
+                            • Enter next continuation move
                           </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
                     <AccordionItem value="advanced">
-                      <AccordionTrigger>Advanced Concepts</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
+                      <AccordionTrigger>Advanced Patterns</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">HRLR → LRLR</h4>
+                          <h4 className="font-semibold mb-2">Manipulation → Reversal</h4>
                           <p className="text-muted-foreground">
-                            High Resistance Liquidity Runs → Low Resistance Liquidity Runs<br/>
-                            In simple terms: manipulation → failure swing
+                            HRLR (High Resistance Run) = manipulation sweep. LRLR (Low Resistance Run) = true move. Watch for the fake-out before the breakout.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Protected vs Failure Swings</h4>
+                          <h4 className="font-semibold mb-2">Protected vs Unprotected Swings</h4>
                           <p className="text-muted-foreground">
-                            Protected Swing = OB/opposing candle into key level (won't be revisited)<br/>
-                            Trade away from protected swings toward unprotected/failure swings
+                            Protected swing = OB into key level, won't get touched again. Unprotected swing = gets swept. Trade FROM protected swings TOWARD unprotected ones.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Daily Profiles</h4>
+                          <h4 className="font-semibold mb-2">Session Profiles</h4>
                           <p className="text-muted-foreground">
-                            • London Reversal = wick in London, NY expansion<br/>
-                            • NY Reversal = wick in NY (after London/Asia fails)
+                            London Reversal = wick in London session, body in NY. NY Reversal = both wick and body in NY (happens on news/high-volatility days).
                           </p>
                         </div>
                       </AccordionContent>
