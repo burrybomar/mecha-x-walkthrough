@@ -58,7 +58,7 @@ const Index = () => {
       title: "Getting Started",
       icon: <Sparkles className="w-8 h-8" />,
       gradient: "from-primary via-accent to-primary",
-      description: "Introduction to MECHA-X trading system",
+      description: "Time-based HTF sweep framework overview",
       stats: { label: "Components", value: "6 Core" },
     },
     htf: {
@@ -107,7 +107,7 @@ const Index = () => {
       title: "Session Models",
       icon: <Clock className="w-8 h-8" />,
       gradient: "from-pink-500 via-rose-500 to-pink-600",
-      description: "4H institutional pattern recognition",
+      description: "4H time-based session pattern recognition",
       stats: { label: "Models", value: "Asia/Lon/NY" },
     },
   };
@@ -145,7 +145,7 @@ const Index = () => {
             </div>
             <div className="p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20 text-center">
               <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
-              <h3 className="text-2xl font-bold mb-2">AI-Powered Tooltips</h3>
+              <h3 className="text-2xl font-bold mb-2">Interactive Guide</h3>
               <p className="text-muted-foreground">
                 Hover over any <AITooltip term="underlined term"><span className="text-primary font-medium cursor-help">underlined term</span></AITooltip> for instant explanations
               </p>
@@ -423,7 +423,7 @@ const Index = () => {
             <span className="text-foreground text-3xl sm:text-5xl">Trading System</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Master institutional patterns with AI-powered tooltips and real-time analysis
+            Time-based HTF sweep framework with multi-timeframe analysis and liquidity detection
           </p>
         </motion.div>
 
@@ -520,12 +520,12 @@ const Index = () => {
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Master MECHA-X?</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Click any section above to dive deep into institutional trading patterns
+            Click any section above to dive deep into time-based HTF sweep patterns
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Multi-Timeframe</Badge>
-            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">AI-Powered</Badge>
-            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Real-Time Analysis</Badge>
+            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">Time-Based</Badge>
+            <Badge className="bg-primary/10 text-primary border border-primary/30 px-4 py-2">HTF Sweep Framework</Badge>
           </div>
         </motion.div>
       </main>
