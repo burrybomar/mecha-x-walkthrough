@@ -35,6 +35,7 @@ import { useToast } from "@/hooks/use-toast";
 import html2pdf from "html2pdf.js";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { SimpleChart } from "@/components/SimpleChart";
+import { PatternChart } from "@/components/PatternChart";
 
 type TabKey =
   | "overview"
@@ -697,6 +698,14 @@ const Index = () => {
                       </p>
                     </div>
 
+                    {/* Mini Visual Previews */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      <SimpleChart type="htf" title="HTF Analysis" />
+                      <SimpleChart type="liquidity" title="BSL/SSL" />
+                      <SimpleChart type="cisd" title="CISD Zones" />
+                      <SimpleChart type="ifvg" title="iFVG" />
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {content.overview.features.map((feat, i) => (
                         <motion.div
@@ -882,6 +891,12 @@ const Index = () => {
                 {/* PATTERNS */}
                 {selectedTab === "patterns" && (
                   <div className="space-y-6">
+                    {/* Visual Examples */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                      <PatternChart type="c1c2c3-bullish" title="Bullish C1→C2→C3" />
+                      <PatternChart type="c1c2c3-bearish" title="Bearish C1→C2→C3" />
+                    </div>
+
                     {/* Flow Diagram */}
                     <div className="bg-muted p-6 rounded-xl border-2 border-primary">
                       <h3 className="text-lg font-bold mb-4 text-center">C1 → C2 → C3 Flow</h3>
@@ -1085,6 +1100,9 @@ const Index = () => {
                 {/* SMT */}
                 {selectedTab === "smt" && (
                   <div className="space-y-6">
+                    {/* Visual Example */}
+                    <PatternChart type="smt-divergence" title="SMT Divergence Example" />
+
                     <div className="bg-primary text-primary-foreground p-6 rounded-2xl border-2">
                       <h3 className="text-xl font-bold mb-2 text-center flex items-center justify-center gap-2">
                         <GitCompare className="w-6 h-6" />
@@ -1174,6 +1192,9 @@ const Index = () => {
                 {/* SESSIONS */}
                 {selectedTab === "sessions" && (
                   <div className="space-y-6">
+                    {/* Visual Timeline */}
+                    <PatternChart type="sessions-timeline" title="4H Session Timeline" />
+
                     {/* Framework */}
                     <div className="bg-primary text-primary-foreground p-6 rounded-2xl border-2">
                       <h3 className="font-bold text-lg mb-4 flex items-center gap-2 justify-center">
@@ -1297,6 +1318,35 @@ const Index = () => {
                 {/* TOOLTIPS */}
                 {selectedTab === "tooltips" && (
                   <div className="space-y-6">
+                    {/* Visual Example of Complete Tooltip */}
+                    <div className="bg-gradient-to-br from-slate-900 to-purple-900 p-6 rounded-2xl border border-purple-500/30">
+                      <h3 className="text-white text-xl font-bold mb-4 text-center">Example Tooltip Anatomy</h3>
+                      <div className="bg-slate-800/50 backdrop-blur border border-cyan-500/30 rounded-lg p-4 font-mono text-xs max-w-2xl mx-auto">
+                        <div className="space-y-2">
+                          <div className="border-l-4 border-purple-500 pl-2">
+                            <span className="text-purple-400 font-bold">HEADER: </span>
+                            <span className="text-white">ASIA-REV @ 19875 | ✓ Held | [3/3] STRONG</span>
+                          </div>
+                          <div className="border-l-4 border-blue-500 pl-2">
+                            <span className="text-blue-400 font-bold">PATTERN: </span>
+                            <span className="text-white">10p High swept → C2 2a</span>
+                          </div>
+                          <div className="border-l-4 border-emerald-500 pl-2">
+                            <span className="text-emerald-400 font-bold">VALIDATION: </span>
+                            <span className="text-white">Phase:REV + Bias:REV + SMT:PSP-REV ✓✓✓</span>
+                          </div>
+                          <div className="border-l-4 border-orange-500 pl-2">
+                            <span className="text-orange-400 font-bold">HTF CONTEXT: </span>
+                            <span className="text-white">✓ 2 HTFs delivering: 7a:EXP ASIA:EXP MON:CONS</span>
+                          </div>
+                          <div className="border-l-4 border-pink-500 pl-2">
+                            <span className="text-pink-400 font-bold">OUTCOME: </span>
+                            <span className="text-white">→ Reversal held ✓ Pattern played correctly</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="space-y-3">
                       {content.tooltips.anatomy.map((item, i) => (
                         <motion.div
@@ -1338,6 +1388,34 @@ const Index = () => {
                 {/* TERMS */}
                 {selectedTab === "terms" && (
                   <div className="space-y-8">
+                    {/* Visual Quick Reference */}
+                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl border border-blue-500/30">
+                      <h3 className="text-white text-xl font-bold mb-4 text-center">Visual Term Reference</h3>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {[
+                          { term: 'BSL', color: 'blue', icon: '↑' },
+                          { term: 'SSL', color: 'red', icon: '↓' },
+                          { term: 'CISD', color: 'orange', icon: '⚡' },
+                          { term: 'iFVG', color: 'purple', icon: '◊' },
+                          { term: 'HTF', color: 'cyan', icon: '⏱️' },
+                          { term: 'LTF', color: 'emerald', icon: '⏰' },
+                          { term: 'PSP', color: 'pink', icon: '⚔' },
+                          { term: 'SB', color: 'yellow', icon: '🎯' },
+                        ].map((item, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: i * 0.05 }}
+                            className={`bg-${item.color}-500/20 border-2 border-${item.color}-500/50 rounded-lg p-3 text-center hover:scale-110 transition-transform cursor-pointer`}
+                          >
+                            <div className="text-2xl mb-1">{item.icon}</div>
+                            <div className={`text-${item.color}-400 font-bold text-sm font-mono`}>{item.term}</div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
                     <div>
                       <h3 className="font-bold text-2xl mb-6 text-foreground flex items-center gap-2">
                         <Book className="w-6 h-6 text-primary" />
