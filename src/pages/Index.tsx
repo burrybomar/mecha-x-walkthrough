@@ -581,12 +581,12 @@ const Index = () => {
                             className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border overflow-hidden"
                           >
                             {elementImage && (
-                              <div className="aspect-[16/9] overflow-hidden border-b">
+                              <div className="h-48 overflow-hidden border-b bg-slate-100">
                                 <img 
                                   src={elementImage} 
                                   alt={el.name}
                                   loading="lazy"
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full object-contain"
                                 />
                               </div>
                             )}
