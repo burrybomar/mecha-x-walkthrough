@@ -10,12 +10,19 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AITooltip } from '@/components/AITooltip';
-import { DiagramViewer } from '@/components/DiagramViewer';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
 import bslSslChart from '@/assets/bsl-ssl-chart.png';
 import htfEdgeCandles from '@/assets/htf-chart-edge.png';
 import cisdChart from '@/assets/cisd-chart.png';
 import c2LabelsChart from '@/assets/c2-labels-chart.png';
+import diagramPattern from '@/assets/diagram-pattern.png';
+import diagramPhases from '@/assets/diagram-phases.png';
+import diagramFramework from '@/assets/diagram-framework.png';
+import diagramAsiaRev from '@/assets/diagram-asia-rev.png';
+import diagramLondonRev from '@/assets/diagram-london-rev.png';
+import diagramNyamSb from '@/assets/diagram-nyam-sb.png';
+import diagramTooltipAnatomy from '@/assets/diagram-tooltip-anatomy.png';
+import diagramTerms from '@/assets/diagram-terms.png';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -662,11 +669,14 @@ const Index = () => {
                 {/* PATTERN */}
                 {selectedTab === 'pattern' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="pattern"
-                      title="C1→C2→C3 Visual Pattern"
-                      description="The core sweep pattern showing liquidity manipulation"
-                    />
+                    <div className="rounded-xl overflow-hidden border shadow-lg">
+                      <img 
+                        src={diagramPattern} 
+                        alt="C1→C2→C3 Visual Pattern - core sweep pattern" 
+                        loading="lazy"
+                        className="w-full"
+                      />
+                    </div>
                     
                     <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -712,11 +722,14 @@ const Index = () => {
                 {/* PHASES */}
                 {selectedTab === 'phases' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="phases"
-                      title="5-Phase Market Cycle"
-                      description="How price moves through reversal, expansion, continuation, consolidation, and retracement"
-                    />
+                    <div className="rounded-xl overflow-hidden border shadow-lg">
+                      <img 
+                        src={diagramPhases} 
+                        alt="5-Phase Market Cycle diagram" 
+                        loading="lazy"
+                        className="w-full"
+                      />
+                    </div>
                     
                     <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -768,11 +781,10 @@ const Index = () => {
                 {/* SMT */}
                 {selectedTab === 'smt' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="smt"
-                      title="SMT Divergence Detection"
-                      description="Structural comparison between correlated assets (ES vs NQ)"
-                    />
+                    <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl border">
+                      <h3 className="text-xl font-bold mb-2 text-center">SMT Divergence Detection</h3>
+                      <p className="text-sm text-slate-600 text-center mb-4">Structural comparison between correlated assets</p>
+                    </div>
                     
                     <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -834,17 +846,14 @@ const Index = () => {
                 {/* MODELS */}
                 {selectedTab === 'models' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="sessions"
-                      title="24-Hour Session Timeline"
-                      description="Asia, London, and NY session windows with key timing"
-                    />
-                    
-                    <DiagramViewer 
-                      diagramType="framework"
-                      title="4-Layer Trading Framework"
-                      description="From directional thesis to precise entry execution"
-                    />
+                    <div className="rounded-xl overflow-hidden border shadow-lg">
+                      <img 
+                        src={diagramFramework} 
+                        alt="4-Layer Trading Framework" 
+                        loading="lazy"
+                        className="w-full"
+                      />
+                    </div>
                     
                     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border">
                       <h3 className="font-bold text-lg mb-4">{content.models.framework.title}</h3>
@@ -862,17 +871,20 @@ const Index = () => {
                     </div>
 
                     {content.models.sessions.map((sess, i) => {
-                      const diagramType = sess.name === "4H ASIA REVERSAL" ? "asiaRev" 
-                        : sess.name === "4H LONDON REVERSAL" ? "londonRev" 
-                        : "nyamSB";
+                      const diagramImage = sess.name === "4H ASIA REVERSAL" ? diagramAsiaRev
+                        : sess.name === "4H LONDON REVERSAL" ? diagramLondonRev 
+                        : diagramNyamSb;
                       
                       return (
                         <div key={i} className="space-y-4">
-                          <DiagramViewer 
-                            diagramType={diagramType}
-                            title={sess.name}
-                            description={sess.setup}
-                          />
+                          <div className="rounded-xl overflow-hidden border shadow-lg">
+                            <img 
+                              src={diagramImage} 
+                              alt={sess.name}
+                              loading="lazy"
+                              className="w-full"
+                            />
+                          </div>
                           
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -909,11 +921,14 @@ const Index = () => {
                 {/* TOOLTIPS */}
                 {selectedTab === 'tooltips' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="tooltipAnatomy"
-                      title="Tooltip Structure Breakdown"
-                      description="Understanding each section of MECHA-X intelligence tooltips"
-                    />
+                    <div className="rounded-xl overflow-hidden border shadow-lg">
+                      <img 
+                        src={diagramTooltipAnatomy} 
+                        alt="Tooltip Structure Breakdown" 
+                        loading="lazy"
+                        className="w-full"
+                      />
+                    </div>
                     
                     <div className="space-y-3">
                       {content.tooltips.anatomy.map((item, i) => (
@@ -954,11 +969,14 @@ const Index = () => {
                 {/* TERMS */}
                 {selectedTab === 'terms' && (
                   <div className="space-y-6">
-                    <DiagramViewer 
-                      diagramType="terms"
-                      title="Essential Trading Terms Visual Guide"
-                      description="Quick visual reference for key MECHA-X terminology"
-                    />
+                    <div className="rounded-xl overflow-hidden border shadow-lg">
+                      <img 
+                        src={diagramTerms} 
+                        alt="Essential Trading Terms Visual Guide" 
+                        loading="lazy"
+                        className="w-full"
+                      />
+                    </div>
                     
                     <div>
                       <h3 className="font-bold text-lg mb-3">Core Terms</h3>
