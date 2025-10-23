@@ -45,16 +45,9 @@ const Knowledge = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Fixed Background */}
+      {/* Subtle Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 opacity-30">
-          <img 
-            src="/src/assets/mecha-x-logo.gif" 
-            alt="MECHA-X" 
-            className="w-full h-full object-contain"
-          />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/98 to-primary/3" />
       </div>
 
       <div className="relative z-10">
