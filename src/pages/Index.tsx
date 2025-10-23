@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
 
-// Import generated chart images
-import chartC1C2C3 from "./assets/chart_c1_c2_c3_sequence.png";
-import chartCISD from "./assets/chart_cisd_formation.png";
-import chartLiquidity from "./assets/chart_liquidity_sweep.png";
-import chartiFVG from "./assets/chart_ifvg_pattern.png";
-import chartSessionAnalysis from "./assets/chart_session_analysis.png";
-import logoGif from "./assets/20250330_1242_AnimatedGlitchLogo_simple_compose_01jqm96wdafrqrb56k9y48wd5z.gif";
+// Import chart images
+import chartC2Labels from "@/assets/c2-labels-chart.png";
+import chartCISD from "@/assets/cisd-chart.png";
+import chartBslSsl from "@/assets/bsl-ssl-chart.png";
+import chartHtf from "@/assets/htf-chart-edge.png";
+import logoGif from "@/assets/mecha-x-logo.gif";
 
 function App() {
   const [activeSection, setActiveSection] = useState("overview");
@@ -578,7 +577,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartSessionAnalysis} alt="HTF Candles on Chart Edge" className="clean-chart-image" />
+            <img src={chartHtf} alt="HTF Candles on Chart Edge" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">HTF Candles on Chart Edge</h3>
@@ -662,7 +661,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartLiquidity} alt="Liquidity Sweep" className="clean-chart-image" />
+            <img src={chartBslSsl} alt="Liquidity Sweep" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">BSL/SSL Liquidity Lines</h3>
@@ -753,7 +752,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartC1C2C3} alt="C1→C2→C3 Sequence" className="clean-chart-image" />
+            <img src={chartC2Labels} alt="C1→C2→C3 Sequence" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">C1→C2→C3 Sequence</h3>
@@ -845,7 +844,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartLiquidity} alt="Liquidity Sweep" className="clean-chart-image" />
+            <img src={chartBslSsl} alt="Liquidity Sweep" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">Liquidity Sweeps</h3>
@@ -895,7 +894,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartiFVG} alt="iFVG Pattern" className="clean-chart-image" />
+            <img src={chartCISD} alt="iFVG Pattern" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">iFVG Pattern</h3>
@@ -1078,7 +1077,7 @@ function App() {
       <div className="charts-grid">
         <div className="clean-chart-container">
           <div className="chart-wrapper">
-            <img src={chartiFVG} alt="iFVG Pattern" className="clean-chart-image" />
+            <img src={chartCISD} alt="iFVG Pattern" className="clean-chart-image" />
           </div>
           <div className="chart-info">
             <h3 className="chart-title">iFVG Pattern</h3>
