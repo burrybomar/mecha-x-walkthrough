@@ -533,7 +533,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Subtle Background Logo with Gradient Overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.25]">
+        <div className="absolute inset-0 opacity-[0.35]">
           <img 
             src={mechaxLogo} 
             alt="" 
@@ -541,7 +541,7 @@ const Index = () => {
             style={{ imageRendering: 'crisp-edges' }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/75 to-background/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/65 via-background/70 to-background/65"></div>
       </div>
 
       {/* Content */}
@@ -1464,28 +1464,28 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-foreground via-primary to-foreground text-primary-foreground py-12 px-4 mt-16 border-t-4 border-primary">
+      <footer className="bg-gradient-to-br from-secondary/30 via-accent/20 to-secondary/30 text-foreground py-12 px-4 mt-16 border-t-2 border-primary/20">
         <div className="container mx-auto">
           <div className="flex flex-col items-center text-center space-y-6">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="absolute inset-0 bg-accent/30 blur-lg rounded-full"></div>
+                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full"></div>
                 <img src={mechaxLogo} alt="MECHA-X Logo" className="w-12 h-12 relative z-10" />
               </div>
               <span className="text-3xl font-bold tracking-tight">MECHA-X</span>
             </div>
-            <div className="h-0.5 w-24 bg-accent rounded-full"></div>
+            <div className="h-0.5 w-24 bg-primary rounded-full"></div>
             <p className="text-lg">
-              Created by <span className="text-accent font-bold">OxQQQ</span>
+              Created by <span className="text-primary font-bold">OxQQQ</span>
             </p>
-            <p className="text-sm opacity-75 max-w-2xl">
+            <p className="text-sm text-muted-foreground max-w-2xl">
               Multi-timeframe analysis with HTF candles, liquidity detection, C1→C2→C3 patterns, CISD zones, iFVG
               patterns, and SMT divergence logic for systematic trading.
             </p>
             <div className="flex gap-3 mt-4">
-              <Badge className="bg-accent/20 text-primary-foreground border border-accent">Multi-Timeframe</Badge>
-              <Badge className="bg-accent/20 text-primary-foreground border border-accent">AI-Powered</Badge>
-              <Badge className="bg-accent/20 text-primary-foreground border border-accent">Interactive</Badge>
+              <Badge className="bg-primary/10 text-primary border border-primary/30">Multi-Timeframe</Badge>
+              <Badge className="bg-primary/10 text-primary border border-primary/30">AI-Powered</Badge>
+              <Badge className="bg-primary/10 text-primary border border-primary/30">Interactive</Badge>
             </div>
           </div>
         </div>
