@@ -15,6 +15,7 @@ import mechaxLogo from '@/assets/mecha-x-logo.gif';
 import bslSslChart from '@/assets/bsl-ssl-chart.png';
 import htfEdgeCandles from '@/assets/htf-chart-edge.png';
 import cisdChart from '@/assets/cisd-chart.png';
+import c2LabelsChart from '@/assets/c2-labels-chart.png';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -570,6 +571,8 @@ const Index = () => {
                           elementImage = bslSslChart;
                         } else if (el.name === "CISD Lines") {
                           elementImage = cisdChart;
+                        } else if (el.name === "C2 Labels") {
+                          elementImage = c2LabelsChart;
                         }
 
                         return (
