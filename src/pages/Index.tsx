@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AITooltip } from '@/components/AITooltip';
 import { DiagramViewer } from '@/components/DiagramViewer';
 import mechaxLogo from '@/assets/mecha-x-logo.gif';
+import bslSslChart from '@/assets/bsl-ssl-chart.png';
 
 type TabKey = 'overview' | 'visual' | 'pattern' | 'phases' | 'smt' | 'models' | 'tooltips' | 'terms';
 
@@ -558,11 +559,17 @@ const Index = () => {
                 {selectedTab === 'visual' && (
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <DiagramViewer 
-                        diagramType="liquidity"
-                        title="BSL/SSL Liquidity Zones"
-                        description="Where institutions hunt for stops"
-                      />
+                      <div className="space-y-3">
+                        <img 
+                          src={bslSslChart} 
+                          alt="BSL/SSL Liquidity Zones - Professional trading chart" 
+                          className="w-full rounded-lg border shadow-lg"
+                        />
+                        <div className="text-center">
+                          <h3 className="font-semibold text-lg">BSL/SSL Liquidity Zones</h3>
+                          <p className="text-sm text-slate-600">Where institutions hunt for stops</p>
+                        </div>
+                      </div>
                       <DiagramViewer 
                         diagramType="cisd"
                         title="CISD Momentum Shift"
