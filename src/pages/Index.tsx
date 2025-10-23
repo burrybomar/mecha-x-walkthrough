@@ -5,6 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import {
   Zap,
   Target,
@@ -29,23 +32,14 @@ const Index = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
 
-  const SettingItem = ({ title, description, tooltip }: { title: string; description: string; tooltip: string }) => (
-    <TooltipProvider>
-      <div className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border hover:border-primary/50 transition-all group">
-        <Info className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-        <div className="flex-1 min-w-0">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <h4 className="font-semibold text-sm cursor-help hover:text-primary transition-colors">{title}</h4>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p>{tooltip}</p>
-            </TooltipContent>
-          </Tooltip>
-          <p className="text-xs text-muted-foreground mt-1">{description}</p>
-        </div>
+  const SettingRow = ({ title, description }: { title: string; description: string }) => (
+    <div className="flex items-center justify-between py-3 px-4 hover:bg-muted/50 rounded-md transition-colors">
+      <div className="flex-1">
+        <Label className="text-sm font-medium cursor-pointer">{title}</Label>
+        <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
       </div>
-    </TooltipProvider>
+      <Switch className="ml-4" />
+    </div>
   );
 
   const renderOverview = () => (
@@ -136,345 +130,236 @@ const Index = () => {
 
       case "settings":
         return (
-          <div className="space-y-6">
-            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20">
+          <div className="space-y-4">
+            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6">
               <Settings className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-xl font-bold mb-2 text-center">MECHA-X Settings Guide</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                Complete configuration reference for all MECHA-X components
-              </p>
+              <h3 className="text-xl font-bold mb-2 text-center">Script Settings</h3>
+              <p className="text-sm text-muted-foreground text-center">Configure all MECHA-X components</p>
             </div>
-            <Tabs defaultValue="display" className="w-full">
-              <TabsList className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 h-auto gap-1 bg-muted/50 p-1">
-                <TabsTrigger value="display" className="text-xs">Display</TabsTrigger>
-                <TabsTrigger value="htf-setup" className="text-xs">HTF Setup</TabsTrigger>
-                <TabsTrigger value="htf-candles" className="text-xs">HTF Candles</TabsTrigger>
-                <TabsTrigger value="chart" className="text-xs">Chart</TabsTrigger>
-                <TabsTrigger value="sweeps" className="text-xs">Sweeps</TabsTrigger>
-                <TabsTrigger value="patterns" className="text-xs">Patterns</TabsTrigger>
-                <TabsTrigger value="cisd" className="text-xs">CISD</TabsTrigger>
-                <TabsTrigger value="ifvg" className="text-xs">iFVG</TabsTrigger>
-                <TabsTrigger value="alerts" className="text-xs">Alerts</TabsTrigger>
-              </TabsList>
 
-              <TabsContent value="display" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">Display Settings</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="Show HTF Candles" 
-                    description="Toggle higher timeframe candle overlay"
-                    tooltip="Enable/disable the display of HTF candles on your current chart timeframe"
-                  />
-                  <SettingItem 
-                    title="Show Chart Mapping" 
-                    description="BSL/SSL lines, EQ, and dividers"
-                    tooltip="Shows buyside/sellside liquidity levels, equilibrium lines, and session dividers"
-                  />
-                  <SettingItem 
-                    title="Show Liquidity Sweeps" 
-                    description="LTF + HTF sweep detection"
-                    tooltip="Displays both lower and higher timeframe liquidity sweep markers"
-                  />
-                  <SettingItem 
-                    title="Show C2 Labels" 
-                    description="Pattern reversal markers"
-                    tooltip="Shows C2 reversal candle labels after valid sweeps"
-                  />
-                  <SettingItem 
-                    title="Show CISD" 
-                    description="Change in State of Delivery"
-                    tooltip="Displays CISD levels with multi-target projections when market structure changes"
-                  />
-                  <SettingItem 
-                    title="Show iFVG" 
-                    description="Inverse Fair Value Gaps"
-                    tooltip="Shows iFVG boxes that form after valid sweeps"
-                  />
-                  <SettingItem 
-                    title="Show SMT" 
-                    description="Smart Money Technique divergence"
-                    tooltip="Displays SMT divergence signals between correlated assets"
-                  />
-                </div>
-              </TabsContent>
+            <div className="bg-card border border-border rounded-lg">
+              <Accordion type="multiple" className="w-full">
+                <AccordionItem value="display">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">Display Settings</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="Show HTF Candles" description="Toggle higher timeframe candle overlay" />
+                      <SettingRow title="Show Chart Mapping" description="BSL/SSL lines, EQ, and dividers" />
+                      <SettingRow title="Show Liquidity Sweeps" description="LTF + HTF sweep detection" />
+                      <SettingRow title="Show C2 Labels" description="Pattern reversal markers" />
+                      <SettingRow title="Show CISD" description="Change in State of Delivery projections" />
+                      <SettingRow title="Show iFVG" description="Inverse Fair Value Gap zones" />
+                      <SettingRow title="Show SMT" description="Smart Money Technique divergence" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="htf-setup" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">HTF Setup</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="HTF Mode" 
-                    description="Auto or Manual timeframe selection"
-                    tooltip="Auto: Intelligently selects HTFs based on current chart TF. Manual: You configure each HTF"
-                  />
-                  <SettingItem 
-                    title="Auto HTF Count" 
-                    description="Number of HTFs in Auto mode"
-                    tooltip="How many higher timeframes to display when using Auto mode (1-4)"
-                  />
-                  <SettingItem 
-                    title="HTF Shift Type" 
-                    description="Live or Historical offset"
-                    tooltip="Live: HTF updates in real-time. Historical: Shifts HTF back by specified candles"
-                  />
-                  <SettingItem 
-                    title="Historical Shift" 
-                    description="Number of candles to offset"
-                    tooltip="When using Historical mode, how many candles back to shift the HTF display"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="htf-setup">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">HTF Setup</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="HTF Mode" description="Auto or Manual timeframe selection" />
+                      <SettingRow title="Auto HTF Count" description="Number of HTFs in Auto mode (1-4)" />
+                      <SettingRow title="HTF Shift Type" description="Live or Historical offset" />
+                      <SettingRow title="Historical Shift" description="Number of candles to offset" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="htf-candles" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">HTF Candles (Manual Mode)</h3>
-                <div className="space-y-6">
-                  {[1, 2, 3, 4].map((num) => (
-                    <Card key={num} className="border-2">
-                      <CardHeader>
-                        <CardTitle className="text-base">HTF {num} Configuration</CardTitle>
-                      </CardHeader>
-                      <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <SettingItem 
-                          title={`HTF ${num} Enable`}
-                          description="Turn this HTF slot on/off"
-                          tooltip={`Enable or disable HTF slot ${num}`}
-                        />
-                        <SettingItem 
-                          title={`HTF ${num} Timeframe`}
-                          description="Select timeframe (e.g., 240 = 4H)"
-                          tooltip={`The timeframe in minutes for HTF ${num}. 60=1H, 240=4H, D=Daily`}
-                        />
-                        <SettingItem 
-                          title={`HTF ${num} Candle Count`}
-                          description="Number of HTF candles to show"
-                          tooltip={`How many HTF candles to display on chart for HTF ${num}`}
-                        />
-                        <SettingItem 
-                          title={`HTF ${num} Offset`}
-                          description="Historical shift amount"
-                          tooltip={`Shift HTF ${num} back by this many candles (0 = live)`}
-                        />
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
+                <AccordionItem value="htf-candles">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">HTF Candles (Manual Mode)</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-4">
+                      {[1, 2, 3, 4].map((num) => (
+                        <div key={num} className="border border-border rounded-lg p-3">
+                          <h4 className="font-medium mb-2 text-sm">HTF {num}</h4>
+                          <div className="space-y-1">
+                            <SettingRow title="Enable" description={`Turn HTF ${num} on/off`} />
+                            <SettingRow title="Timeframe" description="Select timeframe (60=1H, 240=4H)" />
+                            <SettingRow title="Candle Count" description="Number of candles to display" />
+                            <SettingRow title="Offset" description="Historical shift amount" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="chart" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">Chart Mapping</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="BSL Color" 
-                    description="Buyside liquidity line color"
-                    tooltip="Customize the color of BSL (buyside liquidity) lines above highs"
-                  />
-                  <SettingItem 
-                    title="SSL Color" 
-                    description="Sellside liquidity line color"
-                    tooltip="Customize the color of SSL (sellside liquidity) lines below lows"
-                  />
-                  <SettingItem 
-                    title="Show EQ" 
-                    description="Equilibrium (50%) line"
-                    tooltip="Display the midpoint line between BSL and SSL"
-                  />
-                  <SettingItem 
-                    title="Show Dividers" 
-                    description="Session/day separators"
-                    tooltip="Vertical lines marking session boundaries and day changes"
-                  />
-                  <SettingItem 
-                    title="Draw on Liquidity (DOL)" 
-                    description="Show C1 target levels"
-                    tooltip="Display the liquidity level (C1) as the target for C2→C3 moves"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="chart">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">Chart Mapping</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="BSL Color" description="Buyside liquidity line color" />
+                      <SettingRow title="SSL Color" description="Sellside liquidity line color" />
+                      <SettingRow title="Show EQ" description="Equilibrium (50%) line" />
+                      <SettingRow title="Show Dividers" description="Session/day separators" />
+                      <SettingRow title="Draw on Liquidity (DOL)" description="Show C1 target levels" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="sweeps" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">Liquidity Sweeps</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="LTF Sweeps" 
-                    description="Lower timeframe sweep detection"
-                    tooltip="Detect sweeps on the current chart timeframe"
-                  />
-                  <SettingItem 
-                    title="HTF Sweeps" 
-                    description="Higher timeframe sweep detection"
-                    tooltip="Detect sweeps from higher timeframes on your chart"
-                  />
-                  <SettingItem 
-                    title="Valid Sweep Color" 
-                    description="Color for confirmed sweeps"
-                    tooltip="The color used when a sweep is valid (C2 formed, not invalidated)"
-                  />
-                  <SettingItem 
-                    title="Invalid Sweep Color" 
-                    description="Color for failed sweeps"
-                    tooltip="The color used when a sweep gets invalidated by price continuing through"
-                  />
-                  <SettingItem 
-                    title="Sweep Lookback" 
-                    description="Candles to scan for sweeps"
-                    tooltip="How many candles back to check for potential liquidity sweep formations"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="sweeps">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">Liquidity Sweeps</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="LTF Sweeps" description="Lower timeframe sweep detection" />
+                      <SettingRow title="HTF Sweeps" description="Higher timeframe sweep detection" />
+                      <SettingRow title="Valid Sweep Color" description="Color for confirmed sweeps" />
+                      <SettingRow title="Invalid Sweep Color" description="Color for failed sweeps" />
+                      <SettingRow title="Sweep Lookback" description="Candles to scan for sweeps" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="patterns" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">C2 Pattern Detection</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="Show C2 Labels" 
-                    description="Display C2 reversal markers"
-                    tooltip="Show labels on C2 candles (reversal candles that close inside C1 range)"
-                  />
-                  <SettingItem 
-                    title="C2 Label Size" 
-                    description="Text size for labels"
-                    tooltip="Adjust the font size of C2 labels on the chart"
-                  />
-                  <SettingItem 
-                    title="Show C3 Box" 
-                    description="C3 expansion zone visualization"
-                    tooltip="Draw a box around the expected C3 expansion area after C2 forms"
-                  />
-                  <SettingItem 
-                    title="C2 Bull Color" 
-                    description="Bullish C2 label color"
-                    tooltip="Color for C2 labels when detecting bullish reversals (SSL sweeps)"
-                  />
-                  <SettingItem 
-                    title="C2 Bear Color" 
-                    description="Bearish C2 label color"
-                    tooltip="Color for C2 labels when detecting bearish reversals (BSL sweeps)"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="patterns">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">C2 Pattern Detection</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="Show C2 Labels" description="Display C2 reversal markers" />
+                      <SettingRow title="C2 Label Size" description="Text size for labels" />
+                      <SettingRow title="Show C3 Box" description="C3 expansion zone visualization" />
+                      <SettingRow title="C2 Bull Color" description="Bullish C2 label color" />
+                      <SettingRow title="C2 Bear Color" description="Bearish C2 label color" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="cisd" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">CISD Configuration</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="CISD Detection" 
-                    description="Enable state change detection"
-                    tooltip="Detect when market changes from lower lows to higher lows (or vice versa)"
-                  />
-                  <SettingItem 
-                    title="Show Projections" 
-                    description="Multi-target projection lines"
-                    tooltip="Display 1x, 2x, 2.5x, 3.5x, 4x target projections from CISD level"
-                  />
-                  <SettingItem 
-                    title="Bull CISD 1x" 
-                    description="Bullish 1x target"
-                    tooltip="Enable/disable 1x projection for bullish CISD"
-                  />
-                  <SettingItem 
-                    title="Bull CISD 2x" 
-                    description="Bullish 2x target"
-                    tooltip="Enable/disable 2x projection for bullish CISD"
-                  />
-                  <SettingItem 
-                    title="Bull CISD 2.5x" 
-                    description="Bullish 2.5x target"
-                    tooltip="Enable/disable 2.5x projection for bullish CISD"
-                  />
-                  <SettingItem 
-                    title="Bull CISD 3.5x" 
-                    description="Bullish 3.5x target"
-                    tooltip="Enable/disable 3.5x projection for bullish CISD"
-                  />
-                  <SettingItem 
-                    title="Bull CISD 4x" 
-                    description="Bullish 4x target"
-                    tooltip="Enable/disable 4x projection for bullish CISD"
-                  />
-                  <SettingItem 
-                    title="Bear CISD Targets" 
-                    description="Bearish projections (1x-4x)"
-                    tooltip="Same target system for bearish CISD (lower highs to higher highs)"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="cisd">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">CISD Configuration</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="CISD Detection" description="Enable state change detection" />
+                      <SettingRow title="Show Projections" description="Multi-target projection lines" />
+                      <SettingRow title="Bull CISD 1x" description="Bullish 1x target" />
+                      <SettingRow title="Bull CISD 2x" description="Bullish 2x target" />
+                      <SettingRow title="Bull CISD 2.5x" description="Bullish 2.5x target" />
+                      <SettingRow title="Bull CISD 3.5x" description="Bullish 3.5x target" />
+                      <SettingRow title="Bull CISD 4x" description="Bullish 4x target" />
+                      <SettingRow title="Bear CISD Targets" description="Bearish projections (1x-4x)" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="ifvg" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">iFVG Settings</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="iFVG Detection" 
-                    description="Enable iFVG marking"
-                    tooltip="Detect inverse fair value gaps that form after valid sweeps"
-                  />
-                  <SettingItem 
-                    title="iFVG Box Style" 
-                    description="Visualization style"
-                    tooltip="Choose how iFVG zones are displayed (box, line, or both)"
-                  />
-                  <SettingItem 
-                    title="Bull iFVG Color" 
-                    description="Bullish iFVG color"
-                    tooltip="Color for iFVG boxes after SSL sweeps (bullish context)"
-                  />
-                  <SettingItem 
-                    title="Bear iFVG Color" 
-                    description="Bearish iFVG color"
-                    tooltip="Color for iFVG boxes after BSL sweeps (bearish context)"
-                  />
-                  <SettingItem 
-                    title="iFVG Transparency" 
-                    description="Box fill opacity"
-                    tooltip="Adjust the transparency level of iFVG box fills (0-100)"
-                  />
-                </div>
-              </TabsContent>
+                <AccordionItem value="ifvg">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">iFVG Settings</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="iFVG Detection" description="Enable iFVG marking" />
+                      <SettingRow title="iFVG Box Style" description="Visualization style" />
+                      <SettingRow title="Bull iFVG Color" description="Bullish iFVG color" />
+                      <SettingRow title="Bear iFVG Color" description="Bearish iFVG color" />
+                      <SettingRow title="iFVG Transparency" description="Box fill opacity (0-100)" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <TabsContent value="alerts" className="space-y-4 mt-4">
-                <h3 className="font-bold text-lg">Alerts & Sessions</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <SettingItem 
-                    title="Alert on Valid Sweep" 
-                    description="Notify when sweep confirms"
-                    tooltip="Get alert when a liquidity sweep becomes valid (C2 forms)"
-                  />
-                  <SettingItem 
-                    title="Alert on CISD" 
-                    description="Notify on state change"
-                    tooltip="Get alert when CISD is detected (market structure changes)"
-                  />
-                  <SettingItem 
-                    title="Alert on iFVG" 
-                    description="Notify on iFVG formation"
-                    tooltip="Get alert when iFVG forms after valid sweep"
-                  />
-                  <SettingItem 
-                    title="Show Sessions" 
-                    description="Display session windows"
-                    tooltip="Show Asia/London/NY session boxes on chart"
-                  />
-                  <SettingItem 
-                    title="Show Silver Bullet" 
-                    description="1H SB windows"
-                    tooltip="Highlight Silver Bullet windows (10-11 AM, 2-3 PM)"
-                  />
-                  <SettingItem 
-                    title="Show Macro Windows" 
-                    description="20min macro windows"
-                    tooltip="Highlight precise 20-minute macro entry windows"
-                  />
-                  <SettingItem 
-                    title="SMT Mode" 
-                    description="Binary or Triad"
-                    tooltip="Binary: Compare 2 assets. Triad: Compare primary vs 2 correlated assets"
-                  />
-                  <SettingItem 
-                    title="SMT Assets" 
-                    description="Assets for SMT analysis"
-                    tooltip="Specify tickers for SMT divergence detection (e.g., ES, NQ, YM)"
-                  />
-                </div>
-              </TabsContent>
-            </Tabs>
+                <AccordionItem value="alerts">
+                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
+                    <span className="font-semibold">Alerts & Sessions</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="space-y-1">
+                      <SettingRow title="Alert on Valid Sweep" description="Notify when sweep confirms" />
+                      <SettingRow title="Alert on CISD" description="Notify on state change" />
+                      <SettingRow title="Alert on iFVG" description="Notify on iFVG formation" />
+                      <SettingRow title="Show Sessions" description="Display Asia/London/NY windows" />
+                      <SettingRow title="Show Silver Bullet" description="1H SB windows (10-11 AM, 2-3 PM)" />
+                      <SettingRow title="Show Macro Windows" description="20min macro entry windows" />
+                      <SettingRow title="SMT Mode" description="Binary or Triad comparison" />
+                      <SettingRow title="SMT Assets" description="Assets for SMT analysis" />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+        );
+
+      case "education":
+        return (
+          <div className="space-y-6">
+            <Card className="border-primary/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+                  <Target className="w-5 h-5 md:w-6 md:h-6" />
+                  1H/4H Profiling Models
+                </CardTitle>
+                <CardDescription>CISD retest entries with target-based market phases</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="strategy">
+                    <AccordionTrigger>Entry Strategy</AccordionTrigger>
+                    <AccordionContent className="space-y-4 text-sm">
+                      <div>
+                        <h4 className="font-semibold mb-2">CISD Retest Entry</h4>
+                        <p className="text-muted-foreground">Enter on retest of the CISD level after it forms. Wait for price to pull back to the CISD, then enter on confirmation.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Primary Targets</h4>
+                        <p className="text-muted-foreground">Target 1x (first take profit) and 2-2.5x (main target). These are your high-probability zones.</p>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="phases">
+                    <AccordionTrigger>Market Phases by Target</AccordionTrigger>
+                    <AccordionContent className="space-y-4 text-sm">
+                      <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                        <h4 className="font-semibold mb-1 text-blue-400">1x - 1.5x: Accumulation/Re-Accumulation</h4>
+                        <p className="text-muted-foreground text-xs">Price is building position, consolidating, preparing for next move. This is where smart money accumulates.</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                        <h4 className="font-semibold mb-1 text-orange-400">2x - 2.5x: Manipulation Zone</h4>
+                        <p className="text-muted-foreground text-xs">Main target area. Price often reverses here as liquidity is taken and positions are flipped. High-probability reversal zone.</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+                        <h4 className="font-semibold mb-1 text-purple-400">3.5x - 4x: Expansion/Distribution</h4>
+                        <p className="text-muted-foreground text-xs">Extended move, distribution phase. Smart money exits, retail chases. Use for runner targets only.</p>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="execution">
+                    <AccordionTrigger>Trade Execution</AccordionTrigger>
+                    <AccordionContent className="space-y-4 text-sm">
+                      <div>
+                        <h4 className="font-semibold mb-2">Step 1: Wait for CISD</h4>
+                        <p className="text-muted-foreground">CISD forms when structure changes (lower lows → higher lows or vice versa). Mark the level.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Step 2: Wait for Retest</h4>
+                        <p className="text-muted-foreground">Price must pull back to CISD level. This is your entry zone. Don't chase.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Step 3: Enter on Confirmation</h4>
+                        <p className="text-muted-foreground">Enter when price shows confirmation at CISD (opposing candle, FVG fill, etc.).</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Step 4: Target Management</h4>
+                        <p className="text-muted-foreground">Take partial profit at 1x, main exit at 2-2.5x. Let runner target 3.5-4x only with trailing stop.</p>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </CardContent>
+            </Card>
           </div>
         );
 
@@ -495,10 +380,6 @@ const Index = () => {
                 <p className="text-[10px] md:text-xs text-muted-foreground">Trading Intelligence</p>
               </div>
             </div>
-            <Button variant="outline" size="sm" onClick={() => navigate('/knowledge')}>
-              <BookOpen className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Education</span>
-            </Button>
           </div>
         </div>
       </div>
@@ -511,13 +392,15 @@ const Index = () => {
         </motion.div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="w-full overflow-x-auto flex-nowrap justify-start md:justify-center">
+          <TabsList className="w-full grid grid-cols-3 max-w-md mx-auto">
             <TabsTrigger value="overview"><Sparkles className="w-4 h-4 mr-1" />Overview</TabsTrigger>
             <TabsTrigger value="settings"><Settings className="w-4 h-4 mr-1" />Settings</TabsTrigger>
+            <TabsTrigger value="education"><BookOpen className="w-4 h-4 mr-1" />Education</TabsTrigger>
           </TabsList>
           
           <TabsContent value="overview">{renderSectionDetails("overview")}</TabsContent>
           <TabsContent value="settings">{renderSectionDetails("settings")}</TabsContent>
+          <TabsContent value="education">{renderSectionDetails("education")}</TabsContent>
         </Tabs>
       </div>
     </div>
