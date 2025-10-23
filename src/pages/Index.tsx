@@ -560,53 +560,101 @@ const Index = () => {
 
                 {/* VISUAL */}
                 {selectedTab === 'visual' && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {content.visual.elements.map((el, i) => {
-                        // Determine which image to show based on element name
-                        let elementImage = null;
-                        if (el.name === "HTF Candles") {
-                          elementImage = htfEdgeCandles;
-                        } else if (el.name === "BSL/SSL Lines") {
-                          elementImage = bslSslChart;
-                        } else if (el.name === "CISD Lines") {
-                          elementImage = cisdChart;
-                        } else if (el.name === "C2 Labels") {
-                          elementImage = c2LabelsChart;
-                        }
+                  <div className="space-y-8">
+                    {/* Image Gallery Section */}
+                    <div className="bg-gradient-to-br from-slate-900 to-blue-900 p-6 rounded-2xl">
+                      <h3 className="text-white text-xl font-bold mb-4 text-center">Visual Reference Gallery</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img 
+                              src={htfEdgeCandles} 
+                              alt="HTF Candles"
+                              loading="lazy"
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="p-3 text-center">
+                            <p className="text-white text-sm font-semibold">HTF Candles</p>
+                          </div>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img 
+                              src={bslSslChart} 
+                              alt="BSL/SSL Lines"
+                              loading="lazy"
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="p-3 text-center">
+                            <p className="text-white text-sm font-semibold">BSL/SSL Lines</p>
+                          </div>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img 
+                              src={c2LabelsChart} 
+                              alt="C2 Labels"
+                              loading="lazy"
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="p-3 text-center">
+                            <p className="text-white text-sm font-semibold">C2 Labels</p>
+                          </div>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur rounded-xl overflow-hidden hover:bg-white/20 transition-all">
+                          <div className="aspect-[4/3] overflow-hidden">
+                            <img 
+                              src={cisdChart} 
+                              alt="CISD Lines"
+                              loading="lazy"
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="p-3 text-center">
+                            <p className="text-white text-sm font-semibold">CISD Lines</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-                        return (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.05 }}
-                            className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border overflow-hidden"
-                          >
-                            {elementImage && (
-                              <div className="h-48 overflow-hidden border-b bg-slate-100">
-                                <img 
-                                  src={elementImage} 
-                                  alt={el.name}
-                                  loading="lazy"
-                                  className="w-full h-full object-contain"
-                                />
-                              </div>
-                            )}
-                            <div className="p-4">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <div className="text-blue-600">{el.icon}</div>
-                                <h3 className="font-bold">{el.name}</h3>
-                              </div>
-                              <div className="space-y-2 text-sm">
-                                <div><strong className="text-blue-700">What:</strong> {el.what}</div>
-                                <div><strong className="text-emerald-700">Why:</strong> {el.why}</div>
-                                <div><strong className="text-purple-700">How:</strong> {el.how}</div>
-                              </div>
+                    {/* Element Details Section */}
+                    <div>
+                      <h3 className="text-2xl font-bold mb-4 text-center">Component Details</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {content.visual.elements.map((el, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                          className="bg-white rounded-xl border-2 border-slate-200 p-5 hover:border-blue-400 hover:shadow-xl transition-all"
+                        >
+                          <div className="flex items-center space-x-3 mb-4">
+                            <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-lg">
+                              {el.icon}
                             </div>
-                          </motion.div>
-                        );
-                      })}
+                            <h3 className="font-bold text-lg">{el.name}</h3>
+                          </div>
+                          <div className="space-y-3 text-sm">
+                            <div className="bg-blue-50 p-3 rounded-lg">
+                              <strong className="text-blue-700">What:</strong>
+                              <p className="text-slate-700 mt-1">{el.what}</p>
+                            </div>
+                            <div className="bg-emerald-50 p-3 rounded-lg">
+                              <strong className="text-emerald-700">Why:</strong>
+                              <p className="text-slate-700 mt-1">{el.why}</p>
+                            </div>
+                            <div className="bg-purple-50 p-3 rounded-lg">
+                              <strong className="text-purple-700">How:</strong>
+                              <p className="text-slate-700 mt-1">{el.how}</p>
+                            </div>
+                          </div>
+                        </motion.div>
+                       ))}
+                      </div>
                     </div>
                   </div>
                 )}
