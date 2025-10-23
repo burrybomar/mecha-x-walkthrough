@@ -672,117 +672,333 @@ const Knowledge = () => {
                     1H/4H Profiling Models
                   </CardTitle>
                   <CardDescription>
-                    Entry system and target zones - CISD retest entries with defined accumulation, manipulation, and distribution zones
+                    Complete entry system with automated mapping - CISD retest entries with target-based market phases
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="entry">
-                      <AccordionTrigger>Entry Strategy</AccordionTrigger>
+                    <AccordionItem value="foundation">
+                      <AccordionTrigger>The Core Framework</AccordionTrigger>
                       <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">CISD Retest Entry</h4>
+                          <h4 className="font-semibold mb-2">What Is 1H/4H Profiling?</h4>
                           <p className="text-muted-foreground">
-                            After CISD forms and price expands, wait for price to retest the CISD level. This retest provides the optimal entry point with favorable risk/reward.
+                            A systematic approach to trading based on higher timeframe (HTF) structure. You identify HTF sweeps, wait for CISD formation, enter on the retest, and target specific zones based on range projections. Simple, mechanical, repeatable.
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Why Retest Works</h4>
+                          <h4 className="font-semibold mb-2">Why 1H and 4H?</h4>
                           <p className="text-muted-foreground">
-                            • CISD level acts as new support/resistance<br/>
-                            • Retest confirms the level is respected<br/>
-                            • Provides better entry than chasing the initial move<br/>
-                            • Allows tight stop loss placement below/above CISD
+                            These timeframes filter out noise while giving precise entry timing:<br/>
+                            • <strong>4H:</strong> Defines your major swing structure and direction<br/>
+                            • <strong>1H:</strong> Refines entries within the 4H framework<br/>
+                            • Together they provide the sweet spot - not too fast, not too slow
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Entry Timing</h4>
+                          <h4 className="font-semibold mb-2">The Three-Step Process</h4>
                           <p className="text-muted-foreground">
-                            Best executed on 1H or 4H timeframes. Watch for price to pull back to CISD zone, show rejection (wick), then continuation candle in direction of trend.
+                            1. <strong>Sweep:</strong> HTF level gets taken out (BSL/SSL)<br/>
+                            2. <strong>CISD:</strong> Change in state forms at the reversal<br/>
+                            3. <strong>Retest:</strong> Price returns to CISD - you enter here
+                          </p>
+                        </div>
+                        <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
+                          <h4 className="font-semibold mb-2 text-cyan-600 dark:text-cyan-400">🤖 MECHA-X Automation</h4>
+                          <p className="text-muted-foreground">
+                            Manually, you'd need to mark every HTF candle, draw BSL/SSL lines, calculate ranges, project targets... exhausting. MECHA-X does it all automatically:<br/>
+                            • Auto-detects and overlays HTF candles on your chart<br/>
+                            • Draws BSL/SSL liquidity lines automatically<br/>
+                            • Marks CISD levels when they form<br/>
+                            • Projects 1x, 2x, 2.5x, 3.5x, 4x targets instantly<br/>
+                            You just watch for the retest and enter. Everything else is mapped.
                           </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="targets">
-                      <AccordionTrigger>Target Zones (1x-4x)</AccordionTrigger>
+                    <AccordionItem value="htf-sweep">
+                      <AccordionTrigger>Step 1: HTF Sweep Detection</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">What Is An HTF Sweep?</h4>
+                          <p className="text-muted-foreground">
+                            When price takes out a higher timeframe high or low (BSL/SSL), that's a sweep. It's hunting liquidity above/below key levels. After the sweep, price typically reverses - that's your opportunity.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Valid vs Invalid Sweeps</h4>
+                          <p className="text-muted-foreground">
+                            <strong>Valid:</strong> Price sweeps the level and reverses (holds). Forms a wick and closes back inside the range. This creates your entry setup.<br/><br/>
+                            <strong>Invalid:</strong> Price sweeps but continues through without reversing. These are not tradeable - price hasn't found liquidity yet.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">LTF vs HTF Sweeps</h4>
+                          <p className="text-muted-foreground">
+                            Lower timeframe sweeps (chart TF) happen constantly - noise. Higher timeframe sweeps (4H, Daily, Weekly) are significant events. Always prioritize HTF sweeps for main entries.
+                          </p>
+                        </div>
+                        <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/30">
+                          <h4 className="font-semibold mb-2 text-blue-600 dark:text-blue-400">🤖 MECHA-X HTF Detection</h4>
+                          <p className="text-muted-foreground">
+                            Manually tracking HTF sweeps across multiple timeframes is tedious. MECHA-X:<br/>
+                            • Overlays 4H, Daily, Weekly candles on any chart timeframe<br/>
+                            • Auto mode intelligently selects HTFs (5m chart → shows 1H, 4H, Daily)<br/>
+                            • Manual mode lets you choose up to 4 custom HTFs<br/>
+                            • Marks valid sweeps with visual indicators<br/>
+                            • Shows invalid sweeps in gray (so you don't trade them)<br/>
+                            You see everything that matters, filtered automatically.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="cisd-formation">
+                      <AccordionTrigger>Step 2: CISD Formation</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">What Is CISD?</h4>
+                          <p className="text-muted-foreground">
+                            Change in State of Delivery. When price shifts from making lower lows to higher lows (bullish CISD) or higher highs to lower highs (bearish CISD), that's your confirmation. It marks the exact level where market structure changed.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Why CISD Is Critical</h4>
+                          <p className="text-muted-foreground">
+                            No CISD = no trade. It's your proof that the sweep worked and reversal is confirmed. CISD becomes your:<br/>
+                            • Entry level (on retest)<br/>
+                            • Stop loss reference point<br/>
+                            • Anchor for target projections
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">How It Forms After Sweep</h4>
+                          <p className="text-muted-foreground">
+                            1. HTF level gets swept (BSL/SSL taken out)<br/>
+                            2. Price reverses with a wick (rejection)<br/>
+                            3. Next candle(s) close back inside the range<br/>
+                            4. CISD forms at the point where structure changed<br/>
+                            5. Now wait for retest of this level
+                          </p>
+                        </div>
+                        <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                          <h4 className="font-semibold mb-2 text-orange-600 dark:text-orange-400">🤖 MECHA-X CISD Detection</h4>
+                          <p className="text-muted-foreground">
+                            Spotting CISD manually requires constant monitoring. MECHA-X:<br/>
+                            • Detects CISD formation automatically<br/>
+                            • Draws horizontal line at exact CISD level<br/>
+                            • Labels it clearly (bull/bear color coded)<br/>
+                            • Projects target lines (1x, 2x, 2.5x, 3.5x, 4x) from CISD instantly<br/>
+                            • Updates in real-time as new CISDs form<br/>
+                            The moment CISD forms, you have your complete trade map ready.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="retest-entry">
+                      <AccordionTrigger>Step 3: The Retest Entry</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Why Wait For Retest?</h4>
+                          <p className="text-muted-foreground">
+                            After CISD forms, price usually expands away quickly. Chasing is low probability. Instead, wait for price to pull back to the CISD level - this is your entry zone. The retest confirms the level holds.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Perfect Retest Entry</h4>
+                          <p className="text-muted-foreground">
+                            Watch for these signals:<br/>
+                            • Price returns to CISD zone<br/>
+                            • Forms a rejection wick (shows level is respected)<br/>
+                            • Next candle closes in direction of trend<br/>
+                            • Enter on that continuation candle<br/>
+                            • Stop goes below/above the CISD level
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Advanced: iFVG + CISD Combo</h4>
+                          <p className="text-muted-foreground">
+                            Best entries happen when CISD aligns with an iFVG (inverse fair value gap). The iFVG is the gap formed during the reversal - it acts as a magnet. When price retests into both CISD and iFVG zone, you have maximum confluence.
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2">Timeframe For Entry</h4>
+                          <p className="text-muted-foreground">
+                            If your CISD formed on 4H, drop to 1H for entry timing. If on 1H, use 15m. The lower timeframe gives you precise entry candle while respecting the HTF structure.
+                          </p>
+                        </div>
+                        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                          <h4 className="font-semibold mb-2 text-emerald-600 dark:text-emerald-400">🤖 MECHA-X Entry Assistance</h4>
+                          <p className="text-muted-foreground">
+                            MECHA-X makes retest entries obvious:<br/>
+                            • CISD line stays on chart as reference<br/>
+                            • iFVG boxes show precise entry zones<br/>
+                            • BSL/SSL lines show context<br/>
+                            • Chart mapping shows EQ levels<br/>
+                            • You simply watch for price to touch CISD, form rejection, and enter<br/>
+                            All levels are pre-drawn. You focus on execution, not analysis.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="target-phases">
+                      <AccordionTrigger>Target Zones & Market Phases</AccordionTrigger>
                       <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
                           <h4 className="font-semibold mb-2 text-emerald-600 dark:text-emerald-400">Primary Targets: 1x & 2-2.5x</h4>
-                          <p className="text-muted-foreground mb-2">
-                            These are your main take-profit zones. Most moves complete within this range.
-                          </p>
                           <p className="text-muted-foreground">
-                            • <strong>1x:</strong> First target - conservative, high probability<br/>
-                            • <strong>2-2.5x:</strong> Extended target - manipulation zone completion
+                            Most trades complete in this range. These are your main profit zones:<br/>
+                            • <strong>1x:</strong> First target - take 50% profit here<br/>
+                            • <strong>2-2.5x:</strong> Main target - take remaining 50%
                           </p>
                         </div>
 
                         <div>
-                          <h4 className="font-semibold mb-2">1x - 1.5x: Accumulation/Re-accumulation Zone</h4>
+                          <h4 className="font-semibold mb-2">1x - 1.5x: Accumulation Phase</h4>
                           <p className="text-muted-foreground">
-                            This is where smart money accumulates positions. Price often consolidates here before the next leg. If you're in the trade, consider:
+                            This is where smart money builds positions. Price consolidates, might chop sideways (re-accumulation). What to do:<br/>
+                            • Take partial profits at 1x (50%)<br/>
+                            • Move stop to breakeven<br/>
+                            • Expect consolidation before next leg<br/>
+                            • Let runners ride to 2x
                           </p>
-                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
-                            <li>Taking partial profits at 1x</li>
-                            <li>Moving stop to breakeven</li>
-                            <li>Watching for continuation patterns</li>
-                            <li>Expecting some sideways movement (re-accumulation)</li>
-                          </ul>
                         </div>
 
                         <div>
-                          <h4 className="font-semibold mb-2">2x - 2.5x: Manipulation Zone</h4>
+                          <h4 className="font-semibold mb-2">2x - 2.5x: Manipulation Phase</h4>
                           <p className="text-muted-foreground">
-                            The manipulation zone where price often creates final traps before reversal or distribution. Key characteristics:
+                            The zone where price creates final traps before distribution. Characteristics:<br/>
+                            • Sweeps highs/lows to grab liquidity<br/>
+                            • False breakouts common<br/>
+                            • <strong>Take majority of profits here</strong><br/>
+                            • Often the last push before reversal<br/>
+                            Don't get greedy. 2-2.5x is your exit zone.
                           </p>
-                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
-                            <li>Price sweeps highs/lows to grab liquidity</li>
-                            <li>Creates false breakouts</li>
-                            <li>Ideal zone to take majority of profits</li>
-                            <li>Often the last push before reversal</li>
-                          </ul>
                         </div>
 
                         <div>
-                          <h4 className="font-semibold mb-2">3.5x - 4x: Expansion/Distribution Zone</h4>
+                          <h4 className="font-semibold mb-2">3.5x - 4x: Distribution Phase</h4>
                           <p className="text-muted-foreground">
-                            Extended targets only hit during major expansion moves. This is where institutions distribute positions:
+                            Extended targets rarely hit (20-30% of trades). This is where institutions exit:<br/>
+                            • High risk - reversal likely<br/>
+                            • Only hold small runner position<br/>
+                            • If price reaches here, exit immediately<br/>
+                            • Don't chase if you missed the entry<br/>
+                            Greed kills accounts. Respect the phases.
                           </p>
-                          <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
-                            <li>Rare - only 20-30% of trades reach here</li>
-                            <li>High risk - reversal likely imminent</li>
-                            <li>If you're still holding, exit immediately</li>
-                            <li>Don't chase if you missed the entry</li>
-                          </ul>
+                        </div>
+
+                        <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/30">
+                          <h4 className="font-semibold mb-2 text-purple-600 dark:text-purple-400">🤖 MECHA-X Target Projections</h4>
+                          <p className="text-muted-foreground">
+                            Calculating targets manually from CISD is time-consuming and error-prone. MECHA-X:<br/>
+                            • Auto-projects all targets (1x, 2x, 2.5x, 3.5x, 4x) the instant CISD forms<br/>
+                            • Draws horizontal lines at each target level<br/>
+                            • Color-codes them (bull/bear)<br/>
+                            • Updates dynamically as new CISDs form<br/>
+                            • Shows you exactly where to take profits<br/>
+                            You never guess. Every target is pre-calculated and drawn on your chart.
+                          </p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="execution">
-                      <AccordionTrigger>Trade Execution Plan</AccordionTrigger>
+                    <AccordionItem value="complete-mapping">
+                      <AccordionTrigger>Complete Trade Mapping System</AccordionTrigger>
                       <AccordionContent className="space-y-4 text-sm sm:text-base">
                         <div>
-                          <h4 className="font-semibold mb-2">Step-by-Step Process</h4>
+                          <h4 className="font-semibold mb-2">What Manual Trading Looks Like</h4>
+                          <p className="text-muted-foreground">
+                            Without automation, you need to:<br/>
+                            1. Manually add 4H, Daily, Weekly candles to your 5m/15m chart<br/>
+                            2. Mark every swing high/low for BSL/SSL<br/>
+                            3. Draw horizontal lines at each liquidity level<br/>
+                            4. Calculate EQ (50%) for each HTF candle<br/>
+                            5. Identify sweeps manually<br/>
+                            6. Mark CISD when it forms<br/>
+                            7. Calculate range size<br/>
+                            8. Project 1x, 2x, 2.5x, 3.5x, 4x from CISD<br/>
+                            9. Draw all projection lines<br/>
+                            10. Track iFVG zones<br/>
+                            11. Update everything as new candles form<br/><br/>
+                            This takes hours and is prone to mistakes.
+                          </p>
+                        </div>
+
+                        <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
+                          <h4 className="font-semibold mb-2 text-cyan-600 dark:text-cyan-400">🤖 MECHA-X: Instant Complete Mapping</h4>
+                          <p className="text-muted-foreground mb-3">
+                            MECHA-X does ALL of the above automatically in real-time:
+                          </p>
+                          <ul className="space-y-2 text-muted-foreground">
+                            <li><strong>✓ HTF Overlay:</strong> Auto/Manual mode overlays 1-4 HTFs on any chart</li>
+                            <li><strong>✓ BSL/SSL Lines:</strong> Automatically draws buyside/sellside liquidity at highs/lows</li>
+                            <li><strong>✓ EQ Lines:</strong> 50% equilibrium levels drawn for each HTF candle</li>
+                            <li><strong>✓ Sweep Detection:</strong> Marks valid sweeps (colored), invalid sweeps (gray)</li>
+                            <li><strong>✓ CISD Lines:</strong> Detects and draws CISD the moment it forms</li>
+                            <li><strong>✓ Target Projections:</strong> All 1x-4x targets projected instantly</li>
+                            <li><strong>✓ iFVG Boxes:</strong> Fair value gaps auto-detected and highlighted</li>
+                            <li><strong>✓ C2/C3 Labels:</strong> Marks reversal and expansion candles</li>
+                            <li><strong>✓ Session Tracking:</strong> Shows Silver Bullet and Macro windows</li>
+                            <li><strong>✓ Real-time Updates:</strong> Everything updates live as new candles form</li>
+                          </ul>
+                          <p className="text-muted-foreground mt-3 font-semibold">
+                            Result: Your chart becomes a complete trading map. Every level, every target, every zone - pre-drawn. You just execute.
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="execution-plan">
+                      <AccordionTrigger>Trade Execution Checklist</AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm sm:text-base">
+                        <div>
+                          <h4 className="font-semibold mb-2">Pre-Trade (MECHA-X Does This)</h4>
+                          <ol className="list-decimal list-inside text-muted-foreground space-y-1">
+                            <li>HTF candles overlaid ✓</li>
+                            <li>BSL/SSL liquidity lines drawn ✓</li>
+                            <li>EQ levels marked ✓</li>
+                            <li>Valid sweeps highlighted ✓</li>
+                            <li>CISD levels detected ✓</li>
+                            <li>Targets projected ✓</li>
+                            <li>iFVG zones shown ✓</li>
+                          </ol>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-2">Your Job (Execution)</h4>
                           <ol className="list-decimal list-inside text-muted-foreground space-y-2">
-                            <li>Wait for valid CISD formation after sweep</li>
+                            <li>Wait for valid HTF sweep (MECHA-X shows it)</li>
+                            <li>Confirm CISD formation (line appears on chart)</li>
                             <li>Wait for price to retest CISD level</li>
-                            <li>Confirm rejection at CISD (wick formation)</li>
-                            <li>Enter on next continuation candle</li>
-                            <li>Place stop below/above CISD level</li>
-                            <li>First target: 1x (take 50% profit)</li>
-                            <li>Second target: 2-2.5x (take remaining 50%)</li>
-                            <li>If momentum is strong, hold runner to 3.5-4x</li>
+                            <li>Watch for rejection wick at CISD</li>
+                            <li>Enter on continuation candle</li>
+                            <li>Place stop below/above CISD line</li>
+                            <li>Target 1: 1x (take 50% profit) - line is pre-drawn</li>
+                            <li>Target 2: 2-2.5x (take 50% profit) - line is pre-drawn</li>
+                            <li>If strong, hold runner to 3.5-4x - line is pre-drawn</li>
                           </ol>
                         </div>
 
                         <div className="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
-                          <h4 className="font-semibold mb-2">⚠️ Risk Management</h4>
+                          <h4 className="font-semibold mb-2 text-yellow-600 dark:text-yellow-400">⚠️ Risk Management Rules</h4>
                           <p className="text-muted-foreground">
-                            • Never risk more than 1-2% per trade<br/>
+                            • Risk only 1-2% per trade<br/>
+                            • Stop goes beyond CISD level (reference line on chart)<br/>
                             • Move stop to breakeven at 1x target<br/>
-                            • Take majority of profits at 2-2.5x<br/>
-                            • Don't hold into distribution zone (3.5-4x) expecting more
+                            • Take 50% at 1x, 50% at 2-2.5x<br/>
+                            • Don't hold into 3.5-4x distribution zone<br/>
+                            • If price doesn't retest CISD, no trade
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-2">Summary: Automation Changes Everything</h4>
+                          <p className="text-muted-foreground">
+                            Manual 1H/4H profiling = hours of work per trade. MECHA-X profiling = everything mapped automatically. You focus on execution, not analysis. That's the power of automation.
                           </p>
                         </div>
                       </AccordionContent>
