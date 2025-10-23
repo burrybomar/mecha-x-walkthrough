@@ -314,7 +314,7 @@ const Index = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
                   <Target className="w-5 h-5 md:w-6 md:h-6" />
-                  1H/4H Profiling Models
+                  1H/4H Profiling Models - Quick Reference
                 </CardTitle>
                 <CardDescription>CISD retest entries with target-based market phases</CardDescription>
               </CardHeader>
@@ -376,6 +376,18 @@ const Index = () => {
                 </Accordion>
               </CardContent>
             </Card>
+
+            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 text-center">
+              <BookOpen className="w-10 h-10 mx-auto mb-3 text-primary" />
+              <h3 className="text-lg font-bold mb-2">Want More?</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                This tab shows the 1H/4H profiling quick reference. For the complete education including TTrades Model, 4H Profiling, Liquidity concepts, and more...
+              </p>
+              <Button onClick={() => navigate('/knowledge')} className="gap-2">
+                <BookOpen className="w-4 h-4" />
+                Open Full Knowledge Base
+              </Button>
+            </div>
           </div>
         );
 
@@ -396,6 +408,11 @@ const Index = () => {
                 <p className="text-[10px] md:text-xs text-muted-foreground">Trading Intelligence</p>
               </div>
             </div>
+            <Button variant="outline" size="sm" onClick={() => navigate('/knowledge')}>
+              <BookOpen className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">Full Education</span>
+              <span className="sm:hidden">Education</span>
+            </Button>
           </div>
         </div>
       </div>
