@@ -15,9 +15,9 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
           {/* C1 - Setup candle */}
           <div className="flex flex-col items-center gap-2">
             <div className="relative">
-              {/* POI Line */}
-              <div className={`absolute ${isBullish ? 'top-0' : 'bottom-0'} left-1/2 -translate-x-1/2 w-32 h-0.5 bg-purple-400 -${isBullish ? 'top' : 'bottom'}-4`}>
-                <span className="absolute left-0 -top-5 text-[10px] text-purple-400 font-bold whitespace-nowrap">POI (FVG/OB)</span>
+              {/* POI Line - Always above for bullish, below for bearish */}
+              <div className={`absolute ${isBullish ? '-top-4' : '-bottom-4'} left-1/2 -translate-x-1/2 w-32 h-0.5 bg-purple-400`}>
+                <span className={`absolute left-0 ${isBullish ? '-top-5' : '-bottom-5'} text-[10px] text-purple-400 font-bold whitespace-nowrap`}>POI (FVG/OB)</span>
               </div>
               {/* Candle */}
               <div className="w-12 bg-slate-600 h-24 rounded-sm relative">
@@ -56,11 +56,11 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
 
           {/* C3 - Confirmation */}
           <div className="flex flex-col items-center gap-2">
-            <div className="w-12 bg-emerald-500 h-32 rounded-sm relative">
-              <div className="absolute left-1/2 -translate-x-1/2 w-0.5 bg-emerald-300 h-4 -top-4"></div>
+            <div className={`w-12 ${isBullish ? 'bg-emerald-500' : 'bg-red-500'} ${isBullish ? 'h-32' : 'h-16'} rounded-sm relative ${isBullish ? '' : 'mt-16'}`}>
+              <div className={`absolute left-1/2 -translate-x-1/2 w-0.5 ${isBullish ? 'bg-emerald-300 h-4 -top-4' : 'bg-red-300 h-4 -bottom-4'}`}></div>
               {/* Reversal arrow */}
               <motion.div 
-                className={`absolute -right-8 ${isBullish ? 'top-0' : 'bottom-0'} text-emerald-400 text-2xl`}
+                className={`absolute -right-8 ${isBullish ? 'top-0' : 'bottom-0'} ${isBullish ? 'text-emerald-400' : 'text-red-400'} text-2xl`}
                 animate={{ x: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
@@ -68,7 +68,7 @@ export const PatternChart = ({ type, title }: PatternChartProps) => {
               </motion.div>
             </div>
             <div className="text-center">
-              <div className="text-emerald-400 font-bold text-sm">C3</div>
+              <div className={`${isBullish ? 'text-emerald-400' : 'text-red-400'} font-bold text-sm`}>C3</div>
               <div className="text-[10px] text-slate-400">Confirms</div>
             </div>
           </div>
