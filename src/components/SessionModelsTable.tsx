@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, TrendingUp, Zap, Target } from 'lucide-react';
+import { Clock } from 'lucide-react';
 
 interface SessionData {
   name: string;
@@ -120,99 +120,91 @@ export const SessionModelsTable = () => {
     ]);
   }, [currentTime]);
 
-  const getPhaseColor = (phase: SessionData['phase']) => {
-    switch (phase) {
-      case 'REVERSAL': return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
-      case 'EXPANSION': return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-      case 'CONSOLIDATION': return 'bg-orange-500/20 text-orange-300 border-orange-500/30';
-      case 'RETRACEMENT': return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-      case 'CONTINUATION': return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
-    }
-  };
-
-  const getBiasColor = (bias: SessionData['bias']) => {
-    switch (bias) {
-      case 'BULLISH': return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-      case 'BEARISH': return 'bg-red-500/20 text-red-300 border-red-500/30';
-      case 'NEUTRAL': return 'bg-gray-500/20 text-gray-300 border-gray-500/30';
-    }
-  };
-
   return (
     <Card className="border-2 border-primary/20">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Clock className="w-5 h-5 text-primary" />
-          Live Session Models
-          <Badge variant="outline" className="ml-auto text-xs">
+        <CardTitle className="flex items-center gap-2 justify-between">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-primary" />
+            <span>Session Models</span>
+          </div>
+          <Badge variant="outline" className="text-xs font-mono">
             {currentTime.toUTCString().slice(17, 25)} UTC
           </Badge>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-3 px-2 font-semibold">Session</th>
-                <th className="text-left py-3 px-2 font-semibold">Status</th>
-                <th className="text-left py-3 px-2 font-semibold">Time Left</th>
-                <th className="text-left py-3 px-2 font-semibold">Model Hour</th>
-                <th className="text-left py-3 px-2 font-semibold">Silver Bullet</th>
-                <th className="text-left py-3 px-2 font-semibold">Macro</th>
-                <th className="text-left py-3 px-2 font-semibold">Phase</th>
-                <th className="text-left py-3 px-2 font-semibold">Bias</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sessions.map((session, i) => (
-                <tr 
-                  key={i} 
-                  className={`border-b border-border/50 ${session.active ? 'bg-primary/5' : 'opacity-50'}`}
-                >
-                  <td className="py-3 px-2 font-medium">{session.name}</td>
-                  <td className="py-3 px-2">
-                    {session.active ? (
-                      <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
-                        <Zap className="w-3 h-3 mr-1" />
-                        Active
-                      </Badge>
-                    ) : (
-                      <Badge variant="outline" className="opacity-50">Closed</Badge>
-                    )}
-                  </td>
-                  <td className="py-3 px-2">{session.timeRemaining}</td>
-                  <td className="py-3 px-2">
-                    <span className={`text-xs px-2 py-1 rounded ${session.currentHour ? 'bg-primary/20 text-primary' : ''}`}>
-                      {session.hourLabel}
-                    </span>
-                  </td>
-                  <td className="py-3 px-2 text-xs">{session.silverBullet}</td>
-                  <td className="py-3 px-2 text-xs">{session.macro}</td>
-                  <td className="py-3 px-2">
-                    <Badge variant="outline" className={getPhaseColor(session.phase)}>
-                      {session.phase}
-                    </Badge>
-                  </td>
-                  <td className="py-3 px-2">
-                    <Badge variant="outline" className={getBiasColor(session.bias)}>
-                      {session.bias === 'BULLISH' && <TrendingUp className="w-3 h-3 mr-1" />}
-                      {session.bias === 'BEARISH' && <Target className="w-3 h-3 mr-1" />}
-                      {session.bias}
-                    </Badge>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <CardContent className="space-y-4">
+        {/* Compact Session Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {sessions.map((session, i) => (
+            <div
+              key={i}
+              className={`p-4 rounded-lg border-2 transition-all ${
+                session.active
+                  ? 'border-primary/50 bg-primary/5 shadow-lg shadow-primary/10'
+                  : 'border-border/30 opacity-50'
+              }`}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-lg">{session.name}</h3>
+                {session.active && (
+                  <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 text-xs">
+                    LIVE
+                  </Badge>
+                )}
+              </div>
+              
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Time Left:</span>
+                  <span className="font-mono font-semibold">{session.timeRemaining}</span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Model Hour:</span>
+                  <Badge variant={session.currentHour ? "default" : "outline"} className="text-xs">
+                    {session.hourLabel}
+                  </Badge>
+                </div>
+                
+                {session.silverBullet !== '-' && (
+                  <div className="p-2 rounded bg-purple-500/10 border border-purple-500/20">
+                    <div className="text-xs text-muted-foreground mb-1">Silver Bullet</div>
+                    <div className="font-mono text-xs font-semibold text-purple-300">{session.silverBullet}</div>
+                  </div>
+                )}
+                
+                {session.macro !== '-' && (
+                  <div className="p-2 rounded bg-orange-500/10 border border-orange-500/20">
+                    <div className="text-xs text-muted-foreground mb-1">Macro Window</div>
+                    <div className="font-mono text-xs font-semibold text-orange-300">{session.macro}</div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="mt-4 p-4 rounded-lg bg-muted/30 border border-border">
-          <h4 className="font-semibold text-sm mb-2">Session Model Hours Explained:</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-muted-foreground">
-            <div><strong className="text-foreground">H1 (Setup):</strong> Market sets up the range, identifies liquidity</div>
-            <div><strong className="text-foreground">H2 (Quiet/SB):</strong> Silver Bullet window - optimal reversal zone</div>
-            <div><strong className="text-foreground">H3 (Catalyst):</strong> News/momentum drives directional move</div>
-            <div><strong className="text-foreground">H4 (Delivery):</strong> Final push to targets, delivery phase completes</div>
+
+        {/* Hour Legend */}
+        <div className="p-4 rounded-lg bg-muted/30 border border-border">
+          <h4 className="font-semibold text-sm mb-3">Hour Model Guide:</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+              <div className="font-semibold text-orange-300 mb-1">H1: Setup</div>
+              <div className="text-muted-foreground">Range builds, liquidity identified</div>
+            </div>
+            <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+              <div className="font-semibold text-purple-300 mb-1">H2: Silver Bullet</div>
+              <div className="text-muted-foreground">Optimal entry window, sweeps occur</div>
+            </div>
+            <div className="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+              <div className="font-semibold text-cyan-300 mb-1">H3: Catalyst</div>
+              <div className="text-muted-foreground">Momentum & directional move</div>
+            </div>
+            <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+              <div className="font-semibold text-emerald-300 mb-1">H4: Delivery</div>
+              <div className="text-muted-foreground">Final push to targets</div>
+            </div>
           </div>
         </div>
       </CardContent>

@@ -33,6 +33,7 @@ import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 import HTFSweepDiagram from "@/components/HTFSweepDiagram";
 import { TradingSequenceDiagram } from "@/components/TradingSequenceDiagram";
+import { SessionModelsTable } from "@/components/SessionModelsTable";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -414,6 +415,9 @@ const Index = () => {
       case "sessions":
         return (
           <div className="space-y-6">
+            {/* Live Session Models Table */}
+            <SessionModelsTable />
+            
             <Card className="border-2 border-pink-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
