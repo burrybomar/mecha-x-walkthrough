@@ -29,9 +29,9 @@ import { AITooltip } from "@/components/AITooltip";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import cisdLtfChart from "@/assets/cisd-ltf-chart.jpg";
 import smtLtfChart from "@/assets/smt-ltf-chart.png";
-import htfSweepsChart from "@/assets/htf-sweeps-chart.png";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
+import HTFSweepDiagram from "@/components/HTFSweepDiagram";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -133,11 +133,7 @@ const Index = () => {
         return (
           <div className="space-y-6">
             <div className="rounded-xl overflow-hidden border-2 border-blue-500/20 bg-card">
-              <img 
-                src={htfSweepsChart} 
-                alt="Higher Time Frame Sweeps" 
-                className="w-full h-auto"
-              />
+              <HTFSweepDiagram />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
