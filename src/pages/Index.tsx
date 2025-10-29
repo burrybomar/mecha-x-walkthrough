@@ -29,6 +29,7 @@ import { AITooltip } from "@/components/AITooltip";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import cisdLtfChart from "@/assets/cisd-ltf-chart.jpg";
 import smtLtfChart from "@/assets/smt-ltf-chart.png";
+import htfSweepsChart from "@/assets/htf-sweeps-chart.png";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 
@@ -131,11 +132,13 @@ const Index = () => {
       case "htf":
         return (
           <div className="space-y-6">
-            <SimpleChart 
-              type="htf" 
-              title="HTF Sweep Detection" 
-              description="Overlay higher timeframe candles on any chart - Auto mode intelligently selects HTFs, Manual mode gives full control (up to 4 timeframes)"
-            />
+            <div className="rounded-xl overflow-hidden border-2 border-blue-500/20 bg-card">
+              <img 
+                src={htfSweepsChart} 
+                alt="Higher Time Frame Sweeps" 
+                className="w-full h-auto"
+              />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 { title: "Auto Mode", desc: "Smart HTF selection: 5min chart → shows 1H, 4H, Daily automatically", detail: "15min → 4H, Daily, Weekly" },
