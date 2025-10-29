@@ -58,6 +58,12 @@ export const TradingViewSettings = () => {
       
       <div className="max-h-[600px] overflow-y-auto">
         <SettingsGroup title="Display">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>Font:</strong> Choose "Monospace" for cleaner, more technical appearance. 
+              <strong className="ml-2">Text Size:</strong> Global sizing for all labels. Use "Auto" for responsive sizing based on chart zoom.
+            </p>
+          </div>
           <SettingRow label="Font">
             <Select defaultValue="monospace">
               <SelectTrigger className="h-7 text-xs">
@@ -86,6 +92,12 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="HTF Setup">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>Auto Mode:</strong> Intelligently selects HTFs based on your chart timeframe (e.g., 5min → 1H, 4H, Daily).
+              <strong className="ml-2">Manual Mode:</strong> Configure up to 4 custom HTF layers with full control over timeframe, bars displayed, and mapping.
+            </p>
+          </div>
           <SettingRow label="Mode">
             <Select defaultValue="auto">
               <SelectTrigger className="h-7 text-xs">
@@ -132,6 +144,12 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="HTF Candles">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              Customize bull/bear candle colors and wicks. <strong>Offset</strong> = distance from price, <strong>Gap</strong> = space between candles. 
+              <strong className="ml-1">Bias Arrow:</strong> Optional directional trend arrow above HTF candles.
+            </p>
+          </div>
           <SettingRow label="Bull">
             <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
           </SettingRow>
@@ -178,6 +196,13 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="Chart Mapping">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>BSL/SSL Lines:</strong> Mark Buyside/Sellside Liquidity levels (highs/lows where stops sit). Configure count (1-20 each).
+              <strong className="ml-2">Dividers:</strong> Vertical lines marking HTF candle opens/closes with auto hierarchy by timeframe importance.
+              <strong className="ml-2">EQ Lines:</strong> Show 50% equilibrium levels between highs/lows for discount/premium zones.
+            </p>
+          </div>
           <SettingRow label="BSL/SSL">
             <Switch defaultChecked />
           </SettingRow>
@@ -231,6 +256,13 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="Liquidity Sweeps">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>Valid Sweeps:</strong> Sweeps that hold and form reversals (confirmed patterns).
+              <strong className="ml-2">Invalid Sweeps:</strong> Sweeps that fail - price continues through. Optional display for learning.
+              <strong className="ml-2">LTF vs HTF:</strong> Lower timeframe vs Higher timeframe sweeps. HTF sweeps are more significant.
+            </p>
+          </div>
           <SettingRow label="Enable">
             <Switch defaultChecked />
           </SettingRow>
@@ -277,6 +309,13 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="Pattern Detection">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>C2 Labels:</strong> Mark the exact reversal candle where sweep reversed.
+              <strong className="ml-2">C3 Labels:</strong> Mark the expansion candle after reversal. C3 expectation box shows expected expansion range.
+              <strong className="ml-2">SMT:</strong> Smart Money Technique - detects divergence between correlated assets. Binary (2 assets) or Triad (3 assets).
+            </p>
+          </div>
           <SettingRow label="C2">
             <Switch defaultChecked />
           </SettingRow>
@@ -329,6 +368,12 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="CISD">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>CISD:</strong> Change in State of Delivery - marks when market shifts from one phase to another. Your entry level for retests.
+              <strong className="ml-2">Projections:</strong> Target levels from CISD (1x, 2-2.5x, 3.5-4x) based on range size. Comma-separated multipliers.
+            </p>
+          </div>
           <SettingRow label="Enable">
             <Switch defaultChecked />
           </SettingRow>
@@ -367,6 +412,11 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="iFVG">
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>iFVG:</strong> Inverse Fair Value Gap - price inefficiency that forms during reversal after a valid sweep. Acts as support/resistance zone. Only appears after valid sweeps.
+            </p>
+          </div>
           <SettingRow label="Show">
             <Switch defaultChecked />
           </SettingRow>
@@ -379,6 +429,12 @@ export const TradingViewSettings = () => {
         </SettingsGroup>
 
         <SettingsGroup title="Alerts & Sessions" defaultOpen={false}>
+          <div className="px-3 pb-2 pt-1">
+            <p className="text-xs text-muted-foreground italic">
+              <strong>Alerts:</strong> Set up TradingView alerts for sweep formation and failure events.
+              <strong className="ml-2">Session Models Table:</strong> Shows current session, time remaining, and active Silver Bullet/Macro windows. Helps time your entries.
+            </p>
+          </div>
           <SettingRow label="Formation">
             <Switch defaultChecked />
           </SettingRow>
