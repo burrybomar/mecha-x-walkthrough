@@ -726,6 +726,14 @@ const Index = () => {
           <TabsContent value="overview">{renderSectionDetails("overview")}</TabsContent>
           <TabsContent value="settings">{renderSectionDetails("settings")}</TabsContent>
           <TabsContent value="education">{renderSectionDetails("education")}</TabsContent>
+          {/* Overview deep-dive sections (no triggers, opened via Overview cards) */}
+          <TabsContent value="htf">{renderSectionDetails("htf")}</TabsContent>
+          <TabsContent value="liquidity">{renderSectionDetails("liquidity")}</TabsContent>
+          <TabsContent value="patterns">{renderSectionDetails("patterns")}</TabsContent>
+          <TabsContent value="cisd">{renderSectionDetails("cisd")}</TabsContent>
+          <TabsContent value="ifvg">{renderSectionDetails("ifvg")}</TabsContent>
+          <TabsContent value="smt">{renderSectionDetails("smt")}</TabsContent>
+          <TabsContent value="sessions">{renderSectionDetails("sessions")}</TabsContent>
         </Tabs>
       </div>
     </div>
