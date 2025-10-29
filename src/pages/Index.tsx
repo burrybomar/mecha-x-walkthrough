@@ -27,6 +27,7 @@ import {
 import { motion } from "framer-motion";
 import { AITooltip } from "@/components/AITooltip";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
+import cisdLtfChart from "@/assets/cisd-ltf-chart.jpg";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 
@@ -221,11 +222,13 @@ const Index = () => {
       case "cisd":
         return (
           <div className="space-y-6">
-            <SimpleChart 
-              type="cisd" 
-              title="CISD Detection" 
-              description="Change in State of Delivery - marks when market shifts from one phase to another"
-            />
+            <div className="rounded-xl overflow-hidden border-2 border-orange-500/20 bg-card">
+              <img 
+                src={cisdLtfChart} 
+                alt="Lower Time Frame CISD Detection" 
+                className="w-full h-auto"
+              />
+            </div>
             <Card className="border-2 border-orange-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
