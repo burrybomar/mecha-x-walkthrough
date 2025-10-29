@@ -376,6 +376,10 @@ const Index = () => {
                     <span className="font-semibold">Display Settings</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>Font:</strong> Choose "Monospace" for cleaner, more technical appearance. Affects all labels and text.</p>
+                      <p className="mt-2"><strong>Text Size:</strong> Global text sizing for all labels. Use "Auto" for responsive sizing based on chart zoom.</p>
+                    </div>
                     <SelectSetting label="Font" options={["Default", "Monospace"]} defaultValue="Default" />
                     <SelectSetting label="Text Size" options={["Tiny", "Small", "Normal", "Large", "Huge", "Auto"]} defaultValue="Normal" />
                   </AccordionContent>
@@ -387,6 +391,10 @@ const Index = () => {
                     <span className="font-semibold">HTF Setup</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>Auto Mode:</strong> Intelligently selects HTFs based on your chart timeframe (e.g., 5min → 1H, 4H, Daily).</p>
+                      <p className="mt-2"><strong>Manual Mode:</strong> Configure up to 4 custom HTF layers with full control over timeframe, bars displayed, and mapping.</p>
+                    </div>
                     <SelectSetting label="Mode" options={["Auto", "Manual"]} defaultValue="Auto" />
                     <div className="space-y-3 mt-3">
                       {[1, 2, 3, 4].map((num) => (
@@ -408,6 +416,12 @@ const Index = () => {
                     <span className="font-semibold">HTF Candles Display</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>Colors:</strong> Customize bull/bear candle colors and wicks.</p>
+                      <p className="mt-1"><strong>Position & Size:</strong> Offset = distance from price, Gap = space between candles, Width = candle thickness.</p>
+                      <p className="mt-1"><strong>Bias Arrow:</strong> Optional arrow showing directional trend above HTF candles.</p>
+                      <p className="mt-1"><strong>Labels:</strong> Position HTF interval labels (15m, 4H, MON, etc.) above, below, or inside candles.</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Colors</h4>
                       <ColorSetting label="Bull" defaultColor="#00ff00" />
@@ -441,6 +455,11 @@ const Index = () => {
                     <span className="font-semibold">Chart Mapping</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>BSL/SSL Lines:</strong> Mark Buyside/Sellside Liquidity levels (highs/lows where stops sit). Configure count (1-20 each).</p>
+                      <p className="mt-1"><strong>Dividers:</strong> Vertical lines marking HTF candle opens/closes with auto hierarchy by timeframe importance.</p>
+                      <p className="mt-1"><strong>EQ Lines:</strong> Show 50% equilibrium levels between highs/lows for discount/premium zones.</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">BSL/SSL Lines</h4>
                       <ToggleSetting label="Enable" />
@@ -474,6 +493,11 @@ const Index = () => {
                     <span className="font-semibold">Liquidity Sweeps</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>Valid Sweeps:</strong> Sweeps that hold and form reversals (confirmed patterns).</p>
+                      <p className="mt-1"><strong>Invalid Sweeps:</strong> Sweeps that fail - price continues through. Optional display for learning.</p>
+                      <p className="mt-1"><strong>LTF vs HTF:</strong> Lower timeframe vs Higher timeframe sweeps. HTF sweeps are more significant.</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Enable</h4>
                       <ToggleSetting label="Enable" />
@@ -503,6 +527,11 @@ const Index = () => {
                     <span className="font-semibold">Pattern Detection</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>C2 Labels:</strong> Mark the exact reversal candle where sweep reversed.</p>
+                      <p className="mt-1"><strong>C3 Labels:</strong> Mark the expansion candle after reversal. C3 expectation box shows expected expansion range.</p>
+                      <p className="mt-1"><strong>SMT:</strong> Smart Money Technique - detects divergence between correlated assets. Binary (2 assets) or Triad (3 assets).</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">C2 Labels</h4>
                       <ToggleSetting label="Show" />
@@ -539,6 +568,10 @@ const Index = () => {
                     <span className="font-semibold">CISD Settings</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>CISD:</strong> Change in State of Delivery - marks when market shifts from one phase to another. Your entry level for retests.</p>
+                      <p className="mt-1"><strong>Projections:</strong> Target levels from CISD (1x, 2-2.5x, 3.5-4x) based on range size. Comma-separated multipliers.</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">CISD Line</h4>
                       <ToggleSetting label="Enable" />
@@ -581,6 +614,9 @@ const Index = () => {
                     <span className="font-semibold">iFVG Settings</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>iFVG:</strong> Inverse Fair Value Gap - price inefficiency that forms during reversal after a valid sweep. Acts as support/resistance zone. Only appears after valid sweeps.</p>
+                    </div>
                     <ToggleSetting label="Show" />
                     <ColorSetting label="Bull Color" defaultColor="#00ff0033" />
                     <ColorSetting label="Bear Color" defaultColor="#ff000033" />
@@ -593,6 +629,10 @@ const Index = () => {
                     <span className="font-semibold">Alerts & Sessions</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-2 pb-2">
+                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
+                      <p><strong>Alerts:</strong> Set up TradingView alerts for sweep formation and failure events.</p>
+                      <p className="mt-1"><strong>Session Models Table:</strong> Shows current session, time remaining, and active Silver Bullet/Macro windows. Helps time your entries.</p>
+                    </div>
                     <div className="mb-3">
                       <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Alerts</h4>
                       <ToggleSetting label="Formation" />
