@@ -9,8 +9,6 @@ const patternsSteps = [
     icon: Workflow,
     title: 'C1-C2-C3 Structure',
     subtitle: 'Reversal Pattern',
-    color: '#22d3ee',
-    gradient: 'from-[#22d3ee]/20 to-[#06b6d4]/20',
     description: 'Complete three-candle reversal sequence that marks sweep, reversal, and confirmation',
     details: [
       'C1: Candle that sweeps the liquidity (BSL/SSL)',
@@ -24,8 +22,6 @@ const patternsSteps = [
     icon: Target,
     title: 'C2 Entry Strategy',
     subtitle: 'Precision Timing',
-    color: '#06b6d4',
-    gradient: 'from-[#06b6d4]/20 to-[#0891b2]/20',
     description: 'C2 marks exact entry candle - wait for close confirmation before entering',
     details: [
       'Wait for C2 candle to close fully',
@@ -39,8 +35,6 @@ const patternsSteps = [
     icon: TrendingUp,
     title: 'C3 Expectation',
     subtitle: 'Validation Box',
-    color: '#0891b2',
-    gradient: 'from-[#0891b2]/20 to-[#0e7490]/20',
     description: 'Indicator draws box showing where C3 expansion should reach for valid setup',
     details: [
       'C3 box shows expected expansion zone',
@@ -54,8 +48,6 @@ const patternsSteps = [
     icon: Crosshair,
     title: 'SMT Confluence',
     subtitle: 'High Probability',
-    color: '#0e7490',
-    gradient: 'from-[#0e7490]/20 to-[#22d3ee]/20',
     description: 'C2 pattern with SMT divergence significantly increases success probability',
     details: [
       'Look for SMT label alongside C2',
@@ -84,131 +76,69 @@ export const PatternsSlides = () => {
   const IconComponent = currentStep.icon;
 
   return (
-    <div ref={elementRef} className="w-full max-w-6xl mx-auto px-4">
-      <div className="relative rounded-2xl overflow-hidden border-2 border-primary/30 bg-gradient-to-b from-background via-card to-background shadow-2xl">
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-96 h-96 rounded-full blur-3xl opacity-20"
-              style={{
-                background: `radial-gradient(circle, ${currentStep.color} 0%, transparent 70%)`,
-                left: `${20 + i * 30}%`,
-                top: `${10 + i * 25}%`,
-              }}
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.15, 0.25, 0.15],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                delay: i * 2,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
+    <div ref={elementRef} className="w-full max-w-5xl mx-auto px-4">
+      <div className="relative rounded-xl overflow-hidden border border-primary/20 bg-card shadow-lg">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute w-full h-full opacity-5"
+            style={{ background: 'var(--gradient-primary)' }}
+            animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
 
-        <div className="relative z-10 p-8 md:p-12 min-h-[600px] flex flex-col justify-center">
+        <div className="relative z-10 p-6 md:p-10 min-h-[500px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              className="space-y-8"
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="space-y-6"
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
                 <motion.div
                   className="relative"
-                  animate={{ scale: [1, 1.05, 1] }}
+                  animate={{ scale: [1, 1.03, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <div 
-                    className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${currentStep.color}40, ${currentStep.color}20)`,
-                      border: `2px solid ${currentStep.color}60`
-                    }}
-                  >
-                    <IconComponent className="w-12 h-12" style={{ color: currentStep.color }} />
+                  <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-md bg-primary/10 border-2 border-primary/30">
+                    <IconComponent className="w-10 h-10 text-primary" />
                   </div>
-                  <div 
-                    className="absolute -top-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
-                    style={{
-                      background: currentStep.color,
-                      color: '#10212c'
-                    }}
-                  >
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold bg-primary text-primary-foreground">
                     {currentStep.step}
                   </div>
                 </motion.div>
 
                 <div className="flex-1">
-                  <motion.h2 
-                    className="text-4xl md:text-5xl font-bold mb-2"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2, duration: 0.8 }}
-                  >
-                    {currentStep.title}
-                  </motion.h2>
-                  <motion.p 
-                    className="text-xl md:text-2xl text-muted-foreground"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                  >
-                    {currentStep.subtitle}
-                  </motion.p>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-1">{currentStep.title}</h2>
+                  <p className="text-lg md:text-xl text-muted-foreground">{currentStep.subtitle}</p>
                 </div>
               </div>
 
-              <motion.div
-                className={`p-6 rounded-xl bg-gradient-to-br ${currentStep.gradient} backdrop-blur-sm border border-border/50`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                <p className="text-lg md:text-xl leading-relaxed">
-                  {currentStep.description}
-                </p>
-              </motion.div>
+              <div className="p-5 rounded-lg bg-primary/5 backdrop-blur-sm border border-primary/20">
+                <p className="text-base md:text-lg leading-relaxed">{currentStep.description}</p>
+              </div>
 
-              <motion.div 
-                className="space-y-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
+              <div className="space-y-2.5">
                 {currentStep.details.map((detail, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      delay: 0.8 + idx * 0.15, 
-                      duration: 0.8,
-                      ease: "easeOut" 
-                    }}
-                    className="flex items-start gap-3 p-4 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30"
+                    transition={{ delay: 0.1 * idx, duration: 0.5 }}
+                    className="flex items-start gap-3 p-3.5 rounded-lg bg-background/80 border border-border/40"
                   >
-                    <div 
-                      className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                      style={{ backgroundColor: currentStep.color }}
-                    />
-                    <p className="text-base md:text-lg leading-relaxed flex-1">
-                      {detail}
-                    </p>
+                    <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 bg-primary" />
+                    <p className="text-sm md:text-base leading-relaxed flex-1">{detail}</p>
                   </motion.div>
                 ))}
-              </motion.div>
+              </div>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center justify-center gap-3 mt-12">
+          <div className="flex items-center justify-center gap-2.5 mt-10">
             {patternsSteps.map((_, idx) => (
               <button
                 key={idx}
@@ -218,19 +148,14 @@ export const PatternsSlides = () => {
                 }}
                 className="group relative"
               >
-                <div 
-                  className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                    idx === currentIndex ? 'w-12 h-3' : 'hover:scale-125'
+                <div
+                  className={`rounded-full transition-all duration-500 ${
+                    idx === currentIndex ? 'w-10 h-2.5 bg-primary' : 'w-2.5 h-2.5 bg-muted-foreground/40 hover:scale-125'
                   }`}
-                  style={{
-                    backgroundColor: idx === currentIndex ? currentStep.color : '#698696',
-                    opacity: idx === currentIndex ? 1 : 0.4
-                  }}
                 />
                 {idx === currentIndex && isPlaying && (
                   <motion.div
-                    className="absolute inset-0 rounded-full"
-                    style={{ backgroundColor: currentStep.color }}
+                    className="absolute inset-0 rounded-full bg-primary"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 8, ease: "linear" }}
@@ -240,10 +165,10 @@ export const PatternsSlides = () => {
             ))}
           </div>
 
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-5">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="px-6 py-2 rounded-lg bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300"
+              className="px-5 py-2 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-all text-sm font-medium"
             >
               {isPlaying ? 'Pause' : 'Play'}
             </button>
