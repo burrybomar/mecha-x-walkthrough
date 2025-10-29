@@ -100,10 +100,10 @@ const TrendLine = ({ start, end, color }: { start: [number, number, number]; end
 
 const Scene3D = () => {
   const nodes = [
-    { position: [-4.5, 0, 0] as [number, number, number], color: '#3b82f6', label: 'HTF', step: 1 },
-    { position: [-1.5, 0, 0] as [number, number, number], color: '#ec4899', label: 'Session', step: 2 },
-    { position: [1.5, 0, 0] as [number, number, number], color: '#10b981', label: 'Sweep', step: 3 },
-    { position: [4.5, 0, 0] as [number, number, number], color: '#f97316', label: 'Entry', step: 4 },
+    { position: [-4.5, 0, 0] as [number, number, number], color: '#3b82f6', label: 'HTF Analysis', step: 1 },
+    { position: [-1.5, 0, 0] as [number, number, number], color: '#ec4899', label: 'Session Window', step: 2 },
+    { position: [1.5, 0, 0] as [number, number, number], color: '#10b981', label: 'Sweep + C2', step: 3 },
+    { position: [4.5, 0, 0] as [number, number, number], color: '#f97316', label: 'CISD Entry', step: 4 },
   ];
 
   return (
