@@ -27,8 +27,10 @@ import {
 import { motion } from "framer-motion";
 import { AITooltip } from "@/components/AITooltip";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
-import cisdLtfChart from "@/assets/cisd-ltf-chart.jpg";
-import smtLtfChart from "@/assets/smt-ltf-chart.png";
+import cisdLtfChart from "@/assets/candle-closure-clean.png";
+import smtLtfChart from "@/assets/liquidity-sweep-clean.png";
+import htfLevelClean from "@/assets/htf-level-clean.png";
+import setupZonesClean from "@/assets/setup-zones-clean.png";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 import HTFSweepDiagram from "@/components/HTFSweepDiagram";
@@ -159,6 +161,13 @@ const Index = () => {
       case "liquidity":
         return (
           <div className="space-y-6">
+            <div className="rounded-xl overflow-hidden border-2 border-emerald-500/20 bg-card">
+              <img 
+                src={htfLevelClean} 
+                alt="HTF Liquidity Key Level" 
+                className="w-full h-auto"
+              />
+            </div>
             <Card className="border-2 border-emerald-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -190,6 +199,13 @@ const Index = () => {
       case "patterns":
         return (
           <div className="space-y-6">
+            <div className="rounded-xl overflow-hidden border-2 border-cyan-500/20 bg-card">
+              <img 
+                src={setupZonesClean} 
+                alt="Setup Zones and Patterns" 
+                className="w-full h-auto"
+              />
+            </div>
             <PatternChart type="c1c2c3-bullish" title="C2 Pattern - Bullish Reversal" />
             <Card className="border-2 border-cyan-500/20">
               <CardHeader>
