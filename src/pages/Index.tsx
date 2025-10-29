@@ -32,7 +32,6 @@ import smtLtfChart from "@/assets/smt-ltf-chart.png";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 import HTFSweepDiagram from "@/components/HTFSweepDiagram";
-import { SessionModelsTable } from "@/components/SessionModelsTable";
 import { TradingSequenceDiagram } from "@/components/TradingSequenceDiagram";
 
 const Index = () => {
@@ -76,9 +75,6 @@ const Index = () => {
 
   const renderOverview = () => (
     <div className="space-y-6">
-      {/* Live Session Models Table */}
-      <SessionModelsTable />
-      
       {/* Trading Sequence Flow */}
       <TradingSequenceDiagram />
       
@@ -418,8 +414,6 @@ const Index = () => {
       case "sessions":
         return (
           <div className="space-y-6">
-            <SessionModelsTable />
-            
             <Card className="border-2 border-pink-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
