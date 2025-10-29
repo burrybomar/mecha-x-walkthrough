@@ -34,6 +34,8 @@ import { PatternChart } from "@/components/PatternChart";
 import HTFSweepDiagram from "@/components/HTFSweepDiagram";
 import { TradingSequenceDiagram } from "@/components/TradingSequenceDiagram";
 import { SessionModelsTable } from "@/components/SessionModelsTable";
+import { Sequence3D } from "@/components/Sequence3D";
+import { TradingViewSettings } from "@/components/TradingViewSettings";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -76,7 +78,13 @@ const Index = () => {
 
   const renderOverview = () => (
     <div className="space-y-6">
-      {/* Trading Sequence Flow */}
+      {/* 3D Sequence Visualization */}
+      <div className="space-y-2">
+        <h3 className="text-lg font-semibold text-center">Interactive Trading Flow</h3>
+        <Sequence3D />
+      </div>
+      
+      {/* 2D Flow Alternative */}
       <TradingSequenceDiagram />
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -499,290 +507,11 @@ const Index = () => {
           <div className="space-y-4">
             <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6">
               <Settings className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-xl font-bold mb-2 text-center">Script Settings</h3>
+              <h3 className="text-xl font-bold mb-2 text-center">Indicator Settings</h3>
               <p className="text-sm text-muted-foreground text-center">Configure all MECHA-X components</p>
             </div>
 
-            <div className="bg-card border border-border rounded-lg">
-              <Accordion type="multiple" className="w-full">
-                {/* Display Settings */}
-                <AccordionItem value="display">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">Display Settings</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>Font:</strong> Choose "Monospace" for cleaner, more technical appearance. Affects all labels and text.</p>
-                      <p className="mt-2"><strong>Text Size:</strong> Global text sizing for all labels. Use "Auto" for responsive sizing based on chart zoom.</p>
-                    </div>
-                    <SelectSetting label="Font" options={["Default", "Monospace"]} defaultValue="Default" />
-                    <SelectSetting label="Text Size" options={["Tiny", "Small", "Normal", "Large", "Huge", "Auto"]} defaultValue="Normal" />
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* HTF Setup */}
-                <AccordionItem value="htf-setup">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">HTF Setup</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>Auto Mode:</strong> Intelligently selects HTFs based on your chart timeframe (e.g., 5min → 1H, 4H, Daily).</p>
-                      <p className="mt-2"><strong>Manual Mode:</strong> Configure up to 4 custom HTF layers with full control over timeframe, bars displayed, and mapping.</p>
-                    </div>
-                    <SelectSetting label="Mode" options={["Auto", "Manual"]} defaultValue="Auto" />
-                    <div className="space-y-3 mt-3">
-                      {[1, 2, 3, 4].map((num) => (
-                        <div key={num} className="border border-border rounded p-2">
-                          <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">TF {num} (Manual Mode)</h4>
-                          <ToggleSetting label="Show" />
-                          <SelectSetting label="Timeframe" options={["15m", "1H", "4H", "1D", "1W"]} defaultValue="4H" />
-                          <NumberSetting label="Bars" defaultValue={10} />
-                          <ToggleSetting label="Map" />
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* HTF Candles Display */}
-                <AccordionItem value="htf-candles">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">HTF Candles Display</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>Colors:</strong> Customize bull/bear candle colors and wicks.</p>
-                      <p className="mt-1"><strong>Position & Size:</strong> Offset = distance from price, Gap = space between candles, Width = candle thickness.</p>
-                      <p className="mt-1"><strong>Bias Arrow:</strong> Optional arrow showing directional trend above HTF candles.</p>
-                      <p className="mt-1"><strong>Labels:</strong> Position HTF interval labels (15m, 4H, MON, etc.) above, below, or inside candles.</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Colors</h4>
-                      <ColorSetting label="Bull" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear" defaultColor="#000000" />
-                      <ColorSetting label="Wick" defaultColor="#808080" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Position & Size</h4>
-                      <NumberSetting label="Offset" defaultValue={25} />
-                      <NumberSetting label="Gap" defaultValue={2} />
-                      <SelectSetting label="Width" options={["Tiny", "Small", "Medium", "Large", "Huge"]} defaultValue="Medium" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Bias Arrow</h4>
-                      <ToggleSetting label="Show Bias Arrow" />
-                      <ColorSetting label="Bull Arrow" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear Arrow" defaultColor="#ff0000" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Labels</h4>
-                      <SelectSetting label="Position" options={["Above", "Below", "Inside"]} defaultValue="Above" />
-                      <SelectSetting label="Size" options={["Tiny", "Small", "Normal", "Large"]} defaultValue="Normal" />
-                      <ColorSetting label="Color" defaultColor="#ffffff" />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* Chart Mapping */}
-                <AccordionItem value="chart-mapping">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">Chart Mapping</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>BSL/SSL Lines:</strong> Mark Buyside/Sellside Liquidity levels (highs/lows where stops sit). Configure count (1-20 each).</p>
-                      <p className="mt-1"><strong>Dividers:</strong> Vertical lines marking HTF candle opens/closes with auto hierarchy by timeframe importance.</p>
-                      <p className="mt-1"><strong>EQ Lines:</strong> Show 50% equilibrium levels between highs/lows for discount/premium zones.</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">BSL/SSL Lines</h4>
-                      <ToggleSetting label="Enable" />
-                      <SelectSetting label="Style" options={["Solid", "Dashed", "Dotted"]} defaultValue="Solid" />
-                      <NumberSetting label="Width" defaultValue={1} />
-                      <ToggleSetting label="Labels" />
-                      <NumberSetting label="Count" defaultValue={10} />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Dividers (Open/Close)</h4>
-                      <ToggleSetting label="Auto Hierarchy" />
-                      <ToggleSetting label="≤1H (Dotted)" />
-                      <ToggleSetting label="4-8H (Dashed)" />
-                      <ToggleSetting label="1D (Solid)" />
-                      <ToggleSetting label="1W+ (Bold)" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">EQ Lines</h4>
-                      <ToggleSetting label="Enable" />
-                      <SelectSetting label="Style" options={["Solid", "Dashed", "Dotted"]} defaultValue="Dashed" />
-                      <NumberSetting label="Width" defaultValue={1} />
-                      <ToggleSetting label="Labels" />
-                      <NumberSetting label="Count" defaultValue={10} />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* Liquidity Sweeps */}
-                <AccordionItem value="sweeps">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">Liquidity Sweeps</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>Valid Sweeps:</strong> Sweeps that hold and form reversals (confirmed patterns).</p>
-                      <p className="mt-1"><strong>Invalid Sweeps:</strong> Sweeps that fail - price continues through. Optional display for learning.</p>
-                      <p className="mt-1"><strong>LTF vs HTF:</strong> Lower timeframe vs Higher timeframe sweeps. HTF sweeps are more significant.</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Enable</h4>
-                      <ToggleSetting label="Enable" />
-                      <ToggleSetting label="LTF" />
-                      <ToggleSetting label="HTF" />
-                      <ToggleSetting label="Live" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Valid Sweeps</h4>
-                      <SelectSetting label="Style" options={["Solid", "Dashed", "Dotted"]} defaultValue="Solid" />
-                      <NumberSetting label="Width" defaultValue={1} />
-                      <ColorSetting label="Color" defaultColor="#000000" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Invalid Sweeps</h4>
-                      <ToggleSetting label="Show Invalid" />
-                      <ToggleSetting label="Invalid LTF" />
-                      <ToggleSetting label="Invalid HTF" />
-                      <ColorSetting label="Color" defaultColor="#808080" />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* Pattern Detection */}
-                <AccordionItem value="patterns">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">Pattern Detection</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>C2 Labels:</strong> Mark the exact reversal candle where sweep reversed.</p>
-                      <p className="mt-1"><strong>C3 Labels:</strong> Mark the expansion candle after reversal. C3 expectation box shows expected expansion range.</p>
-                      <p className="mt-1"><strong>SMT:</strong> Smart Money Technique - detects divergence between correlated assets. Binary (2 assets) or Triad (3 assets).</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">C2 Labels</h4>
-                      <ToggleSetting label="Show" />
-                      <SelectSetting label="Size" options={["Tiny", "Small", "Normal", "Large", "Huge"]} defaultValue="Normal" />
-                      <ColorSetting label="Color" defaultColor="#000000" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">C3 Labels</h4>
-                      <ToggleSetting label="Show" />
-                      <SelectSetting label="Size" options={["Tiny", "Small", "Normal", "Large", "Huge"]} defaultValue="Normal" />
-                      <ColorSetting label="Color" defaultColor="#800080" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">C3 Expectation Box</h4>
-                      <ToggleSetting label="Show C3 Box" />
-                      <ColorSetting label="Bull Box" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear Box" defaultColor="#ff0000" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">SMT</h4>
-                      <ToggleSetting label="Enable" />
-                      <SelectSetting label="Mode" options={["Binary", "Triad"]} defaultValue="Binary" />
-                      <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
-                        <Label className="text-sm">Asset Override</Label>
-                        <Input type="text" placeholder="ES,NQ" className="w-32 h-8 text-xs" />
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* CISD Settings */}
-                <AccordionItem value="cisd">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">CISD Settings</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>CISD:</strong> Change in State of Delivery - marks when market shifts from one phase to another. Your entry level for retests.</p>
-                      <p className="mt-1"><strong>Projections:</strong> Target levels from CISD (1x, 2-2.5x, 3.5-4x) based on range size. Comma-separated multipliers.</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">CISD Line</h4>
-                      <ToggleSetting label="Enable" />
-                      <SelectSetting label="Style" options={["Solid", "Dashed", "Dotted"]} defaultValue="Solid" />
-                      <NumberSetting label="Width" defaultValue={2} />
-                      <ColorSetting label="Bull Color" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear Color" defaultColor="#ff0000" />
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">CISD Label</h4>
-                      <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
-                        <Label className="text-sm">Text</Label>
-                        <Input type="text" defaultValue="CISD" className="w-24 h-8 text-xs" />
-                      </div>
-                      <SelectSetting label="Size" options={["Tiny", "Small", "Normal", "Large", "Huge"]} defaultValue="Normal" />
-                      <ColorSetting label="Bull Label" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear Label" defaultColor="#ff0000" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Projections</h4>
-                      <ToggleSetting label="Enable" />
-                      <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
-                        <Label className="text-sm">Bullish Targets</Label>
-                        <Input type="text" defaultValue="1,2,2.5,3.5,4" className="w-32 h-8 text-xs" />
-                      </div>
-                      <div className="flex items-center justify-between py-2 px-3 hover:bg-muted/30 rounded transition-colors">
-                        <Label className="text-sm">Bearish Targets</Label>
-                        <Input type="text" defaultValue="1,2,2.5,3.5,4" className="w-32 h-8 text-xs" />
-                      </div>
-                      <SelectSetting label="Style" options={["Solid", "Dashed", "Dotted"]} defaultValue="Dashed" />
-                      <ColorSetting label="Bull Projection" defaultColor="#00ff00" />
-                      <ColorSetting label="Bear Projection" defaultColor="#ff0000" />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* iFVG Settings */}
-                <AccordionItem value="ifvg">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">iFVG Settings</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>iFVG:</strong> Inverse Fair Value Gap - price inefficiency that forms during reversal after a valid sweep. Acts as support/resistance zone. Only appears after valid sweeps.</p>
-                    </div>
-                    <ToggleSetting label="Show" />
-                    <ColorSetting label="Bull Color" defaultColor="#00ff0033" />
-                    <ColorSetting label="Bear Color" defaultColor="#ff000033" />
-                  </AccordionContent>
-                </AccordionItem>
-
-                {/* Alerts & Sessions */}
-                <AccordionItem value="alerts">
-                  <AccordionTrigger className="px-4 hover:no-underline hover:bg-muted/50">
-                    <span className="font-semibold">Alerts & Sessions</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-2 pb-2">
-                    <div className="p-3 mb-3 rounded bg-muted/30 text-xs text-muted-foreground">
-                      <p><strong>Alerts:</strong> Set up TradingView alerts for sweep formation and failure events.</p>
-                      <p className="mt-1"><strong>Session Models Table:</strong> Shows current session, time remaining, and active Silver Bullet/Macro windows. Helps time your entries.</p>
-                    </div>
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Alerts</h4>
-                      <ToggleSetting label="Formation" />
-                      <ToggleSetting label="Failure" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-1 text-xs text-muted-foreground px-2">Session Models Table</h4>
-                      <ToggleSetting label="Show" />
-                      <SelectSetting label="Position" options={["Top Left", "Top Right", "Bottom Left", "Bottom Right"]} defaultValue="Top Left" />
-                      <SelectSetting label="Size" options={["Tiny", "Small", "Normal", "Large"]} defaultValue="Normal" />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
+            <TradingViewSettings />
           </div>
         );
 
