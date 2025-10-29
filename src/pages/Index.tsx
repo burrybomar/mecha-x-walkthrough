@@ -36,6 +36,7 @@ import { TradingSequenceDiagram } from "@/components/TradingSequenceDiagram";
 import { SessionModelsTable } from "@/components/SessionModelsTable";
 import { Sequence3D } from "@/components/Sequence3D";
 import { TradingViewSettings } from "@/components/TradingViewSettings";
+import { SettingsHypeClip } from "@/components/SettingsHypeClip";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -78,6 +79,14 @@ const Index = () => {
 
   const renderOverview = () => (
     <div className="space-y-6">
+      {/* Settings Hype Clip */}
+      <div className="space-y-2">
+        <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          Feature Showcase
+        </h3>
+        <SettingsHypeClip />
+      </div>
+
       {/* 3D Sequence Visualization */}
       <div className="space-y-2">
         <h3 className="text-lg font-semibold text-center">Interactive Trading Flow</h3>
