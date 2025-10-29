@@ -228,6 +228,7 @@ const Index = () => {
                 src={cisdLtfChart} 
                 alt="Lower Time Frame CISD Detection" 
                 className="w-full h-auto"
+                style={{ clipPath: "inset(0 0 12% 0)" }}
               />
             </div>
             <Card className="border-2 border-orange-500/20">
