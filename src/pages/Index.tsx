@@ -34,7 +34,7 @@ import { PatternChart } from "@/components/PatternChart";
 import HTFSweepDiagram from "@/components/HTFSweepDiagram";
 import { TradingSequenceDiagram } from "@/components/TradingSequenceDiagram";
 import { SessionModelsTable } from "@/components/SessionModelsTable";
-import { Sequence3D } from "@/components/Sequence3D";
+import { TradingSequenceSlides } from "@/components/TradingSequenceSlides";
 import { TradingViewSettings } from "@/components/TradingViewSettings";
 import { SettingsHypeClip } from "@/components/SettingsHypeClip";
 
@@ -87,14 +87,13 @@ const Index = () => {
         <SettingsHypeClip />
       </div>
 
-      {/* 3D Sequence Visualization */}
-      <div className="space-y-2">
-        <h3 className="text-lg font-semibold text-center">Interactive Trading Flow</h3>
-        <Sequence3D />
+      {/* Trading Sequence Slides */}
+      <div className="space-y-4">
+        <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          Step-by-Step Trading Sequence
+        </h3>
+        <TradingSequenceSlides />
       </div>
-      
-      {/* 2D Flow Alternative */}
-      <TradingSequenceDiagram />
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
