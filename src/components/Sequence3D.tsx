@@ -62,7 +62,6 @@ const TradingNode = ({ position, color, label, step }: { position: [number, numb
         anchorY="middle"
         outlineWidth={0.03}
         outlineColor="#000000"
-        font="/fonts/inter-bold.woff"
       >
         {label}
       </Text>
@@ -89,11 +88,13 @@ const TradingNode = ({ position, color, label, step }: { position: [number, numb
 
 // Connection lines that look like trend lines on a chart
 const TrendLine = ({ start, end, color }: { start: [number, number, number]; end: [number, number, number]; color: string }) => {
-  const points = [new Vector3(...start), new Vector3(...end)];
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const ref = useRef<THREE.Mesh>(null);
   
   return (
-    <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.8 }))} />
+    <mesh ref={ref}>
+      <tubeGeometry args={[new THREE.LineCurve3(new Vector3(...start), new Vector3(...end)), 20, 0.02, 8, false]} />
+      <meshStandardMaterial color={color} transparent opacity={0.8} emissive={color} emissiveIntensity={0.3} />
+    </mesh>
   );
 };
 
