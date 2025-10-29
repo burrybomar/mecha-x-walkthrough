@@ -1,78 +1,38 @@
+// Shared template for creating unified slide components
+// This is a reference file showing the standard structure
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BarChart3, Layers, Target, Zap } from 'lucide-react';
 import { useScrollPlayPause } from '@/hooks/use-scroll-play-pause';
+import { LucideIcon } from 'lucide-react';
 
-const htfSteps = [
-  {
-    step: 1,
-    icon: BarChart3,
-    title: 'HTF Sweeps',
-    subtitle: 'Institutional Liquidity',
-    description: 'HTF sweeps (4H, Daily, Weekly) represent institutional-level liquidity at major reversal zones',
-    details: [
-      'Daily/4H highs and lows mark institutional liquidity pools',
-      'HTF sweeps are much more reliable than LTF sweeps',
-      'HTF provides direction, LTF provides timing',
-      'Best during H2 Silver Bullet windows of major sessions'
-    ]
-  },
-  {
-    step: 2,
-    icon: Layers,
-    title: 'Chart Mapping',
-    subtitle: 'Multi-Timeframe View',
-    description: 'HTF candles are mapped onto your LTF chart so you see both timeframes simultaneously',
-    details: [
-      'See 4H/Daily candles overlaid on your 5min chart',
-      'Divider lines show HTF candle boundaries',
-      'Different line styles indicate timeframe importance',
-      'BSL/SSL lines mark where HTF liquidity sits'
-    ]
-  },
-  {
-    step: 3,
-    icon: Target,
-    title: 'Auto vs Manual',
-    subtitle: 'Configuration Modes',
-    description: 'Choose automatic smart HTF selection or manual control over displayed timeframes',
-    details: [
-      'Auto Mode: 5m→1H/4H/Daily, 15m→4H/Daily/Weekly',
-      'Manual Mode: Configure up to 4 custom timeframes',
-      'Set candle count, enable/disable mapping',
-      'Adjust offset from current price'
-    ]
-  },
-  {
-    step: 4,
-    icon: Zap,
-    title: 'Trading Flow',
-    subtitle: 'Step-by-Step Process',
-    description: 'Follow the complete HTF sweep trading workflow from identification to entry',
-    details: [
-      '1. Mark key 4H/Daily BSL/SSL levels',
-      '2. Wait for H2 Silver Bullet session window',
-      '3. Watch for price sweep + reversal',
-      '4. Confirm with C2 label, enter on CISD retest'
-    ]
-  }
-];
+interface SlideStep {
+  step: number;
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  description: string;
+  details: string[];
+}
 
-export const HTFSlides = () => {
+interface UnifiedSlideProps {
+  steps: SlideStep[];
+  sectionName: string;
+}
+
+export const UnifiedSlideTemplate = ({ steps, sectionName }: UnifiedSlideProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isPlaying, setIsPlaying, elementRef } = useScrollPlayPause();
 
   useEffect(() => {
     if (!isPlaying) return;
-    
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % htfSteps.length);
+      setCurrentIndex((prev) => (prev + 1) % steps.length);
     }, 8000);
-
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, steps.length]);
 
-  const currentStep = htfSteps[currentIndex];
+  const currentStep = steps[currentIndex];
   const IconComponent = currentStep.icon;
 
   return (
@@ -80,19 +40,10 @@ export const HTFSlides = () => {
       <div className="relative rounded-xl overflow-hidden border border-primary/20 bg-card shadow-lg">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute w-full h-full opacity-10"
-            style={{
-              background: 'var(--gradient-primary)',
-            }}
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.1, 0.15, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+            className="absolute w-full h-full opacity-5"
+            style={{ background: 'var(--gradient-primary)' }}
+            animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
 
@@ -148,7 +99,7 @@ export const HTFSlides = () => {
           </AnimatePresence>
 
           <div className="flex items-center justify-center gap-2.5 mt-10">
-            {htfSteps.map((_, idx) => (
+            {steps.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {

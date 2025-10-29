@@ -39,6 +39,11 @@ All colors MUST be HSL.
 
     --radius: 1rem;
 
+    /* Unified gradient system */
+    --gradient-primary: linear-gradient(135deg, hsl(204 36% 50%) 0%, hsl(202 63% 65%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(171 35% 77%) 0%, hsl(204 36% 50%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(206 60% 98%) 100%);
+
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 203 33% 22%;
     --sidebar-primary: 204 36% 50%;
@@ -77,6 +82,12 @@ All colors MUST be HSL.
     --border: 203 18% 50%;
     --input: 203 35% 36%;
     --ring: 202 63% 65%;
+    
+    /* Unified gradient system - dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(202 63% 65%) 0%, hsl(171 35% 77%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(171 35% 77%) 0%, hsl(202 63% 65%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(203 33% 18%) 0%, hsl(203 35% 16%) 100%);
+
     --sidebar-background: 203 33% 18%;
     --sidebar-foreground: 206 60% 95%;
     --sidebar-primary: 202 63% 65%;

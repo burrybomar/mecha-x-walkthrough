@@ -85,70 +85,85 @@ const Index = () => {
   );
 
   const renderOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-16">
       {/* Settings Hype Clip */}
-      <div className="space-y-2">
-        <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-          Feature Showcase
-        </h3>
+      <section className="space-y-4">
+        <div className="text-center space-y-2">
+          <h3 className="text-3xl font-bold text-foreground">Feature Showcase</h3>
+          <p className="text-muted-foreground">See all MECHA-X indicators in action</p>
+        </div>
         <SettingsHypeClip />
+      </section>
+
+      {/* Divider */}
+      <div className="flex items-center gap-4">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <TrendingUp className="w-5 h-5 text-primary" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
 
       {/* Trading Sequence Slides */}
-      <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-          Step-by-Step Trading Sequence
-        </h3>
+      <section className="space-y-4">
+        <div className="text-center space-y-2">
+          <h3 className="text-3xl font-bold text-foreground">Trading Sequence</h3>
+          <p className="text-muted-foreground">Step-by-step institutional framework</p>
+        </div>
         <TradingSequenceSlides />
+      </section>
+
+      {/* Divider */}
+      <div className="flex items-center gap-4">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <Target className="w-5 h-5 text-primary" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { icon: <BarChart3 />, title: "HTF Sweeps", desc: "4H/Daily overlay", color: "from-blue-500 to-cyan-500" },
-          { icon: <Target />, title: "BSL/SSL", desc: "Liquidity sweeps", color: "from-emerald-500 to-teal-500" },
-          { icon: <Workflow />, title: "C2 Labels", desc: "Reversal patterns", color: "from-cyan-500 to-blue-500" },
-          { icon: <Zap />, title: "CISD", desc: "State changes", color: "from-orange-500 to-amber-500" },
-          { icon: <Layers />, title: "iFVG", desc: "Fair value gaps", color: "from-indigo-500 to-purple-500" },
-          { icon: <GitCompare />, title: "SMT", desc: "Divergence", color: "from-purple-500 to-pink-500" },
-          { icon: <Clock />, title: "Sessions", desc: "Time windows", color: "from-pink-500 to-rose-500" },
-          { icon: <Settings />, title: "Settings", desc: "Configure all", color: "from-gray-600 to-gray-500" },
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-            className="p-4 rounded-xl bg-gradient-to-br from-card to-secondary/30 border border-border hover:border-primary/50 transition-all group cursor-pointer"
-            onClick={() => {
-              const tabMap: Record<string, string> = {
-                "HTF Sweeps": "htf",
-                "BSL/SSL": "liquidity", 
-                "C2 Labels": "patterns",
-                "CISD": "cisd",
-                "iFVG": "ifvg",
-                "SMT": "smt",
-                "Sessions": "sessions",
-                "Settings": "settings"
-              };
-              setActiveTab(tabMap[item.title] || "overview");
-            }}
-          >
-            <div className={`p-2 w-fit rounded-lg bg-gradient-to-br ${item.color} text-white mb-3 group-hover:scale-110 transition-transform`}>
-              {item.icon}
-            </div>
-            <h3 className="font-bold text-sm mb-1">{item.title}</h3>
-            <p className="text-xs text-muted-foreground">{item.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20">
-        <Sparkles className="w-10 h-10 mx-auto mb-3 text-primary" />
-        <h3 className="text-xl font-bold mb-2 text-center">Interactive Trading Intelligence</h3>
-        <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
-          MECHA-X combines HTF sweeps, liquidity detection, and pattern recognition into one powerful framework. 
-          Hover over <AITooltip term="underlined terms"><span className="text-primary font-medium cursor-help">underlined terms</span></AITooltip> for instant explanations.
-        </p>
-      </div>
+
+      {/* Feature Navigation Cards */}
+      <section className="space-y-4">
+        <div className="text-center space-y-2">
+          <h3 className="text-3xl font-bold text-foreground">Explore Indicators</h3>
+          <p className="text-muted-foreground">Deep dive into each component</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto">
+          {[
+            { icon: <BarChart3 />, title: "HTF Sweeps", desc: "4H/Daily overlay" },
+            { icon: <Target />, title: "BSL/SSL", desc: "Liquidity sweeps" },
+            { icon: <Workflow />, title: "C2 Labels", desc: "Reversal patterns" },
+            { icon: <Zap />, title: "CISD", desc: "State changes" },
+            { icon: <Layers />, title: "iFVG", desc: "Fair value gaps" },
+            { icon: <GitCompare />, title: "SMT", desc: "Divergence" },
+            { icon: <Clock />, title: "Sessions", desc: "Time windows" },
+            { icon: <Settings />, title: "Settings", desc: "Configure all" },
+          ].map((item, i) => (
+            <motion.button
+              key={i}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04 }}
+              className="p-4 rounded-lg bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all group cursor-pointer text-left"
+              onClick={() => {
+                const tabMap: Record<string, string> = {
+                  "HTF Sweeps": "htf",
+                  "BSL/SSL": "liquidity",
+                  "C2 Labels": "patterns",
+                  "CISD": "cisd",
+                  "iFVG": "ifvg",
+                  "SMT": "smt",
+                  "Sessions": "sessions",
+                  "Settings": "settings"
+                };
+                setActiveTab(tabMap[item.title] || "overview");
+              }}
+            >
+              <div className="p-2 w-fit rounded-md bg-primary/10 text-primary mb-2 group-hover:scale-110 transition-transform">
+                {item.icon}
+              </div>
+              <h3 className="font-bold text-sm mb-0.5">{item.title}</h3>
+              <p className="text-xs text-muted-foreground">{item.desc}</p>
+            </motion.button>
+          ))}
+        </div>
+      </section>
     </div>
   );
 
@@ -158,35 +173,90 @@ const Index = () => {
         return renderOverview();
 
       case "htf":
-        return <HTFSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">HTF Analysis</h3>
+              <p className="text-muted-foreground">Higher timeframe context and key levels</p>
+            </div>
+            <HTFSlides />
+          </div>
+        );
 
       case "liquidity":
-        return <LiquiditySlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">Liquidity Detection</h3>
+              <p className="text-muted-foreground">BSL/SSL sweeps and entry signals</p>
+            </div>
+            <LiquiditySlides />
+          </div>
+        );
 
       case "patterns":
-        return <PatternsSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">C2 Reversal Patterns</h3>
+              <p className="text-muted-foreground">Three-candle reversal structure</p>
+            </div>
+            <PatternsSlides />
+          </div>
+        );
 
       case "cisd":
-        return <CISDSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">CISD Zones</h3>
+              <p className="text-muted-foreground">Change in state of delivery</p>
+            </div>
+            <CISDSlides />
+          </div>
+        );
 
       case "ifvg":
-        return <IFVGSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">iFVG Analysis</h3>
+              <p className="text-muted-foreground">Inverse fair value gaps</p>
+            </div>
+            <IFVGSlides />
+          </div>
+        );
 
       case "smt":
-        return <SMTSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">SMT Divergence</h3>
+              <p className="text-muted-foreground">Smart money technique</p>
+            </div>
+            <SMTSlides />
+          </div>
+        );
 
       case "sessions":
-        return <SessionSlides />;
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-2">Session Models</h3>
+              <p className="text-muted-foreground">Time-based trading windows</p>
+            </div>
+            <SessionSlides />
+          </div>
+        );
 
       case "settings":
         return (
-          <div className="space-y-4">
-            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6">
-              <Settings className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-xl font-bold mb-2 text-center">Indicator Settings</h3>
-              <p className="text-sm text-muted-foreground text-center">Configure all MECHA-X components</p>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <Settings className="w-12 h-12 mx-auto text-primary" />
+              <h3 className="text-3xl font-bold">Indicator Settings</h3>
+              <p className="text-muted-foreground">Configure all MECHA-X components</p>
             </div>
-
             <TradingViewSettings />
           </div>
         );
@@ -194,11 +264,16 @@ const Index = () => {
       case "education":
         return (
           <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <BookOpen className="w-12 h-12 mx-auto text-primary" />
+              <h3 className="text-3xl font-bold">Quick Reference</h3>
+              <p className="text-muted-foreground">Essential trading concepts</p>
+            </div>
             <Card className="border-primary/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
                   <Target className="w-5 h-5 md:w-6 md:h-6" />
-                  1H/4H Profiling Models - Quick Reference
+                  1H/4H Profiling Models
                 </CardTitle>
                 <CardDescription>CISD retest entries with target-based market phases</CardDescription>
               </CardHeader>
@@ -261,13 +336,13 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <div className="p-6 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 text-center">
-              <BookOpen className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-lg font-bold mb-2">Want More?</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                This tab shows the 1H/4H profiling quick reference. For the complete education including TTrades Model, 4H Profiling, Liquidity concepts, and more...
+            <div className="p-8 rounded-xl bg-card border border-primary/20 text-center">
+              <BookOpen className="w-12 h-12 mx-auto mb-4 text-primary" />
+              <h3 className="text-xl font-bold mb-2">Complete Knowledge Base</h3>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Access the full education including TTrades Model, 4H Profiling, Liquidity concepts, and advanced strategies.
               </p>
-              <Button onClick={() => navigate('/knowledge')} className="gap-2">
+              <Button onClick={() => navigate('/knowledge')} size="lg" className="gap-2">
                 <BookOpen className="w-4 h-4" />
                 Open Full Knowledge Base
               </Button>
@@ -281,8 +356,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-background">
-      <div className="sticky top-0 z-50 backdrop-blur-lg bg-background/95 border-b border-border/50">
+    <div className="min-h-screen bg-background">
+      <div className="sticky top-0 z-50 backdrop-blur-lg bg-background/98 border-b border-border">
         <div className="container mx-auto px-3 md:px-6 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 md:gap-4">
@@ -301,11 +376,11 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-3 md:px-6 py-6 md:py-12">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <Badge variant="outline" className="mb-2"><TrendingUp className="w-3 h-3 mr-2" />HTF Framework</Badge>
-          <h2 className="text-2xl md:text-4xl font-bold">Multi-Timeframe Trading Intelligence</h2>
-          <p className="text-sm md:text-base text-muted-foreground mt-2">Institutional liquidity detection & pattern recognition</p>
+      <div className="container mx-auto px-3 md:px-6 py-8 md:py-16">
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 md:mb-16">
+          <Badge variant="outline" className="mb-3"><TrendingUp className="w-3 h-3 mr-2" />HTF Framework</Badge>
+          <h2 className="text-3xl md:text-5xl font-bold mb-3">Multi-Timeframe Trading Intelligence</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">Institutional liquidity detection & pattern recognition</p>
         </motion.div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
