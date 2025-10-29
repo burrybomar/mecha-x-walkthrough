@@ -28,6 +28,7 @@ import { motion } from "framer-motion";
 import { AITooltip } from "@/components/AITooltip";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import cisdLtfChart from "@/assets/cisd-ltf-chart.jpg";
+import smtLtfChart from "@/assets/smt-ltf-chart.png";
 import { SimpleChart } from "@/components/SimpleChart";
 import { PatternChart } from "@/components/PatternChart";
 
@@ -291,6 +292,14 @@ const Index = () => {
       case "smt":
         return (
           <div className="space-y-6">
+            <div className="rounded-xl overflow-hidden border-2 border-purple-500/20 bg-card">
+              <img 
+                src={smtLtfChart} 
+                alt="Lower Time Frame SMT Divergence" 
+                className="w-full h-auto"
+                style={{ clipPath: "inset(0 0 12% 0)" }}
+              />
+            </div>
             <Card className="border-2 border-purple-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
