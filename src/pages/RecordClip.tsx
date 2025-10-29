@@ -80,7 +80,7 @@ const RecordClip = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % features.length);
-    }, 3000); // 3 seconds per feature = 18 seconds total loop
+    }, 5000); // 5 seconds per feature = 30 seconds total loop
 
     return () => clearInterval(interval);
   }, []);
@@ -139,10 +139,10 @@ const RecordClip = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, scale: 0.9, rotateY: -20 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            exit={{ opacity: 0, scale: 0.9, rotateY: 20 }}
-            transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className="w-full max-w-4xl"
           >
             <div 
@@ -164,10 +164,9 @@ const RecordClip = () => {
                   <motion.div
                     className={`p-6 rounded-2xl bg-gradient-to-br ${currentFeature.gradient}`}
                     animate={{ 
-                      scale: [1, 1.05, 1],
-                      rotate: [0, 3, -3, 0] 
+                      scale: [1, 1.02, 1],
                     }}
-                    transition={{ duration: 3, repeat: Infinity }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <IconComponent className="w-12 h-12 text-white" />
                   </motion.div>
@@ -182,9 +181,9 @@ const RecordClip = () => {
                   {currentFeature.settings.map((setting, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: -40 }}
+                      initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 + idx * 0.15 }}
+                      transition={{ delay: 0.3 + idx * 0.2, duration: 0.6, ease: "easeOut" }}
                       className="flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-background/80 to-background/40 backdrop-blur-sm border border-border/50"
                     >
                       <span className="text-xl font-medium">{setting.label}</span>
@@ -239,7 +238,7 @@ const RecordClip = () => {
                   className="absolute inset-0 bg-white/30"
                   initial={{ x: '-100%' }}
                   animate={{ x: '100%' }}
-                  transition={{ duration: 3, ease: 'linear' }}
+                  transition={{ duration: 5, ease: 'linear' }}
                 />
               )}
             </div>
