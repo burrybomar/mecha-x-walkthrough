@@ -1,73 +1,72 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, Target, Radar, Crosshair } from 'lucide-react';
+import { Zap, Target, TrendingUp, Crosshair } from 'lucide-react';
 import { useScrollPlayPause } from '@/hooks/use-scroll-play-pause';
 
-const tradingSteps = [
+const cisdSteps = [
   {
     step: 1,
-    icon: TrendingUp,
-    title: 'HTF Analysis',
-    subtitle: '4H/Daily Levels',
-    color: '#6bb0dd',
-    gradient: 'from-[#6bb0dd]/20 to-[#5289AD]/20',
-    description: 'Identify key support and resistance levels on Higher Time Frames (4H/Daily charts)',
+    icon: Zap,
+    title: 'CISD Basics',
+    subtitle: 'Change in State',
+    color: '#f97316',
+    gradient: 'from-[#f97316]/20 to-[#fb923c]/20',
+    description: 'CISD marks where market shifts from one delivery phase to another after a liquidity sweep',
     details: [
-      'Mark institutional order blocks and fair value gaps',
-      'Identify premium and discount zones',
-      'Look for liquidity pools above highs and below lows',
-      'Note previous day/week high and low levels'
+      'Forms at the reversal point after sweep',
+      'Represents shift from bearish to bullish (or vice versa)',
+      'Becomes your entry level for retests',
+      'Critical structural level for trade execution'
     ]
   },
   {
     step: 2,
     icon: Target,
-    title: 'Session Window',
-    subtitle: 'H2 Silver Bullet',
-    color: '#abdbd6',
-    gradient: 'from-[#abdbd6]/20 to-[#6bb0dd]/20',
-    description: 'Focus on specific trading sessions with high probability setups',
+    title: 'Target Projections',
+    subtitle: 'Range-Based Targets',
+    color: '#fb923c',
+    gradient: 'from-[#fb923c]/20 to-[#fdba74]/20',
+    description: 'From CISD level, targets project based on the range size with specific multipliers',
     details: [
-      'London Session: 2 AM - 5 AM EST (H2 window)',
-      'New York Session: 9:30 AM - 12 PM EST (H2 window)',
-      'Wait for price to reach HTF levels during these windows',
-      'Watch for manipulation moves before true direction'
+      '1x: First take profit zone',
+      '2-2.5x: Main target area (manipulation zone)',
+      '3.5-4x: Extension targets (distribution phase)',
+      'Targets help identify market phase and exit points'
     ]
   },
   {
     step: 3,
-    icon: Radar,
-    title: 'Sweep + C2',
-    subtitle: 'Reversal Signal',
-    color: '#5289AD',
-    gradient: 'from-[#5289AD]/20 to-[#698696]/20',
-    description: 'Liquidity sweep followed by Change of Character confirms reversal',
+    icon: Crosshair,
+    title: 'Entry Strategy',
+    subtitle: 'Retest Execution',
+    color: '#fdba74',
+    gradient: 'from-[#fdba74]/20 to-[#fcd34d]/20',
+    description: 'Enter on retest of CISD level after it forms - wait for pullback confirmation',
     details: [
-      'Sweep: Price briefly breaks a level to grab liquidity',
-      'C2 (Change of Character): Strong move in opposite direction',
-      'Look for volume spike during the sweep',
-      'Confirm with market structure break on lower timeframe'
+      'Wait for price to pull back to CISD',
+      'Enter on confirmation (engulfing, wick rejection)',
+      'Stop loss goes beyond the sweep point',
+      'Never chase - patience for the retest'
     ]
   },
   {
     step: 4,
-    icon: Crosshair,
-    title: 'CISD Entry',
-    subtitle: 'Target H3/H4',
-    color: '#698696',
-    gradient: 'from-[#698696]/20 to-[#3a647f]/20',
-    description: 'Enter on Consolidation, Inducement, Stop Hunt, Distribution pattern',
+    icon: TrendingUp,
+    title: 'CISD + iFVG',
+    subtitle: 'Power Combo',
+    color: '#fcd34d',
+    gradient: 'from-[#fcd34d]/20 to-[#f97316]/20',
+    description: 'Best entries occur when CISD level aligns with an iFVG for double confluence',
     details: [
-      'Wait for consolidation after the sweep',
-      'Inducement: False move to attract wrong-side traders',
-      'Stop Hunt: Quick spike to trigger stops',
-      'Distribution: Smart money exits, creating your entry',
-      'Target: Opposite liquidity at H3 (1:3 RR) or H4 (1:4 RR)'
+      'CISD level + iFVG zone = highest probability',
+      'Both structure change AND fair value gap',
+      'Combine with H2 Silver Bullet timing',
+      'Target 2-2.5x for main exit'
     ]
   }
 ];
 
-export const TradingSequenceSlides = () => {
+export const CISDSlides = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isPlaying, setIsPlaying, elementRef } = useScrollPlayPause();
 
@@ -75,19 +74,18 @@ export const TradingSequenceSlides = () => {
     if (!isPlaying) return;
     
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % tradingSteps.length);
-    }, 8000); // 8 seconds per slide for comfortable reading
+      setCurrentIndex((prev) => (prev + 1) % cisdSteps.length);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  const currentStep = tradingSteps[currentIndex];
+  const currentStep = cisdSteps[currentIndex];
   const IconComponent = currentStep.icon;
 
   return (
     <div ref={elementRef} className="w-full max-w-6xl mx-auto px-4">
       <div className="relative rounded-2xl overflow-hidden border-2 border-primary/30 bg-gradient-to-b from-background via-card to-background shadow-2xl">
-        {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(3)].map((_, i) => (
             <motion.div
@@ -112,7 +110,6 @@ export const TradingSequenceSlides = () => {
           ))}
         </div>
 
-        {/* Main content */}
         <div className="relative z-10 p-8 md:p-12 min-h-[600px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.div
@@ -123,13 +120,10 @@ export const TradingSequenceSlides = () => {
               transition={{ duration: 1, ease: "easeInOut" }}
               className="space-y-8"
             >
-              {/* Step number and icon */}
               <div className="flex items-center gap-6">
                 <motion.div
                   className="relative"
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                  }}
+                  animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <div 
@@ -172,7 +166,6 @@ export const TradingSequenceSlides = () => {
                 </div>
               </div>
 
-              {/* Description */}
               <motion.div
                 className={`p-6 rounded-xl bg-gradient-to-br ${currentStep.gradient} backdrop-blur-sm border border-border/50`}
                 initial={{ opacity: 0, y: 20 }}
@@ -184,7 +177,6 @@ export const TradingSequenceSlides = () => {
                 </p>
               </motion.div>
 
-              {/* Details list */}
               <motion.div 
                 className="space-y-3"
                 initial={{ opacity: 0 }}
@@ -216,9 +208,8 @@ export const TradingSequenceSlides = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Progress indicators */}
           <div className="flex items-center justify-center gap-3 mt-12">
-            {tradingSteps.map((_, idx) => (
+            {cisdSteps.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {
@@ -229,14 +220,10 @@ export const TradingSequenceSlides = () => {
               >
                 <div 
                   className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                    idx === currentIndex 
-                      ? 'w-12 h-3' 
-                      : 'hover:scale-125'
+                    idx === currentIndex ? 'w-12 h-3' : 'hover:scale-125'
                   }`}
                   style={{
-                    backgroundColor: idx === currentIndex 
-                      ? currentStep.color 
-                      : '#698696',
+                    backgroundColor: idx === currentIndex ? currentStep.color : '#698696',
                     opacity: idx === currentIndex ? 1 : 0.4
                   }}
                 />
@@ -253,7 +240,6 @@ export const TradingSequenceSlides = () => {
             ))}
           </div>
 
-          {/* Play/Pause control */}
           <div className="flex justify-center mt-6">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
@@ -263,15 +249,6 @@ export const TradingSequenceSlides = () => {
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Instructions */}
-      <div className="text-center text-sm text-muted-foreground mt-4 flex items-center justify-center gap-4 flex-wrap">
-        <span>⏸️ Click dots to jump to any step</span>
-        <span>•</span>
-        <span>🔄 Auto-advances every 8 seconds</span>
-        <span>•</span>
-        <span>📱 Mobile friendly</span>
       </div>
     </div>
   );
