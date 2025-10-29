@@ -1,144 +1,208 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text, Box, Cone } from '@react-three/drei';
+import { OrbitControls, Text, Box, Sphere } from '@react-three/drei';
 import { Vector3 } from 'three';
 import * as THREE from 'three';
 
-// Trading-themed 3D nodes that look like chart elements
-const TradingNode = ({ position, color, label, step }: { position: [number, number, number]; color: string; label: string; step: number }) => {
+// Trading level visualization - horizontal plane representing price levels
+const TradingLevel = ({ position, color, label, step, subtitle }: { 
+  position: [number, number, number]; 
+  color: string; 
+  label: string; 
+  step: number;
+  subtitle: string;
+}) => {
   const groupRef = useRef<THREE.Group>(null);
-  const candleGroupRef = useRef<THREE.Group>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.5 + step) * 0.15;
+      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 2 + step) * 0.1;
     }
-    if (candleGroupRef.current) {
-      candleGroupRef.current.rotation.y = state.clock.elapsedTime * 0.3;
+    if (glowRef.current) {
+      glowRef.current.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 3 + step) * 0.1);
     }
   });
 
   return (
     <group ref={groupRef} position={position}>
-      {/* Candlestick-style visualization */}
-      <group ref={candleGroupRef}>
-        {/* Main candle body */}
-        <Box args={[0.4, 0.8, 0.4]}>
-          <meshStandardMaterial 
-            color={color} 
-            metalness={0.3} 
-            roughness={0.4}
-            emissive={color}
-            emissiveIntensity={0.2}
-          />
-        </Box>
-        
-        {/* Wick (top) */}
-        <Box args={[0.08, 0.5, 0.08]} position={[0, 0.65, 0]}>
-          <meshStandardMaterial color={color} metalness={0.5} roughness={0.3} />
-        </Box>
-        
-        {/* Wick (bottom) */}
-        <Box args={[0.08, 0.5, 0.08]} position={[0, -0.65, 0]}>
-          <meshStandardMaterial color={color} metalness={0.5} roughness={0.3} />
-        </Box>
-        
-        {/* Arrow indicator on top */}
-        <Cone args={[0.2, 0.3, 4]} position={[0, 1.2, 0]} rotation={[0, 0, 0]}>
-          <meshStandardMaterial 
-            color={color}
-            emissive={color}
-            emissiveIntensity={0.4}
-          />
-        </Cone>
-      </group>
+      {/* Main level platform */}
+      <Box args={[2, 0.08, 1.5]}>
+        <meshStandardMaterial 
+          color={color}
+          metalness={0.7}
+          roughness={0.2}
+          emissive={color}
+          emissiveIntensity={0.3}
+          transparent
+          opacity={0.9}
+        />
+      </Box>
+      
+      {/* Glowing sphere marker */}
+      <Sphere ref={glowRef} args={[0.15, 32, 32]} position={[0, 0.2, 0]}>
+        <meshStandardMaterial 
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.8}
+          toneMapped={false}
+        />
+      </Sphere>
+      
+      {/* Vertical beam */}
+      <Box args={[0.05, 1.5, 0.05]} position={[0, 0.75, 0]}>
+        <meshStandardMaterial 
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.4}
+          transparent
+          opacity={0.6}
+        />
+      </Box>
+      
+      {/* Step indicator */}
+      <Text
+        position={[0, 1.6, 0]}
+        fontSize={0.35}
+        color={color}
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.02}
+        outlineColor="#000000"
+        fontWeight="bold"
+      >
+        {step}
+      </Text>
       
       {/* Label */}
       <Text
-        position={[0, -1.5, 0]}
-        fontSize={0.25}
-        color="#ffffff"
+        position={[0, -0.4, 0]}
+        fontSize={0.22}
+        color="#e9f2fa"
         anchorX="center"
         anchorY="middle"
-        outlineWidth={0.03}
-        outlineColor="#000000"
+        outlineWidth={0.015}
+        outlineColor="#10212c"
+        fontWeight="bold"
       >
         {label}
       </Text>
       
-      {/* Step number badge */}
-      <group position={[0, 0, 0.6]}>
-        <Box args={[0.5, 0.5, 0.1]}>
-          <meshStandardMaterial color="#1a1a1a" metalness={0.8} roughness={0.2} />
-        </Box>
-        <Text
-          position={[0, 0, 0.06]}
-          fontSize={0.3}
-          color="#00ff88"
-          anchorX="center"
-          anchorY="middle"
-          fontWeight="bold"
-        >
-          {step}
-        </Text>
-      </group>
+      {/* Subtitle */}
+      <Text
+        position={[0, -0.7, 0]}
+        fontSize={0.14}
+        color="#abdbd6"
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.01}
+        outlineColor="#10212c"
+      >
+        {subtitle}
+      </Text>
     </group>
   );
 };
 
-// Connection lines that look like trend lines on a chart
-const TrendLine = ({ start, end, color }: { start: [number, number, number]; end: [number, number, number]; color: string }) => {
+// Connection flow between levels
+const FlowConnection = ({ start, end, color }: { start: [number, number, number]; end: [number, number, number]; color: string }) => {
   const ref = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (ref.current && ref.current.material instanceof THREE.MeshStandardMaterial) {
+      ref.current.material.opacity = 0.5 + Math.sin(state.clock.elapsedTime * 2) * 0.2;
+    }
+  });
   
   return (
     <mesh ref={ref}>
-      <tubeGeometry args={[new THREE.LineCurve3(new Vector3(...start), new Vector3(...end)), 20, 0.02, 8, false]} />
-      <meshStandardMaterial color={color} transparent opacity={0.8} emissive={color} emissiveIntensity={0.3} />
+      <tubeGeometry args={[new THREE.LineCurve3(new Vector3(...start), new Vector3(...end)), 20, 0.04, 8, false]} />
+      <meshStandardMaterial 
+        color={color} 
+        transparent 
+        opacity={0.6} 
+        emissive={color} 
+        emissiveIntensity={0.5}
+      />
     </mesh>
   );
 };
 
 const Scene3D = () => {
-  const nodes = [
-    { position: [-4.5, 0, 0] as [number, number, number], color: '#3b82f6', label: 'HTF Analysis', step: 1 },
-    { position: [-1.5, 0, 0] as [number, number, number], color: '#ec4899', label: 'Session Window', step: 2 },
-    { position: [1.5, 0, 0] as [number, number, number], color: '#10b981', label: 'Sweep + C2', step: 3 },
-    { position: [4.5, 0, 0] as [number, number, number], color: '#f97316', label: 'CISD Entry', step: 4 },
+  const levels = [
+    { 
+      position: [-5, 0, 0] as [number, number, number], 
+      color: '#6bb0dd', // primary blue
+      label: 'HTF Analysis', 
+      subtitle: '4H/Daily Levels',
+      step: 1 
+    },
+    { 
+      position: [-1.5, 0.5, 0] as [number, number, number], 
+      color: '#abdbd6', // accent teal
+      label: 'Session Window', 
+      subtitle: 'H2 Silver Bullet',
+      step: 2 
+    },
+    { 
+      position: [1.5, 0.2, 0] as [number, number, number], 
+      color: '#5289AD', // primary dark blue
+      label: 'Sweep + C2', 
+      subtitle: 'Reversal Signal',
+      step: 3 
+    },
+    { 
+      position: [5, 0.8, 0] as [number, number, number], 
+      color: '#698696', // muted blue
+      label: 'CISD Entry', 
+      subtitle: 'Target H3/H4',
+      step: 4 
+    },
   ];
 
   return (
     <>
-      {/* Chart-like lighting */}
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={0.8} color="#ffffff" />
-      <pointLight position={[-10, 5, -10]} intensity={0.4} color="#3b82f6" />
-      <spotLight position={[0, 10, 0]} intensity={0.5} angle={0.6} penumbra={1} color="#00ff88" />
+      {/* Professional trading platform lighting */}
+      <ambientLight intensity={0.4} color="#e9f2fa" />
+      <directionalLight position={[10, 10, 5]} intensity={1} color="#6bb0dd" />
+      <directionalLight position={[-10, 5, -5]} intensity={0.5} color="#abdbd6" />
+      <pointLight position={[0, 15, 0]} intensity={0.6} color="#5289AD" />
       
-      {/* Grid floor like a chart */}
-      <gridHelper args={[20, 20, '#333333', '#1a1a1a']} position={[0, -2, 0]} />
+      {/* Grid representing chart structure */}
+      <gridHelper args={[24, 24, '#698696', '#3a647f']} position={[0, -1.5, 0]} />
       
-      {nodes.map((node, i) => (
-        <TradingNode key={i} {...node} />
+      {/* Subtle background plane */}
+      <mesh position={[0, -1.51, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[30, 20]} />
+        <meshStandardMaterial 
+          color="#10212c" 
+          transparent 
+          opacity={0.8}
+        />
+      </mesh>
+      
+      {levels.map((level, i) => (
+        <TradingLevel key={i} {...level} />
       ))}
       
-      {nodes.slice(0, -1).map((node, i) => (
-        <TrendLine
+      {levels.slice(0, -1).map((level, i) => (
+        <FlowConnection
           key={i}
-          start={node.position}
-          end={nodes[i + 1].position}
-          color="#00ff88"
+          start={[level.position[0] + 1, level.position[1], level.position[2]]}
+          end={[levels[i + 1].position[0] - 1, levels[i + 1].position[1], levels[i + 1].position[2]]}
+          color="#abdbd6"
         />
       ))}
       
       <OrbitControls
         enableZoom={true}
         enablePan={false}
-        minDistance={6}
-        maxDistance={14}
+        minDistance={8}
+        maxDistance={16}
         autoRotate
-        autoRotateSpeed={1}
-        maxPolarAngle={Math.PI / 2.2}
-        minPolarAngle={Math.PI / 4}
+        autoRotateSpeed={0.5}
+        maxPolarAngle={Math.PI / 2.1}
+        minPolarAngle={Math.PI / 6}
       />
     </>
   );
@@ -146,8 +210,8 @@ const Scene3D = () => {
 
 export const Sequence3D = () => {
   return (
-    <div className="w-full h-[450px] rounded-xl overflow-hidden border-2 border-primary/20 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f1a] to-[#0a0a0a]">
-      <Canvas camera={{ position: [0, 2, 10], fov: 50 }}>
+    <div className="w-full h-[500px] rounded-xl overflow-hidden border-2 border-primary/30 bg-gradient-to-b from-background via-card to-background shadow-lg">
+      <Canvas camera={{ position: [0, 3, 12], fov: 45 }}>
         <Scene3D />
       </Canvas>
       <div className="text-center text-xs text-muted-foreground mt-2 pb-3 flex items-center justify-center gap-4">
