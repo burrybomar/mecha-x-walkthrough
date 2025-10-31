@@ -66,7 +66,7 @@ export const SMTSlides = () => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % smtSteps.length);
-    }, 4000);
+    }, 2500);
     return () => clearInterval(interval);
   }, [isPlaying]);
 
@@ -156,21 +156,13 @@ export const SMTSlides = () => {
                     className="absolute inset-0 rounded-full bg-primary"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: 4, ease: "linear" }}
+                    transition={{ duration: 2.5, ease: "linear" }}
                   />
                 )}
               </button>
             ))}
           </div>
 
-          <div className="flex justify-center mt-5">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="px-5 py-2 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-all text-sm font-medium"
-            >
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
-          </div>
         </div>
       </div>
     </div>
