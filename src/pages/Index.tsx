@@ -23,14 +23,14 @@ const Index = () => {
     initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }
   };
 
   const scaleIn = {
     initial: { opacity: 0, scale: 0.95 },
     whileInView: { opacity: 1, scale: 1 },
     viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as any }
   };
 
   const features = [
@@ -56,7 +56,7 @@ const Index = () => {
                   className="text-6xl md:text-8xl font-bold mb-8 leading-[1.1] tracking-tight"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as any }}
                 >
                   Trade with
                   <br />
@@ -68,14 +68,14 @@ const Index = () => {
                   className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as any }}
                 >
                   Multi-timeframe liquidity detection, smart money tracking, and precision entry timing—all in one system.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] as any }}
                 >
                   <Button onClick={() => navigate('/knowledge')} size="lg" className="text-lg px-8 py-6 rounded-full">
                     <BookOpen className="w-5 h-5 mr-2" />
@@ -98,7 +98,7 @@ const Index = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] as any }}
                     whileHover={{ scale: 1.02, y: -4 }}
                     onClick={() => setActiveTab(feature.tab)}
                     className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-xl transition-all text-left group"
