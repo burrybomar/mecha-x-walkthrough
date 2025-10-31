@@ -67,7 +67,7 @@ export const HTFSlides = () => {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % htfSteps.length);
-    }, 8000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isPlaying]);
@@ -89,7 +89,7 @@ export const HTFSlides = () => {
               opacity: [0.1, 0.15, 0.1],
             }}
             transition={{
-              duration: 8,
+              duration: 4,
               repeat: Infinity,
               ease: "easeInOut"
             }}
@@ -103,7 +103,7 @@ export const HTFSlides = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="space-y-6"
             >
               <div className="flex items-center gap-4">
@@ -136,7 +136,7 @@ export const HTFSlides = () => {
                     key={idx}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * idx, duration: 0.5 }}
+                    transition={{ delay: 0.05 * idx, duration: 0.3 }}
                     className="flex items-start gap-3 p-3.5 rounded-lg bg-background/80 border border-border/40"
                   >
                     <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 bg-primary" />
@@ -167,7 +167,7 @@ export const HTFSlides = () => {
                     className="absolute inset-0 rounded-full bg-primary"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: 8, ease: "linear" }}
+                    transition={{ duration: 4, ease: "linear" }}
                   />
                 )}
               </button>

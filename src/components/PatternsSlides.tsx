@@ -67,7 +67,7 @@ export const PatternsSlides = () => {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % patternsSteps.length);
-    }, 8000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isPlaying]);
@@ -83,7 +83,7 @@ export const PatternsSlides = () => {
             className="absolute w-full h-full opacity-5"
             style={{ background: 'var(--gradient-primary)' }}
             animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
 
@@ -94,7 +94,7 @@ export const PatternsSlides = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="space-y-6"
             >
               <div className="flex items-center gap-4">
@@ -158,7 +158,7 @@ export const PatternsSlides = () => {
                     className="absolute inset-0 rounded-full bg-primary"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
-                    transition={{ duration: 8, ease: "linear" }}
+                    transition={{ duration: 4, ease: "linear" }}
                   />
                 )}
               </button>
