@@ -17,88 +17,86 @@ interface Resource {
 const resources: Resource[] = [
   {
     title: "MECHA-X TradingView Indicator",
-    description: "The official PineScript indicator that automates the entire 6-step framework. Auto-detects HTF levels, sweeps, CISD zones, and more.",
+    description: "Automates HTF levels, sweeps, CISD zones, and setup detection. Will add live examples soon.",
     category: "Tools",
     icon: Zap,
-    badge: "Essential",
-    link: "#"
+    badge: "Essential"
   },
   {
     title: "TradingView Platform",
-    description: "Professional charting platform. Free tier works fine, Premium adds more indicators and alerts. Required for using the MECHA-X indicator.",
+    description: "Charting platform. Free tier works, Premium adds more indicators and alerts.",
     category: "Tools",
     icon: TrendingUp,
     link: "https://www.tradingview.com"
   },
   {
     title: "Chart Replay Feature",
-    description: "Practice on historical data without risking money. TradingView's replay feature lets you 'trade' the past to build pattern recognition.",
+    description: "Practice on historical data. TradingView replay lets you trade the past.",
     category: "Practice",
     icon: Video,
     link: "https://www.tradingview.com/chart/"
   },
   {
-    title: "Knowledge Base (This Site)",
-    description: "Complete framework documentation covering every step, concept, and execution rule. Bookmark this for quick reference.",
+    title: "Knowledge Base",
+    description: "Framework documentation. Bookmark for reference.",
     category: "Learning",
     icon: BookOpen,
     badge: "Start Here"
   },
   {
-    title: "Setup Configuration Guide",
-    description: "Step-by-step walkthrough of every indicator setting, explaining what each does and how it automates the framework.",
+    title: "Setup Configuration",
+    description: "Indicator settings walkthrough.",
     category: "Learning",
     icon: BookOpen
   },
   {
-    title: "Chart Examples Gallery",
-    description: "Real chart screenshots showing HTF analysis, sweeps, CISD zones, and complete trade setups from start to finish.",
+    title: "Chart Examples",
+    description: "Real setups: HTF analysis, sweeps, CISD zones.",
     category: "Learning",
     icon: BookOpen
   },
   {
-    title: "Trading Glossary",
-    description: "Every term and acronym explained: BSL, SSL, CISD, iFVG, C2, SMT, and more. Quick reference for all framework terminology.",
+    title: "Glossary",
+    description: "BSL, SSL, CISD, iFVG, C2, SMT—all terms explained.",
     category: "Learning",
     icon: BookOpen
   },
   {
     title: "Pre-Trade Checklist",
-    description: "Downloadable cheatsheet with the complete pre-trade checklist, session timing, risk rules, and common mistakes to avoid.",
+    description: "Checklist, session timing, risk rules.",
     category: "Practice",
     icon: Download
   },
   {
-    title: "Paper Trading Account",
-    description: "TradingView offers paper trading (simulated money). Practice entries, stops, and targets with zero risk before going live.",
+    title: "Paper Trading",
+    description: "TradingView paper trading. Practice with sim money.",
     category: "Practice",
     icon: TrendingUp,
     link: "https://www.tradingview.com/support/solutions/43000481029-paper-trading/"
   },
   {
-    title: "Micro Futures Contracts",
-    description: "MES (Micro E-mini S&P) and MNQ (Micro Nasdaq) let you trade with $50-$200 risk per trade. Perfect for building confidence.",
+    title: "Micro Futures",
+    description: "MES/MNQ: $50-$200 risk per trade.",
     category: "Practice",
     icon: TrendingUp
   },
   {
-    title: "Trade Journal Template",
-    description: "Notion or Excel template for logging every setup. Track: HTF bias, sweep type, entry, exit, RR, what worked/didn't work.",
+    title: "Trade Journal",
+    description: "Log setups: HTF bias, sweep type, entry, exit, RR.",
     category: "Practice",
     icon: Download,
     badge: "Recommended"
   },
   {
-    title: "MECHA-X Discord Community",
-    description: "Join other traders using the framework. Share setups, ask questions, get feedback. Learning accelerates with community.",
+    title: "MECHA-X Discord",
+    description: "Share setups, ask questions, get feedback.",
     category: "Community",
     icon: Users,
-    badge: "Free",
-    link: "#"
+    badge: "Free"
   },
   {
-    title: "Framework FAQ",
-    description: "20+ frequently asked questions covering everything from timeframes to risk management to common beginner mistakes.",
+    title: "FAQ",
+    description: "Common questions on timeframes, risk, mistakes.",
     category: "Learning",
     icon: BookOpen
   }
@@ -167,7 +165,7 @@ const Resources = () => {
             <span className="text-foreground text-3xl md:text-5xl">In One Place</span>
           </h1>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-            Tools, guides, practice platforms, and community—all the resources to master the framework.
+            Tools, guides, practice platforms.
           </p>
         </motion.div>
 
@@ -248,7 +246,7 @@ const Resources = () => {
           <Card className="p-6 md:p-8 bg-primary/5 border-primary/30">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Suggested Learning Path</h2>
             <p className="text-muted-foreground mb-8">
-              Follow this sequence to build solid foundations before risking real money.
+              Build foundations before risking real money.
             </p>
             
             <div className="space-y-3">
