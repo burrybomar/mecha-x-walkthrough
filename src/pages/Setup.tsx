@@ -1,392 +1,505 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, Settings as SettingsIcon, BarChart3, Clock, Target, Zap, Layers, TrendingUp, ChevronRight } from "lucide-react";
+import { ArrowLeft, Settings as SettingsIcon, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+interface SettingRowProps {
+  label: string;
+  children: React.ReactNode;
+  tooltip?: string;
+}
+
+const SettingRow = ({ label, children, tooltip }: SettingRowProps) => (
+  <div className="grid grid-cols-[160px_1fr] items-center gap-4 py-1.5 hover:bg-muted/30 px-3 rounded transition-colors group font-mono text-xs">
+    <Label className="text-xs text-muted-foreground group-hover:text-foreground transition-colors" title={tooltip}>
+      {label}
+    </Label>
+    <div className="flex items-center gap-2">
+      {children}
+    </div>
+  </div>
+);
+
+interface SettingsGroupProps {
+  title: string;
+  description: string;
+  frameworkLink: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}
+
+const SettingsGroup = ({ title, description, frameworkLink, children, defaultOpen = false }: SettingsGroupProps) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  
+  return (
+    <div className="border-b border-border/50 bg-card/50">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between gap-2 py-3 px-4 hover:bg-muted/30 transition-colors text-left"
+      >
+        <div className="flex items-center gap-2">
+          {isOpen ? <ChevronDown className="w-4 h-4 text-primary" /> : <ChevronRight className="w-4 h-4" />}
+          <span className="font-semibold text-sm">{title}</span>
+        </div>
+        <Badge variant="outline" className="text-[10px] font-mono">{frameworkLink}</Badge>
+      </button>
+      {isOpen && (
+        <div className="pb-4">
+          <div className="px-4 pb-3 pt-1">
+            <p className="text-xs text-muted-foreground italic leading-relaxed">{description}</p>
+          </div>
+          <div className="space-y-0.5">
+            {children}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Setup = () => {
   const navigate = useNavigate();
-  const [activeStep, setActiveStep] = useState(1);
-
-  const setupSteps = [
-    {
-      id: 1,
-      icon: BarChart3,
-      title: "HTF Context Automation",
-      subtitle: "Step 1: Higher Timeframe Overlay",
-      color: "from-blue-500 to-cyan-500",
-      frameworkStep: "Automates HTF Analysis",
-      settings: [
-        {
-          name: "HTF Timeframe Selection",
-          options: ["Auto Mode", "Manual: 1H, 4H, Daily, Weekly"],
-          recommendation: "Auto Mode - intelligently picks HTF based on your chart",
-          why: "Automatically overlays 4H/Daily levels on your 5min/15min charts"
-        },
-        {
-          name: "HTF Levels Display",
-          options: ["Show BSL/SSL", "Show Order Blocks", "Show FVGs"],
-          recommendation: "Enable all for complete HTF context",
-          why: "See where institutional liquidity pools and key levels are"
-        },
-        {
-          name: "Premium/Discount Zones",
-          options: ["Color-code by zone", "Show equilibrium line"],
-          recommendation: "Enable both",
-          why: "Instantly know if you're in buy zone (discount) or sell zone (premium)"
-        }
-      ],
-      result: "Your chart now shows exactly where price is relative to institutional levels—no manual marking needed."
-    },
-    {
-      id: 2,
-      icon: Clock,
-      title: "Session Timing Automation",
-      subtitle: "Step 2: H1-H4 Windows",
-      color: "from-purple-500 to-pink-500",
-      frameworkStep: "Automates Session Profiling",
-      settings: [
-        {
-          name: "Session Boxes",
-          options: ["Show H1, H2, H3, H4 windows", "Highlight Silver Bullet hours"],
-          recommendation: "Enable H2 highlight (2-6 AM, 9:30-12 PM EST)",
-          why: "Visual boxes show you exactly when reversals typically happen"
-        },
-        {
-          name: "Current Hour Model",
-          options: ["Show live hour progression", "Color-code by phase"],
-          recommendation: "Enable with color coding",
-          why: "Know in real-time: Are we in setup, reversal, continuation, or delivery?"
-        },
-        {
-          name: "Time Alerts",
-          options: ["Alert at H2 window open", "Alert 15min before key sessions"],
-          recommendation: "Enable H2 window alerts",
-          why: "Get notified when high-probability trading windows open"
-        }
-      ],
-      result: "No more guessing when to watch charts—the system tells you exactly when institutional moves happen."
-    },
-    {
-      id: 3,
-      icon: Target,
-      title: "Sweep Detection Automation",
-      subtitle: "Step 3: BSL/SSL + C2 Alerts",
-      color: "from-orange-500 to-red-500",
-      frameworkStep: "Automates Liquidity Sweep Detection",
-      settings: [
-        {
-          name: "Auto Sweep Detection",
-          options: ["Detect BSL/SSL sweeps", "Mark sweep candles", "Volume confirmation"],
-          recommendation: "Enable all + volume filter",
-          why: "System automatically identifies when stops are hunted above/below key levels"
-        },
-        {
-          name: "C2 Pattern Recognition",
-          options: ["Auto-detect 3-candle reversals", "Confirm with structure break"],
-          recommendation: "Enable both filters",
-          why: "Get alerted only when clean sweep + confirmed reversal occurs"
-        },
-        {
-          name: "Sweep Alerts",
-          options: ["Real-time alerts", "Only HTF sweeps", "Require C2 confirmation"],
-          recommendation: "HTF sweeps + C2 confirmation required",
-          why: "Filter out noise—only get alerts on high-probability setups"
-        }
-      ],
-      result: "The indicator watches for sweeps 24/7—you only get notified when THE trigger happens."
-    },
-    {
-      id: 4,
-      icon: Zap,
-      title: "CISD Zone Automation",
-      subtitle: "Step 4: Entry Level Marking",
-      color: "from-emerald-500 to-teal-500",
-      frameworkStep: "Automates Entry Zone Identification",
-      settings: [
-        {
-          name: "Auto CISD Detection",
-          options: ["Mark structure change candles", "Draw entry zones", "Show iFVGs"],
-          recommendation: "Enable all",
-          why: "System automatically highlights the exact candle/zone where structure changed"
-        },
-        {
-          name: "Entry Zone Visualization",
-          options: ["Box around CISD level", "Show order block within", "Display risk/reward"],
-          recommendation: "Enable all for clear entries",
-          why: "No guessing—the system draws your entry box and shows R:R"
-        },
-        {
-          name: "Target Projection",
-          options: ["Auto-draw to opposite liquidity", "Show H3/H4 targets", "Calculate RR"],
-          recommendation: "Enable automatic target projection",
-          why: "System calculates and displays your 1:3 and 1:4 targets automatically"
-        }
-      ],
-      result: "Your entry levels, stop loss, and targets are automatically calculated and displayed—just execute."
-    },
-    {
-      id: 5,
-      icon: Layers,
-      title: "SMT Confluence Automation",
-      subtitle: "Step 5: Divergence Detection",
-      color: "from-violet-500 to-purple-500",
-      frameworkStep: "Automates Smart Money Technique",
-      settings: [
-        {
-          name: "Asset Comparison",
-          options: ["ES vs NQ (indices)", "EUR vs GBP (forex)", "Custom pairs"],
-          recommendation: "ES vs NQ for indices, EUR vs GBP for forex",
-          why: "System compares correlated assets in real-time"
-        },
-        {
-          name: "SMT Divergence Alerts",
-          options: ["Alert on divergence", "Show on chart", "Require confirmation"],
-          recommendation: "Enable alerts + chart display",
-          why: "Get notified when one asset sweeps but the other doesn't (manipulation signal)"
-        },
-        {
-          name: "Confluence Indicator",
-          options: ["Show SMT score", "Highlight high-probability setups"],
-          recommendation: "Enable both",
-          why: "Visual indicator shows when SMT adds extra confluence to your setup"
-        }
-      ],
-      result: "System monitors divergence for you—adds 10-20% confidence when present, optional but powerful."
-    },
-    {
-      id: 6,
-      icon: TrendingUp,
-      title: "Execution Automation",
-      subtitle: "Step 6: OSOK Trade Management",
-      color: "from-green-500 to-emerald-500",
-      frameworkStep: "Automates Trade Execution Alerts",
-      settings: [
-        {
-          name: "Entry Alerts",
-          options: ["Alert when price taps CISD", "Require rejection candle", "Volume confirmation"],
-          recommendation: "Enable all filters",
-          why: "Get alerted at the exact moment to enter—no chart watching needed"
-        },
-        {
-          name: "Risk Management Display",
-          options: ["Show 1:1 breakeven level", "Show 50% profit zone (H3)", "Show full target (H4)"],
-          recommendation: "Enable all levels on chart",
-          why: "Your trade management levels are pre-calculated and displayed"
-        },
-        {
-          name: "Trade Tracking",
-          options: ["Mark entry/exit on chart", "Track win rate", "Log trades"],
-          recommendation: "Enable tracking",
-          why: "System logs all trades for performance review and improvement"
-        }
-      ],
-      result: "From entry alert to exit levels—everything is automated. You just need to click the button."
-    }
-  ];
-
-  const currentSetup = setupSteps[activeStep - 1];
-  const IconComponent = currentSetup.icon;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background bg-candlestick-pattern">
       {/* Header */}
       <motion.header 
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate("/")}
-              className="gap-2"
+              className="gap-2 font-mono"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Overview
+              Back
             </Button>
-            <Badge variant="outline" className="gap-2">
-              <SettingsIcon className="w-3 h-3" />
-              Framework Setup
-            </Badge>
+            <div className="flex items-center gap-2">
+              <SettingsIcon className="w-4 h-4 text-primary" />
+              <span className="font-mono text-sm font-medium">MECHA-X Settings</span>
+            </div>
           </div>
         </div>
       </motion.header>
 
-      <div className="container mx-auto px-4 py-12 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Hero */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Automate Your
-            <br />
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Trading Framework
+              TradingView Indicator
             </span>
+            <br />
+            Configuration Guide
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Each framework step has corresponding indicator settings. Configure once, 
-            and the system automates the entire 6-step process on your charts.
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
+            Each setting automates a specific part of the 6-step framework. Configure once in TradingView, trade forever.
           </p>
         </motion.div>
 
-        {/* Progress Steps */}
-        <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4">
-          {setupSteps.map((step, idx) => (
-            <div key={step.id} className="flex items-center">
-              <button
-                onClick={() => setActiveStep(step.id)}
-                className={`flex flex-col items-center gap-2 min-w-[80px] transition-all ${
-                  activeStep === step.id ? 'scale-110' : 'scale-90 opacity-50'
-                }`}
-              >
-                <div
-                  className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all ${
-                    activeStep === step.id
-                      ? `bg-gradient-to-br ${step.color} shadow-lg`
-                      : 'bg-card border border-border'
-                  }`}
-                >
-                  <step.icon
-                    className={`w-7 h-7 ${
-                      activeStep === step.id ? 'text-white' : 'text-muted-foreground'
-                    }`}
-                  />
-                </div>
-                <div className="text-xs font-medium">Step {step.id}</div>
-              </button>
-              {idx < setupSteps.length - 1 && (
-                <ChevronRight className="w-5 h-5 text-muted-foreground/40 mx-2" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Current Step Content */}
+        {/* Settings Panel */}
         <motion.div
-          key={activeStep}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
         >
-          <Card className="p-8 md:p-12 border-2">
-            {/* Header */}
-            <div className="flex items-start gap-6 mb-8">
-              <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${currentSetup.color} flex items-center justify-center flex-shrink-0 shadow-xl`}>
-                <IconComponent className="w-10 h-10 text-white" />
-              </div>
-              <div className="flex-1">
-                <Badge className="mb-3">{currentSetup.frameworkStep}</Badge>
-                <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentSetup.title}</h2>
-                <p className="text-xl text-muted-foreground">{currentSetup.subtitle}</p>
-              </div>
+          <Card className="overflow-hidden border-2 shadow-xl">
+            {/* Panel Header */}
+            <div className="bg-muted/50 px-4 py-3 border-b border-border flex items-center justify-between">
+              <h3 className="font-semibold text-sm font-mono">Settings</h3>
+              <Badge className="font-mono text-[10px]">PineScript v5</Badge>
             </div>
 
-            {/* Settings List */}
-            <div className="space-y-6 mb-8">
-              {currentSetup.settings.map((setting, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="p-6 rounded-xl bg-muted/50 border border-border"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="flex-1 space-y-3">
-                      <h3 className="text-lg font-bold">{setting.name}</h3>
-                      
-                      <div>
-                        <div className="text-sm font-medium text-muted-foreground mb-1">Options:</div>
-                        <div className="flex flex-wrap gap-2">
-                          {setting.options.map((option, i) => (
-                            <Badge key={i} variant="secondary" className="font-normal">
-                              {option}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
+            {/* Settings Content */}
+            <div className="max-h-[70vh] overflow-y-auto">
+              
+              {/* Display */}
+              <SettingsGroup 
+                title="Display" 
+                frameworkLink="Global"
+                description="Font: Use Monospace for cleaner technical appearance. Text Size: Global sizing for all labels (Auto = responsive based on chart zoom)."
+              >
+                <SettingRow label="Font">
+                  <Select defaultValue="monospace">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="monospace">Monospace ✓</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Text Size">
+                  <Select defaultValue="normal">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tiny">Tiny</SelectItem>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="large">Large</SelectItem>
+                      <SelectItem value="huge">Huge</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+              </SettingsGroup>
 
-                      <div className="p-3 rounded-lg bg-primary/10 border border-primary/20">
-                        <div className="text-sm font-semibold text-primary mb-1">✓ Recommended:</div>
-                        <div className="text-sm">{setting.recommendation}</div>
-                      </div>
+              {/* HTF Setup */}
+              <SettingsGroup 
+                title="HTF Setup" 
+                frameworkLink="Step 1: HTF Context"
+                description="Auto Mode: Intelligently selects HTFs based on chart TF (5m → 1H/4H/Daily). Manual: Configure 4 custom HTF layers with full control."
+                defaultOpen
+              >
+                <SettingRow label="Mode">
+                  <Select defaultValue="auto">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="auto">Auto ✓</SelectItem>
+                      <SelectItem value="manual">Manual</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
 
-                      <div className="text-sm text-muted-foreground italic">
-                        <strong>Why:</strong> {setting.why}
-                      </div>
-                    </div>
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">Manual TF Layers</p>
+                </div>
+
+                {[1, 2, 3, 4].map((num) => (
+                  <div key={num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
+                    <SettingRow label={`TF ${num}`}>
+                      <Switch defaultChecked={num === 1} />
+                    </SettingRow>
+                    <SettingRow label="Timeframe">
+                      <Select defaultValue={num === 1 ? "4H" : num === 2 ? "1D" : "1W"}>
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="15m">15m</SelectItem>
+                          <SelectItem value="1H">1H</SelectItem>
+                          <SelectItem value="4H">4H</SelectItem>
+                          <SelectItem value="1D">1D</SelectItem>
+                          <SelectItem value="1W">1W</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </SettingRow>
+                    <SettingRow label="Bars">
+                      <Input type="number" defaultValue={10} className="h-7 text-xs w-20 font-mono" />
+                    </SettingRow>
+                    <SettingRow label="Map">
+                      <Switch defaultChecked />
+                    </SettingRow>
                   </div>
-                </motion.div>
-              ))}
+                ))}
+              </SettingsGroup>
+
+              {/* HTF Candles */}
+              <SettingsGroup 
+                title="HTF Candles" 
+                frameworkLink="Step 1: HTF Context"
+                description="Customize bull/bear candle colors and wicks. Offset = distance from price. Gap = space between candles. Bias Arrow = optional trend arrow."
+              >
+                <SettingRow label="Bull">
+                  <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+                <SettingRow label="Bear">
+                  <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+                <SettingRow label="Wick">
+                  <Input type="color" defaultValue="#808080" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+                <SettingRow label="Offset">
+                  <Input type="number" defaultValue={25} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+                <SettingRow label="Gap">
+                  <Input type="number" defaultValue={2} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+                <SettingRow label="Show Bias">
+                  <Switch />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* Chart Mapping */}
+              <SettingsGroup 
+                title="Chart Mapping" 
+                frameworkLink="Step 1: HTF Context"
+                description="BSL/SSL: Mark Buyside/Sellside liquidity (highs/lows where stops sit). Dividers: Mark HTF candle opens/closes. EQ: 50% equilibrium levels for discount/premium zones."
+              >
+                <SettingRow label="BSL/SSL">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Style">
+                  <Select defaultValue="solid">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="solid">━━━</SelectItem>
+                      <SelectItem value="dashed">----</SelectItem>
+                      <SelectItem value="dotted">····</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="↑ Count">
+                  <Input type="number" defaultValue={1} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+                <SettingRow label="↓ Count">
+                  <Input type="number" defaultValue={1} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">Dividers</p>
+                </div>
+                <SettingRow label="Show">
+                  <Switch defaultChecked />
+                </SettingRow>
+
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">EQ Lines</p>
+                </div>
+                <SettingRow label="Show">
+                  <Switch defaultChecked />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* Liquidity Sweeps */}
+              <SettingsGroup 
+                title="Liquidity Sweeps" 
+                frameworkLink="Step 3: Sweep Detection"
+                description="Valid Sweeps: Confirmed sweeps that held (reversal patterns). Invalid: Failed sweeps (price continued). HTF sweeps are more significant than LTF."
+                defaultOpen
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="LTF">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="HTF">
+                  <Switch defaultChecked />
+                </SettingRow>
+
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">Valid Sweeps</p>
+                </div>
+                <SettingRow label="Style">
+                  <Select defaultValue="solid">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="solid">━━━</SelectItem>
+                      <SelectItem value="dashed">----</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Width">
+                  <Input type="number" defaultValue={2} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+                <SettingRow label="Color">
+                  <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">Invalid Sweeps</p>
+                </div>
+                <SettingRow label="Show">
+                  <Switch />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* Pattern Detection */}
+              <SettingsGroup 
+                title="Pattern Detection" 
+                frameworkLink="Step 3: Sweep + C2"
+                description="C2: Mark exact reversal candle where sweep reversed. C3: Expansion candle after reversal. SMT: Divergence between correlated assets (Binary = 2 assets, Triad = 3)."
+              >
+                <SettingRow label="C2">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="C2 Size">
+                  <Select defaultValue="tiny">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tiny">Tiny</SelectItem>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="C3">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="C3 Box">
+                  <Switch />
+                </SettingRow>
+
+                <div className="mt-2 mb-1 px-3">
+                  <p className="text-xs font-medium text-muted-foreground font-mono">SMT</p>
+                </div>
+                <SettingRow label="Enable">
+                  <Switch />
+                </SettingRow>
+                <SettingRow label="Mode">
+                  <Select defaultValue="binary">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="binary">Binary</SelectItem>
+                      <SelectItem value="triad">Triad</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Asset Override">
+                  <Input placeholder="ES,NQ" className="h-7 text-xs font-mono" />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* CISD */}
+              <SettingsGroup 
+                title="CISD" 
+                frameworkLink="Step 4: Entry Zones"
+                description="Change in State of Delivery - marks when market shifts from one phase to another. Your entry level. Targets = comma-separated multipliers (1x, 2-2.5x, 3.5-4x)."
+                defaultOpen
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Style">
+                  <Select defaultValue="solid">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="solid">━━━</SelectItem>
+                      <SelectItem value="dashed">----</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Width">
+                  <Input type="number" defaultValue={2} className="h-7 text-xs w-20 font-mono" />
+                </SettingRow>
+                <SettingRow label="Bull">
+                  <Input type="color" defaultValue="#2d7ec0" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+                <SettingRow label="Bear">
+                  <Input type="color" defaultValue="#d75e5e" className="h-7 w-16 cursor-pointer" />
+                </SettingRow>
+                <SettingRow label="Targets">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="↑ Targets">
+                  <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
+                </SettingRow>
+                <SettingRow label="↓ Targets">
+                  <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* iFVG */}
+              <SettingsGroup 
+                title="iFVG" 
+                frameworkLink="Step 4: Entry Zones"
+                description="Inverse Fair Value Gaps - price inefficiencies left during quick reversals. Acts as support/resistance. Often aligns with CISD for best entries."
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Style">
+                  <Select defaultValue="solid">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="solid">━━━</SelectItem>
+                      <SelectItem value="dashed">----</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Mitigation">
+                  <Switch defaultChecked />
+                </SettingRow>
+              </SettingsGroup>
+
+              {/* Sessions */}
+              <SettingsGroup 
+                title="Sessions" 
+                frameworkLink="Step 2: Session Timing"
+                description="H1-H4 session boxes mark when key moves happen. H2 = Silver Bullet window where sweeps occur. Enable boxes to see session progression visually."
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="H1 Box">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="H2 Box">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="H3 Box">
+                  <Switch />
+                </SettingRow>
+                <SettingRow label="H4 Box">
+                  <Switch />
+                </SettingRow>
+                <SettingRow label="Macro Times">
+                  <Switch defaultChecked />
+                </SettingRow>
+              </SettingsGroup>
+
             </div>
 
-            {/* Result */}
-            <div className="p-6 rounded-xl bg-gradient-to-r from-accent/10 to-primary/10 border-2 border-accent/30">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <div className="font-bold mb-1">Result After Configuration:</div>
-                  <p className="text-sm leading-relaxed">{currentSetup.result}</p>
+            {/* Panel Footer */}
+            <div className="bg-muted/30 px-4 py-3 border-t border-border">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-muted-foreground font-mono">Framework Automation Complete</span>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" onClick={() => navigate('/knowledge')} className="font-mono text-xs">
+                    Read Logic
+                  </Button>
+                  <Button size="sm" onClick={() => navigate('/')} className="font-mono text-xs">
+                    Back to Overview
+                  </Button>
                 </div>
               </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-8 border-t">
-              <Button
-                variant="outline"
-                onClick={() => setActiveStep(Math.max(1, activeStep - 1))}
-                disabled={activeStep === 1}
-              >
-                Previous Step
-              </Button>
-              <div className="text-sm text-muted-foreground">
-                Step {activeStep} of {setupSteps.length}
-              </div>
-              <Button
-                onClick={() => {
-                  if (activeStep < setupSteps.length) {
-                    setActiveStep(activeStep + 1);
-                  } else {
-                    navigate('/');
-                  }
-                }}
-              >
-                {activeStep < setupSteps.length ? 'Next Step' : 'Complete Setup'}
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </Button>
             </div>
           </Card>
         </motion.div>
 
-        {/* Bottom Summary */}
+        {/* Bottom Info */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-16 p-8 rounded-2xl bg-card border-2 border-primary/20 text-center"
+          transition={{ delay: 0.4 }}
+          className="mt-8 p-6 rounded-xl bg-card border text-center"
         >
-          <h3 className="text-2xl font-bold mb-4">Complete System Automation</h3>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
-            Once configured, the entire 6-step framework runs automatically on your TradingView charts. 
-            You'll see HTF levels, session windows, sweep alerts, entry zones, SMT divergence, and trade management—all working together as one unified system.
+          <p className="text-sm text-muted-foreground leading-relaxed font-mono">
+            These settings mirror exactly what's in your TradingView indicator. Configure once, and the entire 6-step framework automates on your charts.
           </p>
-          <Button size="lg" onClick={() => navigate('/knowledge')} variant="outline">
-            Review Framework Logic
-          </Button>
         </motion.div>
       </div>
     </div>
