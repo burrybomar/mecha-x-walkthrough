@@ -28,10 +28,15 @@ const Index = () => {
                 <div className="text-xs text-muted-foreground">Trading Intelligence</div>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')}>
-              <BookOpen className="w-4 h-4 mr-2" />
-              Deep Dive
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/setup')}>
+                Setup Guide
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')}>
+                <BookOpen className="w-4 h-4 mr-2" />
+                Deep Dive
+              </Button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -108,15 +113,25 @@ const Index = () => {
                 See How It Works
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="text-lg px-8 py-6 rounded-full"
-                onClick={() => navigate('/knowledge')}
-              >
-                <BookOpen className="w-5 h-5 mr-2" />
-                Full Documentation
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-8 py-6 rounded-full"
+                  onClick={() => navigate('/setup')}
+                >
+                  Configure Indicators
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-8 py-6 rounded-full"
+                  onClick={() => navigate('/knowledge')}
+                >
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Full Documentation
+                </Button>
+              </div>
             </motion.div>
           </div>
         </motion.section>
@@ -166,14 +181,22 @@ const Index = () => {
                   Want to understand each step deeply?
                 </p>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button 
                   size="lg"
+                  onClick={() => navigate('/setup')}
+                  className="text-lg px-10 py-6 rounded-full"
+                >
+                  Setup Your Indicators
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
                   onClick={() => navigate('/knowledge')}
                   className="text-lg px-10 py-6 rounded-full"
                 >
                   <BookOpen className="w-5 h-5 mr-2" />
-                  Explore Full Knowledge Base
+                  Read Framework Logic
                 </Button>
               </div>
             </motion.div>

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import Index from "./pages/Index";
 import Knowledge from "./pages/Knowledge";
+import Setup from "./pages/Setup";
 import HypeClip from "./pages/HypeClip";
 import RecordClip from "./pages/RecordClip";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/setup" element={<Setup />} />
             <Route path="/hype" element={<HypeClip />} />
             <Route path="/record" element={<RecordClip />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
