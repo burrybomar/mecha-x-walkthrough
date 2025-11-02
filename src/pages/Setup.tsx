@@ -17,14 +17,19 @@ interface SettingRowProps {
 }
 
 const SettingRow = ({ label, children, tooltip }: SettingRowProps) => (
-  <div className="grid grid-cols-[160px_1fr] items-center gap-4 py-1.5 hover:bg-muted/30 px-3 rounded transition-colors group font-mono text-xs">
-    <Label className="text-xs text-muted-foreground group-hover:text-foreground transition-colors" title={tooltip}>
+  <motion.div 
+    className="grid grid-cols-[140px_1fr] md:grid-cols-[160px_1fr] items-center gap-3 md:gap-4 py-2 md:py-1.5 hover:bg-muted/30 px-3 rounded transition-all duration-200 group font-mono text-xs"
+    initial={{ opacity: 0, x: -10 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.2 }}
+  >
+    <Label className="text-[11px] md:text-xs text-muted-foreground group-hover:text-foreground transition-colors" title={tooltip}>
       {label}
     </Label>
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 w-full">
       {children}
     </div>
-  </div>
+  </motion.div>
 );
 
 interface SettingsGroupProps {
@@ -39,27 +44,42 @@ const SettingsGroup = ({ title, description, frameworkLink, children, defaultOpe
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   return (
-    <div className="border-b border-border/50 bg-card/50">
-      <button
+    <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
+      <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-2 py-3 px-4 hover:bg-muted/30 transition-colors text-left"
+        className="w-full flex items-center justify-between gap-2 py-3 md:py-3 px-4 hover:bg-muted/40 transition-all duration-200 text-left touch-manipulation"
+        whileHover={{ x: 2 }}
+        whileTap={{ scale: 0.99 }}
       >
-        <div className="flex items-center gap-2">
-          {isOpen ? <ChevronDown className="w-4 h-4 text-primary" /> : <ChevronRight className="w-4 h-4" />}
-          <span className="font-semibold text-sm">{title}</span>
+        <div className="flex items-center gap-2 md:gap-3">
+          <motion.div
+            animate={{ rotate: isOpen ? 0 : -90 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronDown className="w-4 h-4 md:w-4 md:h-4 text-primary" />
+          </motion.div>
+          <span className="font-semibold text-sm md:text-sm">{title}</span>
         </div>
-        <Badge variant="outline" className="text-[10px] font-mono">{frameworkLink}</Badge>
-      </button>
-      {isOpen && (
+        <Badge variant="outline" className="text-[9px] md:text-[10px] font-mono px-2 py-0.5">{frameworkLink}</Badge>
+      </motion.button>
+      <motion.div
+        initial={false}
+        animate={{
+          height: isOpen ? "auto" : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
         <div className="pb-4">
           <div className="px-4 pb-3 pt-1">
-            <p className="text-xs text-muted-foreground italic leading-relaxed">{description}</p>
+            <p className="text-[11px] md:text-xs text-muted-foreground italic leading-relaxed">{description}</p>
           </div>
           <div className="space-y-0.5">
             {children}
           </div>
         </div>
-      )}
+      </motion.div>
     </div>
   );
 };
@@ -71,44 +91,44 @@ const Setup = () => {
     <div className="min-h-screen bg-background bg-candlestick-pattern">
       {/* Header */}
       <motion.header 
-        className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95"
+        className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="gap-2 font-mono text-xs md:text-sm h-9 md:h-10"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back
+              <span className="hidden sm:inline">Back</span>
             </Button>
             <div className="flex items-center gap-2">
               <SettingsIcon className="w-4 h-4 text-primary" />
-              <span className="font-mono text-sm font-medium">MECHA-X Settings</span>
+              <span className="font-mono text-xs md:text-sm font-medium">MECHA-X Settings</span>
             </div>
           </div>
         </div>
       </motion.header>
 
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
+      <div className="container mx-auto px-3 md:px-4 py-6 md:py-8 max-w-5xl">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-6 md:mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-mono">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 font-mono leading-tight px-2">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               TradingView Indicator
             </span>
             <br />
-            Configuration Guide
+            <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
           </h1>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono px-4">
             Each setting automates a specific part of the 6-step framework. Configure once in TradingView, trade forever.
           </p>
         </motion.div>
@@ -119,15 +139,15 @@ const Setup = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="overflow-hidden border-2 shadow-xl">
+          <Card className="overflow-hidden border-2 shadow-2xl">
             {/* Panel Header */}
-            <div className="bg-muted/50 px-4 py-3 border-b border-border flex items-center justify-between">
+            <div className="bg-muted/50 px-3 md:px-4 py-2.5 md:py-3 border-b border-border flex items-center justify-between">
               <h3 className="font-semibold text-sm font-mono">Settings</h3>
-              <Badge className="font-mono text-[10px]">PineScript v5</Badge>
+              <Badge className="font-mono text-[9px] md:text-[10px]">PineScript v5</Badge>
             </div>
 
             {/* Settings Content */}
-            <div className="max-h-[70vh] overflow-y-auto">
+            <div className="max-h-[70vh] overflow-y-auto overscroll-contain smooth-scroll">
               
               {/* Display */}
               <SettingsGroup 
