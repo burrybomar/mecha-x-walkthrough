@@ -1,1016 +1,317 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Book, Clock, TrendingUp, Target, Layers, Timer, ArrowLeft } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowLeft, BarChart3, Clock, Target, Zap, Layers, TrendingUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
 const Knowledge = () => {
   const navigate = useNavigate();
+  const { scrollYProgress } = useScroll();
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
-  const topics = [
+  const steps = [
     {
-      id: "ttrades",
-      icon: <TrendingUp className="w-5 h-5" />,
-      label: "TTrades Model",
-      gradient: "from-primary via-accent to-primary",
+      id: 1,
+      icon: BarChart3,
+      title: "HTF Context",
+      subtitle: "Start Here: The Big Picture",
+      color: "from-blue-500 to-cyan-500",
+      content: {
+        concept: "Before entering any trade, you need to know WHERE price is relative to institutional levels on higher timeframes (Daily/4H).",
+        why: "Smart money operates on HTF levels. These are your guardrails—trade with them, not against them.",
+        how: [
+          "Mark Daily/4H highs and lows (BSL/SSL liquidity pools)",
+          "Identify premium vs discount zones relative to range",
+          "Look for order blocks and fair value gaps on HTF",
+          "Note previous week/day high/low as magnets"
+        ],
+        rule: "If price is in premium → look for shorts. If in discount → look for longs. No trade in the middle (equilibrium)."
+      }
     },
     {
-      id: "4h-profiling",
-      icon: <Clock className="w-5 h-5" />,
-      label: "4H Candle Profiling",
-      gradient: "from-blue-500 via-cyan-500 to-blue-600",
+      id: 2,
+      icon: Clock,
+      title: "Session Timing",
+      subtitle: "When to Watch: H1-H4 Model",
+      color: "from-purple-500 to-pink-500",
+      content: {
+        concept: "Not all hours are equal. The 4H/1H profiling model tells you WHEN reversals and expansions happen within the trading day.",
+        why: "Institutional moves happen during specific session windows. Trading outside these windows = low probability.",
+        how: [
+          "H1 (Setup): 2-6 AM EST — Range builds, liquidity forms",
+          "H2 (Reversal): 6-10 AM EST — Silver Bullet window, sweeps occur",
+          "H3 (Continuation): 10 AM-2 PM EST — Momentum follows through",
+          "H4 (Delivery): 2-6 PM EST — Final push into target"
+        ],
+        rule: "Focus on H2 window (2-6 AM or 9:30-12 PM). This is where sweeps happen and trades trigger."
+      }
     },
     {
-      id: "profiling-models",
-      icon: <Target className="w-5 h-5" />,
-      label: "1H/4H Models",
-      gradient: "from-emerald-500 via-teal-500 to-emerald-600",
+      id: 3,
+      icon: Target,
+      title: "Liquidity Sweep",
+      subtitle: "The Trigger: BSL/SSL Sweep + C2",
+      color: "from-orange-500 to-red-500",
+      content: {
+        concept: "A liquidity sweep is when price briefly breaks a key level (BSL/SSL) to grab stops, then reverses sharply. C2 (Change of Character) confirms the reversal.",
+        why: "Smart money needs liquidity to enter large positions. They sweep retail stops before moving in their true direction.",
+        how: [
+          "Price breaks HTF high/low with a wick (sweep)",
+          "Immediate strong reversal candle closes back inside range",
+          "C2 pattern: 3-candle reversal structure confirms",
+          "Volume spike during sweep confirms institutional activity"
+        ],
+        rule: "NO sweep = NO trade. Wait for clean sweep + C2 confirmation before proceeding."
+      }
     },
     {
-      id: "liquidity",
-      icon: <Layers className="w-5 h-5" />,
-      label: "IRL/ERL Liquidity",
-      gradient: "from-purple-500 via-pink-500 to-purple-600",
+      id: 4,
+      icon: Zap,
+      title: "CISD Entry",
+      subtitle: "Where to Enter: Change in State of Delivery",
+      color: "from-emerald-500 to-teal-500",
+      content: {
+        concept: "CISD marks the exact zone where price structure changed—from making lower lows to higher lows (or vice versa). This is your entry zone.",
+        why: "CISD zones act as support/resistance because institutional orders were placed there. Price respects these levels.",
+        how: [
+          "After sweep + C2, identify the candle that broke structure",
+          "Mark the order block or iFVG within that candle",
+          "Wait for price to pull back into this zone",
+          "Enter when price taps the CISD level and shows rejection"
+        ],
+        rule: "Stop loss goes just beyond the sweep level. Target is opposite HTF liquidity (H3 = 1:3 RR, H4 = 1:4+ RR)."
+      }
     },
     {
-      id: "ndm",
-      icon: <Target className="w-5 h-5" />,
-      label: "Next Day Model",
-      gradient: "from-green-500 via-emerald-500 to-green-600",
+      id: 5,
+      icon: Layers,
+      title: "SMT Confluence",
+      subtitle: "Optional: Smart Money Technique",
+      color: "from-violet-500 to-purple-500",
+      content: {
+        concept: "SMT (Smart Money Technique) compares correlated assets (e.g., ES vs NQ, EUR vs GBP). Divergence = manipulation, increases probability.",
+        why: "When one asset makes a new high/low but the correlated asset doesn't, it reveals institutional positioning.",
+        how: [
+          "Compare ES and NQ during your setup",
+          "If ES sweeps high but NQ doesn't = bearish SMT divergence",
+          "If NQ sweeps low but ES doesn't = bullish SMT divergence",
+          "Use as confirmation, not requirement"
+        ],
+        rule: "SMT is optional but powerful. It adds 10-20% confidence to your setup when present."
+      }
     },
     {
-      id: "time-range",
-      icon: <Timer className="w-5 h-5" />,
-      label: "Time & Range",
-      gradient: "from-orange-500 via-yellow-500 to-orange-600",
-    },
+      id: 6,
+      icon: TrendingUp,
+      title: "Trade Management",
+      subtitle: "Execution: OSOK (One Shot One Kill)",
+      color: "from-green-500 to-emerald-500",
+      content: {
+        concept: "OSOK means one entry per setup. No averaging, no hoping. Either it works immediately or you're wrong.",
+        why: "Precision execution prevents overtrading and emotional decisions. Trust your analysis or exit cleanly.",
+        how: [
+          "Enter at CISD zone when price taps and rejects",
+          "Move stop to breakeven at 1:1 risk/reward",
+          "Take 50% profits at H3 (1:3 RR)",
+          "Let remaining position run to H4+ (1:4-1:6 RR)"
+        ],
+        rule: "If price doesn't react at CISD within 2-3 candles, exit. No second chances on same setup."
+      }
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Subtle Background */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/98 to-primary/3" />
-      </div>
+    <div className="min-h-screen bg-background relative">
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
 
-      <div className="relative z-10">
-        {/* Header */}
-        <motion.header 
-          className="border-b border-border/40 backdrop-blur-sm bg-background/80"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate("/")}
-                className="gap-2"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back
-              </Button>
-              <div className="flex items-center gap-3">
-                <Book className="w-8 h-8 text-primary" />
-                <div>
-                  <h1 className="text-3xl font-bold font-mono">Knowledge Base</h1>
-                  <p className="text-sm text-muted-foreground">Complete trading system documentation</p>
-                </div>
-              </div>
+      {/* Header */}
+      <motion.header 
+        className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/")}
+              className="gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Overview
+            </Button>
+            <div className="text-sm font-mono text-muted-foreground">
+              6-Step Framework
             </div>
           </div>
-        </motion.header>
+        </div>
+      </motion.header>
 
-        {/* Content */}
-        <main className="container mx-auto px-4 py-12">
-          <Tabs defaultValue="ttrades" className="w-full">
-            <TabsList className="flex w-full overflow-x-auto mb-8 lg:grid lg:grid-cols-6">
-              {topics.map((topic) => (
-                <TabsTrigger 
-                  key={topic.id} 
-                  value={topic.id}
-                  className="gap-2 data-[state=active]:bg-primary/10 whitespace-nowrap flex-shrink-0"
-                >
-                  {topic.icon}
-                  <span className="text-xs sm:text-sm">{topic.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {/* TTrades Model */}
-            <TabsContent value="ttrades" className="space-y-6">
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
-                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
-                    TTrades Foundation
-                  </CardTitle>
-                  <CardDescription>
-                    Core swing framework - how to spot reversals and time your entries
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="concepts">
-                      <AccordionTrigger>Building Blocks</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Opposing Candles</h4>
-                          <p className="text-muted-foreground">When a candle closes opposite to the prior move, that's your reversal signal. Mark these - they're your entry zones.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Fair Value Gaps (FVG)</h4>
-                          <p className="text-muted-foreground">Price gaps = imbalances = magnets. Price loves to fill these. Use them as entry targets when combined with swing points.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Discount vs Premium</h4>
-                          <p className="text-muted-foreground">Buy low, sell high. Discount = below equilibrium (buy zone). Premium = above equilibrium (sell zone). Simple.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="swings">
-                      <AccordionTrigger>Reading Swings</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Candle 2 - The Reversal</h4>
-                          <p className="text-muted-foreground">Second candle closes back inside the range? That's your reversal. This is where the swing forms.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Candle 3 - The Expansion</h4>
-                          <p className="text-muted-foreground">After the reversal, candle 3 should expand toward your target. If it doesn't reach, candle 4 will continue.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Wicks Show The Story</h4>
-                          <p className="text-muted-foreground">Big wick = failed attempt. Small wick = strong direction. Watch where wicks form relative to equilibrium.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="confirmation">
-                      <AccordionTrigger>CISD - Your Confirmation Tool</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">What Is CISD?</h4>
-                          <p className="text-muted-foreground">Change in State of Delivery. When price shifts from making lower lows to higher lows (or vice versa), that's your confirmation the swing is valid.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">How To Use It</h4>
-                          <p className="text-muted-foreground">Wait for CISD before entering. No CISD = no trade. It confirms the structure changed and gives you your target projection.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="poi">
-                      <AccordionTrigger>Where To Enter (POI)</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Opposing Candles</h4>
-                          <p className="text-muted-foreground">These are your entry zones. Price reversed here once, it'll likely react again.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Swing Highs/Lows</h4>
-                          <p className="text-muted-foreground">Previous swing points = future reaction zones. Mark them, use them.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">FVG as Entry</h4>
-                          <p className="text-muted-foreground">Price gaps are magnets. When combined with a swing point, they're gold.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="calendar">
-                      <AccordionTrigger>News & Timing</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">High-Impact News</h4>
-                          <p className="text-muted-foreground">News creates volatility = sweeps liquidity = forms swings. Watch the calendar, trade the reaction.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Monday Setup</h4>
-                          <p className="text-muted-foreground">Monday sets the weekly tone. Look for manipulation early week, expansion mid-to-late week.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="analysis">
-                      <AccordionTrigger>Top-Down Analysis</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Weekly → Daily Direction</h4>
-                          <p className="text-muted-foreground">Weekly gives you the big picture. Daily gives you the swing. Trade with the HTF, time with the LTF.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">4H/1H Entry Timing</h4>
-                          <p className="text-muted-foreground">Lower timeframes confirm your entry. Wait for CISD on 4H/1H before pulling the trigger.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="entries">
-                      <AccordionTrigger>Execution (OSOK)</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">One Shot, One Kill</h4>
-                          <p className="text-muted-foreground">One entry per setup. Either it works or it doesn't. No averaging down, no hoping. Precision.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Works On Any Timeframe</h4>
-                          <p className="text-muted-foreground">Same logic scales. Daily, 4H, 1H - swings form the same way. Pick your timeframe, apply the rules.</p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* 4H Candle Profiling */}
-            <TabsContent value="4h-profiling" className="space-y-6">
-              <Card className="border-blue-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
-                    <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
-                    4H Session Playbook
-                  </CardTitle>
-                  <CardDescription>
-                    Mechanical session-by-session guide - know which 4H candle will reverse and expand
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="overview">
-                      <AccordionTrigger>The Core Idea</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Simple Logic</h4>
-                          <p className="text-muted-foreground">
-                            Daily candle = 6 × 4H candles. One session reverses (wick), next session expands (body). Identify which 4H candle reverses, trade the expansion that follows.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Wick = Reversal, Body = Expansion</h4>
-                          <p className="text-muted-foreground">
-                            When a 4H candle forms a wick, that's the reversal. The body of the next candle(s) = your expansion/trade opportunity.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="structure">
-                      <AccordionTrigger>Key 4H Windows</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Indices - 3 Key Windows</h4>
-                          <p className="text-muted-foreground">
-                            • 2:00-6:00 AM (London open)<br/>
-                            • 6:00-10:00 AM (NY pre-market/open)<br/>
-                            • 10:00-2:00 PM (NY AM - close before lunch 12PM)
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Forex - Same Idea, Different Times</h4>
-                          <p className="text-muted-foreground">
-                            • 1:00-5:00 AM<br/>
-                            • 5:00-9:00 AM<br/>
-                            • 9:00-1:00 PM (especially on 10AM news days)
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="patterns">
-                      <AccordionTrigger>Session Patterns (When To Trade)</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Asia Reversal → London/NY Expansion</h4>
-                          <p className="text-muted-foreground">
-                            If Asia (18:00 or 22:00 candle) reverses, London and NY will expand that move.<br/>
-                            Trade London open and NY continuation.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">London Reversal → NY Expansion</h4>
-                          <p className="text-muted-foreground">
-                            Most common. London 2AM-6AM candle forms the reversal wick, NY session expands.<br/>
-                            Enter on NY open continuation.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">NY Reversal (News Days)</h4>
-                          <p className="text-muted-foreground">
-                            When Asia/London fail to reverse, NY will handle it (usually around news).<br/>
-                            6AM-10AM or 10AM candle reverses, then expands into close.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="entries-4h">
-                      <AccordionTrigger>How To Enter</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">On Reversal Candles</h4>
-                          <p className="text-muted-foreground">Wait for CISD confirmation on M15. Then enter the reversal candle's OB/FVG.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">On Continuation Candles</h4>
-                          <p className="text-muted-foreground">After reversal confirmed, enter continuation candle OBs toward your target.</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Timing Is Everything</h4>
-                          <p className="text-muted-foreground">
-                            • Watch 4H open<br/>
-                            • Drop to M15 for CISD<br/>
-                            • Enter next continuation move
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="advanced">
-                      <AccordionTrigger>Advanced Patterns</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Manipulation → Reversal</h4>
-                          <p className="text-muted-foreground">
-                            HRLR (High Resistance Run) = manipulation sweep. LRLR (Low Resistance Run) = true move. Watch for the fake-out before the breakout.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Protected vs Unprotected Swings</h4>
-                          <p className="text-muted-foreground">
-                            Protected swing = OB into key level, won't get touched again. Unprotected swing = gets swept. Trade FROM protected swings TOWARD unprotected ones.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Session Profiles</h4>
-                          <p className="text-muted-foreground">
-                            London Reversal = wick in London session, body in NY. NY Reversal = both wick and body in NY (happens on news/high-volatility days).
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* IRL/ERL Liquidity */}
-            <TabsContent value="liquidity" className="space-y-6">
-              <Card className="border-purple-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono">
-                    <Layers className="w-6 h-6" />
-                    Internal & External Range Liquidity
-                  </CardTitle>
-                  <CardDescription>
-                    Understanding liquidity relationships and their impact on price movement
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="internal">
-                      <AccordionTrigger>Internal Liquidity (IRL)</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <p className="text-muted-foreground">
-                            Internal Range Liquidity refers to liquidity pools that exist within an established range. These are interim highs and lows that price may sweep before making its true directional move.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Characteristics</h4>
-                          <p className="text-muted-foreground">
-                            • Created by consolidation within a range<br/>
-                            • Often swept before external liquidity<br/>
-                            • Can be used to refine entries
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="external">
-                      <AccordionTrigger>External Liquidity (ERL)</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <p className="text-muted-foreground">
-                            External Range Liquidity refers to liquidity pools that exist outside an established range—typically swing highs and lows that represent major liquidity objectives.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Buyside Liquidity</h4>
-                          <p className="text-muted-foreground">
-                            Resting buy stops above swing highs—targets for bearish moves.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Sellside Liquidity</h4>
-                          <p className="text-muted-foreground">
-                            Resting sell stops below swing lows—targets for bullish moves.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="relationship">
-                      <AccordionTrigger>IRL/ERL Relationship</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <p className="text-muted-foreground">
-                            The relationship between internal and external liquidity helps determine:
-                          </p>
-                          <ul className="list-disc list-inside space-y-2 text-muted-foreground mt-2">
-                            <li>Whether price will sweep internal liquidity before external</li>
-                            <li>If the current range is accumulation or distribution</li>
-                            <li>Where the true Draw on Liquidity (DOL) is located</li>
-                            <li>Optimal entry timing based on liquidity sweeps</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Trading Application</h4>
-                          <p className="text-muted-foreground">
-                            Watch for internal liquidity sweeps first, then anticipate moves toward external liquidity targets. This sequence helps avoid false moves and improves entry timing.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Next Day Model */}
-            <TabsContent value="ndm" className="space-y-6">
-              <Card className="border-green-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono">
-                    <Target className="w-6 h-6" />
-                    MMXM's Next Day Model
-                  </CardTitle>
-                  <CardDescription>
-                    A secret to predicting daily bias and expansion candles
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="rules">
-                      <AccordionTrigger>Model Rules</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">Core Principle</h4>
-                          <p className="text-muted-foreground">
-                            Price must reach a HTF PD array before the model activates.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Candle 1 - Draw on Liquidity (DOL)</h4>
-                          <p className="text-muted-foreground">
-                            When Candle 2 (reversal candle at HTF level) fails to close above/below the previous candle and instead closes back inside the range, Candle 1 becomes the DOL.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Candle 3 - Expansion</h4>
-                          <p className="text-muted-foreground">
-                            Candle 3 will be an OLHC or OHLC candle (expansion candle).
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Candle 4 - Continued Expansion</h4>
-                          <p className="text-muted-foreground">
-                            If Candle 3 does not reach the Candle 1 draw, Candle 4 will also be considered an expansion candle.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="scenarios">
-                      <AccordionTrigger>Trading Scenarios</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">1st Scenario</h4>
-                          <p className="text-muted-foreground">
-                            Price reaches HTF PDA, Candle 2 fails to break structure, closes inside range, Candle 3 expands toward Candle 1 DOL.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">2nd Scenario</h4>
-                          <p className="text-muted-foreground">
-                            Similar to 1st but Candle 3 doesn't fully reach DOL, so Candle 4 continues expansion.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">3rd Scenario</h4>
-                          <p className="text-muted-foreground">
-                            If liquidity or imbalance resides below the Candle 1 draw, target that as extended objective.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="confirmation-ndm">
-                      <AccordionTrigger>Reversal Confirmation</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <p className="text-muted-foreground">
-                            The reversal can be confirmed through CISD on 4H or 1H timeframe.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">What to Look For</h4>
-                          <p className="text-muted-foreground">
-                            • HTF PDA engagement<br/>
-                            • Candle 2 failure to sustain direction<br/>
-                            • CISD confirmation on lower timeframe<br/>
-                            • Clear DOL target from Candle 1
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Time & Range */}
-            <TabsContent value="time-range" className="space-y-6">
-              <Card className="border-orange-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono">
-                    <Timer className="w-6 h-6" />
-                    Time and Range in a Candle
-                  </CardTitle>
-                  <CardDescription>
-                    Understanding how candles form and anticipating expansion vs consolidation
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="fundamentals">
-                      <AccordionTrigger>Time & Range Fundamentals</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">Time in a Candle</h4>
-                          <p className="text-muted-foreground">
-                            Each candle has a specific time window to expand:<br/>
-                            • Daily candle = 24 hours<br/>
-                            • Hourly candle = 60 minutes<br/>
-                            • 4H candle = 4 hours
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Range in a Candle</h4>
-                          <p className="text-muted-foreground">
-                            Within its time window, a candle must create range—either by creating wick then body, or body then wick. The range pattern reveals market intention.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">ICT Quote</h4>
-                          <p className="text-muted-foreground italic">
-                            "Time first, price later."
-                          </p>
-                          <p className="text-muted-foreground mt-2">
-                            Market expands during specific times: news releases, equity opens (NYSE 9:30), and session opens (London, NY, Asia).
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="expansion">
-                      <AccordionTrigger>Trading the Expansion</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">Expansion Signals</h4>
-                          <p className="text-muted-foreground">
-                            If a candle is going to expand, it often:<br/>
-                            • Creates a small wick early<br/>
-                            • Uses less time for the wick<br/>
-                            • Leaves more time for directional body expansion
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Example</h4>
-                          <p className="text-muted-foreground">
-                            If an hourly candle prints a small wick in the first 5–10 minutes, the remaining 50–55 minutes may expand directionally—giving a trading opportunity.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="consolidation">
-                      <AccordionTrigger>When Candles Consolidate</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">Consolidation Signals</h4>
-                          <p className="text-muted-foreground">
-                            If a new candle:<br/>
-                            • Takes too much time to create opposing run<br/>
-                            • Struggles to close above/below the opposing run<br/>
-                            • Doesn't engage with POI or SMT
-                          </p>
-                          <p className="text-muted-foreground mt-2">
-                            That's a red flag for consolidation.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Key Concept</h4>
-                          <p className="text-muted-foreground italic">
-                            "When price takes time, it engineers liquidity."
-                          </p>
-                          <p className="text-muted-foreground mt-2">
-                            The candle is likely forming a tight range to later manipulate and reverse—classic AMD (Accumulation, Manipulation, Distribution) behavior.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="engagement">
-                      <AccordionTrigger>How to Engage</AccordionTrigger>
-                      <AccordionContent className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-2">Setup Requirements</h4>
-                          <p className="text-muted-foreground">
-                            • Wait for swing point to form<br/>
-                            • Look for opposing runs/OBs forming quickly<br/>
-                            • Preferably, OB should engage with POI (FVG, OB, Range high/low, SMT divergence)
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Non-POI OB (Low Quality)</h4>
-                          <p className="text-muted-foreground">
-                            If an opposing run or OB forms without engaging any PD Array, SMT divergence, or clear POI, it's an unprotected swing—likely to be hunted first before the real move.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Quality Filter</h4>
-                          <p className="text-muted-foreground">
-                            Only trade OBs that engage with clear POIs and form quickly within the candle's time window.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* 1H/4H Profiling Models */}
-            <TabsContent value="profiling-models" className="space-y-6">
-              <Card className="border-emerald-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-mono text-lg sm:text-xl">
-                    <Target className="w-5 h-5 sm:w-6 sm:h-6" />
-                    1H/4H Profiling Models
-                  </CardTitle>
-                  <CardDescription>
-                    Complete entry system with automated mapping - CISD retest entries with target-based market phases
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="foundation">
-                      <AccordionTrigger>The Core Framework</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">What Is 1H/4H Profiling?</h4>
-                          <p className="text-muted-foreground">
-                            A systematic approach to trading based on higher timeframe (HTF) structure. You identify HTF sweeps, wait for CISD formation, enter on the retest, and target specific zones based on range projections. Simple, mechanical, repeatable.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Why 1H and 4H?</h4>
-                          <p className="text-muted-foreground">
-                            These timeframes filter out noise while giving precise entry timing:<br/>
-                            • <strong>4H:</strong> Defines your major swing structure and direction<br/>
-                            • <strong>1H:</strong> Refines entries within the 4H framework<br/>
-                            • Together they provide the sweet spot - not too fast, not too slow
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">The Three-Step Process</h4>
-                          <p className="text-muted-foreground">
-                            1. <strong>Sweep:</strong> HTF level gets taken out (BSL/SSL)<br/>
-                            2. <strong>CISD:</strong> Change in state forms at the reversal<br/>
-                            3. <strong>Retest:</strong> Price returns to CISD - you enter here
-                          </p>
-                        </div>
-                        <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
-                          <h4 className="font-semibold mb-2 text-cyan-600 dark:text-cyan-400">🤖 MECHA-X Automation</h4>
-                          <p className="text-muted-foreground">
-                            Manually, you'd need to mark every HTF candle, draw BSL/SSL lines, calculate ranges, project targets... exhausting. MECHA-X does it all automatically:<br/>
-                            • Auto-detects and overlays HTF candles on your chart<br/>
-                            • Draws BSL/SSL liquidity lines automatically<br/>
-                            • Marks CISD levels when they form<br/>
-                            • Projects 1x, 2x, 2.5x, 3.5x, 4x targets instantly<br/>
-                            You just watch for the retest and enter. Everything else is mapped.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="htf-sweep">
-                      <AccordionTrigger>Step 1: HTF Sweep Detection</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">What Is An HTF Sweep?</h4>
-                          <p className="text-muted-foreground">
-                            When price takes out a higher timeframe high or low (BSL/SSL), that's a sweep. It's hunting liquidity above/below key levels. After the sweep, price typically reverses - that's your opportunity.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Valid vs Invalid Sweeps</h4>
-                          <p className="text-muted-foreground">
-                            <strong>Valid:</strong> Price sweeps the level and reverses (holds). Forms a wick and closes back inside the range. This creates your entry setup.<br/><br/>
-                            <strong>Invalid:</strong> Price sweeps but continues through without reversing. These are not tradeable - price hasn't found liquidity yet.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">LTF vs HTF Sweeps</h4>
-                          <p className="text-muted-foreground">
-                            Lower timeframe sweeps (chart TF) happen constantly - noise. Higher timeframe sweeps (4H, Daily, Weekly) are significant events. Always prioritize HTF sweeps for main entries.
-                          </p>
-                        </div>
-                        <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/30">
-                          <h4 className="font-semibold mb-2 text-blue-600 dark:text-blue-400">🤖 MECHA-X HTF Detection</h4>
-                          <p className="text-muted-foreground">
-                            Manually tracking HTF sweeps across multiple timeframes is tedious. MECHA-X:<br/>
-                            • Overlays 4H, Daily, Weekly candles on any chart timeframe<br/>
-                            • Auto mode intelligently selects HTFs (5m chart → shows 1H, 4H, Daily)<br/>
-                            • Manual mode lets you choose up to 4 custom HTFs<br/>
-                            • Marks valid sweeps with visual indicators<br/>
-                            • Shows invalid sweeps in gray (so you don't trade them)<br/>
-                            You see everything that matters, filtered automatically.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="cisd-formation">
-                      <AccordionTrigger>Step 2: CISD Formation</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">What Is CISD?</h4>
-                          <p className="text-muted-foreground">
-                            Change in State of Delivery. When price shifts from making lower lows to higher lows (bullish CISD) or higher highs to lower highs (bearish CISD), that's your confirmation. It marks the exact level where market structure changed.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Why CISD Is Critical</h4>
-                          <p className="text-muted-foreground">
-                            No CISD = no trade. It's your proof that the sweep worked and reversal is confirmed. CISD becomes your:<br/>
-                            • Entry level (on retest)<br/>
-                            • Stop loss reference point<br/>
-                            • Anchor for target projections
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">How It Forms After Sweep</h4>
-                          <p className="text-muted-foreground">
-                            1. HTF level gets swept (BSL/SSL taken out)<br/>
-                            2. Price reverses with a wick (rejection)<br/>
-                            3. Next candle(s) close back inside the range<br/>
-                            4. CISD forms at the point where structure changed<br/>
-                            5. Now wait for retest of this level
-                          </p>
-                        </div>
-                        <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
-                          <h4 className="font-semibold mb-2 text-orange-600 dark:text-orange-400">🤖 MECHA-X CISD Detection</h4>
-                          <p className="text-muted-foreground">
-                            Spotting CISD manually requires constant monitoring. MECHA-X:<br/>
-                            • Detects CISD formation automatically<br/>
-                            • Draws horizontal line at exact CISD level<br/>
-                            • Labels it clearly (bull/bear color coded)<br/>
-                            • Projects target lines (1x, 2x, 2.5x, 3.5x, 4x) from CISD instantly<br/>
-                            • Updates in real-time as new CISDs form<br/>
-                            The moment CISD forms, you have your complete trade map ready.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="retest-entry">
-                      <AccordionTrigger>Step 3: The Retest Entry</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Why Wait For Retest?</h4>
-                          <p className="text-muted-foreground">
-                            After CISD forms, price usually expands away quickly. Chasing is low probability. Instead, wait for price to pull back to the CISD level - this is your entry zone. The retest confirms the level holds.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Perfect Retest Entry</h4>
-                          <p className="text-muted-foreground">
-                            Watch for these signals:<br/>
-                            • Price returns to CISD zone<br/>
-                            • Forms a rejection wick (shows level is respected)<br/>
-                            • Next candle closes in direction of trend<br/>
-                            • Enter on that continuation candle<br/>
-                            • Stop goes below/above the CISD level
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Advanced: iFVG + CISD Combo</h4>
-                          <p className="text-muted-foreground">
-                            Best entries happen when CISD aligns with an iFVG (inverse fair value gap). The iFVG is the gap formed during the reversal - it acts as a magnet. When price retests into both CISD and iFVG zone, you have maximum confluence.
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-2">Timeframe For Entry</h4>
-                          <p className="text-muted-foreground">
-                            If your CISD formed on 4H, drop to 1H for entry timing. If on 1H, use 15m. The lower timeframe gives you precise entry candle while respecting the HTF structure.
-                          </p>
-                        </div>
-                        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <h4 className="font-semibold mb-2 text-emerald-600 dark:text-emerald-400">🤖 MECHA-X Entry Assistance</h4>
-                          <p className="text-muted-foreground">
-                            MECHA-X makes retest entries obvious:<br/>
-                            • CISD line stays on chart as reference<br/>
-                            • iFVG boxes show precise entry zones<br/>
-                            • BSL/SSL lines show context<br/>
-                            • Chart mapping shows EQ levels<br/>
-                            • You simply watch for price to touch CISD, form rejection, and enter<br/>
-                            All levels are pre-drawn. You focus on execution, not analysis.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="target-phases">
-                      <AccordionTrigger>Target Zones & Market Phases</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <h4 className="font-semibold mb-2 text-emerald-600 dark:text-emerald-400">Primary Targets: 1x & 2-2.5x</h4>
-                          <p className="text-muted-foreground">
-                            Most trades complete in this range. These are your main profit zones:<br/>
-                            • <strong>1x:</strong> First target - take 50% profit here<br/>
-                            • <strong>2-2.5x:</strong> Main target - take remaining 50%
-                          </p>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-2">1x - 1.5x: Accumulation Phase</h4>
-                          <p className="text-muted-foreground">
-                            This is where smart money builds positions. Price consolidates, might chop sideways (re-accumulation). What to do:<br/>
-                            • Take partial profits at 1x (50%)<br/>
-                            • Move stop to breakeven<br/>
-                            • Expect consolidation before next leg<br/>
-                            • Let runners ride to 2x
-                          </p>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-2">2x - 2.5x: Manipulation Phase</h4>
-                          <p className="text-muted-foreground">
-                            The zone where price creates final traps before distribution. Characteristics:<br/>
-                            • Sweeps highs/lows to grab liquidity<br/>
-                            • False breakouts common<br/>
-                            • <strong>Take majority of profits here</strong><br/>
-                            • Often the last push before reversal<br/>
-                            Don't get greedy. 2-2.5x is your exit zone.
-                          </p>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-2">3.5x - 4x: Distribution Phase</h4>
-                          <p className="text-muted-foreground">
-                            Extended targets rarely hit (20-30% of trades). This is where institutions exit:<br/>
-                            • High risk - reversal likely<br/>
-                            • Only hold small runner position<br/>
-                            • If price reaches here, exit immediately<br/>
-                            • Don't chase if you missed the entry<br/>
-                            Greed kills accounts. Respect the phases.
-                          </p>
-                        </div>
-
-                        <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/30">
-                          <h4 className="font-semibold mb-2 text-purple-600 dark:text-purple-400">🤖 MECHA-X Target Projections</h4>
-                          <p className="text-muted-foreground">
-                            Calculating targets manually from CISD is time-consuming and error-prone. MECHA-X:<br/>
-                            • Auto-projects all targets (1x, 2x, 2.5x, 3.5x, 4x) the instant CISD forms<br/>
-                            • Draws horizontal lines at each target level<br/>
-                            • Color-codes them (bull/bear)<br/>
-                            • Updates dynamically as new CISDs form<br/>
-                            • Shows you exactly where to take profits<br/>
-                            You never guess. Every target is pre-calculated and drawn on your chart.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="complete-mapping">
-                      <AccordionTrigger>Complete Trade Mapping System</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">What Manual Trading Looks Like</h4>
-                          <p className="text-muted-foreground">
-                            Without automation, you need to:<br/>
-                            1. Manually add 4H, Daily, Weekly candles to your 5m/15m chart<br/>
-                            2. Mark every swing high/low for BSL/SSL<br/>
-                            3. Draw horizontal lines at each liquidity level<br/>
-                            4. Calculate EQ (50%) for each HTF candle<br/>
-                            5. Identify sweeps manually<br/>
-                            6. Mark CISD when it forms<br/>
-                            7. Calculate range size<br/>
-                            8. Project 1x, 2x, 2.5x, 3.5x, 4x from CISD<br/>
-                            9. Draw all projection lines<br/>
-                            10. Track iFVG zones<br/>
-                            11. Update everything as new candles form<br/><br/>
-                            This takes hours and is prone to mistakes.
-                          </p>
-                        </div>
-
-                        <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
-                          <h4 className="font-semibold mb-2 text-cyan-600 dark:text-cyan-400">🤖 MECHA-X: Instant Complete Mapping</h4>
-                          <p className="text-muted-foreground mb-3">
-                            MECHA-X does ALL of the above automatically in real-time:
-                          </p>
-                          <ul className="space-y-2 text-muted-foreground">
-                            <li><strong>✓ HTF Overlay:</strong> Auto/Manual mode overlays 1-4 HTFs on any chart</li>
-                            <li><strong>✓ BSL/SSL Lines:</strong> Automatically draws buyside/sellside liquidity at highs/lows</li>
-                            <li><strong>✓ EQ Lines:</strong> 50% equilibrium levels drawn for each HTF candle</li>
-                            <li><strong>✓ Sweep Detection:</strong> Marks valid sweeps (colored), invalid sweeps (gray)</li>
-                            <li><strong>✓ CISD Lines:</strong> Detects and draws CISD the moment it forms</li>
-                            <li><strong>✓ Target Projections:</strong> All 1x-4x targets projected instantly</li>
-                            <li><strong>✓ iFVG Boxes:</strong> Fair value gaps auto-detected and highlighted</li>
-                            <li><strong>✓ C2/C3 Labels:</strong> Marks reversal and expansion candles</li>
-                            <li><strong>✓ Session Tracking:</strong> Shows Silver Bullet and Macro windows</li>
-                            <li><strong>✓ Real-time Updates:</strong> Everything updates live as new candles form</li>
-                          </ul>
-                          <p className="text-muted-foreground mt-3 font-semibold">
-                            Result: Your chart becomes a complete trading map. Every level, every target, every zone - pre-drawn. You just execute.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="execution-plan">
-                      <AccordionTrigger>Trade Execution Checklist</AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm sm:text-base">
-                        <div>
-                          <h4 className="font-semibold mb-2">Pre-Trade (MECHA-X Does This)</h4>
-                          <ol className="list-decimal list-inside text-muted-foreground space-y-1">
-                            <li>HTF candles overlaid ✓</li>
-                            <li>BSL/SSL liquidity lines drawn ✓</li>
-                            <li>EQ levels marked ✓</li>
-                            <li>Valid sweeps highlighted ✓</li>
-                            <li>CISD levels detected ✓</li>
-                            <li>Targets projected ✓</li>
-                            <li>iFVG zones shown ✓</li>
-                          </ol>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-2">Your Job (Execution)</h4>
-                          <ol className="list-decimal list-inside text-muted-foreground space-y-2">
-                            <li>Wait for valid HTF sweep (MECHA-X shows it)</li>
-                            <li>Confirm CISD formation (line appears on chart)</li>
-                            <li>Wait for price to retest CISD level</li>
-                            <li>Watch for rejection wick at CISD</li>
-                            <li>Enter on continuation candle</li>
-                            <li>Place stop below/above CISD line</li>
-                            <li>Target 1: 1x (take 50% profit) - line is pre-drawn</li>
-                            <li>Target 2: 2-2.5x (take 50% profit) - line is pre-drawn</li>
-                            <li>If strong, hold runner to 3.5-4x - line is pre-drawn</li>
-                          </ol>
-                        </div>
-
-                        <div className="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
-                          <h4 className="font-semibold mb-2 text-yellow-600 dark:text-yellow-400">⚠️ Risk Management Rules</h4>
-                          <p className="text-muted-foreground">
-                            • Risk only 1-2% per trade<br/>
-                            • Stop goes beyond CISD level (reference line on chart)<br/>
-                            • Move stop to breakeven at 1x target<br/>
-                            • Take 50% at 1x, 50% at 2-2.5x<br/>
-                            • Don't hold into 3.5-4x distribution zone<br/>
-                            • If price doesn't retest CISD, no trade
-                          </p>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-2">Summary: Automation Changes Everything</h4>
-                          <p className="text-muted-foreground">
-                            Manual 1H/4H profiling = hours of work per trade. MECHA-X profiling = everything mapped automatically. You focus on execution, not analysis. That's the power of automation.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
-
-        {/* Footer */}
-        <footer className="border-t border-border/40 backdrop-blur-sm bg-background/80 py-8">
-          <div className="container mx-auto px-4 text-center text-muted-foreground font-mono text-sm">
-            <p>MECHA-X Trading System • Time-Based HTF Sweep Framework</p>
+      {/* Hero */}
+      <section className="py-20 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            The Complete
+            <br />
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Knowledge Base
+            </span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Everything flows together. Each step builds on the previous. 
+            Read this once, linearly, to understand how the entire system connects.
+          </p>
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <span>Scroll to begin</span>
+            <ArrowDown className="w-4 h-4 animate-bounce" />
           </div>
-        </footer>
+        </motion.div>
+      </section>
+
+      {/* Steps */}
+      <div className="relative">
+        {/* Connection Line */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-border hidden md:block" />
+
+        {steps.map((step, index) => {
+          const isEven = index % 2 === 0;
+          const IconComponent = step.icon;
+
+          return (
+            <motion.section
+              key={step.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative py-16 px-4"
+            >
+              <div className="container mx-auto max-w-6xl">
+                <div className={`flex flex-col md:flex-row items-center gap-8 ${isEven ? '' : 'md:flex-row-reverse'}`}>
+                  {/* Content */}
+                  <div className="flex-1">
+                    <motion.div
+                      initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                      className="p-8 rounded-2xl bg-card border border-border shadow-lg"
+                    >
+                      {/* Header */}
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center flex-shrink-0`}>
+                          <IconComponent className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-mono text-muted-foreground mb-1">
+                            Step {step.id} of {steps.length}
+                          </div>
+                          <h2 className="text-3xl font-bold">{step.title}</h2>
+                          <p className="text-lg text-muted-foreground">{step.subtitle}</p>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-lg font-bold mb-2 text-primary">What Is It?</h3>
+                          <p className="text-muted-foreground leading-relaxed">{step.content.concept}</p>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-bold mb-2 text-primary">Why It Matters</h3>
+                          <p className="text-muted-foreground leading-relaxed">{step.content.why}</p>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-bold mb-3 text-primary">How To Apply</h3>
+                          <div className="space-y-2">
+                            {step.content.how.map((item, i) => (
+                              <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-background/80">
+                                <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                  <div className="w-2 h-2 rounded-full bg-primary" />
+                                </div>
+                                <p className="text-sm leading-relaxed">{item}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="p-4 rounded-lg bg-accent/10 border-2 border-accent/30">
+                          <h3 className="text-sm font-bold mb-2 text-accent">Golden Rule:</h3>
+                          <p className="text-sm leading-relaxed">{step.content.rule}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Step Number (Desktop Only) */}
+                  <div className="hidden md:block relative z-10">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, type: "spring" }}
+                      className="w-20 h-20 rounded-full bg-background border-4 border-primary flex items-center justify-center"
+                    >
+                      <span className="text-3xl font-bold text-primary">{step.id}</span>
+                    </motion.div>
+                  </div>
+
+                  {/* Spacer for alignment */}
+                  <div className="flex-1 hidden md:block" />
+                </div>
+
+                {/* Arrow to next step */}
+                {index < steps.length - 1 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="flex justify-center mt-12"
+                  >
+                    <ArrowDown className="w-8 h-8 text-primary animate-bounce" />
+                  </motion.div>
+                )}
+              </div>
+            </motion.section>
+          );
+        })}
       </div>
+
+      {/* Final CTA */}
+      <section className="py-32 px-4 bg-muted/30">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Now You Understand the System
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Every piece connects. HTF → Sessions → Sweep → CISD → SMT → Execute. 
+            Nothing is random. Nothing is disconnected.
+          </p>
+          <Button 
+            size="lg"
+            onClick={() => navigate('/')}
+            className="text-lg px-10 py-6 rounded-full"
+          >
+            Back to Overview
+          </Button>
+        </motion.div>
+      </section>
     </div>
   );
 };
