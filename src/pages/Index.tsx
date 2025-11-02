@@ -132,6 +132,13 @@ const Index = () => {
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
             <div className="text-center max-w-3xl mx-auto px-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setActiveTab("overview")} 
+                className="mb-4"
+              >
+                ← Back to Overview
+              </Button>
               <h2 className="text-5xl font-bold mb-4">HTF Analysis</h2>
               <p className="text-xl text-muted-foreground">Higher timeframe context and key levels</p>
             </div>
@@ -142,6 +149,13 @@ const Index = () => {
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
             <div className="text-center max-w-3xl mx-auto px-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setActiveTab("overview")} 
+                className="mb-4"
+              >
+                ← Back to Overview
+              </Button>
               <h2 className="text-5xl font-bold mb-4">Liquidity Detection</h2>
               <p className="text-xl text-muted-foreground">BSL/SSL sweeps and entry signals</p>
             </div>
@@ -152,6 +166,13 @@ const Index = () => {
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
             <div className="text-center max-w-3xl mx-auto px-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setActiveTab("overview")} 
+                className="mb-4"
+              >
+                ← Back to Overview
+              </Button>
               <h2 className="text-5xl font-bold mb-4">CISD Zones</h2>
               <p className="text-xl text-muted-foreground">Change in state of delivery</p>
             </div>
@@ -162,6 +183,13 @@ const Index = () => {
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
             <div className="text-center max-w-3xl mx-auto px-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setActiveTab("overview")} 
+                className="mb-4"
+              >
+                ← Back to Overview
+              </Button>
               <h2 className="text-5xl font-bold mb-4">Session Models</h2>
               <p className="text-xl text-muted-foreground">Time-based trading windows</p>
             </div>
@@ -172,6 +200,13 @@ const Index = () => {
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
             <div className="text-center max-w-3xl mx-auto px-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => setActiveTab("overview")} 
+                className="mb-4"
+              >
+                ← Back to Overview
+              </Button>
               <Settings className="w-16 h-16 mx-auto mb-6 text-primary" />
               <h2 className="text-5xl font-bold mb-4">TradingView Settings</h2>
               <p className="text-xl text-muted-foreground">Configure all MECHA-X indicators</p>
