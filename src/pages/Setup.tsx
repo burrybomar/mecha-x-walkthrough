@@ -440,31 +440,16 @@ const Setup = () => {
                     </SelectContent>
                   </Select>
                 </SettingRow>
-                <SettingRow label="Mitigation">
-                  <Switch defaultChecked />
-                </SettingRow>
               </SettingsGroup>
 
               {/* Sessions */}
               <SettingsGroup 
                 title="Sessions" 
                 frameworkLink="Step 2: Session Timing"
-                description="H1-H4 session boxes mark when key moves happen. H2 = Silver Bullet window where sweeps occur. Enable boxes to see session progression visually."
+                description="Session markers for timing key moves. Macro Times highlight specific high-probability windows where sweeps and reversals typically occur."
               >
                 <SettingRow label="Enable">
                   <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="H1 Box">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="H2 Box">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="H3 Box">
-                  <Switch />
-                </SettingRow>
-                <SettingRow label="H4 Box">
-                  <Switch />
                 </SettingRow>
                 <SettingRow label="Macro Times">
                   <Switch defaultChecked />
