@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { BookOpen, BarChart3, Target, Workflow, Zap, Layers, GitCompare, Clock, Settings } from "lucide-react";
+import { BookOpen, BarChart3, Target, Zap, Clock, Settings } from "lucide-react";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { HTFSlides } from "@/components/HTFSlides";
 import { LiquiditySlides } from "@/components/LiquiditySlides";
 import { CISDSlides } from "@/components/CISDSlides";
 import { SessionSlides } from "@/components/SessionSlides";
-import { PatternsSlides } from "@/components/PatternsSlides";
-import { IFVGSlides } from "@/components/IFVGSlides";
-import { SMTSlides } from "@/components/SMTSlides";
 import { TradingViewSettings } from "@/components/TradingViewSettings";
+import { TradingFrameworkFlow } from "@/components/TradingFrameworkFlow";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -34,13 +32,10 @@ const Index = () => {
   };
 
   const features = [
-    { icon: BarChart3, title: "HTF Sweeps", desc: "4H/Daily overlay", tab: "htf" },
-    { icon: Target, title: "BSL/SSL", desc: "Liquidity sweeps", tab: "liquidity" },
-    { icon: Workflow, title: "C2 Labels", desc: "Reversal patterns", tab: "patterns" },
-    { icon: Zap, title: "CISD", desc: "State changes", tab: "cisd" },
-    { icon: Layers, title: "iFVG", desc: "Fair value gaps", tab: "ifvg" },
-    { icon: GitCompare, title: "SMT", desc: "Divergence", tab: "smt" },
-    { icon: Clock, title: "Sessions", desc: "Time windows", tab: "sessions" },
+    { icon: BarChart3, title: "HTF Analysis", desc: "Daily/4H levels", tab: "htf" },
+    { icon: Target, title: "Liquidity", desc: "BSL/SSL sweeps", tab: "liquidity" },
+    { icon: Zap, title: "CISD", desc: "Entry zones", tab: "cisd" },
+    { icon: Clock, title: "Sessions", desc: "H1-H4 timing", tab: "sessions" },
     { icon: Settings, title: "Settings", desc: "Configure", tab: "settings" },
   ];
 
@@ -85,13 +80,22 @@ const Index = () => {
               </div>
             </motion.section>
 
-            {/* Features Grid */}
-            <motion.section {...scaleIn} className="max-w-6xl mx-auto px-4">
+            {/* Framework Flow */}
+            <motion.section {...scaleIn} className="max-w-7xl mx-auto px-4">
               <div className="text-center mb-16">
-                <h2 className="text-5xl md:text-6xl font-bold mb-4">Seven Indicators.<br />One Framework.</h2>
-                <p className="text-xl text-muted-foreground">Everything you need to read institutional orderflow.</p>
+                <h2 className="text-5xl md:text-6xl font-bold mb-4">Complete Trading<br />Framework</h2>
+                <p className="text-xl text-muted-foreground">6-step system from HTF analysis to trade execution</p>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <TradingFrameworkFlow />
+            </motion.section>
+
+            {/* Quick Access Cards */}
+            <motion.section {...scaleIn} className="max-w-6xl mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-4">Indicator Details</h2>
+                <p className="text-lg text-muted-foreground">Dive deep into each component</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {features.map((feature, i) => (
                   <motion.button
                     key={i}
@@ -101,11 +105,11 @@ const Index = () => {
                     transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] as any }}
                     whileHover={{ scale: 1.02, y: -4 }}
                     onClick={() => setActiveTab(feature.tab)}
-                    className="p-8 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-xl transition-all text-left group"
+                    className="p-6 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-xl transition-all text-left group"
                   >
-                    <feature.icon className="w-8 h-8 mb-4 text-primary group-hover:scale-110 transition-transform" />
-                    <h3 className="font-bold text-lg mb-1">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                    <feature.icon className="w-7 h-7 mb-3 text-primary group-hover:scale-110 transition-transform" />
+                    <h3 className="font-bold text-base mb-1">{feature.title}</h3>
+                    <p className="text-xs text-muted-foreground">{feature.desc}</p>
                   </motion.button>
                 ))}
               </div>
@@ -144,16 +148,6 @@ const Index = () => {
             <LiquiditySlides />
           </motion.div>
         );
-      case "patterns":
-        return (
-          <motion.div {...fadeInUp} className="py-20 space-y-8">
-            <div className="text-center max-w-3xl mx-auto px-4">
-              <h2 className="text-5xl font-bold mb-4">C2 Reversal Patterns</h2>
-              <p className="text-xl text-muted-foreground">Three-candle reversal structure</p>
-            </div>
-            <PatternsSlides />
-          </motion.div>
-        );
       case "cisd":
         return (
           <motion.div {...fadeInUp} className="py-20 space-y-8">
@@ -162,26 +156,6 @@ const Index = () => {
               <p className="text-xl text-muted-foreground">Change in state of delivery</p>
             </div>
             <CISDSlides />
-          </motion.div>
-        );
-      case "ifvg":
-        return (
-          <motion.div {...fadeInUp} className="py-20 space-y-8">
-            <div className="text-center max-w-3xl mx-auto px-4">
-              <h2 className="text-5xl font-bold mb-4">iFVG Analysis</h2>
-              <p className="text-xl text-muted-foreground">Inverse fair value gaps</p>
-            </div>
-            <IFVGSlides />
-          </motion.div>
-        );
-      case "smt":
-        return (
-          <motion.div {...fadeInUp} className="py-20 space-y-8">
-            <div className="text-center max-w-3xl mx-auto px-4">
-              <h2 className="text-5xl font-bold mb-4">SMT Divergence</h2>
-              <p className="text-xl text-muted-foreground">Smart money technique</p>
-            </div>
-            <SMTSlides />
           </motion.div>
         );
       case "sessions":
