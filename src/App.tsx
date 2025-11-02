@@ -9,6 +9,11 @@ import Knowledge from "./pages/Knowledge";
 import Setup from "./pages/Setup";
 import HypeClip from "./pages/HypeClip";
 import RecordClip from "./pages/RecordClip";
+import Glossary from "./pages/Glossary";
+import ChartExamples from "./pages/ChartExamples";
+import Checklist from "./pages/Checklist";
+import FAQ from "./pages/FAQ";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +31,11 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/knowledge" element={<Knowledge />} />
             <Route path="/setup" element={<Setup />} />
+            <Route path="/glossary" element={<Glossary />} />
+            <Route path="/chart-examples" element={<ChartExamples />} />
+            <Route path="/checklist" element={<Checklist />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/hype" element={<HypeClip />} />
             <Route path="/record" element={<RecordClip />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

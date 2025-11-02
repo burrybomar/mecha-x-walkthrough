@@ -29,12 +29,12 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/setup')}>
-                Setup Guide
+              <Button variant="ghost" size="sm" onClick={() => navigate('/resources')}>
+                Resources
               </Button>
               <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')}>
                 <BookOpen className="w-4 h-4 mr-2" />
-                Deep Dive
+                Learn
               </Button>
             </div>
           </div>
