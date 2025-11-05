@@ -142,7 +142,7 @@ const Setup = () => {
             {/* Panel Header */}
             <div className="bg-muted/50 px-3 md:px-4 py-2.5 md:py-3 border-b border-border flex items-center justify-between">
               <h3 className="font-semibold text-sm font-mono">Settings</h3>
-              <Badge className="font-mono text-[9px] md:text-[10px]">PineScript v5</Badge>
+              <Badge className="font-mono text-[9px] md:text-[10px]">PineScript v6</Badge>
             </div>
 
             {/* Settings Content */}
@@ -176,6 +176,7 @@ const Setup = () => {
                       <SelectItem value="normal">Normal</SelectItem>
                       <SelectItem value="large">Large</SelectItem>
                       <SelectItem value="huge">Huge</SelectItem>
+                      <SelectItem value="auto">Auto</SelectItem>
                     </SelectContent>
                   </Select>
                 </SettingRow>
@@ -204,13 +205,18 @@ const Setup = () => {
                   <p className="text-xs font-medium text-muted-foreground font-mono">Manual TF Layers</p>
                 </div>
 
-                {[1, 2, 3, 4].map((num) => (
-                  <div key={num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
-                    <SettingRow label={`TF ${num}`}>
-                      <Switch defaultChecked={num === 1} />
+                {[
+                  { num: 1, tfDisplay: "15m", bars: 10, enabled: true, map: true },
+                  { num: 2, tfDisplay: "1H", bars: 8, enabled: true, map: true },
+                  { num: 3, tfDisplay: "4H", bars: 6, enabled: true, map: true },
+                  { num: 4, tfDisplay: "1D", bars: 4, enabled: true, map: false }
+                ].map((config) => (
+                  <div key={config.num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
+                    <SettingRow label={`TF ${config.num}`}>
+                      <Switch defaultChecked={config.enabled} />
                     </SettingRow>
                     <SettingRow label="Timeframe">
-                      <Select defaultValue={num === 1 ? "4H" : num === 2 ? "1D" : "1W"}>
+                      <Select defaultValue={config.tfDisplay}>
                         <SelectTrigger className="h-7 text-xs font-mono">
                           <SelectValue />
                         </SelectTrigger>
@@ -224,10 +230,10 @@ const Setup = () => {
                       </Select>
                     </SettingRow>
                     <SettingRow label="Bars">
-                      <Input type="number" defaultValue={10} className="h-7 text-xs w-20 font-mono" />
+                      <Input type="number" defaultValue={config.bars} className="h-7 text-xs w-20 font-mono" />
                     </SettingRow>
                     <SettingRow label="Map">
-                      <Switch defaultChecked />
+                      <Switch defaultChecked={config.map} />
                     </SettingRow>
                   </div>
                 ))}
@@ -303,10 +309,10 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* Liquidity Sweeps */}
-              <SettingsGroup 
-                title="Liquidity Sweeps" 
+              <SettingsGroup
+                title="Liquidity Sweeps"
                 frameworkLink="Step 3: Sweep Detection"
-                description="Valid Sweeps: Confirmed sweeps that held (reversal patterns). Invalid: Failed sweeps (price continued). HTF sweeps are more significant than LTF."
+                description="Valid Sweeps: Confirmed sweeps that held (reversal patterns). Invalid: Failed sweeps (price continued). HTF sweeps are more significant than LTF. Live: Real-time sweep detection as price moves."
                 defaultOpen
               >
                 <SettingRow label="Enable">
@@ -316,6 +322,9 @@ const Setup = () => {
                   <Switch defaultChecked />
                 </SettingRow>
                 <SettingRow label="HTF">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Live">
                   <Switch defaultChecked />
                 </SettingRow>
 
@@ -398,9 +407,63 @@ const Setup = () => {
                 </SettingRow>
               </SettingsGroup>
 
+              {/* Session Models */}
+              <SettingsGroup
+                title="Session Models"
+                frameworkLink="Step 2: Session Timing"
+                description="Display real-time session model tracking table. Shows active sweep sequences, double purge counts (⟐), and SMR entry confirmations (✓). Tracks H1-H4 session progression."
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Position">
+                  <Select defaultValue="bottom-right">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="top-left">Top Left</SelectItem>
+                      <SelectItem value="top-center">Top Center</SelectItem>
+                      <SelectItem value="top-right">Top Right</SelectItem>
+                      <SelectItem value="middle-left">Middle Left</SelectItem>
+                      <SelectItem value="middle-center">Middle Center</SelectItem>
+                      <SelectItem value="middle-right">Middle Right</SelectItem>
+                      <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                      <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                      <SelectItem value="bottom-right">Bottom Right</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Size">
+                  <Select defaultValue="small">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tiny">Tiny</SelectItem>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="large">Large</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Display Mode">
+                  <Select defaultValue="full">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="full">Full</SelectItem>
+                      <SelectItem value="compact">Compact</SelectItem>
+                      <SelectItem value="minimal">Minimal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+              </SettingsGroup>
+
               {/* CISD */}
-              <SettingsGroup 
-                title="CISD" 
+              <SettingsGroup
+                title="CISD"
                 frameworkLink="Step 4: Entry Zones"
                 description="Change in State of Delivery - marks when market shifts from one phase to another. Your entry level. Targets = comma-separated multipliers (1x, 2-2.5x, 3.5-4x)."
                 defaultOpen

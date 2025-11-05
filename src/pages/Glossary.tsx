@@ -155,6 +155,62 @@ const terms: Term[] = [
     category: "Concepts",
     definition: "Smart money buying into retail selling. Happens at discount levels. Precedes bullish moves.",
     example: "Price ranges at lows while volume increases = accumulation phase."
+  },
+  {
+    term: "Double Purge",
+    acronym: "⟐",
+    category: "Patterns",
+    definition: "When both BSL and SSL liquidity levels are swept and rejected on the same HTF candle, creating a high-probability reversal setup. The ⟐ symbol indicates count of double purges detected.",
+    example: "Price sweeps high, reverses to sweep low, then reverses again = ⟐ double purge."
+  },
+  {
+    term: "SMR Entry",
+    acronym: "✓",
+    category: "Execution",
+    definition: "Sweep, Mitigate, Reverse confirmed entry. When a liquidity sweep is followed by mitigation of the CISD zone and price reverses in the expected direction. The ✓ symbol tracks confirmed SMR entries.",
+    example: "SSL swept → price returns to OB → reverses up = ✓ SMR entry confirmed."
+  },
+  {
+    term: "HTF Interval Labels",
+    category: "Zones",
+    definition: "Timestamp labels displayed on HTF candles showing timeframe and exact time in America/New_York timezone. Helps identify specific candle opens/closes for session timing.",
+    example: "Label reads '4H 09:30' = 4-hour candle opened at 9:30 AM EST."
+  },
+  {
+    term: "Divider Hierarchy",
+    category: "Zones",
+    definition: "Auto-scaled line styling based on timeframe importance. Short-term (≤1H) = dotted, Intraday (4-8H) = dashed, Daily = solid gray, Weekly+ = solid orange.",
+    example: "Solid orange line = Weekly open/close, Dotted line = 15m candle boundary."
+  },
+  {
+    term: "Real-Time Sweep Detection",
+    category: "Patterns",
+    definition: "Live monitoring that identifies liquidity sweeps as they occur, not just on candle close. Updates sweep status intrabar for immediate awareness of potential reversals.",
+    example: "Price wicks through SSL mid-candle, 'Live' detection flags potential sweep immediately."
+  },
+  {
+    term: "H1 Setup Phase",
+    category: "Execution",
+    definition: "First session window (2-6 AM EST) where range establishes and liquidity pools form. Not for trading, for observation only.",
+    example: "2-6 AM: Price ranges between 4480-4500, establishing BSL/SSL levels."
+  },
+  {
+    term: "H2 Reversal Phase",
+    category: "Execution",
+    definition: "Second session window (6-10 AM EST or 9:30 AM-12 PM EST) where liquidity sweeps occur and reversals trigger. Highest probability entry window.",
+    example: "9:45 AM: SSL swept at 4480, C2 reversal = enter long in H2 window."
+  },
+  {
+    term: "H3 Continuation Phase",
+    category: "Execution",
+    definition: "Third session window (10 AM-2 PM EST) where momentum follows through after H2 reversal. Take partial profits at 1:3 RR.",
+    example: "11 AM-1 PM: Price continues up from 4485 entry, hitting 4515 target."
+  },
+  {
+    term: "H4 Delivery Phase",
+    category: "Execution",
+    definition: "Fourth session window (2-6 PM EST) where final push into target occurs. Close remaining positions at 1:4-1:6 RR.",
+    example: "3 PM: Price reaches opposite liquidity at 4525, exit final 50%."
   }
 ];
 
