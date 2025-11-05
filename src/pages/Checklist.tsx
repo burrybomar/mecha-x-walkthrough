@@ -57,7 +57,7 @@ const Checklist = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-market-depth">{/* Header */}
+    <div className="min-h-screen bg-retro-digital">{/* Header */}
       <motion.header 
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}

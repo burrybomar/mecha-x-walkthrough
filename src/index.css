@@ -188,6 +188,93 @@ All colors MUST be HSL.
     background-position: 0 0, center, center, center;
   }
 
+  /* Retro digital CRT effect - cyberpunk grid with scanlines */
+  .bg-retro-digital {
+    background-color: hsl(203 35% 12%); /* Dark blue-black base */
+    background-image:
+      /* Scanlines overlay */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+      ),
+      /* Vertical grid lines with glow */
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 49px,
+        rgba(82, 137, 173, 0.4) 49px,
+        rgba(82, 137, 173, 0.4) 50px
+      ),
+      /* Horizontal grid lines with glow */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 49px,
+        rgba(82, 137, 173, 0.4) 49px,
+        rgba(82, 137, 173, 0.4) 50px
+      ),
+      /* Digital circuit pattern */
+      radial-gradient(circle at 20% 30%, rgba(107, 176, 221, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(171, 219, 214, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(82, 137, 173, 0.08) 0%, transparent 60%);
+    background-size:
+      100% 100%,
+      50px 50px,
+      50px 50px,
+      100% 100%,
+      100% 100%,
+      100% 100%;
+    position: relative;
+    animation: digital-pulse 4s ease-in-out infinite;
+  }
+
+  .bg-retro-digital::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Glowing corner accents */
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba(82, 137, 173, 0.3) 0%, transparent 20%),
+      radial-gradient(circle at 100% 0%, rgba(107, 176, 221, 0.25) 0%, transparent 20%),
+      radial-gradient(circle at 0% 100%, rgba(171, 219, 214, 0.25) 0%, transparent 20%),
+      radial-gradient(circle at 100% 100%, rgba(82, 137, 173, 0.3) 0%, transparent 20%);
+    pointer-events: none;
+    animation: corner-glow 6s ease-in-out infinite;
+  }
+
+  .bg-retro-digital::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* CRT flicker overlay */
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(82, 137, 173, 0.02) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+    animation: crt-flicker 0.15s infinite alternate;
+  }
+
+  @keyframes digital-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+
+  @keyframes corner-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes crt-flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.98; }
+  }
+
   @keyframes subtle-float {
     0%, 100% { transform: translateY(0) translateX(0); }
     25% { transform: translateY(-5px) translateX(5px); }

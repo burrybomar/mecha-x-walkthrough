@@ -92,7 +92,7 @@ const TradeJournal = () => {
   };
 
   return (
-    <div className="min-h-screen bg-chart-dots">
+    <div className="min-h-screen bg-retro-digital">
       {/* Header */}
       <motion.header 
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"

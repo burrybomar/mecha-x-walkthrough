@@ -120,7 +120,7 @@ const Knowledge = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-chart-dots relative">
+    <div className="min-h-screen bg-retro-digital relative">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left"
