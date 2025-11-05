@@ -120,9 +120,9 @@ All colors MUST be HSL.
   /* Enhanced candlestick background pattern */
   .bg-candlestick-pattern {
     background-image: 
-      /* Main grid - more visible */
-      linear-gradient(90deg, hsl(var(--border) / 0.12) 1px, transparent 1px),
-      linear-gradient(0deg, hsl(var(--border) / 0.12) 1px, transparent 1px);
+      /* Main grid - highly visible */
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
     background-size: 50px 50px;
     position: relative;
   }
@@ -131,22 +131,22 @@ All colors MUST be HSL.
     content: '';
     position: absolute;
     inset: 0;
-    /* Enhanced candlestick SVG with better visibility */
-    background-image: url("data:image/svg+xml,%3Csvg width='150' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23acbcbf' opacity='0.15' stroke-width='1.5'%3E%3Cline x1='15' y1='20' x2='15' y2='70'/%3E%3Crect x='11' y='35' width='8' height='25' fill='%23acbcbf' opacity='0.2'/%3E%3Cline x1='40' y1='15' x2='40' y2='75'/%3E%3Crect x='36' y='28' width='8' height='32'/%3E%3Cline x1='65' y1='25' x2='65' y2='65'/%3E%3Crect x='61' y='35' width='8' height='18' fill='%23acbcbf' opacity='0.2'/%3E%3Cline x1='90' y1='10' x2='90' y2='70'/%3E%3Crect x='86' y='22' width='8' height='38'/%3E%3Cline x1='115' y1='20' x2='115' y2='75'/%3E%3Crect x='111' y='40' width='8' height='20' fill='%23acbcbf' opacity='0.2'/%3E%3Cline x1='140' y1='15' x2='140' y2='65'/%3E%3Crect x='136' y='28' width='8' height='25'/%3E%3C/g%3E%3C/svg%3E");
+    /* Enhanced candlestick SVG with strong visibility */
+    background-image: url("data:image/svg+xml,%3Csvg width='150' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%235289AD' opacity='0.4' stroke-width='2'%3E%3Cline x1='15' y1='20' x2='15' y2='70'/%3E%3Crect x='11' y='35' width='8' height='25' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='40' y1='15' x2='40' y2='75'/%3E%3Crect x='36' y='28' width='8' height='32' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='65' y1='25' x2='65' y2='65'/%3E%3Crect x='61' y='35' width='8' height='18' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='90' y1='10' x2='90' y2='70'/%3E%3Crect x='86' y='22' width='8' height='38' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='115' y1='20' x2='115' y2='75'/%3E%3Crect x='111' y='40' width='8' height='20' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='140' y1='15' x2='140' y2='65'/%3E%3Crect x='136' y='28' width='8' height='25' fill='%235289AD' opacity='0.3'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     pointer-events: none;
     animation: subtle-float 60s ease-in-out infinite;
   }
 
-  /* Trading grid background - subtle chart-like pattern */
+  /* Trading grid background - visible chart-like pattern */
   .bg-trading-grid {
     background-color: hsl(var(--background));
     background-image: 
-      linear-gradient(rgba(var(--primary-rgb) / 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--primary-rgb) / 0.03) 1px, transparent 1px),
-      radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.08) 0%, transparent 70%),
-      radial-gradient(circle at 20% 80%, hsl(var(--accent) / 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.05) 0%, transparent 50%);
+      linear-gradient(rgba(var(--primary-rgb) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--primary-rgb) / 0.08) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.15) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, hsl(var(--accent) / 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.1) 0%, transparent 50%);
     background-size: 
       60px 60px,
       60px 60px,
@@ -160,10 +160,10 @@ All colors MUST be HSL.
   .bg-chart-dots {
     background-color: hsl(var(--background));
     background-image: 
-      radial-gradient(circle, hsl(var(--primary) / 0.1) 1px, transparent 1px),
-      radial-gradient(circle at 30% 70%, hsl(var(--accent) / 0.12) 0%, transparent 50%),
-      radial-gradient(circle at 70% 30%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
-      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+      radial-gradient(circle, hsl(var(--primary) / 0.25) 2px, transparent 2px),
+      radial-gradient(circle at 30% 70%, hsl(var(--accent) / 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 70% 30%, hsl(var(--primary) / 0.18) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary) / 0.3) 100%);
     background-size: 
       30px 30px,
       100% 100%,
@@ -176,10 +176,10 @@ All colors MUST be HSL.
   .bg-market-depth {
     background-color: hsl(var(--background));
     background-image:
-      radial-gradient(circle, hsl(var(--primary) / 0.06) 2px, transparent 2px),
-      radial-gradient(circle at 40% 60%, hsl(var(--primary) / 0.15) 0%, transparent 40%),
-      radial-gradient(circle at 60% 40%, hsl(var(--accent) / 0.1) 0%, transparent 40%),
-      linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.3) 100%);
+      radial-gradient(circle, hsl(var(--primary) / 0.15) 2px, transparent 2px),
+      radial-gradient(circle at 40% 60%, hsl(var(--primary) / 0.25) 0%, transparent 40%),
+      radial-gradient(circle at 60% 40%, hsl(var(--accent) / 0.2) 0%, transparent 40%),
+      linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.4) 100%);
     background-size:
       40px 40px,
       100% 100%,
