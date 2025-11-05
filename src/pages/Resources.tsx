@@ -30,62 +30,48 @@ const resources: Resource[] = [
     link: "https://www.tradingview.com"
   },
   {
-    title: "Chart Replay Feature",
-    description: "Practice on historical data. TradingView replay lets you trade the past.",
-    category: "Practice",
-    icon: Video,
-    link: "https://www.tradingview.com/chart/"
-  },
-  {
     title: "Knowledge Base",
     description: "Framework documentation. Bookmark for reference.",
     category: "Learning",
     icon: BookOpen,
-    badge: "Start Here"
+    badge: "Start Here",
+    link: "/knowledge"
   },
   {
     title: "Setup Configuration",
     description: "Indicator settings walkthrough.",
     category: "Learning",
-    icon: BookOpen
+    icon: BookOpen,
+    link: "/setup"
   },
   {
     title: "Chart Examples",
     description: "Real setups: HTF analysis, sweeps, CISD zones.",
     category: "Learning",
-    icon: BookOpen
+    icon: BookOpen,
+    link: "/chart-examples"
   },
   {
     title: "Glossary",
     description: "BSL, SSL, CISD, iFVG, C2, SMT—all terms explained.",
     category: "Learning",
-    icon: BookOpen
+    icon: BookOpen,
+    link: "/glossary"
   },
   {
     title: "Pre-Trade Checklist",
     description: "Checklist, session timing, risk rules.",
     category: "Practice",
-    icon: Download
-  },
-  {
-    title: "Paper Trading",
-    description: "TradingView paper trading. Practice with sim money.",
-    category: "Practice",
-    icon: TrendingUp,
-    link: "https://www.tradingview.com/support/solutions/43000481029-paper-trading/"
-  },
-  {
-    title: "Micro Futures",
-    description: "MES/MNQ: $50-$200 risk per trade.",
-    category: "Practice",
-    icon: TrendingUp
+    icon: Download,
+    link: "/checklist"
   },
   {
     title: "Trade Journal",
     description: "Log setups: HTF bias, sweep type, entry, exit, RR.",
     category: "Practice",
     icon: Download,
-    badge: "Recommended"
+    badge: "Recommended",
+    link: "/trade-journal"
   },
   {
     title: "MECHA-X Discord",
@@ -98,7 +84,8 @@ const resources: Resource[] = [
     title: "FAQ",
     description: "Common questions on timeframes, risk, mistakes.",
     category: "Learning",
-    icon: BookOpen
+    icon: BookOpen,
+    link: "/faq"
   }
 ];
 
@@ -218,12 +205,18 @@ const Resources = () => {
                           </p>
                           
                           {resource.link && (
-                            <Button variant="outline" size="sm" className="w-full gap-2 font-mono" asChild>
-                              <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                            resource.link.startsWith('http') ? (
+                              <Button variant="outline" size="sm" className="w-full gap-2 font-mono" asChild>
+                                <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                                  View Resource
+                                  <ExternalLink className="w-3 h-3" />
+                                </a>
+                              </Button>
+                            ) : (
+                              <Button variant="outline" size="sm" className="w-full gap-2 font-mono" onClick={() => navigate(resource.link!)}>
                                 View Resource
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            </Button>
+                              </Button>
+                            )
                           )}
                         </Card>
                       </motion.div>

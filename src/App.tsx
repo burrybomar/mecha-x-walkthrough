@@ -14,6 +14,7 @@ import ChartExamples from "./pages/ChartExamples";
 import Checklist from "./pages/Checklist";
 import FAQ from "./pages/FAQ";
 import Resources from "./pages/Resources";
+import TradeJournal from "./pages/TradeJournal";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/checklist" element={<Checklist />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/trade-journal" element={<TradeJournal />} />
             <Route path="/hype" element={<HypeClip />} />
             <Route path="/record" element={<RecordClip />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
