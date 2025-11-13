@@ -99,7 +99,11 @@ const Checklist = () => {
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono mb-6">
             Print this. Check every box. Trade with confidence.
           </p>
-          <Button variant="outline" className="gap-2 font-mono">
+          <Button
+            variant="outline"
+            className="gap-2 font-mono"
+            onClick={() => window.print()}
+          >
             <Download className="w-4 h-4" />
             Download PDF
           </Button>
