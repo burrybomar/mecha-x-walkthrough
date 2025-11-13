@@ -51,25 +51,56 @@ const terms: Term[] = [
     example: "Candle wicks through high, closes back inside range = bullish sweep."
   },
   {
-    term: "Change of Character",
-    acronym: "C2",
+    term: "C1 Candle",
+    acronym: "C1",
     category: "Patterns",
-    definition: "3-candle reversal pattern confirming a liquidity sweep held. Shows market structure shifted direction.",
-    example: "After sweep: large reversal candle + follow-through = confirmed C2."
+    definition: "Pre-swing candle in the 3-candle reversal model. Establishes the liquidity level (swing high or low) that will be swept by C2.",
+    example: "C1 forms swing high at 4920. This becomes the BSL level for C2 to sweep."
   },
   {
-    term: "C3 Expansion",
+    term: "C2 Candle",
+    acronym: "C2",
+    category: "Patterns",
+    definition: "Sweep candle in the 3-candle reversal model. Breaks C1's high/low with a wick to grab stops, then CLOSES back inside C1's range. This is the reversal trigger.",
+    example: "C2 wicks through C1 high at 4925, then closes back at 4915 (inside C1 range)."
+  },
+  {
+    term: "C3 Candle",
     acronym: "C3",
     category: "Patterns",
-    definition: "The continuation candle after C2. Confirms momentum in new direction. Often targets opposite liquidity.",
-    example: "Strong expansion candle after C2 reversal moving toward target."
+    definition: "Expansion candle in the 3-candle reversal model. Moves away from C2, confirming the reversal direction. Often targets opposite liquidity.",
+    example: "After C2 sweeps high, C3 expands down toward SSL target."
+  },
+  {
+    term: "Formation Types",
+    category: "Patterns",
+    definition: "Categories of C2 reversal strength. REV = standard (close inside C1). SNAP = aggressive (close near opposite extreme within 30%). EXP = weak reversal, continuation likely (body engulfs C1).",
+    example: "SNAP formation: C2 sweeps high at 4925, closes at 4905 near C1 low = strongest reversal signal."
   },
   {
     term: "Change in State of Delivery",
     acronym: "CISD",
     category: "Zones",
-    definition: "The exact zone where market structure changed from bearish to bullish (or vice versa). Your entry level.",
-    example: "Mark the order block where price broke structure after sweep."
+    definition: "After C2 sweep, price forms momentum candles. CISD = the CLOSE of the last momentum candle in the series. This becomes your entry level, NOT the sweep extreme.",
+    example: "C2 sweeps low at 4900. 3 momentum candles form moving up. Last momentum candle closes at 4920. CISD level = 4920."
+  },
+  {
+    term: "Momentum Candles",
+    category: "Patterns",
+    definition: "After C2 sweep, consecutive candles (minimum 2) moving in the reversal direction. The close of the last momentum candle = CISD level. More momentum candles = stronger setup.",
+    example: "After C2 sweeps low, 3 green candles form moving up. These are momentum candles showing institutional delivery."
+  },
+  {
+    term: "Momentum Range",
+    category: "Zones",
+    definition: "Distance from C2 sweep extreme to the extreme of the last momentum candle. Used to calculate CISD projections (targets).",
+    example: "C2 sweeps low at 4900. Momentum candles reach 4935. Momentum range = 35 points."
+  },
+  {
+    term: "CISD Projections",
+    category: "Zones",
+    definition: "Price targets calculated as multipliers of momentum range: 1x, 2x, 2.5x, 3.5x, 4x. Projected from the momentum extreme, NOT from CISD level itself.",
+    example: "Momentum range = 35 points. 2x target = momentum high + (35 × 2) = projected 70 points above momentum extreme."
   },
   {
     term: "Order Block",
@@ -96,8 +127,27 @@ const terms: Term[] = [
     term: "Smart Money Technique",
     acronym: "SMT",
     category: "Patterns",
-    definition: "Divergence between correlated assets (ES/NQ, EUR/GBP) revealing institutional manipulation. Increases setup probability.",
-    example: "ES makes new high but NQ doesn't = bearish SMT divergence."
+    definition: "Compares correlated assets to detect institutional manipulation. Binary mode = 2 assets, PSP divergence. Triad mode = 3 assets, 2-Stage CIC correlation tracking.",
+    example: "Binary: ES sweeps high but NQ doesn't = bearish SMT. Triad: Both NQ and RTY diverge from ES = full triad signal (⟐⟐)."
+  },
+  {
+    term: "PSP (Precision Swing Point)",
+    acronym: "PSP",
+    category: "Patterns",
+    definition: "Binary SMT concept. One asset sweeps an extreme (high/low) but the correlated asset doesn't follow, revealing divergence and institutional positioning.",
+    example: "ES sweeps 4950 high, but NQ fails to make new high = PSP bearish divergence."
+  },
+  {
+    term: "2-Stage CIC",
+    category: "Patterns",
+    definition: "Triad SMT concept. CIC = Correlation in Correlation. Tracks when middle and lagging assets both crack correlation with the leading asset, indicating Algorithm-1 strength switch.",
+    example: "ES leads higher, but both NQ (middle) and RTY (lagging) fail to follow = 2-Stage CIC breakdown."
+  },
+  {
+    term: "Phase Detection",
+    category: "Patterns",
+    definition: "Identifies which phase price is in: REVERSAL (C2 sweep), EXPANSION (C3 momentum), CONSOLIDATION (range-bound), RETRACEMENT (pullback), CONTINUATION (trend extension).",
+    example: "After C2 sweep forms, phase shifts from REVERSAL → EXPANSION as C3 moves away."
   },
   {
     term: "Premium Zone",
@@ -121,8 +171,32 @@ const terms: Term[] = [
   {
     term: "Silver Bullet Hour",
     category: "Execution",
-    definition: "9:30-10:30 AM EST and 3-4 PM EST. High-probability reversal windows where institutional sweeps occur most.",
-    example: "Watch for sweeps during 9:30-10:30 AM window for best setups."
+    definition: "Specific hours with highest probability setups. PRIMARY: 10:00 AM ET (NYAM H2). Secondary: 03:00 AM ET (LON H2) and 14:00 PM ET (NYPM H1). These are marked with ⚡.",
+    example: "10:00 AM ET Silver Bullet hour: C2 sweep occurs, highest probability entry window."
+  },
+  {
+    term: "ASIA Session",
+    category: "Timeframes",
+    definition: "20:00-23:59 ET. Manipulation phase where range builds and liquidity pools form. Not for trading, for observation and level marking.",
+    example: "ASIA session: Price ranges 4900-4920, establishing BSL/SSL levels for London session."
+  },
+  {
+    term: "LONDON Session",
+    category: "Timeframes",
+    definition: "02:00-05:00 ET. Expansion phase where sweeps begin. Silver Bullet at 03:00 ET ⚡.",
+    example: "LONDON opens at 02:00 ET, sweeps ASIA highs at 03:00 Silver Bullet hour."
+  },
+  {
+    term: "NYAM Session",
+    category: "Timeframes",
+    definition: "06:00-09:00 ET. New York AM session. PRIMARY Silver Bullet at 10:00 ET ⚡. Highest probability trading window.",
+    example: "NYAM session: 10:00 AM Silver Bullet hour produces cleanest C2 sweeps."
+  },
+  {
+    term: "NYPM Session",
+    category: "Timeframes",
+    definition: "13:00-16:00 ET. New York PM session. Afternoon Silver Bullet at 14:00 ET ⚡. Final push into targets.",
+    example: "NYPM session: 14:00 PM Silver Bullet hour delivers final move to target."
   },
   {
     term: "One Shot One Kill",
@@ -189,28 +263,16 @@ const terms: Term[] = [
     example: "Price wicks through SSL mid-candle, 'Live' detection flags potential sweep immediately."
   },
   {
-    term: "H1 Setup Phase",
-    category: "Execution",
-    definition: "First session window (2-6 AM EST) where range establishes and liquidity pools form. Not for trading, for observation only.",
-    example: "2-6 AM: Price ranges between 4480-4500, establishing BSL/SSL levels."
+    term: "Strike System",
+    category: "Patterns",
+    definition: "Allows sweeps to temporarily break without invalidation. Default: 3 strikes allowed. If price closes back inside range, sweep recovers. After max strikes = permanent death ✗.",
+    example: "Sweep breaks temporarily, price closes back inside = strike 1. Recovers. After 3 strikes with no recovery = sweep permanently invalidated."
   },
   {
-    term: "H2 Reversal Phase",
-    category: "Execution",
-    definition: "Second session window (6-10 AM EST or 9:30 AM-12 PM EST) where liquidity sweeps occur and reversals trigger. Highest probability entry window.",
-    example: "9:45 AM: SSL swept at 4480, C2 reversal = enter long in H2 window."
-  },
-  {
-    term: "H3 Continuation Phase",
-    category: "Execution",
-    definition: "Third session window (10 AM-2 PM EST) where momentum follows through after H2 reversal. Take partial profits at 1:3 RR.",
-    example: "11 AM-1 PM: Price continues up from 4485 entry, hitting 4515 target."
-  },
-  {
-    term: "H4 Delivery Phase",
-    category: "Execution",
-    definition: "Fourth session window (2-6 PM EST) where final push into target occurs. Close remaining positions at 1:4-1:6 RR.",
-    example: "3 PM: Price reaches opposite liquidity at 4525, exit final 50%."
+    term: "Session Models",
+    category: "Timeframes",
+    definition: "Multi-session patterns showing how sessions interact. ASIA→LON (manipulation → expansion), LON→NY (setup → delivery), NY 4H (New York-only patterns).",
+    example: "ASIA→LON model: Asia builds range 4900-4920, London sweeps high at 03:00 Silver Bullet."
   }
 ];
 

@@ -80,7 +80,7 @@ const Index = () => {
                 One System.
                 <br />
                 <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Six Steps.
+                  Every Setup.
                 </span>
                 <br />
                 Complete Edge.

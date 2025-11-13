@@ -12,48 +12,48 @@ const Checklist = () => {
   const preTradeChecklist = [
     { step: "HTF bias established?", detail: "Check Daily/4H - are we in premium (short) or discount (long)?" },
     { step: "Key levels marked?", detail: "BSL/SSL levels, previous high/low, order blocks identified" },
-    { step: "Right session timing?", detail: "H2 window (9:30-12 PM EST) or macro time active?" },
-    { step: "Liquidity sweep confirmed?", detail: "Wick through BSL/SSL + body closes back inside range?" },
-    { step: "C2 pattern present?", detail: "3-candle reversal structure confirming sweep held?" },
-    { step: "CISD zone identified?", detail: "Where did structure break? Order block or iFVG marked?" },
-    { step: "SMT divergence? (Optional)", detail: "Check ES vs NQ - divergence present for extra confluence?" },
-    { step: "Risk/Reward acceptable?", detail: "Minimum 1:3 RR to opposite HTF liquidity?" }
+    { step: "Right session timing?", detail: "Silver Bullet hour active? 10:00 AM ET (primary), 03:00 AM or 14:00 PM (secondary)" },
+    { step: "C1→C2→C3 pattern?", detail: "C1 establishes level, C2 sweeps + closes inside, C3 expands away?" },
+    { step: "Momentum candles formed?", detail: "After C2 sweep, count minimum 2 momentum candles in reversal direction?" },
+    { step: "CISD level identified?", detail: "Mark the CLOSE of last momentum candle - this is your entry level" },
+    { step: "SMT divergence? (Optional)", detail: "Binary (ES vs NQ) or Triad (ES vs NQ vs RTY) divergence present?" },
+    { step: "CISD projections calculated?", detail: "Momentum range identified? 1x, 2x, 2.5x, 3.5x, 4x targets marked?" }
   ];
 
   const entryRules = [
     { rule: "OSOK Principle", description: "One Shot One Kill - single entry per setup, no averaging down" },
-    { rule: "Stop Placement", description: "Just beyond the sweep level (BSL/SSL that was taken)" },
-    { rule: "Entry Trigger", description: "Price taps CISD zone + shows rejection wick" },
-    { rule: "Target Setting", description: "H3 = 1:3 RR (take 50%), H4 = 1:4-1:6 RR (runner)" },
-    { rule: "Breakeven Move", description: "Move stop to entry at 1:1 risk/reward achieved" },
+    { rule: "Stop Placement", description: "Just beyond the C2 sweep extreme" },
+    { rule: "Entry Trigger", description: "Price taps CISD level + shows rejection wick" },
+    { rule: "Target Setting", description: "Take 50% at 2x CISD projection, let runner to 4x projection" },
+    { rule: "Breakeven Move", description: "Move stop to entry at 1x CISD projection" },
     { rule: "Max Wait Time", description: "If no reaction at CISD within 2-3 candles → exit" }
   ];
 
   const sessionTiming = [
-    { session: "H1 Setup", time: "2-6 AM EST", action: "Range builds, liquidity forms - mark levels, don't trade yet" },
-    { session: "H2 Reversal", time: "9:30 AM-12 PM EST", action: "Silver Bullet - MAIN TRADING WINDOW, sweeps occur here" },
-    { session: "H3 Continuation", time: "12-3 PM EST", action: "Momentum follow-through, take partials at 1:3" },
-    { session: "H4 Delivery", time: "3-6 PM EST", action: "Final push to target, runner positions" }
+    { session: "ASIA", time: "20:00-23:59 ET", action: "Manipulation phase - mark levels, don't trade" },
+    { session: "LONDON", time: "02:00-05:00 ET", action: "Expansion phase - Silver Bullet at 03:00 ET ⚡" },
+    { session: "NYAM", time: "06:00-09:00 ET", action: "PRIMARY Silver Bullet at 10:00 AM ET ⚡ - MAIN TRADING WINDOW" },
+    { session: "NYPM", time: "13:00-16:00 ET", action: "Afternoon Silver Bullet at 14:00 PM ET ⚡ - Final push to targets" }
   ];
 
   const commonMistakes = [
     { mistake: "Trading at equilibrium", fix: "Wait for premium or discount - avoid 40-60% range" },
-    { mistake: "No sweep confirmation", fix: "Never enter without clear BSL/SSL sweep + C2" },
-    { mistake: "Wrong session timing", fix: "Focus on H2 window, avoid dead hours" },
+    { mistake: "No C1→C2→C3 pattern", fix: "Never enter without complete 3-candle reversal structure" },
+    { mistake: "Wrong session timing", fix: "Focus on Silver Bullet hours (10:00 AM ET primary), avoid dead hours" },
     { mistake: "Ignoring HTF bias", fix: "Always check HTF first - context is king" },
-    { mistake: "Averaging down losses", fix: "OSOK only - if wrong, exit cleanly" },
+    { mistake: "No momentum candles", fix: "Wait for minimum 2 momentum candles after C2 before marking CISD" },
     { mistake: "Moving stop loss wider", fix: "Never widen stop - accept loss and move on" },
-    { mistake: "Taking partials too early", fix: "Let it reach proper targets (H3/H4)" },
+    { mistake: "Taking partials too early", fix: "Let it reach 2x CISD projection minimum before taking profits" },
     { mistake: "Overtrading setups", fix: "Quality over quantity - wait for A+ setups only" }
   ];
 
   const riskManagement = [
     { item: "Position Size", value: "1-2% risk per trade maximum" },
     { item: "Daily Loss Limit", value: "3% of account - stop trading if hit" },
-    { item: "Win Rate Target", value: "45-55% with 1:3+ RR = profitable" },
+    { item: "Win Rate Target", value: "45-55% win rate with CISD projections = profitable" },
     { item: "Max Open Trades", value: "1-2 concurrent positions only" },
     { item: "Streak Management", value: "After 3 losses, reduce size by 50%" },
-    { item: "Profit Taking", value: "50% at H3 (1:3), runner to H4 (1:4-1:6)" }
+    { item: "Profit Taking", value: "50% at 2x CISD projection, runner to 4x projection" }
   ];
 
   return (

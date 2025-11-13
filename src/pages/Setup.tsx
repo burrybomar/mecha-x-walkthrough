@@ -411,7 +411,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Session Models"
                 frameworkLink="Step 2: Session Timing"
-                description="Display real-time session model tracking table. Shows active sweep sequences, double purge counts (⟐), and SMR entry confirmations (✓). Tracks H1-H4 session progression."
+                description="Display real-time session model tracking table. Shows active sweep sequences, double purge counts (⟐), and SMR entry confirmations (✓). Tracks session flow: ASIA→LONDON→NYAM→NYPM."
               >
                 <SettingRow label="Enable">
                   <Switch defaultChecked />
