@@ -20,47 +20,47 @@ const Knowledge = () => {
         why: "Smart money operates on HTF levels. These are your guardrails—trade with them, not against them.",
         how: [
           "Mark Daily/4H highs and lows (BSL/SSL liquidity pools)",
-          "Identify premium vs discount zones relative to range",
-          "Look for order blocks and fair value gaps on HTF",
-          "Note previous week/day high/low as magnets"
+          "Identify premium vs discount zones: Premium = above 50% of range (equilibrium), Discount = below 50%",
+          "Look for order blocks (opposing candles) and fair value gaps on HTF",
+          "Note previous week/day high/low as liquidity magnets"
         ],
-        rule: "If price is in premium → look for shorts. If in discount → look for longs. No trade in the middle (equilibrium)."
+        rule: "If price is in premium (above 50% EQ) → look for shorts. If in discount (below 50% EQ) → look for longs. Avoid trading at equilibrium (40-60% range)."
       }
     },
     {
       id: 2,
       icon: Clock,
       title: "Session Timing",
-      subtitle: "When to Watch: H1-H4 Model",
+      subtitle: "When to Watch: Session Profiling",
       color: "from-purple-500 to-pink-500",
       content: {
-        concept: "Not all hours are equal. The 4H/1H profiling model tells you WHEN reversals and expansions happen within the trading day.",
-        why: "Institutional moves happen during specific session windows. Trading outside these windows = low probability.",
+        concept: "Not all hours are equal. Understanding session flow tells you WHEN reversals and expansions happen during the trading day.",
+        why: "Institutional moves happen during specific session windows. Each session has a distinct character and purpose.",
         how: [
-          "H1 (Setup): 2-6 AM EST — Range builds, liquidity forms",
-          "H2 (Reversal): 6-10 AM EST — Silver Bullet window, sweeps occur",
-          "H3 (Continuation): 10 AM-2 PM EST — Momentum follows through",
-          "H4 (Delivery): 2-6 PM EST — Final push into target"
+          "ASIA (20:00-23:59 ET): Manipulation phase, range building, liquidity forms",
+          "LONDON (02:00-05:00 ET): Expansion phase, sweeps occur, Silver Bullet at 03:00 ET ⚡",
+          "NYAM (06:00-09:00 ET): New York AM session, PRIMARY Silver Bullet at 10:00 ET ⚡",
+          "NYPM (13:00-16:00 ET): New York PM session, afternoon Silver Bullet at 14:00 ET ⚡"
         ],
-        rule: "Focus on H2 window (2-6 AM or 9:30-12 PM). This is where sweeps happen and trades trigger."
+        rule: "Focus on Silver Bullet hours: 10:00 AM ET (NYAM H2) is PRIMARY window. 03:00 AM ET (LON H2) and 14:00 PM ET (NYPM H1) are secondary."
       }
     },
     {
       id: 3,
       icon: Target,
-      title: "Liquidity Sweep",
-      subtitle: "The Trigger: BSL/SSL Sweep + C2",
+      title: "3-Candle Reversal",
+      subtitle: "The Trigger: C1 → C2 → C3 Pattern",
       color: "from-orange-500 to-red-500",
       content: {
-        concept: "A liquidity sweep is when price briefly breaks a key level (BSL/SSL) to grab stops, then reverses sharply. C2 (Change of Character) confirms the reversal.",
-        why: "Smart money needs liquidity to enter large positions. They sweep retail stops before moving in their true direction.",
+        concept: "The 3-candle reversal model is the core setup. C1 establishes liquidity. C2 sweeps that level and closes back inside. C3 expands away, confirming the reversal.",
+        why: "This is how smart money operates: sweep retail stops (C2), then move in their true direction (C3). Understanding this pattern is everything.",
         how: [
-          "Price breaks HTF high/low with a wick (sweep)",
-          "Immediate strong reversal candle closes back inside range",
-          "C2 pattern: 3-candle reversal structure confirms",
-          "Volume spike during sweep confirms institutional activity"
+          "C1: Pre-swing candle that forms the liquidity level (swing high or low)",
+          "C2: Sweep candle that breaks C1's high/low with a wick, then CLOSES back inside C1's range",
+          "C3: Expansion candle that moves away from C2, confirming the reversal direction",
+          "Formation types: REV (standard), SNAP (aggressive close near opposite extreme), EXP (strong continuation)"
         ],
-        rule: "NO sweep = NO trade. Wait for clean sweep + C2 confirmation before proceeding."
+        rule: "NO sweep = NO trade. Wait for complete C1 → C2 → C3 formation. C2 must close back inside C1's range to be valid."
       }
     },
     {
@@ -70,15 +70,15 @@ const Knowledge = () => {
       subtitle: "Where to Enter: Change in State of Delivery",
       color: "from-emerald-500 to-teal-500",
       content: {
-        concept: "CISD marks the exact zone where price structure changed—from making lower lows to higher lows (or vice versa). This is your entry zone.",
-        why: "CISD zones act as support/resistance because institutional orders were placed there. Price respects these levels.",
+        concept: "After C2 sweep, price forms momentum candles moving in the reversal direction. CISD = the CLOSE of the last momentum candle. This becomes your entry level.",
+        why: "CISD marks where institutional momentum began. It's where smart money orders were placed, making it a high-probability entry zone.",
         how: [
-          "After sweep + C2, identify the candle that broke structure",
-          "Mark the order block or iFVG within that candle",
-          "Wait for price to pull back into this zone",
-          "Enter when price taps the CISD level and shows rejection"
+          "After C2 sweep, count consecutive candles moving in reversal direction (minimum 2 required)",
+          "CISD level = close price of the LAST momentum candle in the series",
+          "Momentum range = distance from C2 sweep extreme to momentum candle extreme",
+          "Targets = CISD projections: 1x, 2x, 2.5x, 3.5x, 4x multipliers of momentum range"
         ],
-        rule: "Stop loss goes just beyond the sweep level. Target is opposite HTF liquidity (H3 = 1:3 RR, H4 = 1:4+ RR)."
+        rule: "Stop loss goes just beyond C2 sweep extreme. Take 50% at 2x projection, let rest run to 4x. Enter when price pulls back to CISD and shows rejection."
       }
     },
     {
@@ -88,15 +88,15 @@ const Knowledge = () => {
       subtitle: "Optional: Smart Money Technique",
       color: "from-violet-500 to-purple-500",
       content: {
-        concept: "SMT (Smart Money Technique) compares correlated assets (e.g., ES vs NQ, EUR vs GBP). Divergence = manipulation, increases probability.",
-        why: "When one asset makes a new high/low but the correlated asset doesn't, it reveals institutional positioning.",
+        concept: "SMT compares correlated assets to detect institutional manipulation. Binary mode (2 assets) looks for PSP divergence. Triad mode (3 assets) tracks correlation strength shifts.",
+        why: "When one asset makes a new high/low but correlated assets don't follow, it reveals institutional positioning and increases setup probability.",
         how: [
-          "Compare ES and NQ during your setup",
-          "If ES sweeps high but NQ doesn't = bearish SMT divergence",
-          "If NQ sweeps low but ES doesn't = bullish SMT divergence",
-          "Use as confirmation, not requirement"
+          "Binary Mode: Compare 2 assets (ES vs NQ). Look for PSP (Precision Swing Point) - one sweeps, other doesn't",
+          "Triad Mode (Advanced): Compare 3 assets (ES vs NQ vs RTY). Look for 2-Stage CIC (Correlation in Correlation)",
+          "PSP Divergence: ES sweeps high but NQ doesn't = bearish SMT. NQ sweeps low but ES doesn't = bullish SMT",
+          "Full Triad (⟐⟐): Both secondary assets diverge = strongest signal"
         ],
-        rule: "SMT is optional but powerful. It adds 10-20% confidence to your setup when present."
+        rule: "SMT is optional but powerful. Binary adds +10% confidence. Full Triad adds +20%. Start with Binary, graduate to Triad once comfortable."
       }
     },
     {
@@ -106,15 +106,15 @@ const Knowledge = () => {
       subtitle: "Execution: OSOK (One Shot One Kill)",
       color: "from-green-500 to-emerald-500",
       content: {
-        concept: "OSOK means one entry per setup. No averaging, no hoping. Either it works immediately or you're wrong.",
-        why: "Precision execution prevents overtrading and emotional decisions. Trust your analysis or exit cleanly.",
+        concept: "OSOK means one entry per setup. No averaging, no hoping. Either it works immediately or you're wrong. This comes from the TTrades methodology.",
+        why: "Precision execution prevents overtrading and emotional decisions. Trust your analysis or exit cleanly. Avoid news days and Mondays.",
         how: [
           "Enter at CISD zone when price taps and rejects",
-          "Move stop to breakeven at 1:1 risk/reward",
-          "Take 50% profits at H3 (1:3 RR)",
-          "Let remaining position run to H4+ (1:4-1:6 RR)"
+          "Stop loss: Just beyond C2 sweep extreme",
+          "Move stop to breakeven at 1x CISD projection",
+          "Take 50% profits at 2x CISD projection, let rest run to 4x projection"
         ],
-        rule: "If price doesn't react at CISD within 2-3 candles, exit. No second chances on same setup."
+        rule: "If price doesn't react at CISD within 2-3 candles, exit. Trail stops at opposing candle levels. Use CISD projections as targets, not arbitrary RR ratios."
       }
     }
   ];
