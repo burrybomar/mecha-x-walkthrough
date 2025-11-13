@@ -88,7 +88,7 @@ const terms: Term[] = [
     term: "Momentum Candles",
     category: "Patterns",
     definition: "After C2 sweep, consecutive candles (minimum 2) moving in the reversal direction. The close of the last momentum candle = CISD level. More momentum candles = stronger setup.",
-    example: "After C2 sweeps low, 3 green candles form moving up. These are momentum candles showing institutional delivery."
+    example: "Bullish example: C2 sweeps LOW (SSL) → 3 green candles move UP. Bearish example: C2 sweeps HIGH (BSL) → 3 red candles move DOWN. These show institutional delivery in the reversal direction."
   },
   {
     term: "Momentum Range",
