@@ -30,6 +30,12 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/chart-examples')}>
+                Chart Examples
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/glossary')}>
+                Glossary
+              </Button>
               <Button variant="ghost" size="sm" onClick={() => navigate('/resources')}>
                 Resources
               </Button>

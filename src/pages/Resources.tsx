@@ -94,10 +94,7 @@ const Resources = () => {
   const categories = Array.from(new Set(resources.map(r => r.category)));
 
   const platformLinks = [
-    { name: "TradingView", url: "https://www.tradingview.com", description: "Charting platform" },
-    { name: "TastyTrade", url: "https://www.tastytrade.com", description: "Futures broker - low commissions" },
-    { name: "Interactive Brokers", url: "https://www.interactivebrokers.com", description: "Professional trading platform" },
-    { name: "ThinkOrSwim", url: "https://www.tdameritrade.com/tools-and-platforms/thinkorswim.html", description: "Advanced charting & analysis" }
+    { name: "TradingView", url: "https://www.tradingview.com", description: "Professional charting platform for OHLC analysis" }
   ];
 
   const learningPath = [
@@ -272,8 +269,8 @@ const Resources = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Trading Platforms & Brokers</h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Charting Platform</h2>
+          <div className="grid gap-4 max-w-2xl">
             {platformLinks.map((platform, idx) => (
               <motion.div
                 key={platform.name}
@@ -290,7 +287,7 @@ const Resources = () => {
                   <p className="text-sm text-muted-foreground mb-4">{platform.description}</p>
                   <Button variant="outline" size="sm" className="w-full" asChild>
                     <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                      Visit Site
+                      Visit Platform
                     </a>
                   </Button>
                 </Card>
