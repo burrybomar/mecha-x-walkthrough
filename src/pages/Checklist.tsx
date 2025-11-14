@@ -5,9 +5,50 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
+import html2pdf from "html2pdf.js";
 
 const Checklist = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleDownloadPDF = () => {
+    const element = document.getElementById('checklist-content');
+    if (!element) {
+      toast({
+        title: "Error",
+        description: "Could not find checklist content",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const opt = {
+      margin: 10,
+      filename: 'pre-trade-checklist.pdf',
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
+    };
+
+    toast({
+      title: "Generating PDF",
+      description: "Your checklist is being prepared..."
+    });
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      toast({
+        title: "Success",
+        description: "Checklist downloaded successfully"
+      });
+    }).catch(() => {
+      toast({
+        title: "Error", 
+        description: "Failed to generate PDF",
+        variant: "destructive"
+      });
+    });
+  };
 
   const preTradeChecklist = [
     { step: "HTF bias established?", detail: "Check Daily/4H - are we in premium (short) or discount (long)?" },
@@ -99,13 +140,13 @@ const Checklist = () => {
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono mb-6">
             Print this. Check every box. Trade with confidence.
           </p>
-          <Button variant="outline" className="gap-2 font-mono">
+          <Button variant="outline" className="gap-2 font-mono" onClick={handleDownloadPDF}>
             <Download className="w-4 h-4" />
             Download PDF
           </Button>
         </motion.div>
 
-        <div className="space-y-8">
+        <div id="checklist-content" className="space-y-8">
           {/* Pre-Trade Checklist */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -69,7 +69,7 @@ const TradeJournal = () => {
 
   const fetchTrades = async (uid: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('trades')
         .select('*')
         .eq('user_id', uid)
@@ -94,7 +94,7 @@ const TradeJournal = () => {
     if (!userId) return;
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('trades')
         .insert([{
           user_id: userId,
@@ -136,7 +136,7 @@ const TradeJournal = () => {
 
   const handleDelete = async (tradeId: string) => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('trades')
         .delete()
         .eq('id', tradeId);
