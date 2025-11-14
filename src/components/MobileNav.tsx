@@ -33,13 +33,13 @@ export const MobileNav = () => {
     <>
       {/* Hamburger Button - Only visible on mobile */}
       <Button
-        variant="ghost"
+        variant="outline"
         size="icon"
         onClick={() => setIsOpen(true)}
-        className="md:hidden"
+        className="md:hidden border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary"
         aria-label="Open navigation menu"
       >
-        <Menu className="w-5 h-5" />
+        <Menu className="w-6 h-6 text-foreground" />
       </Button>
 
       {/* Mobile Menu Overlay */}
@@ -80,29 +80,29 @@ export const MobileNav = () => {
               </div>
 
               {/* Navigation Items */}
-              <nav className="p-4 space-y-2" role="navigation" aria-label="Main navigation">
+              <nav className="p-4 space-y-3" role="navigation" aria-label="Main navigation">
                 {navItems.map((item, idx) => (
                   <motion.button
                     key={item.path}
                     onClick={() => handleNavigate(item.path)}
-                    className={`w-full flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
+                    className={`w-full flex items-center gap-4 p-5 rounded-xl border-2 transition-all ${
                       item.color === 'bullish'
-                        ? 'border-bullish/20 bg-bullish/5 hover:border-bullish hover:bg-bullish/10 active:bg-bullish/20'
-                        : 'border-primary/20 bg-primary/5 hover:border-primary hover:bg-primary/10 active:bg-primary/20'
+                        ? 'border-bullish/40 bg-bullish/15 hover:border-bullish hover:bg-bullish/25 active:bg-bullish/30 shadow-lg shadow-bullish/10'
+                        : 'border-primary/40 bg-primary/15 hover:border-primary hover:bg-primary/25 active:bg-primary/30 shadow-lg shadow-primary/10'
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className={`p-2 rounded-lg ${
-                      item.color === 'bullish' ? 'bg-bullish/20' : 'bg-primary/20'
+                    <div className={`p-3 rounded-xl ${
+                      item.color === 'bullish' ? 'bg-bullish/30' : 'bg-primary/30'
                     }`}>
-                      <item.icon className={`w-5 h-5 ${
+                      <item.icon className={`w-6 h-6 ${
                         item.color === 'bullish' ? 'text-bullish' : 'text-primary'
                       }`} />
                     </div>
-                    <span className="font-medium text-foreground text-left flex-1">
+                    <span className="font-semibold text-base text-foreground text-left flex-1">
                       {item.label}
                     </span>
                   </motion.button>
