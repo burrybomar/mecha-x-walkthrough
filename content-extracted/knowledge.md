@@ -20,10 +20,10 @@ Everything flows together. Each step builds on the previous. Read this once, lin
 **Start Here: The Big Picture**
 
 ### What Is It?
-Before entering any trade, you need to know WHERE price is relative to institutional levels on higher timeframes (Daily/4H).
+Before entering any trade, you need to know WHERE price is relative to key OHLC levels on higher timeframes (Daily/4H).
 
 ### Why It Matters
-Smart money operates on HTF levels. These are your guardrails—trade with them, not against them.
+Major price structure operates on HTF levels. These are your guardrails—trade with them, not against them.
 
 ### How To Apply
 - Mark Daily/4H highs and lows (BSL/SSL liquidity pools)
@@ -43,7 +43,7 @@ If price is in premium → look for shorts. If in discount → look for longs. N
 Not all hours are equal. The 4H/1H profiling model tells you WHEN reversals and expansions happen within the trading day.
 
 ### Why It Matters
-Institutional moves happen during specific session windows. Trading outside these windows = low probability.
+Major price movements happen during specific session windows. Trading outside these windows = low probability.
 
 ### How To Apply
 - **H1 (Setup)**: 2-6 AM EST — Range builds, liquidity forms
@@ -63,13 +63,13 @@ Focus on H2 window (2-6 AM or 9:30-12 PM). This is where sweeps happen and trade
 A liquidity sweep is when price briefly breaks a key level (BSL/SSL) to grab stops, then reverses sharply. C2 (Change of Character) confirms the reversal.
 
 ### Why It Matters
-Smart money needs liquidity to enter large positions. They sweep retail stops before moving in their true direction.
+Large participants need liquidity to enter positions. Price wicks through stops before reversing in the true direction.
 
 ### How To Apply
 - Price breaks HTF high/low with a wick (sweep)
 - Immediate strong reversal candle closes back inside range
 - C2 pattern: 3-candle reversal structure confirms
-- Volume spike during sweep confirms institutional activity
+- Volume spike during sweep confirms participant activity
 
 ### Golden Rule:
 NO sweep = NO trade. Wait for clean sweep + C2 confirmation before proceeding.
@@ -83,7 +83,7 @@ NO sweep = NO trade. Wait for clean sweep + C2 confirmation before proceeding.
 CISD marks the exact zone where price structure changed—from making lower lows to higher lows (or vice versa). This is your entry zone.
 
 ### Why It Matters
-CISD zones act as support/resistance because institutional orders were placed there. Price respects these levels.
+CISD zones act as support/resistance because significant orders were placed there via OHLC structure. Price respects these levels.
 
 ### How To Apply
 - After sweep + C2, identify the candle that broke structure
@@ -97,13 +97,13 @@ Stop loss goes just beyond the sweep level. Target is opposite HTF liquidity (H3
 ---
 
 ## Step 5 of 6: SMT Confluence
-**Optional: Smart Money Technique**
+**Optional: Correlation Divergence Technique**
 
 ### What Is It?
-SMT (Smart Money Technique) compares correlated assets (e.g., ES vs NQ, EUR vs GBP). Divergence = manipulation, increases probability.
+SMT compares correlated assets (e.g., ES vs NQ, EUR vs GBP). Divergence in OHLC structure = manipulation, increases probability.
 
 ### Why It Matters
-When one asset makes a new high/low but the correlated asset doesn't, it reveals institutional positioning.
+When one asset makes a new high/low but the correlated asset doesn't, it reveals underlying price mechanics and positioning.
 
 ### How To Apply
 - Compare ES and NQ during your setup

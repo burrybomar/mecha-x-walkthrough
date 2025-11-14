@@ -20,7 +20,7 @@ Everything you need to know about the framework, execution, and trading.
 
 **Q: Which timeframes should I use for HTF analysis?**
 
-A: For HTF context, use Daily and 4H charts. These show where smart money is positioned and where major liquidity sits. Your entry timeframe (LTF) should be 5m, 15m, or 1H depending on your chart timeframe. If you're on 5m chart, your HTF is 1H/4H/Daily. The indicator's Auto Mode handles this automatically.
+A: For HTF context, use Daily and 4H charts. These show where major price structure is positioned and where key liquidity sits. Your entry timeframe (LTF) should be 5m, 15m, or 1H depending on your chart timeframe. If you're on 5m chart, your HTF is 1H/4H/Daily. The indicator's Auto Mode handles this automatically.
 
 ---
 
@@ -58,7 +58,7 @@ A: Find the HTF range (Daily high to Daily low). Calculate 50% (equilibrium). If
 
 **Q: What if there's no liquidity sweep?**
 
-A: NO SWEEP = NO TRADE. This is a strict rule. Without a liquidity sweep, you have no trigger and no confirmation that smart money is active. Wait patiently for a clear wick through BSL/SSL with immediate reversal. Don't force trades.
+A: NO SWEEP = NO TRADE. This is a strict rule. Without a liquidity sweep, you have no trigger and no confirmation that major participants are active. Wait patiently for a clear wick through BSL/SSL with immediate reversal. Don't force trades.
 
 ---
 
@@ -76,7 +76,7 @@ A: Yes, but let HTF bias guide you. In a Daily uptrend, focus on long setups. In
 
 **Q: What if sweep happens outside H2 session window?**
 
-A: You can still trade it if all other conditions are met, but probability is lower. H2 (9:30-12 PM EST) is highest probability because that's when institutional sweeps cluster. Late-night or off-hours sweeps work but with reduced confidence. Be more selective.
+A: You can still trade it if all other conditions are met, but probability is lower. H2 (9:30-12 PM EST) is highest probability because that's when liquidity sweeps cluster based on OHLC patterns. Late-night or off-hours sweeps work but with reduced confidence. Be more selective.
 
 ---
 

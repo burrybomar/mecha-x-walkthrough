@@ -2,13 +2,13 @@
 
 ## Hero Section
 
-**Institutional Trading Framework**
+**OHLC Price Action Framework**
 
 # One System.
 # Six Steps.
 # Complete Edge.
 
-A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries into one coherent trading system.
+A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles.
 
 ### Call-to-Action Buttons:
 - See How It Works
@@ -34,8 +34,8 @@ Every step flows into the next. From higher timeframe analysis down to precision
 
 ## Why This Framework Works
 
-### 01 - Institutional Logic
-Follow where big money moves, not retail patterns
+### 01 - Price Action Logic
+Follow OHLC structure and candle closures, not lagging indicators
 
 ### 02 - Multi-Timeframe Sync
 HTF context guides LTF execution—perfect harmony

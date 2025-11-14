@@ -20,7 +20,7 @@ const terms: Term[] = [
     term: "Higher Timeframe",
     acronym: "HTF",
     category: "Timeframes",
-    definition: "Larger timeframes (4H, Daily, Weekly) that show institutional positioning and major support/resistance levels. Smart money operates on these levels.",
+    definition: "Larger timeframes (4H, Daily, Weekly) that show key OHLC structure and major support/resistance levels. Price action at these levels guides trades.",
     example: "Daily and 4H charts show where major liquidity pools sit."
   },
   {
@@ -34,14 +34,14 @@ const terms: Term[] = [
     term: "Buy Side Liquidity",
     acronym: "BSL",
     category: "Zones",
-    definition: "Stop losses and buy orders sitting above recent highs. Smart money sweeps these levels before reversing down.",
+    definition: "Stop losses and buy orders sitting above recent highs. Major participants sweep these levels before reversing down.",
     example: "Price breaks above swing high to grab stops, then reverses sharply."
   },
   {
     term: "Sell Side Liquidity",
     acronym: "SSL",
     category: "Zones",
-    definition: "Stop losses and sell orders sitting below recent lows. Smart money sweeps these levels before reversing up.",
+    definition: "Stop losses and sell orders sitting below recent lows. Major participants sweep these levels before reversing up.",
     example: "Price breaks below swing low to grab stops, then reverses sharply."
   },
   {
@@ -88,7 +88,7 @@ const terms: Term[] = [
     term: "Momentum Candles",
     category: "Patterns",
     definition: "After C2 sweep, consecutive candles (minimum 2) moving in the reversal direction. The close of the last momentum candle = CISD level. More momentum candles = stronger setup.",
-    example: "After C2 sweeps low, 3 green candles form moving up. These are momentum candles showing institutional delivery."
+    example: "After C2 sweeps low, 3 green candles form moving up. These are momentum candles showing price delivery."
   },
   {
     term: "Momentum Range",
@@ -106,7 +106,7 @@ const terms: Term[] = [
     term: "Order Block",
     acronym: "OB",
     category: "Zones",
-    definition: "The last opposing candle before a strong move. Shows where institutions placed orders. Acts as support/resistance.",
+    definition: "The last opposing candle before a strong move. Shows where significant orders were placed via OHLC structure. Acts as support/resistance.",
     example: "Last down candle before rally = bullish order block for entries."
   },
   {
@@ -124,17 +124,17 @@ const terms: Term[] = [
     example: "Previously filled FVG now acting as entry zone after sweep."
   },
   {
-    term: "Smart Money Technique",
+    term: "Correlation Divergence",
     acronym: "SMT",
     category: "Patterns",
-    definition: "Compares correlated assets to detect institutional manipulation. Binary mode = 2 assets, PSP divergence. Triad mode = 3 assets, 2-Stage CIC correlation tracking.",
+    definition: "Compares correlated assets to detect OHLC manipulation. Binary mode = 2 assets, PSP divergence. Triad mode = 3 assets, 2-Stage CIC correlation tracking.",
     example: "Binary: ES sweeps high but NQ doesn't = bearish SMT. Triad: Both NQ and RTY diverge from ES = full triad signal (⟐⟐)."
   },
   {
     term: "PSP (Precision Swing Point)",
     acronym: "PSP",
     category: "Patterns",
-    definition: "Binary SMT concept. One asset sweeps an extreme (high/low) but the correlated asset doesn't follow, revealing divergence and institutional positioning.",
+    definition: "Binary SMT concept. One asset sweeps an extreme (high/low) but the correlated asset doesn't follow, revealing divergence in price structure.",
     example: "ES sweeps 4950 high, but NQ fails to make new high = PSP bearish divergence."
   },
   {
@@ -152,13 +152,13 @@ const terms: Term[] = [
   {
     term: "Premium Zone",
     category: "Zones",
-    definition: "Upper half of HTF range (above 50% equilibrium). Institutional sellers dominate. Look for short setups here.",
+    definition: "Upper half of HTF range (above 50% equilibrium). Look for short setups here based on OHLC structure.",
     example: "Price in top 25% of Daily range = premium, expect shorts."
   },
   {
     term: "Discount Zone",
     category: "Zones",
-    definition: "Lower half of HTF range (below 50% equilibrium). Institutional buyers dominate. Look for long setups here.",
+    definition: "Lower half of HTF range (below 50% equilibrium). Look for long setups here based on OHLC structure.",
     example: "Price in bottom 25% of Daily range = discount, expect longs."
   },
   {
@@ -215,19 +215,19 @@ const terms: Term[] = [
   {
     term: "Macro Time",
     category: "Timeframes",
-    definition: "Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where institutional algorithms execute. Session models based on these.",
+    definition: "Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where major price movements execute. Session models based on these OHLC patterns.",
     example: "2-5 AM = London open manipulation, 9:30-12 = NYC reversal."
   },
   {
     term: "Distribution",
     category: "Concepts",
-    definition: "Smart money selling into retail buying. Happens at premium levels. Precedes bearish moves.",
+    definition: "Major participants selling into retail buying. Happens at premium levels. Precedes bearish moves.",
     example: "Price ranges at highs while volume increases = distribution phase."
   },
   {
     term: "Accumulation",
     category: "Concepts",
-    definition: "Smart money buying into retail selling. Happens at discount levels. Precedes bullish moves.",
+    definition: "Major participants buying into retail selling. Happens at discount levels. Precedes bullish moves.",
     example: "Price ranges at lows while volume increases = accumulation phase."
   },
   {

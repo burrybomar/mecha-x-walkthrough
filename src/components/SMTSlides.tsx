@@ -8,13 +8,13 @@ const smtSteps = [
     step: 1,
     icon: GitCompare,
     title: 'SMT Basics',
-    subtitle: 'Smart Money Technique',
+    subtitle: 'Correlation Divergence',
     description: 'Detects divergence between correlated assets at swing highs and lows signaling reversals',
     details: [
       'Compares ES, NQ, YM (or other correlating pairs)',
       'When one makes new high/low but others don\'t = divergence',
-      'Shows smart money positioning for reversal',
-      'Indicates institutional disagreement on direction'
+      'Shows underlying price mechanics for reversal',
+      'Indicates disagreement in OHLC structure between pairs'
     ]
   },
   {

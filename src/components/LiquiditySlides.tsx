@@ -9,12 +9,13 @@ const liquiditySteps = [
     icon: Target,
     title: 'Liquidity Pools',
     subtitle: 'BSL & SSL Basics',
-    description: 'Stop-loss clusters at key levels that smart money targets for filling large orders',
+    description: 'Stop-loss clusters at key levels that major participants target for filling large orders',
     details: [
       'BSL (Buy-Side Liquidity): Stops above swing highs',
       'SSL (Sell-Side Liquidity): Stops below swing lows',
-      'Smart money sweeps these levels before reversing',
-      'Liquidity hunting is institutional manipulation'
+      'Price wicks through BSL/SSL to grab liquidity',
+      'Major participants need this fuel for large positions',
+      'Liquidity sweep is price manipulation at OHLC extremes'
     ]
   },
   {

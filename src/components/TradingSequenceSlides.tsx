@@ -11,7 +11,7 @@ const tradingSteps = [
     subtitle: '4H/Daily Levels',
     description: 'Identify key support and resistance levels on Higher Time Frames (4H/Daily charts)',
     details: [
-      'Mark institutional order blocks and fair value gaps',
+      'Mark order blocks and fair value gaps on HTF',
       'Identify premium and discount zones',
       'Look for liquidity pools above highs and below lows',
       'Note previous day/week high and low levels'
@@ -53,7 +53,7 @@ const tradingSteps = [
       'Wait for consolidation after the sweep',
       'Inducement: False move to attract wrong-side traders',
       'Stop Hunt: Quick spike to trigger stops',
-      'Distribution: Smart money exits, creating your entry',
+      'Distribution: Major exits creating your entry opportunity',
       'Target: Opposite liquidity at H3 (1:3 RR) or H4 (1:4 RR)'
     ]
   }

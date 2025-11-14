@@ -8,10 +8,10 @@ const htfSteps = [
     step: 1,
     icon: BarChart3,
     title: 'HTF Sweeps',
-    subtitle: 'Institutional Liquidity',
-    description: 'HTF sweeps (4H, Daily, Weekly) represent institutional-level liquidity at major reversal zones',
+    subtitle: 'HTF Liquidity Levels',
+    description: 'HTF sweeps (4H, Daily, Weekly) represent key OHLC-based liquidity at major reversal zones',
     details: [
-      'Daily/4H highs and lows mark institutional liquidity pools',
+      'Daily/4H highs and lows mark key liquidity pools',
       'HTF sweeps are much more reliable than LTF sweeps',
       'HTF provides direction, LTF provides timing',
       'Best during H2 Silver Bullet windows of major sessions'

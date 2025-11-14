@@ -179,7 +179,7 @@ const examples: ChartExample[] = [
     title: "Distribution Setup",
     category: "Sessions",
     image: distributionSetups,
-    description: "How smart money distributes at premium levels during specific session windows.",
+    description: "How major participants distribute at premium levels during specific session windows.",
     keyPoints: [
       "Price ranges at highs = distribution",
       "Volume increases during consolidation",
@@ -205,7 +205,7 @@ const examples: ChartExample[] = [
     title: "SMT Divergence (LTF)",
     category: "Patterns",
     image: smtLtf,
-    description: "Smart Money Technique divergence between correlated assets revealing manipulation.",
+    description: "Correlation divergence between assets revealing OHLC manipulation.",
     keyPoints: [
       "Compare ES vs NQ during setup",
       "One makes new high, other doesn't",
