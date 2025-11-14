@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { FloatingCandlestickAssistant } from "@/components/FloatingCandlestickAssistant";
 import Index from "./pages/Index";
 import Knowledge from "./pages/Knowledge";
 import Setup from "./pages/Setup";
@@ -31,6 +32,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <FloatingCandlestickAssistant />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
