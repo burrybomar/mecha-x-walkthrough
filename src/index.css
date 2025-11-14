@@ -126,6 +126,23 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
   
+  /* Reduced motion for mobile and accessibility */
+  @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .candle-rise,
+    .candle-fall,
+    .wick-animate,
+    .price-pulse,
+    .subtle-float {
+      animation: none !important;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   /* OHLC-themed animations */
   @keyframes candle-rise {
     0% { transform: scaleY(0); opacity: 0; }
