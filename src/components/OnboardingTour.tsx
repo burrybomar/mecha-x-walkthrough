@@ -110,12 +110,15 @@ export const OnboardingTour = () => {
   const getTooltipPosition = () => {
     const rect = getCurrentStepElement();
     const step = tourSteps[currentStep];
+    const isMobile = window.innerWidth < 768;
     
-    if (!rect || step.position === 'center') {
+    // On mobile, always center the tooltip for better UX
+    if (isMobile || !rect || step.position === 'center') {
       return {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
+        maxWidth: 'calc(100vw - 2rem)',
       };
     }
 
@@ -158,7 +161,10 @@ export const OnboardingTour = () => {
 
   const getHighlightStyle = () => {
     const rect = getCurrentStepElement();
-    if (!rect) return null;
+    const isMobile = window.innerWidth < 768;
+    
+    // On mobile, don't show the highlight box
+    if (isMobile || !rect) return null;
 
     return {
       top: `${rect.top - 8}px`,
@@ -224,24 +230,24 @@ export const OnboardingTour = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          className="absolute z-[101] max-w-md"
+          className="absolute z-[101] w-full max-w-md px-4 md:px-0"
           style={tooltipPosition}
         >
-          <Card className="p-6 border-2 border-primary/30 shadow-2xl bg-card/95 backdrop-blur-md">
+          <Card className="p-4 md:p-6 border-2 border-primary/30 shadow-2xl bg-card/95 backdrop-blur-md">
             {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className={`p-2 rounded-lg ${
+            <div className="flex items-start justify-between mb-3 md:mb-4">
+              <div className="flex items-center gap-2 md:gap-3">
+                <div className={`p-1.5 md:p-2 rounded-lg ${
                   step.highlightColor === 'bullish'
                     ? 'bg-bullish/20 text-bullish'
                     : step.highlightColor === 'bearish'
                     ? 'bg-bearish/20 text-bearish'
                     : 'bg-primary/20 text-primary'
                 }`}>
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">{step.title}</h3>
+                  <h3 className="font-bold text-base md:text-lg">{step.title}</h3>
                   <p className="text-xs text-muted-foreground">
                     Step {currentStep + 1} of {tourSteps.length}
                   </p>
@@ -251,7 +257,7 @@ export const OnboardingTour = () => {
                 variant="ghost"
                 size="icon"
                 onClick={handleSkip}
-                className="hover:bg-muted"
+                className="hover:bg-muted h-8 w-8 md:h-10 md:w-10"
                 aria-label="Skip tour"
               >
                 <X className="w-4 h-4" />
@@ -259,22 +265,22 @@ export const OnboardingTour = () => {
             </div>
 
             {/* Description */}
-            <p className="text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 leading-relaxed">
               {step.description}
             </p>
 
             {/* Progress dots */}
             <div className="flex items-center justify-between">
-              <div className="flex gap-2">
+              <div className="flex gap-1.5 md:gap-2">
                 {tourSteps.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`h-2 rounded-full transition-all ${
+                    className={`h-1.5 md:h-2 rounded-full transition-all ${
                       idx === currentStep
-                        ? 'w-8 bg-primary'
+                        ? 'w-6 md:w-8 bg-primary'
                         : idx < currentStep
-                        ? 'w-2 bg-primary/50'
-                        : 'w-2 bg-muted'
+                        ? 'w-1.5 md:w-2 bg-primary/50'
+                        : 'w-1.5 md:w-2 bg-muted'
                     }`}
                   />
                 ))}
@@ -287,6 +293,7 @@ export const OnboardingTour = () => {
                     variant="ghost"
                     size="sm"
                     onClick={handleSkip}
+                    className="text-xs md:text-sm"
                   >
                     Skip
                   </Button>
@@ -294,19 +301,19 @@ export const OnboardingTour = () => {
                 <Button
                   size="sm"
                   onClick={handleNext}
-                  className="gap-2"
+                  className="gap-1 md:gap-2 text-xs md:text-sm"
                 >
                   {currentStep === tourSteps.length - 1 ? 'Get Started' : 'Next'}
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                 </Button>
               </div>
             </div>
           </Card>
 
-          {/* Pointer arrow for non-center tooltips */}
+          {/* Pointer arrow for non-center tooltips - hide on mobile */}
           {step.position !== 'center' && (
             <div
-              className={`absolute w-4 h-4 bg-card border-2 border-primary/30 rotate-45 ${
+              className={`hidden md:block absolute w-4 h-4 bg-card border-2 border-primary/30 rotate-45 ${
                 step.position === 'top'
                   ? 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
                   : step.position === 'bottom'
