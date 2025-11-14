@@ -149,8 +149,9 @@ const Checklist = () => {
             </p>
             <Button variant="outline" className="gap-2 font-mono" onClick={handleDownloadPDF}>
               <Download className="w-4 h-4" />
-            Download PDF
-          </Button>
+              Download PDF
+            </Button>
+          </div>
         </motion.div>
 
         <div id="checklist-content" className="space-y-8">
