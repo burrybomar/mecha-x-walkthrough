@@ -7,6 +7,8 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { CandlestickButton } from "@/components/CandlestickButton";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 interface Term {
   term: string;
@@ -303,15 +305,14 @@ const Glossary = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-primary" />
               <span className="font-mono text-sm font-medium">Trading Glossary</span>
@@ -390,34 +391,39 @@ const Glossary = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3 + termIdx * 0.05 }}
                     >
-                      <Card className="p-4 md:p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex flex-col md:flex-row md:items-start gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-3">
-                              <h3 className="text-lg md:text-xl font-bold font-mono">
-                                {term.term}
-                              </h3>
-                              {term.acronym && (
-                                <Badge variant="secondary" className="font-mono text-xs">
-                                  {term.acronym}
-                                </Badge>
+                      <CandlestickCard 
+                        variant={termIdx % 2 === 0 ? "bullish" : "bearish"}
+                        wickHeight="sm"
+                      >
+                        <Card className="p-4 md:p-6 hover:shadow-lg transition-shadow border-0">
+                          <div className="flex flex-col md:flex-row md:items-start gap-4">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-3 mb-3">
+                                <h3 className="text-lg md:text-xl font-bold font-mono">
+                                  {term.term}
+                                </h3>
+                                {term.acronym && (
+                                  <Badge variant="secondary" className="font-mono text-xs">
+                                    {term.acronym}
+                                  </Badge>
+                                )}
+                              </div>
+                              
+                              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
+                                {term.definition}
+                              </p>
+                              
+                              {term.example && (
+                                <div className="p-3 rounded-lg bg-accent/10 border border-accent/30">
+                                  <p className="text-xs md:text-sm font-mono">
+                                    <span className="font-bold text-accent">Example:</span> {term.example}
+                                  </p>
+                                </div>
                               )}
                             </div>
-                            
-                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
-                              {term.definition}
-                            </p>
-                            
-                            {term.example && (
-                              <div className="p-3 rounded-lg bg-accent/10 border border-accent/30">
-                                <p className="text-xs md:text-sm font-mono">
-                                  <span className="font-bold text-accent">Example:</span> {term.example}
-                                </p>
-                              </div>
-                            )}
                           </div>
-                        </div>
-                      </Card>
+                        </Card>
+                      </CandlestickCard>
                     </motion.div>
                   ))}
                 </div>

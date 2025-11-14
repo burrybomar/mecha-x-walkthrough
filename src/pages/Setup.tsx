@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { CandlestickButton } from "@/components/CandlestickButton";
 
 interface SettingRowProps {
   label: string;
@@ -97,15 +98,14 @@ const Setup = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono text-xs md:text-sm h-9 md:h-10"
+              className="text-xs h-auto"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               <span className="hidden sm:inline">Back</span>
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <SettingsIcon className="w-4 h-4 text-primary" />
               <span className="font-mono text-xs md:text-sm font-medium">MECHA-X Settings</span>
