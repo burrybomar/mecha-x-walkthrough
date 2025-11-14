@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import { Menu, X, BookOpen, ListChecks, FileText, Settings, TrendingUp, BookText, HelpCircle, RefreshCw, ArrowUpRight, Search, ChartColumnIncreasing } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetClose,
-} from './ui/sheet';
 
 const navItems = [
   { icon: TrendingUp, label: 'OHLC Tutorial', path: '/ohlc-tutorial', color: 'bullish' },
@@ -38,71 +30,128 @@ export const MobileNav = () => {
   };
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      {/* Hamburger Button - mobile only */}
-      <SheetTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="fixed top-4 right-4 md:hidden z-[2147483647] border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary shadow-lg"
-          aria-label="Open navigation menu"
-        >
-          <Menu className="w-6 h-6 text-foreground" />
-        </Button>
-      </SheetTrigger>
-
-      {/* Drawer Menu */}
-      <SheetContent
-        side="left"
-        className="w-[90vw] max-w-sm p-0 bg-card border-r-2 border-border/50 z-[2147483647]"
+    <>
+      {/* Floating Hamburger Button */}
+      <Button
+        onClick={() => setOpen(true)}
+        variant="outline"
+        size="icon"
+        className="fixed top-4 right-4 md:hidden z-[100] backdrop-blur-xl bg-background/80 border border-border/40 hover:bg-primary/10 hover:border-primary/60 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 active:scale-95 rounded-2xl"
+        aria-label="Open navigation menu"
       >
-        <header className="sticky top-0 bg-card border-b-2 border-border/50 px-5 py-4 flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-foreground">MECHA-X</h2>
-            <p className="text-xs text-muted-foreground">Trading Intelligence</p>
-          </div>
-          <SheetClose asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Close navigation menu"
-              className="border-2 hover:bg-destructive/20 hover:border-destructive"
+        <Menu className="w-5 h-5 text-foreground" />
+      </Button>
+
+      {/* Animated Overlay & Menu */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/60 backdrop-blur-md z-[99] md:hidden"
+              onClick={() => setOpen(false)}
+            />
+
+            {/* Sliding Menu Panel */}
+            <motion.div
+              initial={{ x: '-100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '-100%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed left-0 top-0 h-full w-[85vw] max-w-sm bg-card/95 backdrop-blur-2xl border-r border-border/30 shadow-2xl z-[100] md:hidden flex flex-col"
             >
-              <X className="w-5 h-5" />
-            </Button>
-          </SheetClose>
-        </header>
-
-        <nav className="p-4 space-y-3" role="navigation" aria-label="Main navigation">
-          {navItems.map((item, idx) => (
-            <SheetClose asChild key={item.path}>
-              <button
-                onClick={() => handleNavigate(item.path)}
-                className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                  ${
-                    item.color === 'bullish'
-                      ? 'border-bullish/40 bg-bullish/15 hover:border-bullish hover:bg-bullish/25 active:bg-bullish/30 shadow-lg shadow-bullish/10'
-                      : 'border-primary/40 bg-primary/15 hover:border-primary hover:bg-primary/25 active:bg-primary/30 shadow-lg shadow-primary/10'
-                  }
-                `}
-                style={{ WebkitTapHighlightColor: 'transparent' }}
-              >
-                <div className={`${item.color === 'bullish' ? 'bg-bullish/30' : 'bg-primary/30'} p-3 rounded-xl`}>
-                  <item.icon className={`w-6 h-6 ${item.color === 'bullish' ? 'text-bullish' : 'text-primary'}`} />
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-6 border-b border-border/20">
+                <div>
+                  <h2 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    MECHA-X
+                  </h2>
+                  <p className="text-xs text-muted-foreground mt-0.5">Trading Intelligence</p>
                 </div>
-                <span className="font-semibold text-base text-foreground flex-1">{item.label}</span>
-              </button>
-            </SheetClose>
-          ))}
-        </nav>
+                <Button
+                  onClick={() => setOpen(false)}
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
 
-        <footer className="sticky bottom-0 bg-card border-t-2 border-border/50 px-6 py-5 pb-[max(env(safe-area-inset-bottom),1rem)]">
-          <p className="text-sm text-muted-foreground text-center font-medium">
-            Master the OHLC framework.<br />
-            Six steps. Complete edge.
-          </p>
-        </footer>
-      </SheetContent>
-    </Sheet>
+              {/* Navigation Items */}
+              <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-2" role="navigation" aria-label="Main navigation">
+                {navItems.map((item, idx) => (
+                  <motion.button
+                    key={item.path}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05, duration: 0.3 }}
+                    onClick={() => handleNavigate(item.path)}
+                    className={`w-full flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-300 text-left group relative overflow-hidden
+                      ${
+                        item.color === 'bullish'
+                          ? 'hover:bg-bullish/10 active:bg-bullish/20'
+                          : 'hover:bg-primary/10 active:bg-primary/20'
+                      }
+                    `}
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
+                  >
+                    {/* Animated background gradient on hover */}
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl ${
+                      item.color === 'bullish' 
+                        ? 'bg-gradient-to-r from-bullish/5 to-bullish/10' 
+                        : 'bg-gradient-to-r from-primary/5 to-primary/10'
+                    }`} />
+                    
+                    {/* Icon */}
+                    <div className={`relative z-10 p-2.5 rounded-xl transition-all duration-300 group-hover:scale-110 ${
+                      item.color === 'bullish' 
+                        ? 'bg-bullish/10 group-hover:bg-bullish/20' 
+                        : 'bg-primary/10 group-hover:bg-primary/20'
+                    }`}>
+                      <item.icon className={`w-5 h-5 ${item.color === 'bullish' ? 'text-bullish' : 'text-primary'}`} />
+                    </div>
+                    
+                    {/* Label */}
+                    <span className="relative z-10 font-semibold text-sm text-foreground group-hover:translate-x-1 transition-transform duration-300">
+                      {item.label}
+                    </span>
+                    
+                    {/* Arrow indicator */}
+                    <div className={`relative z-10 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 ${
+                      item.color === 'bullish' ? 'text-bullish' : 'text-primary'
+                    }`}>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </motion.button>
+                ))}
+              </nav>
+
+              {/* Footer */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="px-6 py-6 border-t border-border/20 pb-[max(env(safe-area-inset-bottom),1.5rem)]"
+              >
+                <div className="text-center space-y-2">
+                  <p className="text-sm font-medium bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                    Master the OHLC framework
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Six steps. Complete edge.
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
