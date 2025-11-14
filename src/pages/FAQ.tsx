@@ -14,7 +14,7 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: "Which timeframes should I use for HTF analysis?",
-    answer: "For HTF context, use Daily and 4H charts. These show where smart money is positioned and where major liquidity sits. Your entry timeframe (LTF) should be 5m, 15m, or 1H depending on your chart timeframe. If you're on 5m chart, your HTF is 1H/4H/Daily. The indicator's Auto Mode handles this automatically.",
+    answer: "For HTF context, use Daily and 4H charts. These show where major price structure is positioned and where key liquidity sits. Your entry timeframe (LTF) should be 5m, 15m, or 1H depending on your chart timeframe. If you're on 5m chart, your HTF is 1H/4H/Daily. The indicator's Auto Mode handles this automatically.",
     category: "Getting Started"
   },
   {
@@ -24,7 +24,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What if there's no liquidity sweep?",
-    answer: "NO SWEEP = NO TRADE. This is a strict rule. Without a liquidity sweep, you have no trigger and no confirmation that smart money is active. Wait patiently for a clear wick through BSL/SSL with immediate reversal. Don't force trades.",
+    answer: "NO SWEEP = NO TRADE. This is a strict rule. Without a liquidity sweep, you have no trigger and no confirmation that major participants are active. Wait patiently for a clear wick through BSL/SSL with immediate reversal. Don't force trades.",
     category: "Framework"
   },
   {
@@ -99,7 +99,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What if sweep happens outside Silver Bullet hours?",
-    answer: "You can still trade it if all other conditions are met, but probability is lower. Silver Bullet hours (10:00 AM ET primary, 03:00 AM and 14:00 PM secondary) are highest probability because that's when institutional sweeps cluster. Late-night or off-hours sweeps work but with reduced confidence. Be more selective.",
+    answer: "You can still trade it if all other conditions are met, but probability is lower. Silver Bullet hours (10:00 AM ET primary, 03:00 AM and 14:00 PM secondary) are highest probability because that's when liquidity sweeps cluster based on OHLC patterns. Late-night or off-hours sweeps work but with reduced confidence. Be more selective.",
     category: "Framework"
   },
   {

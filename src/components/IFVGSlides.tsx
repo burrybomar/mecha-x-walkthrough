@@ -12,7 +12,7 @@ const ifvgSteps = [
     description: 'Fair value gaps that form during reversal phase after valid liquidity sweeps',
     details: [
       'Price inefficiency left during quick reversal',
-      'Forms as smart money rapidly changes direction',
+      'Forms as price structure rapidly changes direction',
       'Gap between candle bodies marks the iFVG zone',
       'Acts as future support/resistance area'
     ]

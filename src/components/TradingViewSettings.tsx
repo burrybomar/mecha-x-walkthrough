@@ -313,7 +313,7 @@ export const TradingViewSettings = () => {
             <p className="text-xs text-muted-foreground italic">
               <strong>C2 Labels:</strong> Mark the exact reversal candle where sweep reversed.
               <strong className="ml-2">C3 Labels:</strong> Mark the expansion candle after reversal. C3 expectation box shows expected expansion range.
-              <strong className="ml-2">SMT:</strong> Smart Money Technique - detects divergence between correlated assets. Binary (2 assets) or Triad (3 assets).
+              <strong className="ml-2">SMT:</strong> Correlation divergence - detects OHLC structure differences between correlated assets. Binary (2 assets) or Triad (3 assets).
             </p>
           </div>
           <SettingRow label="C2">

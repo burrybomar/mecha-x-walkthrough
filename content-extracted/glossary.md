@@ -19,7 +19,7 @@ Every term, every acronym, every concept—explained clearly with real examples.
 ## Timeframes
 
 ### Higher Timeframe (HTF)
-Larger timeframes (4H, Daily, Weekly) that show institutional positioning and major support/resistance levels. Smart money operates on these levels.
+Larger timeframes (4H, Daily, Weekly) that show key OHLC structure and major support/resistance levels. Price action at these levels guides trades.
 
 **Example:** Daily and 4H charts show where major liquidity pools sit.
 
@@ -33,7 +33,7 @@ Smaller timeframes (5m, 15m, 1H) used for precise entry timing after HTF context
 ---
 
 ### Macro Time
-Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where institutional algorithms execute. Session models based on these.
+Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where major price movements execute. Session models based on these OHLC patterns.
 
 **Example:** 2-5 AM = London open manipulation, 9:30-12 = NYC reversal.
 
@@ -42,14 +42,14 @@ Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where institutional algori
 ## Zones
 
 ### Buy Side Liquidity (BSL)
-Stop losses and buy orders sitting above recent highs. Smart money sweeps these levels before reversing down.
+Stop losses and buy orders sitting above recent highs. Major participants sweep these levels before reversing down.
 
 **Example:** Price breaks above swing high to grab stops, then reverses sharply.
 
 ---
 
 ### Sell Side Liquidity (SSL)
-Stop losses and sell orders sitting below recent lows. Smart money sweeps these levels before reversing up.
+Stop losses and sell orders sitting below recent lows. Major participants sweep these levels before reversing up.
 
 **Example:** Price breaks below swing low to grab stops, then reverses sharply.
 
@@ -84,14 +84,14 @@ FVG that's been partially filled but still acts as support/resistance. Often use
 ---
 
 ### Premium Zone
-Upper half of HTF range (above 50% equilibrium). Institutional sellers dominate. Look for short setups here.
+Upper half of HTF range (above 50% equilibrium). Look for short setups here based on OHLC structure.
 
 **Example:** Price in top 25% of Daily range = premium, expect shorts.
 
 ---
 
 ### Discount Zone
-Lower half of HTF range (below 50% equilibrium). Institutional buyers dominate. Look for long setups here.
+Lower half of HTF range (below 50% equilibrium). Look for long setups here based on OHLC structure.
 
 **Example:** Price in bottom 25% of Daily range = discount, expect longs.
 
@@ -142,7 +142,7 @@ The continuation candle after C2. Confirms momentum in new direction. Often targ
 ---
 
 ### Smart Money Technique (SMT)
-Divergence between correlated assets (ES/NQ, EUR/GBP) revealing institutional manipulation. Increases setup probability.
+Divergence between correlated assets (ES/NQ, EUR/GBP) revealing OHLC manipulation. Increases setup probability.
 
 **Example:** ES makes new high but NQ doesn't = bearish SMT divergence.
 
@@ -172,7 +172,7 @@ Live monitoring that identifies liquidity sweeps as they occur, not just on cand
 ## Execution
 
 ### Silver Bullet Hour
-9:30-10:30 AM EST and 3-4 PM EST. High-probability reversal windows where institutional sweeps occur most.
+9:30-10:30 AM EST and 3-4 PM EST. High-probability reversal windows where liquidity sweeps occur most based on OHLC patterns.
 
 **Example:** Watch for sweeps during 9:30-10:30 AM window for best setups.
 
@@ -223,13 +223,13 @@ Fourth session window (2-6 PM EST) where final push into target occurs. Close re
 ## Concepts
 
 ### Distribution
-Smart money selling into retail buying. Happens at premium levels. Precedes bearish moves.
+Major participants selling into retail buying. Happens at premium levels. Precedes bearish moves.
 
 **Example:** Price ranges at highs while volume increases = distribution phase.
 
 ---
 
 ### Accumulation
-Smart money buying into retail selling. Happens at discount levels. Precedes bullish moves.
+Major participants buying into retail selling. Happens at discount levels. Precedes bullish moves.
 
 **Example:** Price ranges at lows while volume increases = accumulation phase.

@@ -60,6 +60,18 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        bullish: {
+          DEFAULT: "hsl(var(--bullish))",
+          foreground: "hsl(var(--bullish-foreground))",
+        },
+        bearish: {
+          DEFAULT: "hsl(var(--bearish))",
+          foreground: "hsl(var(--bearish-foreground))",
+        },
+        candle: {
+          wick: "hsl(var(--candle-wick))",
+          body: "hsl(var(--candle-body))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

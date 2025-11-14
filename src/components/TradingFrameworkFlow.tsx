@@ -13,7 +13,7 @@ const frameworkSteps = [
       'Mark 4H/Daily BSL & SSL liquidity pools',
       'Identify premium/discount zones',
       'Note previous day/week highs/lows',
-      'Look for institutional order blocks'
+      'Look for order blocks and fair value gaps',
     ],
     color: 'from-blue-500 to-cyan-500'
   },
@@ -68,7 +68,7 @@ const frameworkSteps = [
     details: [
       'Compare correlated assets (ES/NQ)',
       'SMT divergence = manipulation',
-      'Confirms institutional direction',
+      'Confirms price direction via candle structure',
       'Increases probability of success'
     ],
     color: 'from-violet-500 to-purple-500'
@@ -247,7 +247,7 @@ export const TradingFrameworkFlow = () => {
                     <span className="font-semibold">→ THEN</span> confidence increases (optional but powerful)
                   </p>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Works without SMT, but divergence adds institutional confirmation.
+                    Works without SMT, but divergence adds OHLC structure confirmation.
                   </p>
                 </motion.div>
               )}

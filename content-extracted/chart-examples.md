@@ -184,7 +184,7 @@ Multiple CISD setup zones marked showing optimal entry levels after different sw
 ### Distribution Setup
 **Framework Step:** Step 2: Session Timing
 
-How smart money distributes at premium levels during specific session windows.
+description: "How major participants distribute at premium levels during specific session windows.",
 
 **Key Points:**
 - Price ranges at highs = distribution
@@ -210,7 +210,7 @@ H4 session window showing distribution phase and final delivery move.
 ### SMT Divergence (LTF)
 **Framework Step:** Step 5: SMT Confluence
 
-Smart Money Technique divergence between correlated assets revealing manipulation.
+Smart Money Technique divergence between correlated assets revealing OHLC structure manipulation.
 
 **Key Points:**
 - Compare ES vs NQ during setup

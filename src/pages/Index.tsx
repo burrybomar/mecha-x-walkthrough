@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { BookOpen, ArrowRight } from "lucide-react";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { TradingFrameworkFlow } from "@/components/TradingFrameworkFlow";
+import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -65,6 +66,9 @@ const Index = () => {
                 ease: "easeInOut"
               }}
             />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-20">
+              <CandlestickPattern variant="hero" />
+            </div>
           </div>
 
           <div className="relative z-10 max-w-5xl">
@@ -74,7 +78,7 @@ const Index = () => {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="text-sm font-mono text-primary mb-4 tracking-wider uppercase">
-                Institutional Trading Framework
+                OHLC Price Action Framework
               </div>
               <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
                 One System.
@@ -93,7 +97,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              A unified framework connecting HTF levels, session timing, liquidity sweeps, 
+              A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles. 
               and precision entries into one coherent trading system.
             </motion.p>
 
@@ -218,8 +222,8 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-8 mt-16">
               {[
                 {
-                  title: "Institutional Logic",
-                  desc: "Follow where big money moves, not retail patterns"
+                  title: "Price Action Logic",
+                  desc: "Follow OHLC structure and candle closures, not lagging indicators"
                 },
                 {
                   title: "Multi-Timeframe Sync",
