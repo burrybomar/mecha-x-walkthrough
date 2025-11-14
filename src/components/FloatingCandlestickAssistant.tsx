@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, BookOpen, X, ChevronRight } from 'lucide-react';
+import { TrendingUp, BookOpen, X, ChevronRight, RefreshCw, ArrowUpRight, Search } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
 import { useNavigate } from 'react-router-dom';
 
 const frameworkSteps = [
-  { title: 'HTF Key Levels', path: '/knowledge#htf', icon: '📊' },
-  { title: 'Session Context', path: '/knowledge#sessions', icon: '⏰' },
-  { title: 'Liquidity Sweeps', path: '/knowledge#liquidity', icon: '💧' },
-  { title: 'SMT Confluence', path: '/knowledge#smt', icon: '🔄' },
-  { title: 'CISD Patterns', path: '/knowledge#cisd', icon: '📈' },
-  { title: 'Entry Execution', path: '/knowledge#entry', icon: '🎯' },
+  { icon: TrendingUp, label: 'Continuation', path: '/sequences' },
+  { icon: RefreshCw, label: 'Reversal', path: '/sequences' },
+  { icon: ArrowUpRight, label: 'Aligned', path: '/sequences' },
+  { icon: Search, label: 'Case Studies', path: '/case-studies' },
 ];
 
 const quickGlossary = [
@@ -160,34 +158,37 @@ export const FloatingCandlestickAssistant = () => {
                         <p className="text-sm text-muted-foreground mb-4">
                           Jump to any step in the trading sequence
                         </p>
-                        {frameworkSteps.map((step, idx) => (
-                          <motion.button
-                            key={step.title}
-                            onClick={() => handleNavigate(step.path)}
-                            className="w-full group"
-                            whileHover={{ x: 4 }}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.05 }}
-                          >
-                            <div className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all ${
-                              idx % 2 === 0
-                                ? 'border-bullish/20 bg-bullish/5 hover:border-bullish hover:bg-bullish/10'
-                                : 'border-bearish/20 bg-bearish/5 hover:border-bearish hover:bg-bearish/10'
-                            }`}>
-                              <span className="text-2xl">{step.icon}</span>
-                              <div className="flex-1 text-left">
-                                <div className="font-medium text-foreground">
-                                  {step.title}
+                        {frameworkSteps.map((step, idx) => {
+                          const Icon = step.icon;
+                          return (
+                            <motion.button
+                              key={step.label}
+                              onClick={() => handleNavigate(step.path)}
+                              className="w-full group"
+                              whileHover={{ x: 4 }}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: idx * 0.05 }}
+                            >
+                              <div className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all ${
+                                idx % 2 === 0
+                                  ? 'border-bullish/20 bg-bullish/5 hover:border-bullish hover:bg-bullish/10'
+                                  : 'border-bearish/20 bg-bearish/5 hover:border-bearish hover:bg-bearish/10'
+                              }`}>
+                                <Icon className="w-5 h-5" />
+                                <div className="flex-1 text-left">
+                                  <div className="font-medium text-foreground">
+                                    {step.label}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">
+                                    Sequence {idx + 1}
+                                  </div>
                                 </div>
-                                <div className="text-xs text-muted-foreground">
-                                  Step {idx + 1} of 6
-                                </div>
+                                <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                               </div>
-                              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                            </div>
-                          </motion.button>
-                        ))}
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="space-y-3">

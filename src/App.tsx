@@ -20,6 +20,10 @@ import TradeJournal from "./pages/TradeJournal";
 import OHLCTutorial from "./pages/OHLCTutorial";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import FractalModel from "./pages/FractalModel";
+import Sequences from "./pages/Sequences";
+import SequenceIdentifier from "./pages/SequenceIdentifier";
+import CaseStudies from "./pages/CaseStudies";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -40,6 +44,10 @@ const App = () => {
             <Route path="/auth" element={<Auth />} />
             <Route path="/knowledge" element={<Knowledge />} />
             <Route path="/ohlc-tutorial" element={<OHLCTutorial />} />
+            <Route path="/fractal-model" element={<FractalModel />} />
+            <Route path="/sequences" element={<Sequences />} />
+            <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/setup" element={<Setup />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/chart-examples" element={<ChartExamples />} />
