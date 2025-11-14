@@ -29,24 +29,38 @@ const Index = () => {
                 <div className="text-xs text-muted-foreground">Trading Intelligence</div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ohlc-tutorial')}>
-                OHLC Tutorial
+            <nav className="flex items-center gap-1">
+              {/* Core Learning */}
+              <Button variant="ghost" size="sm" onClick={() => navigate('/ohlc-tutorial')} className="font-mono">
+                OHLC
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/chart-examples')}>
-                Chart Examples
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/glossary')}>
-                Glossary
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/resources')}>
-                Resources
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')}>
-                <BookOpen className="w-4 h-4 mr-2" />
+              <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')} className="font-mono">
+                <BookOpen className="w-4 h-4 mr-1" />
                 Learn
               </Button>
-            </div>
+              
+              {/* Tools */}
+              <Button variant="ghost" size="sm" onClick={() => navigate('/checklist')} className="font-mono">
+                Checklist
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/trade-journal')} className="font-mono">
+                Journal
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/setup')} className="font-mono">
+                Setup
+              </Button>
+              
+              {/* Reference */}
+              <Button variant="ghost" size="sm" onClick={() => navigate('/chart-examples')} className="font-mono">
+                Charts
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/glossary')} className="font-mono">
+                Glossary
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/faq')} className="font-mono">
+                FAQ
+              </Button>
+            </nav>
           </div>
         </div>
       </motion.header>
