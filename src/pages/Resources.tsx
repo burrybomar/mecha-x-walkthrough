@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 interface Resource {
   title: string;
@@ -138,18 +140,21 @@ const Resources = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative overflow-hidden"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Everything You Need
-            </span>
-            <br />
-            <span className="text-foreground text-3xl md:text-5xl">In One Place</span>
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-            Tools, guides, practice platforms.
-          </p>
+          <AnimatedPriceAction />
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Everything You Need
+              </span>
+              <br />
+              <span className="text-foreground text-3xl md:text-5xl">In One Place</span>
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
+              Tools, guides, practice platforms.
+            </p>
+          </div>
         </motion.div>
 
         {/* Resources by Category */}

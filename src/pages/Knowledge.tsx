@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { CandlestickScroll } from "@/components/CandlestickScroll";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 const Knowledge = () => {
   const navigate = useNavigate();
@@ -154,12 +156,15 @@ const Knowledge = () => {
       </motion.header>
 
       {/* Hero */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative overflow-hidden">
+        {/* Animated Price Action Background */}
+        <AnimatedPriceAction />
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center relative z-10"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             The Complete

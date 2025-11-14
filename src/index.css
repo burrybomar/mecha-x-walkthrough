@@ -124,6 +124,45 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* OHLC-themed animations */
+  @keyframes candle-rise {
+    0% { transform: scaleY(0); opacity: 0; }
+    50% { transform: scaleY(1.1); }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  
+  @keyframes candle-fall {
+    0% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.9); }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  
+  @keyframes wick-extend {
+    0%, 100% { height: 20px; }
+    50% { height: 40px; }
+  }
+  
+  @keyframes price-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  
+  .candle-rise {
+    animation: candle-rise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .candle-fall {
+    animation: candle-fall 0.6s ease-in-out;
+  }
+  
+  .wick-animate {
+    animation: wick-extend 2s ease-in-out infinite;
+  }
+  
+  .price-pulse {
+    animation: price-pulse 2s ease-in-out infinite;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }

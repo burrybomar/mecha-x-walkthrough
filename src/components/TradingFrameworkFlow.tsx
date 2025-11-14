@@ -123,168 +123,214 @@ export const TradingFrameworkFlow = () => {
                 }`}
               >
                 <div
-                  className={`w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                    idx === activeStep
-                      ? 'bg-gradient-to-br ' + step.color + ' shadow-lg'
-                      : 'bg-card border border-border'
-                  }`}
+                  className={`w-16 h-16 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}
                 >
-                  <step.icon
-                    className={`w-8 h-8 transition-colors ${
-                      idx === activeStep ? 'text-white' : 'text-muted-foreground'
-                    }`}
-                  />
+                  <step.icon className="w-7 h-7" />
                 </div>
-                <div
-                  className={`absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-medium transition-opacity ${
-                    idx === activeStep ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  Step {step.id}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                  {step.title}
                 </div>
               </button>
               {idx < frameworkSteps.length - 1 && (
-                <ArrowRight
-                  className={`w-6 h-6 mx-2 transition-colors ${
-                    idx === activeStep ? 'text-primary' : 'text-muted-foreground/40'
-                  }`}
-                />
+                <div className="relative w-12 h-0.5 mx-2">
+                  <div className="absolute inset-0 bg-border" />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-primary to-accent"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: idx < activeStep ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ transformOrigin: 'left' }}
+                  />
+                  <ArrowRight className="absolute top-1/2 -translate-y-1/2 -right-1 w-3 h-3 text-primary opacity-0" />
+                </div>
               )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Content Display */}
-      <div className="relative rounded-2xl overflow-hidden border border-border bg-card shadow-xl">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            className={`absolute inset-0 opacity-10 bg-gradient-to-br ${currentStep.color}`}
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 5, 0]
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-
-        <div className="relative z-10 p-8 md:p-12">
-          <AnimatePresence mode="wait">
+      {/* Candlestick Cards */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeStep}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          {/* Candlestick Card */}
+          <div className="flex flex-col items-center">
+            {/* Top Wick */}
             <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-8"
+              className="w-2 bg-candle-wick rounded-full"
+              initial={{ height: 0 }}
+              animate={{ height: '60px' }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            />
+            
+            {/* Candlestick Body */}
+            <motion.div
+              className={`relative w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden backdrop-blur-sm border-2`}
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{
+                background: `linear-gradient(135deg, ${
+                  activeStep % 2 === 0 
+                    ? 'hsl(var(--bullish) / 0.15)' 
+                    : 'hsl(var(--bearish) / 0.15)'
+                })`,
+                borderColor: activeStep % 2 === 0 
+                  ? 'hsl(var(--bullish))' 
+                  : 'hsl(var(--bearish))'
+              }}
             >
-              {/* Header */}
-              <div className="flex items-start gap-6">
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${currentStep.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                  <IconComponent className="w-10 h-10 text-white" />
-                </div>
-                <div className="flex-1 pt-1">
-                  <div className="text-sm font-medium text-muted-foreground mb-1">
-                    Step {currentStep.id} of {frameworkSteps.length}
+              {/* Gradient Overlay */}
+              <div 
+                className="absolute inset-0 opacity-20"
+                style={{
+                  background: `linear-gradient(135deg, ${
+                    activeStep % 2 === 0 
+                      ? 'hsl(var(--bullish))' 
+                      : 'hsl(var(--bearish))'
+                  } 0%, transparent 100%)`
+                }}
+              />
+              
+              {/* Content */}
+              <div className="relative z-10 p-12">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-8">
+                  <div className="flex items-center gap-6">
+                    <motion.div
+                      className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${currentStep.color} flex items-center justify-center text-white shadow-xl`}
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <IconComponent className="w-10 h-10" />
+                    </motion.div>
+                    <div>
+                      <div className="text-sm font-mono text-muted-foreground mb-2">
+                        STEP {activeStep + 1} / {frameworkSteps.length}
+                      </div>
+                      <h2 className="text-4xl font-bold mb-2">{currentStep.title}</h2>
+                      <div className="text-lg font-mono text-primary">{currentStep.subtitle}</div>
+                    </div>
                   </div>
-                  <h3 className="text-4xl font-bold mb-2">{currentStep.title}</h3>
-                  <p className="text-xl text-muted-foreground">{currentStep.subtitle}</p>
+                  
+                  {/* Play/Pause */}
+                  <button
+                    onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                    className="px-4 py-2 rounded-full border-2 border-border hover:border-primary transition-colors font-mono text-sm"
+                  >
+                    {isAutoPlaying ? 'PAUSE' : 'PLAY'}
+                  </button>
                 </div>
-              </div>
 
-              {/* Description */}
-              <div className="p-6 rounded-xl bg-primary/5 border border-primary/20">
-                <p className="text-lg leading-relaxed">{currentStep.description}</p>
-              </div>
+                {/* Description */}
+                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                  {currentStep.description}
+                </p>
 
-              {/* Details Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {currentStep.details.map((detail, idx) => (
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {currentStep.details.map((detail, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 + idx * 0.1 }}
+                      className="flex items-start gap-3 p-4 rounded-xl bg-background/50 backdrop-blur border border-border hover:border-primary transition-colors group"
+                    >
+                      <div 
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                        style={{
+                          background: `linear-gradient(135deg, ${
+                            activeStep % 2 === 0 
+                              ? 'hsl(var(--bullish))' 
+                              : 'hsl(var(--bearish))'
+                          } 0%, transparent 100%)`,
+                          color: activeStep % 2 === 0 
+                            ? 'hsl(var(--bullish))' 
+                            : 'hsl(var(--bearish))'
+                        }}
+                      >
+                        {idx + 1}
+                      </div>
+                      <p className="text-foreground leading-relaxed group-hover:text-primary transition-colors">
+                        {detail}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Special Logic Sections */}
+                {activeStep === 4 && (
                   <motion.div
-                    key={idx}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.1, duration: 0.4 }}
-                    className="flex items-start gap-3 p-4 rounded-lg bg-background/80 border border-border/40"
+                    transition={{ delay: 1 }}
+                    className="mt-8 p-6 rounded-xl border-2 border-dashed border-accent bg-accent/5"
                   >
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                    </div>
-                    <p className="text-sm leading-relaxed flex-1">{detail}</p>
+                    <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                      <span className="text-accent">⚡</span> If/Then Logic
+                    </h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li><strong>If</strong> SMT divergence present → increase position size (1.5x)</li>
+                      <li><strong>If</strong> no SMT → standard position size</li>
+                      <li><strong>If</strong> inverse SMT → skip setup (counter signal)</li>
+                    </ul>
                   </motion.div>
-                ))}
-              </div>
-
-              {/* If/Then Logic */}
-              {activeStep === 2 && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="p-6 rounded-xl bg-accent/10 border-2 border-accent/30"
-                >
-                  <div className="text-sm font-bold text-accent mb-2">Decision Point:</div>
-                  <p className="text-sm leading-relaxed">
-                    <span className="font-semibold">IF</span> BSL/SSL sweep occurs <span className="font-semibold">AND</span> C2 pattern confirms{' '}
-                    <span className="font-semibold">→ THEN</span> proceed to Step 4 (CISD Entry)
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">
-                    No sweep = No trade. Wait for next session window.
-                  </p>
-                </motion.div>
-              )}
-
-              {activeStep === 4 && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="p-6 rounded-xl bg-accent/10 border-2 border-accent/30"
-                >
-                  <div className="text-sm font-bold text-accent mb-2">Optional Enhancement:</div>
-                  <p className="text-sm leading-relaxed">
-                    <span className="font-semibold">IF</span> SMT divergence present{' '}
-                    <span className="font-semibold">→ THEN</span> confidence increases (optional but powerful)
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">
-                    Works without SMT, but divergence adds OHLC structure confirmation.
-                  </p>
-                </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Progress Dots */}
-          <div className="flex items-center justify-center gap-2 mt-12">
-            {frameworkSteps.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setActiveStep(idx);
-                  setIsAutoPlaying(false);
-                }}
-                className="relative group"
-              >
-                <div
-                  className={`rounded-full transition-all duration-300 ${
-                    idx === activeStep
-                      ? 'w-12 h-3 bg-primary'
-                      : 'w-3 h-3 bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
-                />
-                {idx === activeStep && isAutoPlaying && (
-                  <motion.div
-                    className="absolute inset-0 rounded-full bg-primary/50"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 3.5, ease: "linear" }}
-                    style={{ transformOrigin: 'left' }}
-                  />
                 )}
-              </button>
-            ))}
+
+                {activeStep === 4 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2 }}
+                    className="mt-4 p-6 rounded-xl border-2 border-dashed border-primary bg-primary/5"
+                  >
+                    <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                      <span className="text-primary">✨</span> Optional Enhancement
+                    </h3>
+                    <p className="text-muted-foreground">
+                      While SMT adds confluence, the framework works without it. Focus on HTF context + sweep + CISD as your core setup.
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Bottom Wick */}
+            <motion.div
+              className="w-2 bg-candle-wick rounded-full"
+              initial={{ height: 0 }}
+              animate={{ height: '60px' }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            />
           </div>
-        </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Progress Indicators */}
+      <div className="mt-12 flex justify-center gap-2">
+        {frameworkSteps.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              setActiveStep(idx);
+              setIsAutoPlaying(false);
+            }}
+            className="group"
+          >
+            <div className={`h-2 rounded-full transition-all duration-300 ${
+              idx === activeStep 
+                ? 'w-12 bg-primary' 
+                : 'w-2 bg-border group-hover:bg-muted-foreground'
+            }`} />
+          </button>
+        ))}
       </div>
     </div>
   );
