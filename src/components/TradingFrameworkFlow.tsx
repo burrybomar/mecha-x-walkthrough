@@ -107,7 +107,7 @@ export const TradingFrameworkFlow = () => {
   const IconComponent = currentStep.icon;
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto px-4 framework-flow">
       {/* Flow Visualization */}
       <div className="mb-12 overflow-x-auto pb-4">
         <div className="flex items-center justify-center gap-2 min-w-max px-4">
