@@ -30,6 +30,9 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/ohlc-tutorial')}>
+                OHLC Tutorial
+              </Button>
               <Button variant="ghost" size="sm" onClick={() => navigate('/chart-examples')}>
                 Chart Examples
               </Button>

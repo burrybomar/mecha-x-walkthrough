@@ -15,6 +15,7 @@ import Checklist from "./pages/Checklist";
 import FAQ from "./pages/FAQ";
 import Resources from "./pages/Resources";
 import TradeJournal from "./pages/TradeJournal";
+import OHLCTutorial from "./pages/OHLCTutorial";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/ohlc-tutorial" element={<OHLCTutorial />} />
             <Route path="/setup" element={<Setup />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/chart-examples" element={<ChartExamples />} />
