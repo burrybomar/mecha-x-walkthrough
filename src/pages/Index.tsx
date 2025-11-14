@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
-import { TradingFrameworkFlow } from "@/components/TradingFrameworkFlow";
+import { ThreeSequencesFlow } from "@/components/ThreeSequencesFlow";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { ResponsiveNav } from "@/components/ResponsiveNav";
@@ -165,7 +165,7 @@ const Index = () => {
               </motion.div>
             </div>
 
-            <TradingFrameworkFlow />
+            <ThreeSequencesFlow />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -177,23 +177,23 @@ const Index = () => {
               <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/5 border border-primary/20">
                 <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <p className="text-sm font-medium">
-                  Want to understand each step deeply?
+                  Ready to master the sequences?
                 </p>
               </div>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <CandlestickButton 
                   variant="bullish"
-                  onClick={() => navigate('/setup')}
+                  onClick={() => navigate('/fractal-model')}
                   className="text-lg px-10 py-6"
                 >
-                  Setup Your Indicators
+                  Learn the Fractal Model
                 </CandlestickButton>
                 <CandlestickButton 
                   variant="bearish"
-                  onClick={() => navigate('/knowledge')}
+                  onClick={() => navigate('/sequence-identifier')}
                   className="text-lg px-10 py-6"
                 >
-                  Read Framework Logic
+                  Identify Your Sequence
                 </CandlestickButton>
               </div>
             </motion.div>

@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, BookOpen, ListChecks, FileText, Settings, TrendingUp, BookText, HelpCircle } from 'lucide-react';
+import { Menu, X, BookOpen, ListChecks, FileText, Settings, TrendingUp, BookText, HelpCircle, RefreshCw, ArrowUpRight, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 
 const navItems = [
   { icon: TrendingUp, label: 'OHLC Tutorial', path: '/ohlc-tutorial', color: 'bullish' },
   { icon: BookOpen, label: 'Learn Framework', path: '/knowledge', color: 'primary' },
+  { icon: RefreshCw, label: 'Fractal Model', path: '/fractal-model', color: 'bullish' },
+  { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
+  { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
+  { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
   { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'bullish' },
   { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'primary' },
   { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'bullish' },
