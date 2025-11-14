@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, RefreshCw, ArrowUpRight, Search, FileText } from 'lucide-react';
+import { BookOpen, RefreshCw, ArrowUpRight, Search, FileText, ChartColumnIncreasing } from 'lucide-react';
 import { Button } from './ui/button';
 import { MobileNav } from './MobileNav';
 
@@ -74,6 +74,16 @@ export const ResponsiveNav = () => {
         >
           <FileText className="w-4 h-4 mr-1" />
           Cases
+        </Button>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/chart-comparison')} 
+          className="font-mono"
+          aria-label="Chart Comparison"
+        >
+          <ChartColumnIncreasing className="w-4 h-4 mr-1" />
+          Compare
         </Button>
         
         {/* Tools */}
