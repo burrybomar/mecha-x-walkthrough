@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { CandlestickPattern } from "@/components/CandlestickPattern";
 
 // Import chart images
 import htfChart from "@/assets/htf-chart-edge.png";
@@ -264,18 +265,25 @@ const ChartExamples = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Real Charts
-            </span>
-            <br />
-            <span className="text-foreground text-3xl md:text-5xl">Real Setups</span>
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-mono">
-            See the framework in action. Every concept visualized with actual chart examples.
-          </p>
+          {/* Background Candlestick Pattern */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-125">
+            <CandlestickPattern variant="background" />
+          </div>
+          
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Real Charts
+              </span>
+              <br />
+              <span className="text-foreground text-3xl md:text-5xl">Real Setups</span>
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-mono">
+              See the framework in action. Every concept visualized with actual chart examples.
+            </p>
+          </div>
         </motion.div>
 
         {/* Examples by Category */}

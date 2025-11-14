@@ -20,64 +20,64 @@ const OHLCTutorial = () => {
 
   const lessons = [
     {
-      title: "OHLC Basics",
+      title: "OHLC Basics - Large Body",
       description: "Understanding Open, High, Low, Close",
       candles: [
-        { open: 50, high: 80, low: 40, close: 75, label: "Bullish" }
+        { open: 45, high: 77, low: 42, close: 75, label: "Bullish" }
       ],
-      explanation: "A candlestick shows four key prices: Open (where price started), High (highest price reached), Low (lowest price reached), and Close (where price ended). A bullish candle (green) closes above its open.",
-      highlights: ["Open = 50", "High = 80", "Low = 40", "Close = 75"]
+      explanation: "A candlestick shows four key prices: Open (where price started), High (highest price reached), Low (lowest price reached), and Close (where price ended). A bullish candle (green) closes above its open. This candle has a large body (45-75) with small wicks, showing strong buying momentum.",
+      highlights: ["Open = 45", "High = 77 (small upper wick)", "Low = 42 (small lower wick)", "Close = 75 (strong close)"]
     },
     {
-      title: "Bearish Candle",
-      description: "Price closes below open",
+      title: "Large Body Bearish",
+      description: "Price closes well below open",
       candles: [
-        { open: 75, high: 80, low: 40, close: 45, label: "Bearish" }
+        { open: 75, high: 78, low: 43, close: 45, label: "Bearish" }
       ],
-      explanation: "A bearish candle (red) closes below its open. The body represents the range between open and close, while wicks show the high and low extremes.",
-      highlights: ["Open = 75", "High = 80", "Low = 40", "Close = 45"]
+      explanation: "A bearish candle (red) closes below its open. This candle has a large body (75-45) with small wicks, showing strong selling pressure. The small wicks indicate little fight from buyers.",
+      highlights: ["Open = 75", "High = 78 (small upper wick)", "Low = 43 (small lower wick)", "Close = 45 (strong rejection)"]
     },
     {
-      title: "Wick Rejection",
-      description: "Long wicks show rejection of price levels",
+      title: "Long Wick Rejection",
+      description: "Small body with long wicks = rejection",
       candles: [
-        { open: 60, high: 90, low: 30, close: 65, label: "Rejection" }
+        { open: 58, high: 92, low: 28, close: 62, label: "Rejection" }
       ],
-      explanation: "Long wicks indicate price was rejected at that level. This candle tried to go higher (high of 90) but was rejected, closing near its open. The upper wick shows sellers defending that level.",
-      highlights: ["Upper Wick = Rejection at 90", "Price closed near open", "Sellers in control above 80"]
+      explanation: "Long wicks with small body indicate strong rejection. This candle tried to reach 92 (upper wick) but was rejected. It also tested 28 (lower wick) and rejected. The small body (58-62) shows indecision but the wicks show sellers above and buyers below are defending levels.",
+      highlights: ["Long upper wick = 92 rejected", "Long lower wick = 28 rejected", "Small body = 58-62 indecision", "Key reversal signal"]
     },
     {
       title: "Liquidity Sweep Pattern",
       description: "Wick through level, close back inside",
       candles: [
-        { open: 50, high: 55, low: 48, close: 52, label: "C1" },
-        { open: 52, high: 70, low: 45, close: 48, label: "C2 Sweep" },
-        { open: 48, high: 55, low: 42, close: 52, label: "C3" }
+        { open: 50, high: 58, low: 47, close: 56, label: "C1" },
+        { open: 56, high: 75, low: 54, close: 55, label: "C2 Sweep" },
+        { open: 55, high: 57, low: 38, close: 40, label: "C3" }
       ],
-      explanation: "C1 forms a high. C2 sweeps above C1's high with a wick (grabbing liquidity), then closes back inside. C3 confirms the reversal by moving away. This is the core price action setup.",
-      highlights: ["C1 = Setup liquidity", "C2 = Sweep + rejection", "C3 = Expansion away"]
+      explanation: "C1 forms a high at 58. C2 sweeps above C1's high with a long upper wick to 75 (grabbing BSL), then closes back at 55 (inside C1's range). C3 confirms the reversal by expanding down to 38. This is the core bearish price action setup.",
+      highlights: ["C1 high = 58 (liquidity level)", "C2 sweeps to 75, closes 55", "C3 drops to 38 (confirmation)", "Wick + rejection = valid sweep"]
     },
     {
-      title: "Bullish Reversal",
-      description: "Sweep low, then reverse up",
+      title: "Bullish Reversal Sweep",
+      description: "Sweep low, then reverse up strongly",
       candles: [
-        { open: 70, high: 75, low: 65, close: 68, label: "C1" },
-        { open: 68, high: 70, low: 45, close: 72, label: "C2 Sweep" },
-        { open: 72, high: 85, low: 70, close: 82, label: "C3" }
+        { open: 68, high: 72, low: 62, close: 64, label: "C1" },
+        { open: 64, high: 66, low: 45, close: 65, label: "C2 Sweep" },
+        { open: 65, high: 85, low: 63, close: 83, label: "C3" }
       ],
-      explanation: "Same pattern inverted. C1 forms a low. C2 sweeps below with a wick, then closes back above. C3 expands upward, confirming the bullish reversal.",
-      highlights: ["Sweep of SSL (sell-side liquidity)", "Strong close back inside", "Momentum shift to bulls"]
+      explanation: "C1 forms a low at 62. C2 sweeps below with a long lower wick to 45 (grabbing SSL), then closes back at 65 (inside C1's range). C3 expands upward with a large bullish body to 83, confirming the reversal.",
+      highlights: ["C1 low = 62 (liquidity level)", "C2 sweeps to 45, closes 65", "C3 rallies to 83 (large body)", "Sweep of SSL confirmed"]
     },
     {
       title: "Range & Equilibrium",
-      description: "Understanding premium vs discount zones",
+      description: "Premium vs discount zones from C1 range",
       candles: [
-        { open: 40, high: 45, low: 38, close: 42, label: "Discount" },
-        { open: 42, high: 62, low: 40, close: 60, label: "EQ Cross" },
-        { open: 60, high: 80, low: 58, close: 75, label: "Premium" }
+        { open: 40, high: 80, low: 40, close: 78, label: "C1 Range" },
+        { open: 78, high: 80, low: 54, close: 58, label: "To EQ" },
+        { open: 58, high: 65, low: 40, close: 43, label: "Discount" }
       ],
-      explanation: "In a range from 40-80, equilibrium (EQ) is at 60. Below EQ (40-60) is discount - look for longs. Above EQ (60-80) is premium - look for shorts. Price at EQ is no-trade zone.",
-      highlights: ["40-60 = Discount (buy zone)", "60 = Equilibrium (avoid)", "60-80 = Premium (sell zone)"]
+      explanation: "C1 establishes the range: Low=40, High=80. Equilibrium (EQ) = 60 (midpoint). C2 drops from premium to EQ at 58-60. C3 moves into discount zone (40-60). Below 60 = discount (look for longs). Above 60 = premium (look for shorts). At 60 = avoid trading.",
+      highlights: ["Range: 40-80 from C1", "EQ = 60 (50% of range)", "40-60 = Discount zone", "60-80 = Premium zone"]
     }
   ];
 

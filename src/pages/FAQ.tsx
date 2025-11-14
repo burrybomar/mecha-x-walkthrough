@@ -192,18 +192,25 @@ const FAQ = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Questions
-            </span>
-            <br />
-            <span className="text-foreground text-3xl md:text-5xl">Answered</span>
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-            Everything you need to know about the framework, execution, and trading.
-          </p>
+          {/* Background Candlestick Pattern */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-150">
+            <CandlestickPattern variant="background" />
+          </div>
+          
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Questions
+              </span>
+              <br />
+              <span className="text-foreground text-3xl md:text-5xl">Answered</span>
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
+              Everything you need to know about the framework, execution, and trading.
+            </p>
+          </div>
         </motion.div>
 
         {/* Category Filter */}
