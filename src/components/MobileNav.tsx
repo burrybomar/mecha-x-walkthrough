@@ -32,15 +32,17 @@ export const MobileNav = () => {
   return (
     <>
       {/* Hamburger Button - Only visible on mobile */}
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => setIsOpen(true)}
-        className="md:hidden border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary"
-        aria-label="Open navigation menu"
-      >
-        <Menu className="w-6 h-6 text-foreground" />
-      </Button>
+{!isOpen && (
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setIsOpen(true)}
+          className="fixed top-4 right-4 z-[10050] md:hidden border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary shadow-lg"
+          aria-label="Open navigation menu"
+        >
+          <Menu className="w-6 h-6 text-foreground" />
+        </Button>
+      )}
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
