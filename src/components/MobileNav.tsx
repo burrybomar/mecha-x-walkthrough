@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, BookOpen, ListChecks, FileText, Settings, TrendingUp, BookText, HelpCircle, RefreshCw, ArrowUpRight, Search } from 'lucide-react';
+import { Menu, X, BookOpen, ListChecks, FileText, Settings, TrendingUp, BookText, HelpCircle, RefreshCw, ArrowUpRight, Search, ChartColumnIncreasing } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 
@@ -11,12 +11,13 @@ const navItems = [
   { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
   { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
   { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
-  { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'bullish' },
-  { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'primary' },
-  { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'bullish' },
-  { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'primary' },
-  { icon: BookText, label: 'Glossary', path: '/glossary', color: 'bullish' },
-  { icon: HelpCircle, label: 'FAQ', path: '/faq', color: 'primary' },
+  { icon: ChartColumnIncreasing, label: 'Chart Comparison', path: '/chart-comparison', color: 'bullish' },
+  { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'primary' },
+  { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'bullish' },
+  { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'primary' },
+  { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'bullish' },
+  { icon: BookText, label: 'Glossary', path: '/glossary', color: 'primary' },
+  { icon: HelpCircle, label: 'FAQ', path: '/faq', color: 'bullish' },
 ];
 
 export const MobileNav = () => {

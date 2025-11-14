@@ -24,6 +24,7 @@ import FractalModel from "./pages/FractalModel";
 import Sequences from "./pages/Sequences";
 import SequenceIdentifier from "./pages/SequenceIdentifier";
 import CaseStudies from "./pages/CaseStudies";
+import ChartComparison from "./pages/ChartComparison";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/sequences" element={<Sequences />} />
             <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
             <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/chart-comparison" element={<ChartComparison />} />
             <Route path="/setup" element={<Setup />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/chart-examples" element={<ChartExamples />} />
