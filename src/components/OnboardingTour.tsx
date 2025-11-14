@@ -18,7 +18,7 @@ const tourSteps: TourStep[] = [
   {
     id: 'welcome',
     title: 'Welcome to MECHA-X! 🎯',
-    description: 'Let\'s take a quick tour to help you master the OHLC framework. This will only take a minute.',
+    description: 'Master the three core sequences: Continuation, Reversal, and Aligned. This quick tour will show you around.',
     target: 'body',
     position: 'center',
     icon: Sparkles,
@@ -27,25 +27,25 @@ const tourSteps: TourStep[] = [
   {
     id: 'floating-assistant',
     title: 'Your Quick Access Assistant',
-    description: 'Click this floating candlestick anytime to jump to framework steps or glossary terms instantly.',
-    target: '.floating-assistant', // Will target the floating assistant button
+    description: 'Click this floating candlestick anytime to jump to sequences, case studies, or glossary terms instantly.',
+    target: '.floating-assistant',
     position: 'left',
     icon: TrendingUp,
     highlightColor: 'bullish',
   },
   {
     id: 'framework',
-    title: '6-Step Trading Framework',
-    description: 'Everything flows together: HTF analysis → Session timing → Liquidity sweeps → SMT → CISD → Entry. Click any step to explore.',
-    target: '.framework-flow', // Will target the framework section
+    title: 'Three Core Sequences',
+    description: 'Every trade fits into Continuation (inherited swing), Reversal (fresh turn), or Aligned (re-entry). Click any to explore.',
+    target: '.framework-flow',
     position: 'top',
     icon: TrendingUp,
     highlightColor: 'primary',
   },
   {
     id: 'navigation',
-    title: 'Easy Navigation',
-    description: 'Access learning materials, tools, and references from the top menu. On mobile, use the hamburger menu.',
+    title: 'Complete Navigation',
+    description: 'Access Fractal Model, Sequence Identifier, Case Studies, and all tools from the top menu or hamburger on mobile.',
     target: 'header',
     position: 'bottom',
     icon: BookOpen,
@@ -54,7 +54,7 @@ const tourSteps: TourStep[] = [
   {
     id: 'ready',
     title: 'You\'re All Set! 🚀',
-    description: 'Start by exploring the framework or jump to any section using the floating assistant. Happy trading!',
+    description: 'Start with the Fractal Model to understand 4H+1H, then use the Sequence Identifier to label your setups.',
     target: 'body',
     position: 'center',
     icon: Sparkles,

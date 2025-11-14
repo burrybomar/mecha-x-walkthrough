@@ -9,43 +9,63 @@ import { Button } from '@/components/ui/button';
 interface Question {
   id: string;
   question: string;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; hint?: string }[];
+  help?: string;
 }
 
 const questions: Question[] = [
   {
-    id: 'prior_swing',
-    question: 'Did the PREVIOUS 4H candle leave a clean, usable LTF swing?',
+    id: 'htf_narrative',
+    question: '1. What is your HTF (Daily/Weekly) narrative?',
+    help: 'Understanding the bigger picture helps identify which sequence will likely play out.',
     options: [
-      { value: 'yes', label: 'Yes - Clean LTF swing exists from prior 4H' },
-      { value: 'no', label: 'No - Prior 4H was noisy or no clear swing' },
+      { value: 'continuation', label: 'Clear directional bias - expecting continuation', hint: 'e.g., strong trend, recent driver confirmed direction' },
+      { value: 'reversal', label: 'Expecting reversal from key level', hint: 'e.g., at weekly high/low, major support/resistance' },
+      { value: 'consolidation', label: 'Consolidation/range-bound', hint: 'e.g., trading between external highs/lows' },
     ],
   },
   {
-    id: 'current_position',
-    question: 'Where did the CURRENT 4H candle open relative to that prior swing?',
+    id: 'prior_4h',
+    question: '2. Did the PREVIOUS 4H candle leave a clean, protected LTF swing?',
+    help: 'A clean LTF swing from the prior 4H is key for Continuation setups.',
     options: [
-      { value: 'inside', label: 'Inside/near the prior swing' },
-      { value: 'away', label: 'Away from the prior swing' },
-      { value: 'no_swing', label: 'No prior swing to reference' },
+      { value: 'yes_clean', label: 'Yes - Clean LTF reversal swing with SMT/confirmation', hint: 'Clear swing low/high with structural confirmation' },
+      { value: 'yes_weak', label: 'Yes - But weak or questionable', hint: 'Swing exists but not ideal quality' },
+      { value: 'no', label: 'No - Prior 4H was noisy or no clear swing', hint: 'No usable structure from previous candle' },
     ],
   },
   {
-    id: 'expansion',
-    question: 'Has the current 4H candle already expanded significantly?',
+    id: 'current_4h_open',
+    question: '3. Where did the CURRENT 4H candle open?',
+    help: 'The 4H open position relative to prior structure determines if you inherited a swing.',
     options: [
-      { value: 'yes', label: 'Yes - Already made a strong directional move' },
-      { value: 'no', label: 'No - Still forming or early in candle' },
-      { value: 'retrace', label: 'Yes, and now retracing' },
+      { value: 'inside_swing', label: 'Inside or very near the prior LTF swing', hint: 'Opened at/near the reversal point' },
+      { value: 'away_swing', label: 'Away from the prior swing', hint: 'Gap or significant distance from prior swing' },
+      { value: 'no_reference', label: 'No prior swing to reference', hint: 'Starting fresh' },
     ],
   },
   {
-    id: 'ltf_swing',
-    question: 'Has a new LTF swing formed during the current 4H?',
+    id: 'current_4h_state',
+    question: '4. What has the CURRENT 4H candle done so far?',
+    help: 'Understanding where you are in the 4H candle lifecycle is critical.',
     options: [
-      { value: 'yes_reversal', label: 'Yes - Created a reversal swing (new high/low)' },
-      { value: 'yes_retrace', label: 'Yes - Formed after retrace, realigning with direction' },
-      { value: 'no', label: 'No - Waiting for LTF confirmation' },
+      { value: 'just_opened', label: 'Just opened (first 30-60 mins)', hint: 'Early in the candle' },
+      { value: 'forming_swing', label: 'Currently forming an LTF reversal swing', hint: 'Making a low/high right now' },
+      { value: 'post_swing', label: 'Already formed swing and starting to expand', hint: 'Swing confirmed, moving away' },
+      { value: 'expanded', label: 'Already had significant expansion', hint: 'Made a strong directional move' },
+      { value: 'expanded_retracing', label: 'Expanded, now retracing', hint: 'Had move, now pulling back' },
+    ],
+  },
+  {
+    id: 'ltf_confirmation',
+    question: '5. Do you have LTF swing confirmation for THIS 4H candle?',
+    help: 'The LTF swing is your mechanical entry trigger. No swing = no trade.',
+    options: [
+      { value: 'yes_reversal', label: 'Yes - Fresh LTF reversal swing (created new high/low)', hint: 'This 4H made its own turning point' },
+      { value: 'yes_inherited', label: 'Yes - Inherited from prior 4H', hint: 'Using the previous 4H swing' },
+      { value: 'yes_realigned', label: 'Yes - New swing after retrace (realigning)', hint: 'Post-expansion retrace swing' },
+      { value: 'forming', label: 'Currently forming / not yet confirmed', hint: 'Potential swing developing' },
+      { value: 'no', label: 'No swing yet', hint: 'Waiting for structure' },
     ],
   },
 ];
@@ -70,27 +90,46 @@ const SequenceIdentifier = () => {
   };
 
   const determineSequence = (ans: Record<string, string>): string => {
-    // Continuation logic
-    if (ans.prior_swing === 'yes' && ans.current_position === 'inside' && ans.expansion === 'no') {
+    // Continuation: Clean prior swing + opened inside + early/inherited confirmation
+    if (
+      ans.prior_4h === 'yes_clean' &&
+      ans.current_4h_open === 'inside_swing' &&
+      (ans.ltf_confirmation === 'yes_inherited' || ans.current_4h_state === 'just_opened')
+    ) {
       return 'continuation';
     }
 
-    // Reversal logic
-    if ((ans.prior_swing === 'no' || ans.current_position === 'no_swing') && 
-        ans.ltf_swing === 'yes_reversal' && ans.expansion === 'no') {
+    // Reversal: No prior swing OR current 4H creating its own swing
+    if (
+      (ans.prior_4h === 'no' || ans.current_4h_open === 'no_reference') &&
+      (ans.current_4h_state === 'forming_swing' || ans.current_4h_state === 'post_swing') &&
+      ans.ltf_confirmation === 'yes_reversal'
+    ) {
       return 'reversal';
     }
 
-    // Aligned logic
-    if (ans.expansion === 'retrace' && ans.ltf_swing === 'yes_retrace') {
+    // Aligned: Already expanded + retracing + new realignment swing
+    if (
+      ans.current_4h_state === 'expanded_retracing' &&
+      ans.ltf_confirmation === 'yes_realigned'
+    ) {
       return 'aligned';
     }
 
-    // Default cases
-    if (ans.expansion === 'yes' && ans.ltf_swing === 'no') {
-      return 'wait';
+    // Wait states - specific feedback
+    if (ans.ltf_confirmation === 'no' || ans.ltf_confirmation === 'forming') {
+      return 'wait_no_swing';
     }
 
+    if (ans.current_4h_state === 'expanded' && ans.ltf_confirmation !== 'yes_realigned') {
+      return 'wait_chase';
+    }
+
+    if (ans.prior_4h === 'yes_weak') {
+      return 'wait_weak_structure';
+    }
+
+    // Unclear - doesn't fit clean patterns
     return 'unclear';
   };
 
@@ -104,42 +143,65 @@ const SequenceIdentifier = () => {
     switch (sequence) {
       case 'continuation':
         return {
-          title: 'Continuation Sequence',
+          title: 'Continuation Sequence ✅',
           color: 'bullish',
-          description: 'The new 4H opened inside a prior swing. You can trade the continuation immediately.',
-          action: 'Enter at 4H open using the inherited swing as your stop.',
+          description: 'Perfect setup! The prior 4H did the reversal work. The current 4H opened inside that swing. You can trade the continuation immediately.',
+          action: 'Enter at 4H open (or early LTF failure swing) using the inherited swing as your stop. Target HTF draw on liquidity.',
+          confidence: 'High Confidence Setup',
           icon: TrendingUp,
         };
       case 'reversal':
         return {
-          title: 'Reversal Sequence',
+          title: 'Reversal Sequence ⏳',
           color: 'bearish',
-          description: 'The 4H is creating its own swing. Wait for LTF to engineer the turn.',
-          action: 'Be patient. Once the LTF swing is confirmed, trade the expansion from that new swing point.',
+          description: 'The 4H is creating its own structural turn right now. This is the classic "wait for the low/high to form" scenario.',
+          action: 'Be patient. Let the LTF complete the reversal swing with confirmation (SMT preferred). Once confirmed with expansion, enter against that swing.',
+          confidence: 'High Confidence - Requires Patience',
           icon: XCircle,
         };
       case 'aligned':
         return {
-          title: 'Aligned Sequence',
+          title: 'Aligned Sequence 🎯',
           color: 'primary',
-          description: 'The 4H already moved, retraced, and a new swing is realigning with the original direction.',
-          action: 'Re-enter using the new LTF swing as your structure, targeting remaining draw.',
+          description: 'The 4H already proved direction. After the retrace, a new LTF swing is realigning with the original expansion direction.',
+          action: 'Re-enter using the realignment swing as structure. This is often a "strength switch" SMT between correlated assets. Lower risk than the initial leg.',
+          confidence: 'Medium-High Confidence',
           icon: CheckCircle2,
         };
-      case 'wait':
+      case 'wait_no_swing':
         return {
-          title: 'Wait State',
+          title: 'No Trade - Waiting for LTF Swing',
           color: 'muted',
-          description: 'The 4H has expanded but no LTF swing has formed yet.',
-          action: 'Do not chase. Wait for a retrace and new swing formation.',
+          description: 'You don\'t have mechanical confirmation yet. The LTF swing is the non-negotiable trigger.',
+          action: 'Do NOT enter without LTF confirmation. Wait for structure: SMT, clean reversal pattern, or strength switch. No swing = no trade.',
+          confidence: 'Not Ready',
+          icon: HelpCircle,
+        };
+      case 'wait_chase':
+        return {
+          title: 'No Trade - Don\'t Chase',
+          color: 'muted',
+          description: 'The 4H already expanded without you. Entering now means chasing without structure.',
+          action: 'Wait for a retrace. Look for the 4H to pull back and form a new LTF swing that realigns (Aligned sequence). Don\'t FOMO into momentum.',
+          confidence: 'Wait for Retrace',
+          icon: HelpCircle,
+        };
+      case 'wait_weak_structure':
+        return {
+          title: 'No Trade - Weak Structure',
+          color: 'muted',
+          description: 'The prior swing exists but isn\'t high quality. Weak structure = lower probability.',
+          action: 'Either wait for the current 4H to create a better swing (Reversal), or skip this setup entirely. Only trade A+ setups.',
+          confidence: 'Low Probability',
           icon: HelpCircle,
         };
       default:
         return {
           title: 'Unclear Setup',
           color: 'muted',
-          description: 'The current setup doesn\'t fit a clean sequence pattern.',
-          action: 'No trade. Wait for clearer structure before deploying risk.',
+          description: 'The current setup doesn\'t fit a clean Mecha-X sequence pattern. This could mean choppy conditions or mixed signals.',
+          action: 'No trade. Wait for clearer structure. Not every 4H candle produces a tradeable sequence. Sometimes the best trade is no trade.',
+          confidence: 'No Clear Edge',
           icon: HelpCircle,
         };
     }
@@ -207,19 +269,29 @@ const SequenceIdentifier = () => {
                         ))}
                       </div>
                     </div>
-                    <CardTitle className="text-2xl">
+                    <CardTitle className="text-xl md:text-2xl mb-2">
                       {questions[currentQuestion].question}
                     </CardTitle>
+                    {questions[currentQuestion].help && (
+                      <p className="text-sm text-muted-foreground">
+                        {questions[currentQuestion].help}
+                      </p>
+                    )}
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-3">
                     {questions[currentQuestion].options.map((option) => (
                       <Button
                         key={option.value}
                         onClick={() => handleAnswer(questions[currentQuestion].id, option.value)}
                         variant="outline"
-                        className="w-full justify-start text-left h-auto py-4 px-6 hover:bg-primary/10 hover:border-primary"
+                        className="w-full justify-start text-left h-auto py-4 px-6 hover:bg-primary/10 hover:border-primary flex flex-col items-start gap-1"
                       >
-                        {option.label}
+                        <span className="font-medium">{option.label}</span>
+                        {option.hint && (
+                          <span className="text-xs text-muted-foreground">
+                            {option.hint}
+                          </span>
+                        )}
                       </Button>
                     ))}
                   </CardContent>
@@ -268,15 +340,25 @@ const SequenceIdentifier = () => {
                         </div>
 
                         <div>
-                          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                          <h2 className="text-3xl md:text-4xl font-bold mb-2">
                             {content.title}
                           </h2>
-                          <p className="text-lg text-muted-foreground mb-6">
+                          {content.confidence && (
+                            <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4 ${
+                              content.confidence.includes('High') ? 'bg-bullish/20 text-bullish' :
+                              content.confidence.includes('Medium') ? 'bg-primary/20 text-primary' :
+                              'bg-muted/40 text-muted-foreground'
+                            }`}>
+                              {content.confidence}
+                            </div>
+                          )}
+                          <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                             {content.description}
                           </p>
-                          <div className="p-4 bg-background/50 rounded-lg border border-border">
-                            <p className="font-medium text-foreground">
-                              <strong>What to do:</strong> {content.action}
+                          <div className="p-5 bg-background/50 rounded-lg border-2 border-border">
+                            <p className="font-medium text-foreground leading-relaxed">
+                              <strong className="text-primary">Action Plan:</strong><br />
+                              {content.action}
                             </p>
                           </div>
                         </div>
