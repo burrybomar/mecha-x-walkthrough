@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
 import { CandlestickCard } from "@/components/CandlestickCard";
+import { CandlestickButton } from "@/components/CandlestickButton";
 
 interface Resource {
   title: string;
@@ -118,15 +119,14 @@ const Resources = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <Download className="w-4 h-4 text-primary" />
               <span className="font-mono text-sm font-medium">Resources</span>

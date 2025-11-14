@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import html2pdf from "html2pdf.js";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { CandlestickButton } from "@/components/CandlestickButton";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 const Checklist = () => {
   const navigate = useNavigate();
@@ -107,15 +109,14 @@ const Checklist = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <CheckSquare className="w-4 h-4 text-primary" />
               <span className="font-mono text-sm font-medium">Trading Checklist</span>
@@ -147,10 +148,10 @@ const Checklist = () => {
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono mb-6">
               Print this. Check every box. Trade with confidence.
             </p>
-            <Button variant="outline" className="gap-2 font-mono" onClick={handleDownloadPDF}>
-              <Download className="w-4 h-4" />
+            <CandlestickButton variant="bearish" onClick={handleDownloadPDF}>
+              <Download className="w-4 h-4 mr-2" />
               Download PDF
-            </Button>
+            </CandlestickButton>
           </div>
         </motion.div>
 
@@ -161,23 +162,25 @@ const Checklist = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Card className="p-6">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 font-mono flex items-center gap-3">
-                <CheckSquare className="w-6 h-6 text-primary" />
-                Pre-Trade Checklist
-              </h2>
-              <div className="space-y-3">
-                {preTradeChecklist.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                    <div className="w-5 h-5 rounded border-2 border-primary flex-shrink-0 mt-0.5" />
-                    <div className="flex-1">
-                      <p className="font-bold text-sm md:text-base mb-1">{item.step}</p>
-                      <p className="text-xs md:text-sm text-muted-foreground">{item.detail}</p>
+            <CandlestickCard variant="bullish" wickHeight="md">
+              <Card className="p-6 border-0">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 font-mono flex items-center gap-3">
+                  <CheckSquare className="w-6 h-6 text-primary" />
+                  Pre-Trade Checklist
+                </h2>
+                <div className="space-y-3">
+                  {preTradeChecklist.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                      <div className="w-5 h-5 rounded border-2 border-primary flex-shrink-0 mt-0.5" />
+                      <div className="flex-1">
+                        <p className="font-bold text-sm md:text-base mb-1">{item.step}</p>
+                        <p className="text-xs md:text-sm text-muted-foreground">{item.detail}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
+                  ))}
+                </div>
+              </Card>
+            </CandlestickCard>
           </motion.div>
 
           {/* Entry Rules */}
@@ -186,23 +189,25 @@ const Checklist = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Card className="p-6">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 font-mono">Entry & Exit Rules</h2>
-              <div className="space-y-4">
-                {entryRules.map((item, idx) => (
-                  <div key={idx}>
-                    <div className="flex items-start gap-3">
-                      <Badge variant="secondary" className="font-mono text-xs mt-1">{idx + 1}</Badge>
-                      <div>
-                        <p className="font-bold text-sm md:text-base mb-1">{item.rule}</p>
-                        <p className="text-xs md:text-sm text-muted-foreground">{item.description}</p>
+            <CandlestickCard variant="bearish" wickHeight="md">
+              <Card className="p-6 border-0">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 font-mono">Entry & Exit Rules</h2>
+                <div className="space-y-4">
+                  {entryRules.map((item, idx) => (
+                    <div key={idx}>
+                      <div className="flex items-start gap-3">
+                        <Badge variant="secondary" className="font-mono text-xs mt-1">{idx + 1}</Badge>
+                        <div>
+                          <p className="font-bold text-sm md:text-base mb-1">{item.rule}</p>
+                          <p className="text-xs md:text-sm text-muted-foreground">{item.description}</p>
+                        </div>
                       </div>
+                      {idx < entryRules.length - 1 && <Separator className="my-3" />}
                     </div>
-                    {idx < entryRules.length - 1 && <Separator className="my-3" />}
-                  </div>
-                ))}
-              </div>
-            </Card>
+                  ))}
+                </div>
+              </Card>
+            </CandlestickCard>
           </motion.div>
 
           {/* Session Timing */}

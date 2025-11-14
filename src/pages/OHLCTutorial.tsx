@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { useScrollPlayPause } from "@/hooks/use-scroll-play-pause";
+import { CandlestickButton } from "@/components/CandlestickButton";
 
 interface CandleData {
   open: number;

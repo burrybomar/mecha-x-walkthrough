@@ -5,6 +5,7 @@ import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { TradingFrameworkFlow } from "@/components/TradingFrameworkFlow";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { Button } from "@/components/ui/button";
+import { CandlestickButton } from "@/components/CandlestickButton";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -130,34 +131,32 @@ const Index = () => {
               transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Button 
-                size="lg" 
-                className="text-lg px-8 py-6 rounded-full group"
+              <CandlestickButton
+                variant="bullish"
                 onClick={() => {
                   document.getElementById('framework')?.scrollIntoView({ behavior: 'smooth' });
                 }}
+                className="text-lg px-2"
               >
                 See How It Works
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </CandlestickButton>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="text-lg px-8 py-6 rounded-full"
+                <CandlestickButton
+                  variant="bearish"
                   onClick={() => navigate('/setup')}
+                  className="text-base px-2"
                 >
                   Configure Indicators
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="text-lg px-8 py-6 rounded-full"
+                </CandlestickButton>
+                <CandlestickButton
+                  variant="bullish"
                   onClick={() => navigate('/knowledge')}
+                  className="text-base px-2"
                 >
                   <BookOpen className="w-5 h-5 mr-2" />
                   Full Documentation
-                </Button>
+                </CandlestickButton>
               </div>
             </motion.div>
           </div>

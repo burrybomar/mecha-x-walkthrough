@@ -6,6 +6,7 @@ import { CandlestickScroll } from "@/components/CandlestickScroll";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
 import { CandlestickCard } from "@/components/CandlestickCard";
+import { CandlestickButton } from "@/components/CandlestickButton";
 
 const Knowledge = () => {
   const navigate = useNavigate();
@@ -139,15 +140,14 @@ const Knowledge = () => {
       >
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back to Overview
-            </Button>
+            </CandlestickButton>
             <div className="text-sm font-mono text-muted-foreground">
               6-Step Framework
             </div>

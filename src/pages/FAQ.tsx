@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { CandlestickButton } from "@/components/CandlestickButton";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 interface FAQItem {
   question: string;
@@ -170,15 +172,14 @@ const FAQ = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <HelpCircle className="w-4 h-4 text-primary" />
               <span className="font-mono text-sm font-medium">FAQ</span>
@@ -267,41 +268,46 @@ const FAQ = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + faqIdx * 0.05 }}
                       >
-                        <Card className="overflow-hidden">
-                          <button
-                            onClick={() => setOpenIndex(isOpen ? null : globalIdx)}
-                            className="w-full p-4 md:p-5 text-left hover:bg-muted/30 transition-colors flex items-start justify-between gap-4"
-                          >
-                            <div className="flex items-start gap-3 flex-1">
-                              <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                              <h3 className="font-bold text-sm md:text-base leading-relaxed">
-                                {faq.question}
-                              </h3>
-                            </div>
-                            <motion.div
-                              animate={{ rotate: isOpen ? 180 : 0 }}
-                              transition={{ duration: 0.2 }}
+                        <CandlestickCard 
+                          variant={faqIdx % 2 === 0 ? "bullish" : "bearish"}
+                          wickHeight="sm"
+                        >
+                          <Card className="overflow-hidden border-0">
+                            <button
+                              onClick={() => setOpenIndex(isOpen ? null : globalIdx)}
+                              className="w-full p-4 md:p-5 text-left hover:bg-muted/30 transition-colors flex items-start justify-between gap-4"
                             >
-                              <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                              <div className="flex items-start gap-3 flex-1">
+                                <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                <h3 className="font-bold text-sm md:text-base leading-relaxed">
+                                  {faq.question}
+                                </h3>
+                              </div>
+                              <motion.div
+                                animate={{ rotate: isOpen ? 180 : 0 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                              </motion.div>
+                            </button>
+                            
+                            <motion.div
+                              initial={false}
+                              animate={{
+                                height: isOpen ? "auto" : 0,
+                                opacity: isOpen ? 1 : 0
+                              }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-4 md:px-5 pb-4 md:pb-5 pt-0">
+                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed pl-8">
+                                  {faq.answer}
+                                </p>
+                              </div>
                             </motion.div>
-                          </button>
-                          
-                          <motion.div
-                            initial={false}
-                            animate={{
-                              height: isOpen ? "auto" : 0,
-                              opacity: isOpen ? 1 : 0
-                            }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-4 md:px-5 pb-4 md:pb-5 pt-0">
-                              <p className="text-sm md:text-base text-muted-foreground leading-relaxed pl-8">
-                                {faq.answer}
-                              </p>
-                            </div>
-                          </motion.div>
-                        </Card>
+                          </Card>
+                        </CandlestickCard>
                       </motion.div>
                     );
                   })}

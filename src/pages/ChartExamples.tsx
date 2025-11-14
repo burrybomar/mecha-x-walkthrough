@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
+import { CandlestickButton } from "@/components/CandlestickButton";
+import { CandlestickCard } from "@/components/CandlestickCard";
 
 // Import chart images
 import htfChart from "@/assets/htf-chart-edge.png";
@@ -243,15 +245,14 @@ const ChartExamples = () => {
       >
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
+            <CandlestickButton
+              variant="bullish"
               onClick={() => navigate("/")}
-              className="gap-2 font-mono"
+              className="text-xs"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3 mr-1" />
               Back
-            </Button>
+            </CandlestickButton>
             <div className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-primary" />
               <span className="font-mono text-sm font-medium">Chart Examples</span>
@@ -313,42 +314,48 @@ const ChartExamples = () => {
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1 }}
                     >
-                      <Card className="overflow-hidden hover:shadow-2xl transition-shadow">
-                        {/* Image */}
-                        <div className="relative aspect-video bg-muted overflow-hidden group">
-                          <img 
-                            src={example.image} 
-                            alt={example.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <Badge 
-                            className="absolute top-3 right-3 font-mono text-xs"
-                            variant="secondary"
-                          >
-                            {example.frameworkStep}
-                          </Badge>
-                        </div>
-                        
-                        {/* Content */}
-                        <div className="p-6">
-                          <h3 className="text-xl md:text-2xl font-bold mb-3 font-mono">
-                            {example.title}
-                          </h3>
-                          
-                          <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
-                            {example.description}
-                          </p>
-                          
-                          <div className="space-y-2">
-                            {example.keyPoints.map((point, i) => (
-                              <div key={i} className="flex items-start gap-2">
-                                <Target className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                                <p className="text-xs md:text-sm leading-relaxed">{point}</p>
-                              </div>
-                            ))}
+                      <CandlestickCard 
+                        variant={idx % 2 === 0 ? "bullish" : "bearish"}
+                        wickHeight="md"
+                        className="h-full"
+                      >
+                        <Card className="overflow-hidden hover:shadow-2xl transition-shadow border-0">
+                          {/* Image */}
+                          <div className="relative aspect-video bg-muted overflow-hidden group">
+                            <img 
+                              src={example.image} 
+                              alt={example.title}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <Badge 
+                              className="absolute top-3 right-3 font-mono text-xs"
+                              variant="secondary"
+                            >
+                              {example.frameworkStep}
+                            </Badge>
                           </div>
-                        </div>
-                      </Card>
+                          
+                          {/* Content */}
+                          <div className="p-6">
+                            <h3 className="text-xl md:text-2xl font-bold mb-3 font-mono">
+                              {example.title}
+                            </h3>
+                            
+                            <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
+                              {example.description}
+                            </p>
+                            
+                            <div className="space-y-2">
+                              {example.keyPoints.map((point, i) => (
+                                <div key={i} className="flex items-start gap-2">
+                                  <Target className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                                  <p className="text-xs md:text-sm leading-relaxed">{point}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </Card>
+                      </CandlestickCard>
                     </motion.div>
                   ))}
                 </div>
