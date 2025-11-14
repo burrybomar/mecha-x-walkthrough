@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft, BarChart3, Clock, Target, Zap, Layers, TrendingUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { CandlestickScroll } from "@/components/CandlestickScroll";
+import { CandlestickPattern } from "@/components/CandlestickPattern";
 
 const Knowledge = () => {
   const navigate = useNavigate();
@@ -197,6 +199,14 @@ const Knowledge = () => {
             >
               <div className="container mx-auto max-w-6xl">
                 <div className={`flex flex-col md:flex-row items-center gap-8 ${isEven ? '' : 'md:flex-row-reverse'}`}>
+                  {/* Animated Candlestick */}
+                  <div className="hidden lg:block flex-shrink-0 relative w-32 h-64">
+                    <CandlestickScroll 
+                      stepNumber={step.id} 
+                      isBullish={step.id % 2 !== 0}
+                    />
+                  </div>
+
                   {/* Content */}
                   <div className="flex-1">
                     <motion.div
@@ -204,10 +214,15 @@ const Knowledge = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 }}
-                      className="p-8 rounded-2xl bg-card border border-border shadow-lg"
+                      className="p-8 rounded-2xl bg-card border border-border shadow-lg relative overflow-hidden"
                     >
+                      {/* Background candlestick pattern */}
+                      <div className="absolute top-0 right-0 w-48 h-48 opacity-5 pointer-events-none">
+                        <CandlestickPattern variant="background" />
+                      </div>
+
                       {/* Header */}
-                      <div className="flex items-center gap-4 mb-6">
+                      <div className="flex items-center gap-4 mb-6 relative z-10">
                         <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center flex-shrink-0`}>
                           <IconComponent className="w-8 h-8 text-white" />
                         </div>
@@ -221,7 +236,7 @@ const Knowledge = () => {
                       </div>
 
                       {/* Content */}
-                      <div className="space-y-6">
+                      <div className="space-y-6 relative z-10">
                         <div>
                           <h3 className="text-lg font-bold mb-2 text-primary">What Is It?</h3>
                           <p className="text-muted-foreground leading-relaxed">{step.content.concept}</p>
