@@ -37,7 +37,7 @@ export const MobileNav = () => {
           variant="outline"
           size="icon"
           onClick={() => setIsOpen(true)}
-          className="fixed top-4 right-4 z-[10050] md:hidden border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary shadow-lg"
+          className="fixed top-4 right-4 z-[2147483647] md:hidden border-2 border-primary/40 bg-primary/10 hover:bg-primary/20 hover:border-primary shadow-lg"
           aria-label="Open navigation menu"
         >
           <Menu className="w-6 h-6 text-foreground" />
@@ -54,7 +54,7 @@ export const MobileNav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2147483646] md:hidden"
             />
 
             {/* Menu Panel */}
@@ -63,7 +63,7 @@ export const MobileNav = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card border-r-2 border-border/50 z-[9999] md:hidden overflow-y-auto shadow-2xl"
+              className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card border-r-2 border-border/50 z-[2147483647] md:hidden overflow-y-auto shadow-2xl"
             >
               {/* Header */}
               <div className="sticky top-0 bg-card border-b-2 border-border/50 p-6 flex items-center justify-between z-10">
