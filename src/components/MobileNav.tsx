@@ -36,7 +36,7 @@ export const MobileNav = () => {
         onClick={() => setOpen(true)}
         variant="outline"
         size="icon"
-        className="fixed top-4 right-4 md:hidden z-[100] backdrop-blur-xl bg-background/80 border border-border/40 hover:bg-primary/10 hover:border-primary/60 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 active:scale-95 rounded-2xl"
+        className="fixed top-4 right-4 md:hidden z-[9999] backdrop-blur-xl bg-background/80 border border-border/40 hover:bg-primary/10 hover:border-primary/60 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 active:scale-95 rounded-2xl"
         aria-label="Open navigation menu"
       >
         <Menu className="w-5 h-5 text-foreground" />
@@ -52,7 +52,7 @@ export const MobileNav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-background/60 backdrop-blur-md z-[99] md:hidden"
+              className="fixed inset-0 bg-background/60 backdrop-blur-md z-[9998] md:hidden"
               onClick={() => setOpen(false)}
             />
 
@@ -62,7 +62,7 @@ export const MobileNav = () => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: '-100%', opacity: 0 }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed left-0 top-0 h-full w-[85vw] max-w-sm bg-card/95 backdrop-blur-2xl border-r border-border/30 shadow-2xl z-[100] md:hidden flex flex-col"
+              className="fixed left-0 top-0 h-full w-[85vw] max-w-sm bg-card/95 backdrop-blur-2xl border-r border-border/30 shadow-2xl z-[9999] md:hidden flex flex-col overflow-hidden"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-6 border-b border-border/20">
