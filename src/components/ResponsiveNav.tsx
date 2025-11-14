@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, RefreshCw, ArrowUpRight, Search, FileText } from 'lucide-react';
 import { Button } from './ui/button';
 import { MobileNav } from './MobileNav';
 
@@ -13,7 +13,39 @@ export const ResponsiveNav = () => {
 
       {/* Desktop Navigation - Hidden on mobile */}
       <nav className="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
-        {/* Core Learning */}
+        {/* Framework Core */}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/fractal-model')} 
+          className="font-mono"
+          aria-label="Fractal Model"
+        >
+          <RefreshCw className="w-4 h-4 mr-1" />
+          Model
+        </Button>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/sequences')} 
+          className="font-mono"
+          aria-label="Three Sequences"
+        >
+          <ArrowUpRight className="w-4 h-4 mr-1" />
+          Sequences
+        </Button>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/sequence-identifier')} 
+          className="font-mono"
+          aria-label="Sequence Identifier"
+        >
+          <Search className="w-4 h-4 mr-1" />
+          Identify
+        </Button>
+        
+        {/* Learning */}
         <Button 
           variant="ghost" 
           size="sm" 
@@ -33,6 +65,16 @@ export const ResponsiveNav = () => {
           <BookOpen className="w-4 h-4 mr-1" />
           Learn
         </Button>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/case-studies')} 
+          className="font-mono"
+          aria-label="Case Studies"
+        >
+          <FileText className="w-4 h-4 mr-1" />
+          Cases
+        </Button>
         
         {/* Tools */}
         <Button 
@@ -47,15 +89,6 @@ export const ResponsiveNav = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          onClick={() => navigate('/trade-journal')} 
-          className="font-mono"
-          aria-label="Trade Journal"
-        >
-          Journal
-        </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
           onClick={() => navigate('/setup')} 
           className="font-mono"
           aria-label="Setup Indicators"
@@ -64,15 +97,6 @@ export const ResponsiveNav = () => {
         </Button>
         
         {/* Reference */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/chart-examples')} 
-          className="font-mono"
-          aria-label="Chart Examples"
-        >
-          Charts
-        </Button>
         <Button 
           variant="ghost" 
           size="sm" 
