@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/checklist" element={<Checklist />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/resources" element={<Resources />} />
-            <Route path="/trade-journal" element={<TradeJournal />} />
+            <Route path="/trade-journal" element={<ProtectedRoute><TradeJournal /></ProtectedRoute>} />
             <Route path="/hype" element={<ProtectedRoute><HypeClip /></ProtectedRoute>} />
             <Route path="/record" element={<ProtectedRoute><RecordClip /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
