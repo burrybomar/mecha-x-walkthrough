@@ -52,7 +52,7 @@ export const MobileNav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-background/95 backdrop-blur-lg z-50 md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] md:hidden"
             />
 
             {/* Menu Panel */}
@@ -61,21 +61,22 @@ export const MobileNav = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card border-r border-border z-50 md:hidden overflow-y-auto"
+              className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card border-r-2 border-border/50 z-[9999] md:hidden overflow-y-auto shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-card/95 backdrop-blur-sm border-b border-border p-6 flex items-center justify-between">
+              <div className="sticky top-0 bg-card border-b-2 border-border/50 p-6 flex items-center justify-between z-10">
                 <div>
-                  <h2 className="text-xl font-bold">MECHA-X</h2>
+                  <h2 className="text-xl font-bold text-foreground">MECHA-X</h2>
                   <p className="text-xs text-muted-foreground">Trading Intelligence</p>
                 </div>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="icon"
                   onClick={() => setIsOpen(false)}
+                  className="border-2 hover:bg-destructive/20 hover:border-destructive"
                   aria-label="Close navigation menu"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6" />
                 </Button>
               </div>
 
@@ -110,8 +111,8 @@ export const MobileNav = () => {
               </nav>
 
               {/* Footer */}
-              <div className="sticky bottom-0 bg-card/95 backdrop-blur-sm border-t border-border p-6 mt-8">
-                <p className="text-xs text-muted-foreground text-center">
+              <div className="sticky bottom-0 bg-card border-t-2 border-border/50 p-6 mt-8">
+                <p className="text-sm text-muted-foreground text-center font-medium">
                   Master the OHLC framework.<br />
                   Six steps. Complete edge.
                 </p>
