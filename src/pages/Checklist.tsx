@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import html2pdf from "html2pdf.js";
+import { CandlestickPattern } from "@/components/CandlestickPattern";
 
 const Checklist = () => {
   const navigate = useNavigate();
@@ -123,25 +124,31 @@ const Checklist = () => {
         </div>
       </motion.header>
 
-      <div className="container mx-auto px-3 md:px-4 py-6 md:py-12 max-w-5xl">
+      <div className="container mx-auto px-3 md:px-4 py-6 md:py-12 max-w-5xl" id="checklist-content">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Pre-Trade
-            </span>
-            <br />
-            <span className="text-foreground text-3xl md:text-5xl">Cheatsheet</span>
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono mb-6">
-            Print this. Check every box. Trade with confidence.
-          </p>
-          <Button variant="outline" className="gap-2 font-mono" onClick={handleDownloadPDF}>
-            <Download className="w-4 h-4" />
+          {/* Background Candlestick Pattern */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-125">
+            <CandlestickPattern variant="background" />
+          </div>
+          
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Pre-Trade
+              </span>
+              <br />
+              <span className="text-foreground text-3xl md:text-5xl">Cheatsheet</span>
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono mb-6">
+              Print this. Check every box. Trade with confidence.
+            </p>
+            <Button variant="outline" className="gap-2 font-mono" onClick={handleDownloadPDF}>
+              <Download className="w-4 h-4" />
             Download PDF
           </Button>
         </motion.div>

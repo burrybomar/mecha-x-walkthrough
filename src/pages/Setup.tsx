@@ -119,18 +119,25 @@ const Setup = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-6 md:mb-8 relative"
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 font-mono leading-tight px-2">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              TradingView Indicator
-            </span>
-            <br />
-            <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
-          </h1>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono px-4">
-            Each setting automates a specific part of the 6-step framework. Configure once in TradingView, trade forever.
-          </p>
+          {/* Background Candlestick Pattern */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-125">
+            <CandlestickPattern variant="background" />
+          </div>
+          
+          <div className="relative z-10">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 font-mono leading-tight px-2">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                TradingView Indicator
+              </span>
+              <br />
+              <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
+            </h1>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono px-4">
+              Each setting automates a specific part of the 6-step framework. Configure once in TradingView, trade forever.
+            </p>
+          </div>
         </motion.div>
 
         {/* Settings Panel */}
