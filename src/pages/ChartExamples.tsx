@@ -16,14 +16,17 @@ import htfKeyLevel from "@/assets/htf-key-level-diagram.png";
 import liquiditySweep from "@/assets/liquidity-sweep-clean.png";
 import bslSslChart from "@/assets/bsl-ssl-chart.png";
 import c2Chart from "@/assets/c2-labels-chart.png";
-import swingPattern from "@/assets/swing-low-pattern.png";
+import swingPattern from "@/assets/swing-low-confirmation-new.jpg";
 import cisdChart from "@/assets/cisd-chart.png";
-import cisdLtf from "@/assets/cisd-ltf-chart.jpg";
-import setupZones from "@/assets/setup-zones-clean.png";
+import cisdLtf from "@/assets/ltf-entry-confirmation.jpg";
+import setupZones from "@/assets/trade-setups-h4.jpg";
 import distributionSetups from "@/assets/distribution-setups.png";
-import h4Distribution from "@/assets/h4-distribution-candle.png";
+import h4Distribution from "@/assets/h4-distribution-formations.jpg";
 import smtLtf from "@/assets/smt-ltf-chart.png";
-import candleClosure from "@/assets/candle-closure-clean.png";
+import candleClosure from "@/assets/closing-within-pattern.jpg";
+import closingComplete from "@/assets/closing-within-complete.jpg";
+import h1M15WithinH4 from "@/assets/h1-m15-within-h4.jpg";
+import scalperObjective from "@/assets/scalper-objective.jpg";
 
 interface ChartExample {
   title: string;
@@ -221,14 +224,53 @@ const examples: ChartExample[] = [
     title: "Candle Closure Confirmation",
     category: "Patterns",
     image: candleClosure,
-    description: "Importance of candle body closure in confirming sweep validity and direction.",
+    description: "How candle body closes relative to sweep levels determines setup validity.",
     keyPoints: [
-      "Wick sweeps level",
-      "Body must close inside range",
+      "Wick sweeps HTF level",
+      "Body must close back inside range",
       "Closure confirms rejection",
-      "Open vs close shows conviction"
+      "Validates sweep and reversal"
     ],
     frameworkStep: "Step 3: Sweep Detection"
+  },
+  {
+    title: "Complete Closing Within Pattern",
+    category: "Patterns",
+    image: closingComplete,
+    description: "Full pattern showing closing within behavior after H4 distribution candle sweep.",
+    keyPoints: [
+      "H4 distribution candle closes above sweep",
+      "Next candle must close back inside",
+      "This confirms the reversal",
+      "Entry zone now valid"
+    ],
+    frameworkStep: "Step 3: Sweep Detection"
+  },
+  {
+    title: "Multi-Timeframe Confluence",
+    category: "Entry Zones",
+    image: h1M15WithinH4,
+    description: "H1 previous candle run, M15 stop hunt, and M15 FVG all within the H4 distribution candle.",
+    keyPoints: [
+      "H1 run establishes larger context",
+      "M15 stop hunt provides entry precision",
+      "M15 FVG marks optimal fill zone",
+      "All align within H4 candle body"
+    ],
+    frameworkStep: "Step 4: CISD Entry"
+  },
+  {
+    title: "Scalper's Primary Objective",
+    category: "Sessions",
+    image: scalperObjective,
+    description: "The ultimate scalping target: catching the very next H4 candle distribution move.",
+    keyPoints: [
+      "Previous H4 sets up next move",
+      "Target is immediate next H4 candle",
+      "Highest probability scalp",
+      "Quick execution, tight stops"
+    ],
+    frameworkStep: "Step 6: Trade Management"
   }
 ];
 
