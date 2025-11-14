@@ -7,6 +7,12 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { z } from 'zod';
+
+const authSchema = z.object({
+  email: z.string().trim().email('Invalid email address').max(255, 'Email must be less than 255 characters'),
+  password: z.string().min(8, 'Password must be at least 8 characters').max(100, 'Password must be less than 100 characters')
+});
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -18,9 +24,19 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
 
+    const result = authSchema.safeParse({ email, password });
+    if (!result.success) {
+      toast.error(result.error.errors[0].message);
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
+      email: result.data.email,
+      password: result.data.password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/`
+      }
     });
 
     if (error) {
@@ -36,9 +52,16 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
 
+    const result = authSchema.safeParse({ email, password });
+    if (!result.success) {
+      toast.error(result.error.errors[0].message);
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: result.data.email,
+      password: result.data.password,
     });
 
     if (error) {
