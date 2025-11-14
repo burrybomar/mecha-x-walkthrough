@@ -174,12 +174,22 @@ export const OnboardingTour = () => {
     };
   };
 
+  const handleSwipe = (event: any, info: any) => {
+    // Swipe right to advance, swipe left to skip
+    if (info.offset.x > 100 || info.velocity.x > 500) {
+      handleNext();
+    } else if (info.offset.x < -100 || info.velocity.x < -500) {
+      handleSkip();
+    }
+  };
+
   if (!isActive || hasSeenTour) return null;
 
   const step = tourSteps[currentStep];
   const Icon = step.icon;
   const tooltipPosition = getTooltipPosition();
   const highlightStyle = getHighlightStyle();
+  const isMobile = window.innerWidth < 768;
 
   return (
     <AnimatePresence>
@@ -229,10 +239,21 @@ export const OnboardingTour = () => {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          drag={isMobile ? "x" : false}
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={handleSwipe}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           className="absolute z-[101] w-full max-w-md px-4 md:px-0"
           style={tooltipPosition}
         >
+          {/* Swipe Indicator - Mobile Only */}
+          {isMobile && (
+            <div className="flex justify-center mb-2">
+              <div className="w-12 h-1 bg-muted-foreground/20 rounded-full" />
+            </div>
+          )}
+          
           <Card className="p-4 md:p-6 border-2 border-primary/30 shadow-2xl bg-card/95 backdrop-blur-md">
             {/* Header */}
             <div className="flex items-start justify-between mb-3 md:mb-4">

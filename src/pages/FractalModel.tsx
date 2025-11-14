@@ -13,40 +13,40 @@ const FractalModel = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
           <CandlestickButton
             variant="bullish"
             onClick={() => navigate('/')}
-            className="gap-2"
+            className="gap-2 text-sm md:text-base"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-3 h-3 md:w-4 md:h-4" />
             Back to Home
           </CandlestickButton>
           <div className="flex items-center gap-2">
-            <Layers className="w-5 h-5 text-primary" />
-            <h1 className="text-xl font-bold">Fractal Model</h1>
+            <Layers className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+            <h1 className="text-base md:text-xl font-bold">Fractal Model</h1>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 px-4 text-center bg-gradient-to-b from-primary/5 to-background">
+      <section className="py-8 md:py-16 px-4 text-center bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
-              <span className="text-primary font-mono font-semibold">Core Concept</span>
+            <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 rounded-full mb-4 md:mb-6">
+              <span className="text-primary font-mono font-semibold text-xs md:text-sm">Core Concept</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 px-4">
               The Fractal Principle:<br />
               <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 4H Canvas + 1H Trigger
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed px-4">
               Market truth: A durable directional move requires a swing point. 
               The market does not reverse from "nowhere". Mecha-X makes this a hard rule.
             </p>
@@ -55,11 +55,11 @@ const FractalModel = () => {
       </section>
 
       {/* Core Principle Alert */}
-      <section className="py-8 px-4">
+      <section className="py-4 md:py-8 px-4">
         <div className="container mx-auto max-w-4xl">
           <Alert className="border-bearish/30 bg-bearish/5">
-            <AlertCircle className="h-5 w-5 text-bearish" />
-            <AlertDescription className="text-lg font-medium">
+            <AlertCircle className="h-4 w-4 md:h-5 md:w-5 text-bearish" />
+            <AlertDescription className="text-sm md:text-lg font-medium">
               <strong className="text-bearish">Non-Negotiable Rule:</strong> No swing, no trade. 
               The 4H "small wick" must be validated by an LTF swing before you assume expansion.
             </AlertDescription>
@@ -68,18 +68,18 @@ const FractalModel = () => {
       </section>
 
       {/* The Two Components */}
-      <section className="py-16 px-4">
+      <section className="py-8 md:py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 px-4"
           >
             Two Components, One System
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* 4H Canvas */}
             <CandlestickCard variant="bullish" wickHeight="md">
               <CardHeader>
