@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, BookOpen, Plus, Calendar, TrendingUp, TrendingDown } from "lucide-react";
+import { ArrowLeft, BookOpen, Plus, Calendar, TrendingUp, TrendingDown, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
@@ -9,48 +9,41 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface TradeEntry {
   id: string;
+  user_id: string;
   date: string;
   pair: string;
   direction: "long" | "short";
-  htfBias: string;
-  sweepType: string;
+  htf_bias: string;
+  sweep_type: string;
   entry: string;
   stop: string;
   target: string;
   rr: string;
   outcome: "win" | "loss" | "breakeven" | "pending";
   notes: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 const TradeJournal = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [showForm, setShowForm] = useState(false);
-  const [trades, setTrades] = useState<TradeEntry[]>([
-    {
-      id: "1",
-      date: "2024-01-15",
-      pair: "ES",
-      direction: "long",
-      htfBias: "Daily bullish, 4H discount",
-      sweepType: "SSL sweep at 4900",
-      entry: "4905",
-      stop: "4895",
-      target: "4935",
-      rr: "1:3",
-      outcome: "win",
-      notes: "Clean sweep during H2 window. C2 confirmed. Entered CISD zone at 50% FVG."
-    }
-  ]);
+  const [trades, setTrades] = useState<TradeEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     date: new Date().toISOString().split('T')[0],
     pair: "",
     direction: "long" as "long" | "short",
-    htfBias: "",
-    sweepType: "",
+    htf_bias: "",
+    sweep_type: "",
     entry: "",
     stop: "",
     target: "",
@@ -59,27 +52,110 @@ const TradeJournal = () => {
     notes: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newTrade: TradeEntry = {
-      id: Date.now().toString(),
-      ...formData
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserId(user.id);
+        await fetchTrades(user.id);
+      } else {
+        setLoading(false);
+        navigate("/auth");
+      }
     };
-    setTrades([newTrade, ...trades]);
-    setFormData({
-      date: new Date().toISOString().split('T')[0],
-      pair: "",
-      direction: "long",
-      htfBias: "",
-      sweepType: "",
-      entry: "",
-      stop: "",
-      target: "",
-      rr: "",
-      outcome: "pending",
-      notes: ""
-    });
-    setShowForm(false);
+
+    initializeAuth();
+  }, [navigate]);
+
+  const fetchTrades = async (uid: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('trades')
+        .select('*')
+        .eq('user_id', uid)
+        .order('date', { ascending: false });
+
+      if (error) throw error;
+      setTrades((data as TradeEntry[]) || []);
+    } catch (error) {
+      console.error('Error fetching trades:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load trades",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userId) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('trades')
+        .insert([{
+          user_id: userId,
+          ...formData
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setTrades([data as TradeEntry, ...trades]);
+      setFormData({
+        date: new Date().toISOString().split('T')[0],
+        pair: "",
+        direction: "long",
+        htf_bias: "",
+        sweep_type: "",
+        entry: "",
+        stop: "",
+        target: "",
+        rr: "",
+        outcome: "pending",
+        notes: ""
+      });
+      setShowForm(false);
+      toast({
+        title: "Success",
+        description: "Trade logged successfully"
+      });
+    } catch (error) {
+      console.error('Error creating trade:', error);
+      toast({
+        title: "Error",
+        description: "Failed to log trade",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleDelete = async (tradeId: string) => {
+    try {
+      const { error } = await supabase
+        .from('trades')
+        .delete()
+        .eq('id', tradeId);
+
+      if (error) throw error;
+
+      setTrades(trades.filter(t => t.id !== tradeId));
+      toast({
+        title: "Success",
+        description: "Trade deleted"
+      });
+    } catch (error) {
+      console.error('Error deleting trade:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete trade",
+        variant: "destructive"
+      });
+    }
   };
 
   const stats = {
@@ -136,12 +212,18 @@ const TradeJournal = () => {
         </motion.div>
 
         {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
-        >
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="text-muted-foreground font-mono">Loading trades...</div>
+          </div>
+        ) : (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+            >
           <Card className="p-4">
             <div className="text-2xl font-bold text-primary">{stats.totalTrades}</div>
             <div className="text-xs text-muted-foreground">Total Trades</div>
@@ -237,8 +319,8 @@ const TradeJournal = () => {
                   <Label>HTF Bias</Label>
                   <Input 
                     placeholder="Daily bullish, 4H in discount..."
-                    value={formData.htfBias}
-                    onChange={(e) => setFormData({...formData, htfBias: e.target.value})}
+                    value={formData.htf_bias}
+                    onChange={(e) => setFormData({...formData, htf_bias: e.target.value})}
                     required
                   />
                 </div>
@@ -247,8 +329,8 @@ const TradeJournal = () => {
                   <Label>Sweep Type</Label>
                   <Input 
                     placeholder="SSL sweep at 4900, BSL at 15500..."
-                    value={formData.sweepType}
-                    onChange={(e) => setFormData({...formData, sweepType: e.target.value})}
+                    value={formData.sweep_type}
+                    onChange={(e) => setFormData({...formData, sweep_type: e.target.value})}
                     required
                   />
                 </div>
@@ -352,20 +434,30 @@ const TradeJournal = () => {
                           {trade.date}
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold font-mono text-accent">{trade.rr}</div>
-                        <div className="text-xs text-muted-foreground">Risk/Reward</div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-right">
+                          <div className="text-2xl font-bold font-mono text-accent">{trade.rr}</div>
+                          <div className="text-xs text-muted-foreground">Risk/Reward</div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(trade.id)}
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-3 text-sm">
                       <div>
                         <div className="text-muted-foreground text-xs mb-1">HTF Bias</div>
-                        <div className="font-mono">{trade.htfBias}</div>
+                        <div className="font-mono">{trade.htf_bias}</div>
                       </div>
                       <div>
                         <div className="text-muted-foreground text-xs mb-1">Sweep</div>
-                        <div className="font-mono">{trade.sweepType}</div>
+                        <div className="font-mono">{trade.sweep_type}</div>
                       </div>
                     </div>
 
@@ -397,7 +489,7 @@ const TradeJournal = () => {
           ))}
         </div>
 
-        {trades.length === 0 && !showForm && (
+        {trades.length === 0 && !showForm && !loading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -412,6 +504,8 @@ const TradeJournal = () => {
               Log Your First Trade
             </Button>
           </motion.div>
+        )}
+          </>
         )}
       </div>
     </div>
