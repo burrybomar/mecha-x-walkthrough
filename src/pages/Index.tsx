@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import mechaxLogo from "@/assets/mecha-x-logo.gif";
 import { TradingFrameworkFlow } from "@/components/TradingFrameworkFlow";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
-import { Button } from "@/components/ui/button";
 import { CandlestickButton } from "@/components/CandlestickButton";
+import { ResponsiveNav } from "@/components/ResponsiveNav";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -20,48 +20,22 @@ const Index = () => {
       <motion.header 
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-border"
         style={{ backgroundColor: `hsla(var(--background) / ${headerOpacity})` }}
+        role="banner"
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src={mechaxLogo} alt="MECHA-X" className="w-10 h-10 rounded-lg" />
+            <button 
+              onClick={() => navigate('/')}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              aria-label="MECHA-X Home"
+            >
+              <img src={mechaxLogo} alt="MECHA-X Logo" className="w-10 h-10 rounded-lg" />
               <div className="text-left">
                 <div className="text-xl font-bold">MECHA-X</div>
                 <div className="text-xs text-muted-foreground">Trading Intelligence</div>
               </div>
-            </div>
-            <nav className="flex items-center gap-1">
-              {/* Core Learning */}
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ohlc-tutorial')} className="font-mono">
-                OHLC
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/knowledge')} className="font-mono">
-                <BookOpen className="w-4 h-4 mr-1" />
-                Learn
-              </Button>
-              
-              {/* Tools */}
-              <Button variant="ghost" size="sm" onClick={() => navigate('/checklist')} className="font-mono">
-                Checklist
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/trade-journal')} className="font-mono">
-                Journal
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/setup')} className="font-mono">
-                Setup
-              </Button>
-              
-              {/* Reference */}
-              <Button variant="ghost" size="sm" onClick={() => navigate('/chart-examples')} className="font-mono">
-                Charts
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/glossary')} className="font-mono">
-                Glossary
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/faq')} className="font-mono">
-                FAQ
-              </Button>
-            </nav>
+            </button>
+            <ResponsiveNav />
           </div>
         </div>
       </motion.header>
@@ -72,6 +46,8 @@ const Index = () => {
         <motion.section 
           className="relative min-h-[90vh] flex items-center justify-center text-center px-4 overflow-hidden"
           style={{ y: heroY, opacity: heroOpacity }}
+          role="region"
+          aria-label="Hero section"
         >
           {/* Animated Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -154,7 +130,6 @@ const Index = () => {
                   onClick={() => navigate('/knowledge')}
                   className="text-base px-2"
                 >
-                  <BookOpen className="w-5 h-5 mr-2" />
                   Full Documentation
                 </CandlestickButton>
               </div>
@@ -208,22 +183,20 @@ const Index = () => {
                 </p>
               </div>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button 
-                  size="lg"
+                <CandlestickButton 
+                  variant="bullish"
                   onClick={() => navigate('/setup')}
-                  className="text-lg px-10 py-6 rounded-full"
+                  className="text-lg px-10 py-6"
                 >
                   Setup Your Indicators
-                </Button>
-                <Button 
-                  size="lg"
-                  variant="outline"
+                </CandlestickButton>
+                <CandlestickButton 
+                  variant="bearish"
                   onClick={() => navigate('/knowledge')}
-                  className="text-lg px-10 py-6 rounded-full"
+                  className="text-lg px-10 py-6"
                 >
-                  <BookOpen className="w-5 h-5 mr-2" />
                   Read Framework Logic
-                </Button>
+                </CandlestickButton>
               </div>
             </motion.div>
           </motion.div>
