@@ -16,6 +16,12 @@ export default {
       fontFamily: {
         mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', 'monospace'],
       },
+      zIndex: {
+        'modal': '1000',
+        'drawer': '1100',
+        'floating': '1200',
+        'menu': '9999',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
