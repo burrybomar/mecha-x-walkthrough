@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,26 +7,30 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { FloatingCandlestickAssistant } from "@/components/FloatingCandlestickAssistant";
 import { OnboardingTour } from "@/components/OnboardingTour";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+
+// Eager load critical pages
 import Index from "./pages/Index";
-import Knowledge from "./pages/Knowledge";
-import Setup from "./pages/Setup";
-import HypeClip from "./pages/HypeClip";
-import RecordClip from "./pages/RecordClip";
-import Glossary from "./pages/Glossary";
-import ChartExamples from "./pages/ChartExamples";
-import Checklist from "./pages/Checklist";
-import FAQ from "./pages/FAQ";
-import Resources from "./pages/Resources";
-import TradeJournal from "./pages/TradeJournal";
-import OHLCTutorial from "./pages/OHLCTutorial";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
-import FractalModel from "./pages/FractalModel";
-import Sequences from "./pages/Sequences";
-import SequenceIdentifier from "./pages/SequenceIdentifier";
-import CaseStudies from "./pages/CaseStudies";
-import ChartComparison from "./pages/ChartComparison";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+
+// Lazy load secondary pages for better performance
+const Knowledge = lazy(() => import("./pages/Knowledge"));
+const Setup = lazy(() => import("./pages/Setup"));
+const HypeClip = lazy(() => import("./pages/HypeClip"));
+const RecordClip = lazy(() => import("./pages/RecordClip"));
+const Glossary = lazy(() => import("./pages/Glossary"));
+const ChartExamples = lazy(() => import("./pages/ChartExamples"));
+const Checklist = lazy(() => import("./pages/Checklist"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Resources = lazy(() => import("./pages/Resources"));
+const TradeJournal = lazy(() => import("./pages/TradeJournal"));
+const OHLCTutorial = lazy(() => import("./pages/OHLCTutorial"));
+const FractalModel = lazy(() => import("./pages/FractalModel"));
+const Sequences = lazy(() => import("./pages/Sequences"));
+const SequenceIdentifier = lazy(() => import("./pages/SequenceIdentifier"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+const ChartComparison = lazy(() => import("./pages/ChartComparison"));
 
 const queryClient = new QueryClient();
 
@@ -35,33 +40,51 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-menu focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <OnboardingTour />
           <FloatingCandlestickAssistant />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/knowledge" element={<Knowledge />} />
-            <Route path="/ohlc-tutorial" element={<OHLCTutorial />} />
-            <Route path="/fractal-model" element={<FractalModel />} />
-            <Route path="/sequences" element={<Sequences />} />
-            <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/chart-comparison" element={<ChartComparison />} />
-            <Route path="/setup" element={<Setup />} />
-            <Route path="/glossary" element={<Glossary />} />
-            <Route path="/chart-examples" element={<ChartExamples />} />
-            <Route path="/checklist" element={<Checklist />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/trade-journal" element={<ProtectedRoute><TradeJournal /></ProtectedRoute>} />
-            <Route path="/hype" element={<ProtectedRoute><HypeClip /></ProtectedRoute>} />
-            <Route path="/record" element={<ProtectedRoute><RecordClip /></ProtectedRoute>} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-screen bg-background">
+                <div className="text-center space-y-4">
+                  <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+                  <p className="text-sm text-muted-foreground">Loading...</p>
+                </div>
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/knowledge" element={<Knowledge />} />
+              <Route path="/ohlc-tutorial" element={<OHLCTutorial />} />
+              <Route path="/fractal-model" element={<FractalModel />} />
+              <Route path="/sequences" element={<Sequences />} />
+              <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/chart-comparison" element={<ChartComparison />} />
+              <Route path="/setup" element={<Setup />} />
+              <Route path="/glossary" element={<Glossary />} />
+              <Route path="/chart-examples" element={<ChartExamples />} />
+              <Route path="/checklist" element={<Checklist />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/trade-journal" element={<ProtectedRoute><TradeJournal /></ProtectedRoute>} />
+              <Route path="/hype" element={<ProtectedRoute><HypeClip /></ProtectedRoute>} />
+              <Route path="/record" element={<ProtectedRoute><RecordClip /></ProtectedRoute>} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

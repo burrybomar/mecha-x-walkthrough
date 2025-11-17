@@ -13,25 +13,58 @@ import {
   ArrowUpRight,
   Search,
   ChartColumnIncreasing,
+  GraduationCap,
+  Wrench,
+  Info,
 } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from './ui/sheet';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
-const navItems = [
-  { icon: TrendingUp, label: 'OHLC Tutorial', path: '/ohlc-tutorial', color: 'bullish' },
-  { icon: BookOpen, label: 'Learn Framework', path: '/knowledge', color: 'primary' },
-  { icon: RefreshCw, label: 'Fractal Model', path: '/fractal-model', color: 'bullish' },
-  { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
-  { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
-  { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
-  { icon: ChartColumnIncreasing, label: 'Chart Comparison', path: '/chart-comparison', color: 'bullish' },
-  { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'primary' },
-  { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'bullish' },
-  { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'primary' },
-  { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'bullish' },
-  { icon: BookText, label: 'Glossary', path: '/glossary', color: 'primary' },
-  { icon: HelpCircle, label: 'FAQ', path: '/faq', color: 'bullish' },
+// Organized nav sections for better mobile UX
+const navSections = [
+  {
+    id: 'learn',
+    icon: GraduationCap,
+    label: 'Learn',
+    items: [
+      { icon: TrendingUp, label: 'OHLC Tutorial', path: '/ohlc-tutorial', color: 'bullish' },
+      { icon: BookOpen, label: 'Framework Guide', path: '/knowledge', color: 'primary' },
+      { icon: RefreshCw, label: 'Fractal Model', path: '/fractal-model', color: 'bullish' },
+    ],
+  },
+  {
+    id: 'sequences',
+    icon: ArrowUpRight,
+    label: 'Sequences',
+    items: [
+      { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
+      { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
+      { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
+      { icon: ChartColumnIncreasing, label: 'Chart Comparison', path: '/chart-comparison', color: 'bullish' },
+    ],
+  },
+  {
+    id: 'tools',
+    icon: Wrench,
+    label: 'Tools',
+    items: [
+      { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'primary' },
+      { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'bullish' },
+      { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'primary' },
+      { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'bullish' },
+    ],
+  },
+  {
+    id: 'reference',
+    icon: Info,
+    label: 'Reference',
+    items: [
+      { icon: BookText, label: 'Glossary', path: '/glossary', color: 'primary' },
+      { icon: HelpCircle, label: 'FAQ', path: '/faq', color: 'bullish' },
+    ],
+  },
 ] as const;
 
 export const MobileNav = () => {
@@ -51,7 +84,7 @@ export const MobileNav = () => {
         <Button
           variant="outline"
           size="icon"
-          className="fixed top-4 right-4 md:hidden z-[9999] backdrop-blur-xl bg-background/80 border border-border/40 hover:bg-accent hover:text-accent-foreground shadow-2xl transition-all duration-300 rounded-2xl"
+          className="fixed top-4 right-4 md:hidden z-[9999] backdrop-blur-xl bg-background/95 border-2 border-primary/40 hover:bg-accent hover:border-primary/70 hover:text-accent-foreground shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-all duration-300 rounded-2xl"
           aria-label="Open navigation menu"
         >
           <Menu className="w-5 h-5 text-foreground" />
@@ -83,47 +116,65 @@ export const MobileNav = () => {
           </SheetClose>
         </div>
 
-        {/* Nav List */}
+        {/* Nav List with Grouped Accordion */}
         <nav
           role="navigation"
           aria-label="Main navigation"
           className="flex h-[calc(100dvh-64px)] flex-col overflow-y-auto px-3 py-4"
           style={{ WebkitTapHighlightColor: 'transparent' }}
         >
-          <ul className="space-y-1">
-            {navItems.map((item) => {
-              const active = location.pathname === item.path;
+          <Accordion type="multiple" defaultValue={['learn', 'sequences', 'tools', 'reference']} className="space-y-2">
+            {navSections.map((section) => {
+              const SectionIcon = section.icon;
               return (
-                <li key={item.path}>
-                  <SheetClose asChild>
-                    <button
-                      onClick={() => handleNavigate(item.path)}
-                      className={
-                        `w-full flex items-center gap-3 px-3.5 py-3.5 rounded-xl transition-colors text-left group ` +
-                        `${active ? 'bg-accent text-accent-foreground ring-1 ring-border/50' : 'bg-transparent hover:bg-accent/50'}`
-                      }
-                    >
-                      <span
-                        className={`p-2.5 rounded-lg ${
-                          item.color === 'bullish'
-                            ? 'bg-bullish/10 text-bullish'
-                            : 'bg-primary/10 text-primary'
-                        }`}
-                      >
-                        <item.icon className="w-5 h-5" />
-                      </span>
-                      <span className="font-medium text-sm text-foreground">
-                        {item.label}
-                      </span>
-                      <span className={`ml-auto ${active ? 'opacity-100' : 'opacity-50 group-hover:opacity-100'} transition-opacity`}>
-                        <ArrowUpRight className={`w-4 h-4 ${item.color === 'bullish' ? 'text-bullish' : 'text-primary'}`} />
-                      </span>
-                    </button>
-                  </SheetClose>
-                </li>
+                <AccordionItem key={section.id} value={section.id} className="border-none">
+                  <AccordionTrigger className="hover:no-underline py-2 px-2 hover:bg-muted/50 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <SectionIcon className="w-4 h-4 text-primary" />
+                      <span className="font-semibold text-sm">{section.label}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-2">
+                    <ul className="space-y-1 mt-1">
+                      {section.items.map((item) => {
+                        const active = location.pathname === item.path;
+                        const ItemIcon = item.icon;
+                        return (
+                          <li key={item.path}>
+                            <SheetClose asChild>
+                              <button
+                                onClick={() => handleNavigate(item.path)}
+                                className={
+                                  `w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-left group ` +
+                                  `${active ? 'bg-accent text-accent-foreground ring-1 ring-border/50 shadow-sm' : 'bg-transparent hover:bg-accent/50'}`
+                                }
+                              >
+                                <span
+                                  className={`p-1.5 rounded-md ${
+                                    item.color === 'bullish'
+                                      ? 'bg-bullish/10 text-bullish'
+                                      : 'bg-primary/10 text-primary'
+                                  }`}
+                                >
+                                  <ItemIcon className="w-4 h-4" />
+                                </span>
+                                <span className="font-medium text-sm text-foreground flex-1">
+                                  {item.label}
+                                </span>
+                                {active && (
+                                  <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                )}
+                              </button>
+                            </SheetClose>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
               );
             })}
-          </ul>
+          </Accordion>
 
           {/* Footer */}
           <div className="mt-auto pt-4 pb-[max(env(safe-area-inset-bottom),1rem)] text-center text-xs text-muted-foreground">

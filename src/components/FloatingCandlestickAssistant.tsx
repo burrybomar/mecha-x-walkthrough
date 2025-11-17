@@ -34,9 +34,9 @@ export const FloatingCandlestickAssistant = () => {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button - Hidden on mobile to avoid conflicts with menu button */}
       <motion.div
-        className="fixed bottom-8 right-8 z-50 floating-assistant"
+        className="fixed bottom-8 right-8 z-50 floating-assistant hidden md:block"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}

@@ -15,7 +15,7 @@ const Index = () => {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-trading-grid">
+    <div className="min-h-screen bg-trading-grid overflow-x-hidden">
       {/* Sticky Header */}
       <motion.header 
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-border"
@@ -80,7 +80,7 @@ const Index = () => {
               <div className="text-sm font-mono text-primary mb-4 tracking-wider uppercase">
                 OHLC Price Action Framework
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-[1.1] tracking-tight px-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-[1.1] tracking-tight px-4">
                 One System.
                 <br />
                 <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
@@ -91,14 +91,13 @@ const Index = () => {
               </h1>
             </motion.div>
 
-            <motion.p 
-              className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles. 
-              and precision entries into one coherent trading system.
+              A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles.
             </motion.p>
 
             <motion.div
