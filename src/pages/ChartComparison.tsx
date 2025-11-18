@@ -4,19 +4,32 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
-import continuationSuccess from "@/assets/continuation-sequence.jpg";
-import reversalSuccess from "@/assets/reversal-sequence.jpg";
-import alignedSuccess from "@/assets/aligned-sequence.jpg";
-import continuationFailed from "@/assets/failed-continuation.jpg";
-import reversalFailed from "@/assets/failed-reversal.jpg";
-import alignedFailed from "@/assets/failed-aligned.jpg";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceLine, Area, AreaChart } from 'recharts';
 
 const sequences = [
   {
     id: "continuation",
     title: "Continuation Sequence",
-    successImage: continuationSuccess,
-    failedImage: continuationFailed,
+    successData: [
+      { time: '1', price: 102 },
+      { time: '2', price: 103 },
+      { time: '3', price: 105 },
+      { time: '4', price: 107 },
+      { time: '5', price: 109 },
+      { time: '6', price: 112 },
+      { time: '7', price: 115 },
+      { time: '8', price: 118 },
+    ],
+    failedData: [
+      { time: '1', price: 102 },
+      { time: '2', price: 103 },
+      { time: '3', price: 102 },
+      { time: '4', price: 100 },
+      { time: '5', price: 98 },
+      { time: '6', price: 96 },
+      { time: '7', price: 94 },
+      { time: '8', price: 92 },
+    ],
     successPoints: [
       "4H bullish candle forms in discount zone",
       "Clear LTF swing low confirms structure",
@@ -33,8 +46,26 @@ const sequences = [
   {
     id: "reversal",
     title: "Reversal Sequence",
-    successImage: reversalSuccess,
-    failedImage: reversalFailed,
+    successData: [
+      { time: '1', price: 100 },
+      { time: '2', price: 105 },
+      { time: '3', price: 108 },
+      { time: '4', price: 112 },
+      { time: '5', price: 110 },
+      { time: '6', price: 106 },
+      { time: '7', price: 102 },
+      { time: '8', price: 98 },
+    ],
+    failedData: [
+      { time: '1', price: 100 },
+      { time: '2', price: 105 },
+      { time: '3', price: 108 },
+      { time: '4', price: 112 },
+      { time: '5', price: 114 },
+      { time: '6', price: 116 },
+      { time: '7', price: 119 },
+      { time: '8', price: 122 },
+    ],
     successPoints: [
       "4H distribution candle sweeps liquidity at premium",
       "Clean LTF swing high forms during 4H candle",
@@ -51,8 +82,26 @@ const sequences = [
   {
     id: "aligned",
     title: "Aligned Sequence",
-    successImage: alignedSuccess,
-    failedImage: alignedFailed,
+    successData: [
+      { time: '1', price: 95 },
+      { time: '2', price: 98 },
+      { time: '3', price: 102 },
+      { time: '4', price: 106 },
+      { time: '5', price: 110 },
+      { time: '6', price: 114 },
+      { time: '7', price: 118 },
+      { time: '8', price: 122 },
+    ],
+    failedData: [
+      { time: '1', price: 100 },
+      { time: '2', price: 102 },
+      { time: '3', price: 99 },
+      { time: '4', price: 103 },
+      { time: '5', price: 101 },
+      { time: '6', price: 104 },
+      { time: '7', price: 100 },
+      { time: '8', price: 98 },
+    ],
     successPoints: [
       "All timeframes aligned in same direction",
       "HTF provides strong directional bias",
@@ -151,11 +200,39 @@ export default function ChartComparison() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <img
-                      src={currentSequence.successImage}
-                      alt={`Successful ${currentSequence.title}`}
-                      className="w-full rounded-lg mb-4"
-                    />
+                    <div className="aspect-video mb-4 bg-gradient-to-br from-success/5 to-success/10 rounded-lg p-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={currentSequence.successData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                          <defs>
+                            <linearGradient id="successGradient" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="hsl(var(--success))" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="hsl(var(--success))" stopOpacity={0.05}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" vertical={false} />
+                          <XAxis 
+                            dataKey="time" 
+                            stroke="rgba(148,163,184,0.3)"
+                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
+                            axisLine={false}
+                          />
+                          <YAxis 
+                            stroke="rgba(148,163,184,0.3)"
+                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
+                            domain={['dataMin - 3', 'dataMax + 3']}
+                            axisLine={false}
+                          />
+                          <Area
+                            type="monotone"
+                            dataKey="price"
+                            stroke="hsl(var(--success))"
+                            strokeWidth={3}
+                            fill="url(#successGradient)"
+                            dot={false}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
                     <div className="space-y-2">
                       <h3 className="font-semibold text-success mb-2">✓ What Makes This Work:</h3>
                       {currentSequence.successPoints.map((point, idx) => (
@@ -178,11 +255,39 @@ export default function ChartComparison() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <img
-                      src={currentSequence.failedImage}
-                      alt={`Failed ${currentSequence.title}`}
-                      className="w-full rounded-lg mb-4"
-                    />
+                    <div className="aspect-video mb-4 bg-gradient-to-br from-destructive/5 to-destructive/10 rounded-lg p-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={currentSequence.failedData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                          <defs>
+                            <linearGradient id="failedGradient" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0.05}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" vertical={false} />
+                          <XAxis 
+                            dataKey="time" 
+                            stroke="rgba(148,163,184,0.3)"
+                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
+                            axisLine={false}
+                          />
+                          <YAxis 
+                            stroke="rgba(148,163,184,0.3)"
+                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
+                            domain={['dataMin - 3', 'dataMax + 3']}
+                            axisLine={false}
+                          />
+                          <Area
+                            type="monotone"
+                            dataKey="price"
+                            stroke="hsl(var(--destructive))"
+                            strokeWidth={3}
+                            fill="url(#failedGradient)"
+                            dot={false}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
                     <div className="space-y-2">
                       <h3 className="font-semibold text-destructive mb-2">✗ Critical Mistakes:</h3>
                       {currentSequence.failurePoints.map((point, idx) => (
