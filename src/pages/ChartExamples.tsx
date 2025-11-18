@@ -49,7 +49,7 @@ const examples: ChartExample[] = [
       "Previous week low = discount zone for longs",
       "HTF order blocks marked for reversal areas"
     ],
-    frameworkStep: "Step 1: HTF Context"
+    frameworkStep: "Fractal Foundation"
   },
   {
     title: "Clean HTF Level",
@@ -62,7 +62,7 @@ const examples: ChartExample[] = [
       "Gap between current price and level = target",
       "Await sweep of this level for reversal setup"
     ],
-    frameworkStep: "Step 1: HTF Context"
+    frameworkStep: "Fractal Foundation"
   },
   {
     title: "HTF Sweep Pattern",
@@ -75,7 +75,7 @@ const examples: ChartExample[] = [
       "Close back inside range confirms sweep",
       "This is your trigger to look for entries"
     ],
-    frameworkStep: "Step 3: Liquidity Sweep"
+    frameworkStep: "C2 Detection"
   },
   {
     title: "Key Level Diagram",
@@ -88,7 +88,7 @@ const examples: ChartExample[] = [
       "Expected sweep zones",
       "Reversal areas after sweep"
     ],
-    frameworkStep: "Step 1: HTF Context"
+    frameworkStep: "Fractal Foundation"
   },
   {
     title: "Perfect Liquidity Sweep",
@@ -101,7 +101,7 @@ const examples: ChartExample[] = [
       "Strong rejection = valid sweep",
       "Next step: find C2 confirmation"
     ],
-    frameworkStep: "Step 3: Liquidity Sweep"
+    frameworkStep: "C2 Detection"
   },
   {
     title: "BSL/SSL Levels",
@@ -114,7 +114,7 @@ const examples: ChartExample[] = [
       "Price seeks these levels before reversing",
       "Higher TF liquidity more significant"
     ],
-    frameworkStep: "Step 1: HTF Context"
+    frameworkStep: "BSL/SSL Levels"
   },
   {
     title: "C2 Pattern Labels",
@@ -127,7 +127,7 @@ const examples: ChartExample[] = [
       "Shows structure break",
       "Entry signal to find CISD"
     ],
-    frameworkStep: "Step 3: Sweep Detection"
+    frameworkStep: "C2 Pattern"
   },
   {
     title: "Swing Low Pattern",
@@ -140,7 +140,7 @@ const examples: ChartExample[] = [
       "Structure shift after sweep",
       "Entry zone forms at breakdown point"
     ],
-    frameworkStep: "Step 3: Sweep Detection"
+    frameworkStep: "C2 Detection"
   },
   {
     title: "CISD Entry Zone",
@@ -153,7 +153,7 @@ const examples: ChartExample[] = [
       "Wait for pullback to this level",
       "Enter on rejection wick"
     ],
-    frameworkStep: "Step 4: CISD Entry"
+    frameworkStep: "Entry Zones"
   },
   {
     title: "CISD on LTF",
@@ -166,7 +166,7 @@ const examples: ChartExample[] = [
       "Strong rejection confirms",
       "Stop loss just beyond sweep"
     ],
-    frameworkStep: "Step 4: CISD Entry"
+    frameworkStep: "Entry Zones"
   },
   {
     title: "Setup Zones Clean",
@@ -179,7 +179,7 @@ const examples: ChartExample[] = [
       "Respect HTF bias for direction",
       "Each zone offers entry opportunity"
     ],
-    frameworkStep: "Step 4: CISD Entry"
+    frameworkStep: "Entry Zones"
   },
   {
     title: "Distribution Setup",
@@ -192,7 +192,7 @@ const examples: ChartExample[] = [
       "Sweep of high triggers reversal",
       "Targets discount zone below"
     ],
-    frameworkStep: "Step 2: Session Timing"
+    frameworkStep: "Session Timing"
   },
   {
     title: "H4 Distribution Candle",
@@ -205,7 +205,7 @@ const examples: ChartExample[] = [
       "Distribution before move",
       "Session-based timing critical"
     ],
-    frameworkStep: "Step 2: Session Timing"
+    frameworkStep: "Session Timing"
   },
   {
     title: "SMT Divergence (LTF)",
@@ -218,7 +218,7 @@ const examples: ChartExample[] = [
       "Divergence = manipulation confirmed",
       "Adds 10-20% confidence to trade"
     ],
-    frameworkStep: "Step 5: SMT Confluence"
+    frameworkStep: "SMT (Optional)"
   },
   {
     title: "Candle Closure Confirmation",
@@ -231,7 +231,7 @@ const examples: ChartExample[] = [
       "Closure confirms rejection",
       "Validates sweep and reversal"
     ],
-    frameworkStep: "Step 3: Sweep Detection"
+    frameworkStep: "C2 Detection"
   },
   {
     title: "Complete Closing Within Pattern",
@@ -244,7 +244,7 @@ const examples: ChartExample[] = [
       "This confirms the reversal",
       "Entry zone now valid"
     ],
-    frameworkStep: "Step 3: Sweep Detection"
+    frameworkStep: "C2 Pattern"
   },
   {
     title: "Multi-Timeframe Confluence",
@@ -257,7 +257,7 @@ const examples: ChartExample[] = [
       "M15 FVG marks optimal fill zone",
       "All align within H4 candle body"
     ],
-    frameworkStep: "Step 4: CISD Entry"
+    frameworkStep: "Entry Zones"
   },
   {
     title: "Scalper's Primary Objective",
@@ -270,7 +270,7 @@ const examples: ChartExample[] = [
       "Highest probability scalp",
       "Quick execution, tight stops"
     ],
-    frameworkStep: "Step 6: Trade Management"
+    frameworkStep: "Execution"
   }
 ];
 
