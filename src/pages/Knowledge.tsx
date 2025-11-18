@@ -16,56 +16,56 @@ const Knowledge = () => {
   const steps = [
     {
       id: 1,
-      icon: BarChart3,
-      title: "HTF Context",
-      subtitle: "Start Here: The Big Picture",
-      color: "from-blue-500 to-cyan-500",
+      icon: Target,
+      title: "Reversal Sequence",
+      subtitle: "C2 Pattern: Sweep + Close Inside",
+      color: "from-orange-500 to-red-500",
       content: {
-        concept: "Before entering any trade, you need to know WHERE price is relative to institutional levels on higher timeframes (Daily/4H).",
-        why: "Smart money operates on HTF levels. These are your guardrails—trade with them, not against them.",
+        concept: "The core mechanical pattern. C1 establishes liquidity, C2 sweeps it and closes back inside, C3 expands away confirming reversal.",
+        why: "This is how institutions operate: sweep retail stops at key levels, then reverse direction. The most common sequence.",
         how: [
-          "Mark Daily/4H highs and lows (BSL/SSL liquidity pools)",
-          "Identify premium vs discount zones: Premium = above 50% of range (equilibrium), Discount = below 50%",
-          "Look for order blocks (opposing candles) and fair value gaps on HTF",
-          "Note previous week/day high/low as liquidity magnets"
+          "C1: Pre-swing candle forming the liquidity level (swing high/low)",
+          "C2: Sweep candle that breaks C1's high/low with wick, closes back inside C1's range",
+          "C3: Expansion candle confirming reversal direction",
+          "Three formation types: C2-REV (standard), C2-SNAP (aggressive close), C2-EXP (continuation bias)"
         ],
-        rule: "If price is in premium (above 50% EQ) → look for shorts. If in discount (below 50% EQ) → look for longs. Avoid trading at equilibrium (40-60% range)."
+        rule: "NO sweep = NO trade. C2 must close back inside C1's range. Entry at CISD zone (order block or iFVG where structure broke)."
       }
     },
     {
       id: 2,
-      icon: Clock,
-      title: "Session Timing",
-      subtitle: "When to Watch: Session Profiling",
-      color: "from-purple-500 to-pink-500",
+      icon: Layers,
+      title: "Continuation Sequence",
+      subtitle: "Aligned Structure Following HTF",
+      color: "from-emerald-500 to-teal-500",
       content: {
-        concept: "Not all hours are equal. Understanding session flow tells you WHEN reversals and expansions happen during the trading day.",
-        why: "Institutional moves happen during specific session windows. Each session has a distinct character and purpose.",
+        concept: "Price maintains directional bias with HTF, showing aligned momentum without major reversals. Cleaner, faster moves.",
+        why: "When lower timeframes align with higher timeframes, institutional money flows in one direction with less resistance.",
         how: [
-          "ASIA (20:00-23:59 ET): Manipulation phase, range building, liquidity forms",
-          "LONDON (02:00-05:00 ET): Expansion phase, sweeps occur, Silver Bullet at 03:00 ET ⚡",
-          "NYAM (06:00-09:00 ET): New York AM session, PRIMARY Silver Bullet at 10:00 ET ⚡",
-          "NYPM (13:00-16:00 ET): New York PM session, afternoon Silver Bullet at 14:00 ET ⚡"
+          "HTF shows clear directional bias (premium for shorts, discount for longs)",
+          "LTF creates sweep setups that align with HTF direction",
+          "No major counter-trend structure on intermediate timeframes",
+          "Targets reached faster with less pullback"
         ],
-        rule: "Focus on Silver Bullet hours: 10:00 AM ET (NYAM H2) is PRIMARY window. 03:00 AM ET (LON H2) and 14:00 PM ET (NYPM H1) are secondary."
+        rule: "Best during Silver Bullet hours when HTF and LTF are aligned. Less risk, cleaner execution, faster targets."
       }
     },
     {
       id: 3,
-      icon: Target,
-      title: "3-Candle Reversal",
-      subtitle: "The Trigger: C1 → C2 → C3 Pattern",
-      color: "from-orange-500 to-red-500",
+      icon: ArrowDown,
+      title: "Aligned Sequence (C3)",
+      subtitle: "Triple Timeframe Confluence",
+      color: "from-blue-500 to-cyan-500",
       content: {
-        concept: "The 3-candle reversal model is the core setup. C1 establishes liquidity. C2 sweeps that level and closes back inside. C3 expands away, confirming the reversal.",
-        why: "This is how smart money operates: sweep retail stops (C2), then move in their true direction (C3). Understanding this pattern is everything.",
+        concept: "All three timeframes (HTF, ITF, LTF) show aligned structure in the same direction. The highest probability setup.",
+        why: "When Daily, 4H, and 1H all align, institutional flows compound. These are the A+ setups worth waiting for.",
         how: [
-          "C1: Pre-swing candle that forms the liquidity level (swing high or low)",
-          "C2: Sweep candle that breaks C1's high/low with a wick, then CLOSES back inside C1's range",
-          "C3: Expansion candle that moves away from C2, confirming the reversal direction",
-          "Formation types: REV (standard), SNAP (aggressive close near opposite extreme), EXP (strong continuation)"
+          "Daily: Clear premium/discount positioning",
+          "4H: Sweep + CISD zone established in HTF direction",
+          "1H/15M: LTF sweep confirming HTF bias",
+          "All timeframes aligned = maximum confluence"
         ],
-        rule: "NO sweep = NO trade. Wait for complete C1 → C2 → C3 formation. C2 must close back inside C1's range to be valid."
+        rule: "Wait for complete alignment. Don't force trades when timeframes conflict. Patience = higher win rate."
       }
     },
     {
@@ -317,19 +317,36 @@ const Knowledge = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Now You Understand the System
+            Apply The Framework
           </h2>
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Every piece connects. HTF → Sessions → Sweep → CISD → SMT → Execute. 
-            Nothing is random. Nothing is disconnected.
+            Master the three sequences. See them in action on real charts.
           </p>
-          <Button 
-            size="lg"
-            onClick={() => navigate('/')}
-            className="text-lg px-10 py-6 rounded-full"
-          >
-            Back to Overview
-          </Button>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button 
+              size="lg"
+              onClick={() => navigate('/c2-patterns')}
+              className="text-lg px-10 py-6 rounded-full"
+            >
+              C2 Pattern Types
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              onClick={() => navigate('/chart-examples')}
+              className="text-lg px-10 py-6 rounded-full"
+            >
+              Chart Examples
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              onClick={() => navigate('/setup')}
+              className="text-lg px-10 py-6 rounded-full"
+            >
+              Setup Guide
+            </Button>
+          </div>
         </motion.div>
       </section>
     </div>
