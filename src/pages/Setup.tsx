@@ -135,7 +135,7 @@ const Setup = () => {
               <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
             </h1>
             <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono px-4">
-              Each setting automates a specific part of the 6-step framework. Configure once in TradingView, trade forever.
+              Each setting automates a specific part of the 3-sequence mechanical framework. Configure once in TradingView, trade forever.
             </p>
           </div>
         </motion.div>
@@ -193,7 +193,7 @@ const Setup = () => {
               {/* HTF Setup */}
               <SettingsGroup 
                 title="HTF Setup" 
-                frameworkLink="Step 1: HTF Context"
+                frameworkLink="Fractal Foundation"
                 description="Auto Mode: Intelligently selects HTFs based on chart TF (5m → 1H/4H/Daily). Manual: Configure 4 custom HTF layers with full control."
                 defaultOpen
               >
@@ -250,7 +250,7 @@ const Setup = () => {
               {/* HTF Candles */}
               <SettingsGroup 
                 title="HTF Candles" 
-                frameworkLink="Step 1: HTF Context"
+                frameworkLink="Fractal Foundation"
                 description="Customize bull/bear candle colors and wicks. Offset = distance from price. Gap = space between candles. Bias Arrow = optional trend arrow."
               >
                 <SettingRow label="Bull">
@@ -276,7 +276,7 @@ const Setup = () => {
               {/* Chart Mapping */}
               <SettingsGroup 
                 title="Chart Mapping" 
-                frameworkLink="Step 1: HTF Context"
+                frameworkLink="BSL/SSL Levels"
                 description="BSL/SSL: Mark Buyside/Sellside liquidity (highs/lows where stops sit). Dividers: Mark HTF candle opens/closes. EQ: 50% equilibrium levels for discount/premium zones."
               >
                 <SettingRow label="BSL/SSL">
@@ -319,7 +319,7 @@ const Setup = () => {
               {/* Liquidity Sweeps */}
               <SettingsGroup
                 title="Liquidity Sweeps"
-                frameworkLink="Step 3: Sweep Detection"
+                frameworkLink="C2 Detection"
                 description="Valid Sweeps: Confirmed sweeps that held (reversal patterns). Invalid: Failed sweeps (price continued). HTF sweeps are more significant than LTF. Live: Real-time sweep detection as price moves."
                 defaultOpen
               >
@@ -368,7 +368,7 @@ const Setup = () => {
               {/* Pattern Detection */}
               <SettingsGroup 
                 title="Pattern Detection" 
-                frameworkLink="Step 3: Sweep + C2"
+                frameworkLink="C2 Labels & C3"
                 description="C2: Mark exact reversal candle where sweep reversed. C3: Expansion candle after reversal. SMT: Divergence between correlated assets (Binary = 2 assets, Triad = 3)."
               >
                 <SettingRow label="C2">
@@ -418,7 +418,7 @@ const Setup = () => {
               {/* Session Models */}
               <SettingsGroup
                 title="Session Models"
-                frameworkLink="Step 2: Session Timing"
+                frameworkLink="Session Timing"
                 description="Display real-time session model tracking table. Shows active sweep sequences, double purge counts (⟐), and SMR entry confirmations (✓). Tracks session flow: ASIA→LONDON→NYAM→NYPM."
               >
                 <SettingRow label="Enable">
@@ -472,7 +472,7 @@ const Setup = () => {
               {/* CISD */}
               <SettingsGroup
                 title="CISD"
-                frameworkLink="Step 4: Entry Zones"
+                frameworkLink="Entry Zones"
                 description="Change in State of Delivery - marks when market shifts from one phase to another. Your entry level. Targets = comma-separated multipliers (1x, 2-2.5x, 3.5-4x)."
                 defaultOpen
               >
@@ -513,7 +513,7 @@ const Setup = () => {
               {/* iFVG */}
               <SettingsGroup 
                 title="iFVG" 
-                frameworkLink="Step 4: Entry Zones"
+                frameworkLink="Entry Zones"
                 description="Inverse Fair Value Gaps - price inefficiencies left during quick reversals. Acts as support/resistance. Often aligns with CISD for best entries."
               >
                 <SettingRow label="Enable">
@@ -535,7 +535,7 @@ const Setup = () => {
               {/* Sessions */}
               <SettingsGroup 
                 title="Sessions" 
-                frameworkLink="Step 2: Session Timing"
+                frameworkLink="Session Timing"
                 description="Session markers for timing key moves. Macro Times highlight specific high-probability windows where sweeps and reversals typically occur."
               >
                 <SettingRow label="Enable">
@@ -573,7 +573,7 @@ const Setup = () => {
           className="mt-8 p-6 rounded-xl bg-card border text-center"
         >
           <p className="text-sm text-muted-foreground leading-relaxed font-mono">
-            These settings mirror exactly what's in your TradingView indicator. Configure once, and the entire 6-step framework automates on your charts.
+            These settings mirror exactly what's in your TradingView indicator. Configure once, and the entire 3-sequence framework automates on your charts.
           </p>
         </motion.div>
       </div>

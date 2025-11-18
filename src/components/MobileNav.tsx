@@ -178,7 +178,7 @@ export const MobileNav = () => {
 
           {/* Footer */}
           <div className="mt-auto pt-4 pb-[max(env(safe-area-inset-bottom),1rem)] text-center text-xs text-muted-foreground">
-            Six steps. Complete edge.
+            Three sequences. Complete edge.
           </div>
         </nav>
       </SheetContent>

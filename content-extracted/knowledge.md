@@ -1,7 +1,7 @@
-# Knowledge Base - The Complete Framework
+# Knowledge Base - The Mecha-X Fractal Framework
 
 ## Header
-**6-Step Framework**
+**3-Sequence Framework**
 - Back to Overview
 
 ---
@@ -10,129 +10,170 @@
 
 # The Complete Knowledge Base
 
-Everything flows together. Each step builds on the previous. Read this once, linearly, to understand how the entire system connects.
+A mechanical, repeatable methodology for confirming intraday setups through fractal price profiling. Read this once, linearly, to understand how the entire system connects.
 
 **Scroll to begin** ↓
 
 ---
 
-## Step 1 of 6: HTF Context
-**Start Here: The Big Picture**
+## The Fractal Foundation
 
-### What Is It?
-Before entering any trade, you need to know WHERE price is relative to key OHLC levels on higher timeframes (Daily/4H).
+# The Core Principle
 
-### Why It Matters
-Major price structure operates on HTF levels. These are your guardrails—trade with them, not against them.
+**The market cannot reverse from a swing point.**
 
-### How To Apply
-- Mark Daily/4H highs and lows (BSL/SSL liquidity pools)
-- Identify premium vs discount zones relative to range
-- Look for order blocks and fair value gaps on HTF
-- Note previous week/day high/low as magnets
+Therefore, successful expansion must involve trading away from confirmed swing points. The Mecha-X Approach profiles a Higher Time Frame (HTF) candle with a Lower Time Frame (LTF) swing using the fractal model—the best 4-hour Power of Three strategy available.
+
+### HTF Setup & Key Levels
+
+Before entering any trade, establish precise HTF structure using OHLC levels on higher timeframes (Daily/4H).
+
+**Mechanically Defined Levels:**
+
+**BSL/SSL (Liquidity):** Confirmed swing highs (BSL) and swing lows (SSL) using ICT Pivot Detection (3-candle formation). These levels are tracked for sweeping—the engineered liquidity that must be manipulated to initiate a reversal.
+
+**Equilibrium (EQ):** The midline of a candle's range. For Reversal Sequence patterns (C2), EQ is calculated based on the Wick Range Only if a reversal pattern is detected. Used to validate expansion days (respecting EQ) versus opposing runs (disrespecting EQ).
 
 ### Golden Rule:
 If price is in premium → look for shorts. If in discount → look for longs. No trade in the middle (equilibrium).
 
 ---
 
-## Step 2 of 6: Session Timing
-**When to Watch: H1-H4 Model**
+## Sequence 1 of 3: Mecha-X Reversal Sequence (C2 Pattern)
+
+**The Swing Confirmation**
 
 ### What Is It?
-Not all hours are equal. The 4H/1H profiling model tells you WHEN reversals and expansions happen within the trading day.
+This sequence confirms the low or high of a new 4H expansion candle by validating that the necessary LTF swing has formed. Since the HTF candle is not opening within a prior LTF swing, its low/high must be created from one.
 
 ### Why It Matters
-Major price movements happen during specific session windows. Trading outside these windows = low probability.
+This action confirms the formation of the small wick that supports expansion—the precise reversal tick at the HTF extreme.
+
+### Mechanical Confirmation (C2)
+Two mechanical actions relative to the previous candle (C1):
+1. The subsequent candle (C2) must execute a sweep of C1's BSL or SSL (liquidity extreme)
+2. C2 must then close back inside the body range of C1
+
+### C2 Formation Types
+
+**C2-REV (Reversal):** Swept and closed back inside the range, but not near the opposite extreme.
+
+**C2-SNAP (Strong Reversal):** Swept and immediately rejected to the opposite extreme of the C1 range.
+
+**C2-EXP (Continuation):** C2 body engulfs the entire C1 range and closes beyond, indicating expansion.
+
+### Golden Rule:
+Once the LTF swing is confirmed → trade AWAY from the swing point.
+
+---
+
+## Sequence 2 of 3: Mecha-X Continuation Sequence
+
+**Immediate Follow-Through Expected**
+
+### What Is It?
+This sequence confirms that immediate follow-through is expected because the LTF reversal structure was finalized in the prior period.
+
+### Why It Matters
+The new HTF candle opens within a lower time frame swing that the previous candle created. No new reversal structure is needed immediately.
 
 ### How To Apply
+- Identify that current candle opened within prior LTF swing
+- Expect the candle to simply open and expand/continue
+- No C2 pattern confirmation required
+- Trade with the established swing direction
+
+### Golden Rule:
+Opening within a swing = continuation bias. Trade with the flow.
+
+---
+
+## Sequence 3 of 3: Mecha-X Aligned Sequence (C3 Tracking)
+
+**Re-Entry & Realignment After Retracement**
+
+### What Is It?
+This sequence facilitates re-entry and continuation if price executes an internal retracement while expanding.
+
+### Why It Matters
+A retracement means price action is not aligned anymore. To resume HTF expansion, a swing formation (reversal candle) is necessary to realign price with the expansionary narrative and cap off that retracement.
+
+### C3 Zone Mechanics
+- System tracks the C3 Continuation Zone following a confirmed C2 setup
+- Zone is mechanically bounded by C3 open price and calculated C2 Equilibrium level
+- HTF-AWARE break detection monitors whether price closes beyond zone boundary (plus buffer)
+- If zone holds and realignment occurs → continuation expected
+
+### How To Apply
+- Wait for C2 pattern confirmation first
+- Monitor C3 zone boundaries automatically
+- Enter when price retests and holds the C3 zone
+- Trade resumption of HTF expansion
+
+### Golden Rule:
+C3 zone hold + realignment = continuation signal. Failed hold = invalidation.
+
+---
+
+## CISD: Change in State of Delivery
+
+**Momentum Confirmation & Target Projection**
+
+### What Is It?
+CISD detects strong momentum immediately following a reversal swing and provides mechanical target zones.
+
+### Mechanical Detection
+- Identifies two or more consecutive momentum candles following the swing
+- Defines the CISD level (the order block or zone where momentum initiated)
+- Projects mechanical Targets: 1x, 2x, 2.5x, 3.5x, 4x based on momentum range
+
+### Retest Tracking
+- System tracks retests of the CISD zone
+- Marks if zone is broken after a retest (potential failure signal)
+- Valid CISD retest = high-probability continuation entry
+
+### Golden Rule:
+Enter at CISD zone retest. Targets are mechanical. Stop loss just beyond the swing.
+
+---
+
+## Session Timing Integration
+
+**When to Watch: H1-H4 Model**
+
+Not all hours are equal. The 4H/1H profiling model tells you WHEN reversals and expansions happen.
+
+### Session Windows
 - **H1 (Setup)**: 2-6 AM EST — Range builds, liquidity forms
 - **H2 (Reversal)**: 6-10 AM EST — Silver Bullet window, sweeps occur
 - **H3 (Continuation)**: 10 AM-2 PM EST — Momentum follows through
 - **H4 (Delivery)**: 2-6 PM EST — Final push into target
 
 ### Golden Rule:
-Focus on H2 window (2-6 AM or 9:30-12 PM). This is where sweeps happen and trades trigger.
+Focus on H2 window (2-6 AM or 9:30-12 PM). This is where sweeps happen and C2 patterns trigger.
 
 ---
 
-## Step 3 of 6: Liquidity Sweep
-**The Trigger: BSL/SSL Sweep + C2**
+## Trade Execution: OSOK (One Shot One Kill)
 
-### What Is It?
-A liquidity sweep is when price briefly breaks a key level (BSL/SSL) to grab stops, then reverses sharply. C2 (Change of Character) confirms the reversal.
-
-### Why It Matters
-Large participants need liquidity to enter positions. Price wicks through stops before reversing in the true direction.
-
-### How To Apply
-- Price breaks HTF high/low with a wick (sweep)
-- Immediate strong reversal candle closes back inside range
-- C2 pattern: 3-candle reversal structure confirms
-- Volume spike during sweep confirms participant activity
-
-### Golden Rule:
-NO sweep = NO trade. Wait for clean sweep + C2 confirmation before proceeding.
-
----
-
-## Step 4 of 6: CISD Entry
-**Where to Enter: Change in State of Delivery**
-
-### What Is It?
-CISD marks the exact zone where price structure changed—from making lower lows to higher lows (or vice versa). This is your entry zone.
-
-### Why It Matters
-CISD zones act as support/resistance because significant orders were placed there via OHLC structure. Price respects these levels.
-
-### How To Apply
-- After sweep + C2, identify the candle that broke structure
-- Mark the order block or iFVG within that candle
-- Wait for price to pull back into this zone
-- Enter when price taps the CISD level and shows rejection
-
-### Golden Rule:
-Stop loss goes just beyond the sweep level. Target is opposite HTF liquidity (H3 = 1:3 RR, H4 = 1:4+ RR).
-
----
-
-## Step 5 of 6: SMT Confluence
-**Optional: Correlation Divergence Technique**
-
-### What Is It?
-SMT compares correlated assets (e.g., ES vs NQ, EUR vs GBP). Divergence in OHLC structure = manipulation, increases probability.
-
-### Why It Matters
-When one asset makes a new high/low but the correlated asset doesn't, it reveals underlying price mechanics and positioning.
-
-### How To Apply
-- Compare ES and NQ during your setup
-- If ES sweeps high but NQ doesn't = bearish SMT divergence
-- If NQ sweeps low but ES doesn't = bullish SMT divergence
-- Use as confirmation, not requirement
-
-### Golden Rule:
-SMT is optional but powerful. It adds 10-20% confidence to your setup when present.
-
----
-
-## Step 6 of 6: Trade Management
-**Execution: OSOK (One Shot One Kill)**
+**Precision Entry & Management**
 
 ### What Is It?
 OSOK means one entry per setup. No averaging, no hoping. Either it works immediately or you're wrong.
 
-### Why It Matters
-Precision execution prevents overtrading and emotional decisions. Trust your analysis or exit cleanly.
-
-### How To Apply
+### Execution Rules
 - Enter at CISD zone when price taps and rejects
 - Move stop to breakeven at 1:1 risk/reward
 - Take 50% profits at H3 (1:3 RR)
 - Let remaining position run to H4+ (1:4-1:6 RR)
 
+### Invalidation
+- If price doesn't react at CISD within 2-3 candles → exit
+- If sweep gets "Max Breaks" exceeded → permanent invalidation
+- Body close beyond swept level = invalidation
+
 ### Golden Rule:
-If price doesn't react at CISD within 2-3 candles, exit. No second chances on same setup.
+Trust your mechanical setup or exit cleanly. No second chances on same setup.
 
 ---
 
@@ -140,6 +181,8 @@ If price doesn't react at CISD within 2-3 candles, exit. No second chances on sa
 
 # Now You Understand the System
 
-Every piece connects. HTF → Sessions → Sweep → CISD → SMT → Execute. Nothing is random. Nothing is disconnected.
+Every piece connects. HTF levels → C2 Reversal Sequence → Continuation Sequence → C3 Aligned Sequence → CISD Entry → Execute. Nothing is random. Nothing is disconnected.
+
+This is fractal price profiling—mechanical, repeatable, logical.
 
 **Back to Overview**
