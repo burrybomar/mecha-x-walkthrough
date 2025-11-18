@@ -2,13 +2,13 @@
 
 ## Hero Section
 
-**OHLC Price Action Framework**
+**Fractal Price Profiling Framework**
 
 # One System.
-# Six Steps.
+# Three Sequences.
 # Complete Edge.
 
-A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles.
+A mechanical, repeatable methodology for confirming intraday setups through fractal price profiling. Trade away from confirmed swing points using the best 4H Power of Three strategy available.
 
 ### Call-to-Action Buttons:
 - See How It Works
@@ -19,12 +19,12 @@ A unified framework connecting HTF levels, session timing, liquidity sweeps, and
 
 ## Framework Section
 
-# The Complete Trading Sequence
+# The Three Trading Sequences
 
-Every step flows into the next. From higher timeframe analysis down to precision entry and execution—nothing is disconnected.
+Every sequence flows into the next. From C2 reversal confirmation to continuation and aligned re-entry—nothing is disconnected. The market cannot reverse from a swing point.
 
 ### Trading Framework Flow
-(Interactive component showing the 6-step framework)
+(Interactive component showing the 3-sequence framework)
 
 **Want to understand each step deeply?**
 - Setup Your Indicators
@@ -34,14 +34,14 @@ Every step flows into the next. From higher timeframe analysis down to precision
 
 ## Why This Framework Works
 
-### 01 - Price Action Logic
-Follow OHLC structure and candle closures, not lagging indicators
+### 01 - Mechanical Precision
+Follow LTF swing confirmation (C2 patterns) and HTF structure—no guesswork
 
-### 02 - Multi-Timeframe Sync
-HTF context guides LTF execution—perfect harmony
+### 02 - Fractal Foundation
+HTF candle profiled with LTF swing using ICT Pivot Detection
 
-### 03 - Mechanical Process
-Clear if/then rules eliminate guesswork and emotion
+### 03 - Repeatable Process
+Clear if/then rules eliminate emotion: trade AWAY from confirmed swings
 
 ---
 

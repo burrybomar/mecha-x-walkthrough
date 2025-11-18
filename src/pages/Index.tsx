@@ -78,13 +78,13 @@ const Index = () => {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="text-sm font-mono text-primary mb-4 tracking-wider uppercase">
-                OHLC Price Action Framework
+                Fractal Price Profiling Framework
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-[1.1] tracking-tight px-4">
                 One System.
                 <br />
                 <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Every Setup.
+                  Three Sequences.
                 </span>
                 <br />
                 Complete Edge.
@@ -97,7 +97,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              A unified framework connecting HTF levels, session timing, liquidity sweeps, and precision entries—all based on pure candlestick analysis and OHLC principles.
+              A mechanical, repeatable methodology for confirming intraday setups through fractal price profiling. Trade away from confirmed swing points using the best 4H Power of Three strategy available.
             </motion.p>
 
             <motion.div

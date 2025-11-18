@@ -149,7 +149,7 @@ const Knowledge = () => {
               Back to Overview
             </CandlestickButton>
             <div className="text-sm font-mono text-muted-foreground">
-              6-Step Framework
+              3-Sequence Framework
             </div>
           </div>
         </div>
