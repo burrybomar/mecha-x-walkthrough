@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceLine, Area, AreaChart } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceLine, Area, AreaChart, Label } from 'recharts';
 
 const sequences = [
   {
@@ -29,6 +29,15 @@ const sequences = [
       { time: '6', price: 96 },
       { time: '7', price: 94 },
       { time: '8', price: 92 },
+    ],
+    successLevels: [
+      { y: 102, label: 'Swing Low', color: '#3b82f6', description: 'LTF swing confirmed - entry point' },
+      { y: 105, label: 'Entry', color: '#10b981', description: 'Break of structure confirms continuation' },
+      { y: 118, label: 'Target', color: '#8b5cf6', description: 'Premium zone objective' }
+    ],
+    failedLevels: [
+      { y: 103, label: 'Failed Entry', color: '#ef4444', description: 'Entry in premium - wrong zone' },
+      { y: 92, label: 'Loss', color: '#dc2626', description: 'Reversal against position' }
     ],
     successPoints: [
       "4H bullish candle forms in discount zone",
@@ -66,6 +75,16 @@ const sequences = [
       { time: '7', price: 119 },
       { time: '8', price: 122 },
     ],
+    successLevels: [
+      { y: 112, label: 'BSL Sweep', color: '#f59e0b', description: 'Liquidity sweep at premium - C2 pattern' },
+      { y: 110, label: 'Swing High', color: '#3b82f6', description: 'LTF reversal structure confirmed' },
+      { y: 106, label: 'Entry', color: '#10b981', description: 'Break below swing low' },
+      { y: 98, label: 'Target', color: '#8b5cf6', description: 'Discount zone objective' }
+    ],
+    failedLevels: [
+      { y: 112, label: 'No Sweep', color: '#ef4444', description: 'Failed to sweep BSL - no C2' },
+      { y: 122, label: 'Continuation', color: '#dc2626', description: 'No reversal - continued higher' }
+    ],
     successPoints: [
       "4H distribution candle sweeps liquidity at premium",
       "Clean LTF swing high forms during 4H candle",
@@ -101,6 +120,15 @@ const sequences = [
       { time: '6', price: 104 },
       { time: '7', price: 100 },
       { time: '8', price: 98 },
+    ],
+    successLevels: [
+      { y: 95, label: 'C3 Realignment', color: '#3b82f6', description: 'Price realigns with HTF bias' },
+      { y: 102, label: 'Entry', color: '#10b981', description: 'C3 continuation zone holds' },
+      { y: 122, label: 'Target', color: '#8b5cf6', description: 'HTF expansion continues' }
+    ],
+    failedLevels: [
+      { y: 102, label: 'No Alignment', color: '#ef4444', description: 'HTF and LTF not aligned' },
+      { y: 98, label: 'HTF Pressure', color: '#dc2626', description: 'Counter-trend fails' }
     ],
     successPoints: [
       "All timeframes aligned in same direction",
@@ -230,8 +258,37 @@ export default function ChartComparison() {
                             fill="url(#successGradient)"
                             dot={false}
                           />
+                          {currentSequence.successLevels?.map((level, idx) => (
+                            <ReferenceLine 
+                              key={idx}
+                              y={level.y} 
+                              stroke={level.color}
+                              strokeWidth={2}
+                              strokeDasharray="5 5"
+                            >
+                              <Label 
+                                value={level.label} 
+                                position="insideTopRight"
+                                fill={level.color}
+                                fontSize={11}
+                                fontWeight="700"
+                                className="drop-shadow-lg"
+                              />
+                            </ReferenceLine>
+                          ))}
                         </AreaChart>
                       </ResponsiveContainer>
+                    </div>
+                    <div className="space-y-3 mb-4">
+                      <h3 className="font-semibold text-sm text-muted-foreground">Key Levels Explained:</h3>
+                      {currentSequence.successLevels?.map((level, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-xs">
+                          <div className="w-3 h-3 rounded-full mt-0.5 flex-shrink-0" style={{ backgroundColor: level.color }} />
+                          <div>
+                            <span className="font-semibold">{level.label}:</span> {level.description}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     <div className="space-y-2">
                       <h3 className="font-semibold text-success mb-2">✓ What Makes This Work:</h3>
@@ -285,8 +342,37 @@ export default function ChartComparison() {
                             fill="url(#failedGradient)"
                             dot={false}
                           />
+                          {currentSequence.failedLevels?.map((level, idx) => (
+                            <ReferenceLine 
+                              key={idx}
+                              y={level.y} 
+                              stroke={level.color}
+                              strokeWidth={2}
+                              strokeDasharray="5 5"
+                            >
+                              <Label 
+                                value={level.label} 
+                                position="insideTopRight"
+                                fill={level.color}
+                                fontSize={11}
+                                fontWeight="700"
+                                className="drop-shadow-lg"
+                              />
+                            </ReferenceLine>
+                          ))}
                         </AreaChart>
                       </ResponsiveContainer>
+                    </div>
+                    <div className="space-y-3 mb-4">
+                      <h3 className="font-semibold text-sm text-muted-foreground">Key Levels Explained:</h3>
+                      {currentSequence.failedLevels?.map((level, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-xs">
+                          <div className="w-3 h-3 rounded-full mt-0.5 flex-shrink-0" style={{ backgroundColor: level.color }} />
+                          <div>
+                            <span className="font-semibold">{level.label}:</span> {level.description}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     <div className="space-y-2">
                       <h3 className="font-semibold text-destructive mb-2">✗ Critical Mistakes:</h3>
