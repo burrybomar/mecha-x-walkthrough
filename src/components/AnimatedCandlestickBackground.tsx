@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import candlestickTheme from '@/assets/candlestick-theme.jpg';
 
 interface AnimatedCandlestickBackgroundProps {
   variant?: 'bullish' | 'bearish' | 'mixed';
@@ -23,12 +24,15 @@ export const AnimatedCandlestickBackground = ({
   // Animation duration based on speed
   const duration = speed === 'slow' ? 60 : speed === 'medium' ? 40 : 20;
 
+  // Use the candlestick theme image by default
+  const backgroundImage = imageUrl || candlestickTheme;
+
   // Minimal gradient overlay - let the image dominate
   const gradientOverlay = variant === 'bullish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.35) 50%, hsla(var(--background), 0.50) 100%)'
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.40) 0%, hsla(var(--background), 0.20) 50%, hsla(var(--background), 0.40) 100%)'
     : variant === 'bearish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.35) 50%, hsla(var(--background), 0.50) 100%)'
-    : 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.40) 50%, hsla(var(--background), 0.50) 100%)';
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.40) 0%, hsla(var(--background), 0.20) 50%, hsla(var(--background), 0.40) 100%)'
+    : 'linear-gradient(180deg, hsla(var(--background), 0.40) 0%, hsla(var(--background), 0.25) 50%, hsla(var(--background), 0.40) 100%)';
 
   if (!mounted) return null;
 
@@ -40,15 +44,14 @@ export const AnimatedCandlestickBackground = ({
         style={{ background: gradientOverlay }}
       />
 
-      {/* Animated background image if provided */}
-      {imageUrl && (
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${imageUrl})`,
-            opacity: opacity,
-            filter: 'blur(0px)',
-          }}
+      {/* Animated background image */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          opacity: opacity,
+          filter: 'blur(0px)',
+        }}
           initial={{ y: 0, scale: 1 }}
           animate={{
             y: [0, -20, 0],
@@ -60,7 +63,7 @@ export const AnimatedCandlestickBackground = ({
             ease: 'easeInOut',
           }}
         />
-      )}
+      
 
       {/* Radial gradient accents for depth */}
       <motion.div
@@ -68,10 +71,10 @@ export const AnimatedCandlestickBackground = ({
         style={{
           background:
             variant === 'bullish'
-              ? 'radial-gradient(circle, hsla(var(--bullish), 0.35) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, hsla(var(--bullish), 0.25) 0%, transparent 70%)'
               : variant === 'bearish'
-              ? 'radial-gradient(circle, hsla(var(--bearish), 0.35) 0%, transparent 70%)'
-              : 'radial-gradient(circle, hsla(var(--primary), 0.25) 0%, transparent 70%)',
+              ? 'radial-gradient(circle, hsla(var(--bearish), 0.25) 0%, transparent 70%)'
+              : 'radial-gradient(circle, hsla(var(--primary), 0.20) 0%, transparent 70%)',
         }}
         animate={{
           scale: [1, 1.2, 1],
@@ -89,10 +92,10 @@ export const AnimatedCandlestickBackground = ({
         style={{
           background:
             variant === 'bullish'
-              ? 'radial-gradient(circle, hsla(var(--bullish), 0.35) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, hsla(var(--bullish), 0.25) 0%, transparent 70%)'
               : variant === 'bearish'
-              ? 'radial-gradient(circle, hsla(var(--bearish), 0.35) 0%, transparent 70%)'
-              : 'radial-gradient(circle, hsla(var(--accent), 0.25) 0%, transparent 70%)',
+              ? 'radial-gradient(circle, hsla(var(--bearish), 0.25) 0%, transparent 70%)'
+              : 'radial-gradient(circle, hsla(var(--accent), 0.20) 0%, transparent 70%)',
         }}
         animate={{
           scale: [1, 1.3, 1],
