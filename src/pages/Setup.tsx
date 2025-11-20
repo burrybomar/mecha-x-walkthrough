@@ -216,9 +216,9 @@ const Setup = () => {
 
                 {[
                   { num: 1, tfDisplay: "15m", bars: 10, enabled: true, map: true },
-                  { num: 2, tfDisplay: "1H", bars: 8, enabled: true, map: true },
-                  { num: 3, tfDisplay: "4H", bars: 6, enabled: true, map: true },
-                  { num: 4, tfDisplay: "1D", bars: 4, enabled: true, map: false }
+                  { num: 2, tfDisplay: "1H", bars: 10, enabled: true, map: true },
+                  { num: 3, tfDisplay: "4H", bars: 10, enabled: true, map: true },
+                  { num: 4, tfDisplay: "1D", bars: 10, enabled: true, map: true }
                 ].map((config) => (
                   <div key={config.num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
                     <SettingRow label={`TF ${config.num}`}>
@@ -258,7 +258,7 @@ const Setup = () => {
                   <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
                 </SettingRow>
                 <SettingRow label="Bear">
-                  <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
+                  <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
                 </SettingRow>
                 <SettingRow label="Wick">
                   <Input type="color" defaultValue="#808080" className="h-7 w-16 cursor-pointer" />

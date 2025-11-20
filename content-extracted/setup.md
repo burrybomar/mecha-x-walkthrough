@@ -44,20 +44,20 @@ Auto Mode: Intelligently selects HTFs based on chart TF (5m → 1H/4H/Daily). Ma
 **TF 2:**
 - Enabled: ✓
 - Timeframe: 1H
-- Bars: 8
+- Bars: 10
 - Map: ✓
 
 **TF 3:**
 - Enabled: ✓
 - Timeframe: 4H
-- Bars: 6
+- Bars: 10
 - Map: ✓
 
 **TF 4:**
 - Enabled: ✓
 - Timeframe: 1D
-- Bars: 4
-- Map: ☐
+- Bars: 10
+- Map: ✓
 
 ---
 
@@ -66,7 +66,7 @@ Customize bull/bear candle colors and wicks. Offset = distance from price. Gap =
 
 **Settings:**
 - Bull: #00ff00
-- Bear: #ff0000
+- Bear: #000000
 - Wick: #808080
 - Offset: 25
 - Gap: 2

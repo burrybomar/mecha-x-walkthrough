@@ -29,7 +29,6 @@ const navSections = [
     icon: GraduationCap,
     label: 'Learn',
     items: [
-      { icon: TrendingUp, label: 'OHLC Tutorial', path: '/ohlc-tutorial', color: 'bullish' },
       { icon: BookOpen, label: 'Framework Guide', path: '/knowledge', color: 'primary' },
       { icon: RefreshCw, label: 'Fractal Model', path: '/fractal-model', color: 'bullish' },
     ],
@@ -42,7 +41,6 @@ const navSections = [
       { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
       { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
       { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
-      { icon: ChartColumnIncreasing, label: 'Chart Comparison', path: '/chart-comparison', color: 'bullish' },
     ],
   },
   {

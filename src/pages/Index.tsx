@@ -97,10 +97,10 @@ const Index = () => {
                 INITIATE SEQUENCE
               </Button>
             </Link>
-            <Link to="/chart-comparison">
+            <Link to="/chart-examples">
               <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-white/20 hover:bg-white/5 backdrop-blur-sm transition-all hover:scale-105 rounded-none">
                 <Activity className="mr-2 h-5 w-5" />
-                VIEW DATA
+                VIEW CHARTS
               </Button>
             </Link>
           </motion.div>
