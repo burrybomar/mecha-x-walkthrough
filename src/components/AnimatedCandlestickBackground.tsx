@@ -37,37 +37,27 @@ export const AnimatedCandlestickBackground = ({
   if (!mounted) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {/* Light gradient overlay - barely there */}
       <div
         className="absolute inset-0 z-10"
         style={{ background: gradientOverlay }}
       />
 
-      {/* Animated background image - THE MAIN VISUAL */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      {/* Static background image - Stable and high quality */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           opacity: opacity,
           filter: 'blur(0px) brightness(1.1)',
-        }}
-        initial={{ y: 0, scale: 1 }}
-        animate={{
-          y: [0, -15, 0],
-          scale: [1, 1.03, 1],
-        }}
-        transition={{
-          duration: duration,
-          repeat: Infinity,
-          ease: 'easeInOut',
         }}
       />
       
 
       {/* Subtle radial accents - don't overpower the main image */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
         style={{
           background:
             variant === 'bullish'
@@ -77,7 +67,6 @@ export const AnimatedCandlestickBackground = ({
               : 'radial-gradient(circle, hsla(var(--primary), 0.12) 0%, transparent 70%)',
         }}
         animate={{
-          scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
@@ -88,7 +77,7 @@ export const AnimatedCandlestickBackground = ({
       />
 
       <motion.div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full"
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
         style={{
           background:
             variant === 'bullish'
@@ -98,7 +87,6 @@ export const AnimatedCandlestickBackground = ({
               : 'radial-gradient(circle, hsla(var(--accent), 0.12) 0%, transparent 70%)',
         }}
         animate={{
-          scale: [1, 1.3, 1],
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{

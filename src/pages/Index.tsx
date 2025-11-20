@@ -19,16 +19,16 @@ const Index = () => {
     <div className="min-h-screen relative overflow-x-hidden">
       {/* Candlestick Background */}
       <AnimatedCandlestickBackground variant="mixed" opacity={0.5} speed="slow" />
-      
+
       {/* Sticky Header */}
-      <motion.header 
+      <motion.header
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-border"
         style={{ backgroundColor: `hsla(var(--background) / ${headerOpacity})` }}
         role="banner"
       >
         <div className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
-            <button 
+            <button
               onClick={() => navigate('/')}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
               aria-label="MECHA-X Home"
@@ -47,25 +47,26 @@ const Index = () => {
       {/* Main Content */}
       <div className="pt-20">
         {/* Hero Section with Parallax */}
-        <motion.section 
+        <motion.section
           className="relative min-h-[90vh] flex items-center justify-center text-center px-4 overflow-hidden"
           style={{ y: heroY, opacity: heroOpacity }}
           role="region"
           aria-label="Hero section"
         >
           {/* Animated Background */}
+          {/* Animated Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
               className="absolute inset-0 opacity-10"
               style={{
-                background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, transparent 50%)'
+                background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, transparent 50%)',
+                willChange: 'opacity'
               }}
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.15, 0.1]
+                opacity: [0.08, 0.12, 0.08]
               }}
               transition={{
-                duration: 8,
+                duration: 5,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
@@ -162,7 +163,7 @@ const Index = () => {
                   </span>
                 </h2>
                 <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
-                  Every step flows into the next. From higher timeframe analysis down to 
+                  Every step flows into the next. From higher timeframe analysis down to
                   precision entry and execution—nothing is disconnected.
                 </p>
               </motion.div>
@@ -184,14 +185,14 @@ const Index = () => {
                 </p>
               </div>
               <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-                <CandlestickButton 
+                <CandlestickButton
                   variant="bullish"
                   onClick={() => navigate('/fractal-model')}
                   className="w-full sm:w-auto text-base md:text-lg px-6 md:px-10 py-4 md:py-6"
                 >
                   Learn the Fractal Model
                 </CandlestickButton>
-                <CandlestickButton 
+                <CandlestickButton
                   variant="bearish"
                   onClick={() => navigate('/sequence-identifier')}
                   className="w-full sm:w-auto text-base md:text-lg px-6 md:px-10 py-4 md:py-6"
