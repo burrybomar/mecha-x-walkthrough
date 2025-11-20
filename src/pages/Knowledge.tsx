@@ -7,6 +7,9 @@ import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
 import { CandlestickCard } from "@/components/CandlestickCard";
 import { CandlestickButton } from "@/components/CandlestickButton";
+import continuationImg from '@/assets/continuation-sequence.jpg';
+import reversalImg from '@/assets/reversal-sequence.jpg';
+import alignedImg from '@/assets/aligned-sequence.jpg';
 
 const Knowledge = () => {
   const navigate = useNavigate();

@@ -46,10 +46,20 @@ const FractalModel = () => {
                 4H Canvas + 1H Trigger
               </span>
             </h1>
-            <p className="text-base md:text-xl text-muted-foreground leading-relaxed px-4">
-              Market truth: A durable directional move requires a swing point. 
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed px-4 mb-4">
+              Market truth: A durable directional move requires a swing point.
               The market does not reverse from "nowhere". Mecha-X makes this a hard rule.
             </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-sm">
+              <span className="text-accent font-semibold">Deep Dive</span>
+              <span className="text-muted-foreground">•</span>
+              <button
+                onClick={() => navigate('/knowledge')}
+                className="text-accent hover:underline font-medium"
+              >
+                See Full Framework →
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
