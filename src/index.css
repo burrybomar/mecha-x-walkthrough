@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 203 33% 22%;
 
-    --primary: 204 36% 50%; /* #5289AD blue */
+    --primary: 204 45% 55%; /* Brighter blue for more visibility */
     --primary-rgb: 82 137 173;
     --primary-foreground: 0 0% 100%;
 
@@ -28,7 +28,7 @@ All colors MUST be HSL.
     --muted: 189 21% 86%; /* #d6e3e6 light grey-blue */
     --muted-foreground: 203 18% 50%; /* #698696 */
 
-    --accent: 171 35% 77%; /* #abdbd6 light teal */
+    --accent: 171 45% 65%; /* More vibrant teal */
     --accent-foreground: 203 33% 22%;
 
     --destructive: 0 84.2% 60.2%;
@@ -40,15 +40,15 @@ All colors MUST be HSL.
 
     --radius: 1rem;
 
-    /* Unified gradient system */
-    --gradient-primary: linear-gradient(135deg, hsl(204 36% 50%) 0%, hsl(202 63% 65%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(171 35% 77%) 0%, hsl(204 36% 50%) 100%);
+    /* Unified gradient system - enhanced */
+    --gradient-primary: linear-gradient(135deg, hsl(204 45% 55%) 0%, hsl(202 70% 70%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(171 45% 65%) 0%, hsl(204 45% 55%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(206 60% 98%) 100%);
     
-    /* Candlestick colors - professional palette */
-    --bullish: 160 45% 42%; /* Muted teal-green */
+    /* Candlestick colors - enhanced visibility */
+    --bullish: 160 55% 48%; /* Brighter teal-green */
     --bullish-foreground: 0 0% 100%;
-    --bearish: 8 65% 52%; /* Muted warm red */
+    --bearish: 8 75% 58%; /* Brighter warm red */
     --bearish-foreground: 0 0% 100%;
     --candle-wick: 240 5% 64%;
     --candle-body: 240 4% 16%;
@@ -73,7 +73,7 @@ All colors MUST be HSL.
     --popover: 203 33% 18%;
     --popover-foreground: 206 60% 95%;
 
-    --primary: 202 63% 65%; /* #6bb0dd bright blue */
+    --primary: 202 70% 70%; /* Even brighter blue for dark mode */
     --primary-rgb: 107 176 221;
     --primary-foreground: 203 33% 22%;
 
@@ -83,7 +83,7 @@ All colors MUST be HSL.
     --muted: 203 18% 50%; /* #698696 */
     --muted-foreground: 189 21% 86%;
 
-    --accent: 171 35% 77%; /* #abdbd6 teal */
+    --accent: 171 50% 70%; /* Brighter teal for dark mode */
     --accent-foreground: 203 33% 22%;
 
     --destructive: 0 62.8% 30.6%;
@@ -93,15 +93,15 @@ All colors MUST be HSL.
     --input: 203 35% 36%;
     --ring: 202 63% 65%;
     
-    /* Unified gradient system - dark mode */
-    --gradient-primary: linear-gradient(135deg, hsl(202 63% 65%) 0%, hsl(171 35% 77%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(171 35% 77%) 0%, hsl(202 63% 65%) 100%);
+    /* Unified gradient system - enhanced dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(202 70% 70%) 0%, hsl(171 50% 70%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(171 50% 70%) 0%, hsl(202 70% 70%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(203 33% 18%) 0%, hsl(203 35% 16%) 100%);
     
-    /* Candlestick colors - dark mode professional palette */
-    --bullish: 160 50% 48%; /* Slightly brighter teal-green for dark bg */
+    /* Candlestick colors - enhanced dark mode */
+    --bullish: 160 60% 55%; /* Much brighter teal-green for dark bg */
     --bullish-foreground: 203 35% 12%;
-    --bearish: 8 60% 55%; /* Slightly brighter warm red for dark bg */
+    --bearish: 8 75% 62%; /* Much brighter warm red for dark bg */
     --bearish-foreground: 203 35% 12%;
     --candle-wick: 240 5% 84%;
     --candle-body: 240 5% 96%;

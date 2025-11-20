@@ -23,12 +23,12 @@ export const AnimatedCandlestickBackground = ({
   // Animation duration based on speed
   const duration = speed === 'slow' ? 60 : speed === 'medium' ? 40 : 20;
 
-  // Gradient overlays to ensure text visibility
+  // Gradient overlays to ensure text visibility (lighter for more image visibility)
   const gradientOverlay = variant === 'bullish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.95) 0%, hsla(var(--background), 0.85) 50%, hsla(var(--background), 0.95) 100%)'
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.70) 50%, hsla(var(--background), 0.85) 100%)'
     : variant === 'bearish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.95) 0%, hsla(var(--background), 0.85) 50%, hsla(var(--background), 0.95) 100%)'
-    : 'linear-gradient(180deg, hsla(var(--background), 0.95) 0%, hsla(var(--background), 0.9) 50%, hsla(var(--background), 0.95) 100%)';
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.70) 50%, hsla(var(--background), 0.85) 100%)'
+    : 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.75) 50%, hsla(var(--background), 0.85) 100%)';
 
   if (!mounted) return null;
 
@@ -47,7 +47,7 @@ export const AnimatedCandlestickBackground = ({
           style={{
             backgroundImage: `url(${imageUrl})`,
             opacity: opacity,
-            filter: 'blur(1px)',
+            filter: 'blur(0.5px)',
           }}
           initial={{ y: 0, scale: 1 }}
           animate={{
@@ -68,14 +68,14 @@ export const AnimatedCandlestickBackground = ({
         style={{
           background:
             variant === 'bullish'
-              ? 'radial-gradient(circle, hsla(var(--bullish), 0.2) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, hsla(var(--bullish), 0.35) 0%, transparent 70%)'
               : variant === 'bearish'
-              ? 'radial-gradient(circle, hsla(var(--bearish), 0.2) 0%, transparent 70%)'
-              : 'radial-gradient(circle, hsla(var(--primary), 0.15) 0%, transparent 70%)',
+              ? 'radial-gradient(circle, hsla(var(--bearish), 0.35) 0%, transparent 70%)'
+              : 'radial-gradient(circle, hsla(var(--primary), 0.25) 0%, transparent 70%)',
         }}
         animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
+          opacity: [0.5, 0.7, 0.5],
         }}
         transition={{
           duration: duration / 2,
@@ -89,14 +89,14 @@ export const AnimatedCandlestickBackground = ({
         style={{
           background:
             variant === 'bullish'
-              ? 'radial-gradient(circle, hsla(var(--bullish), 0.2) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, hsla(var(--bullish), 0.35) 0%, transparent 70%)'
               : variant === 'bearish'
-              ? 'radial-gradient(circle, hsla(var(--bearish), 0.2) 0%, transparent 70%)'
-              : 'radial-gradient(circle, hsla(var(--accent), 0.15) 0%, transparent 70%)',
+              ? 'radial-gradient(circle, hsla(var(--bearish), 0.35) 0%, transparent 70%)'
+              : 'radial-gradient(circle, hsla(var(--accent), 0.25) 0%, transparent 70%)',
         }}
         animate={{
           scale: [1, 1.3, 1],
-          opacity: [0.3, 0.5, 0.3],
+          opacity: [0.5, 0.7, 0.5],
         }}
         transition={{
           duration: duration / 2,
@@ -108,11 +108,11 @@ export const AnimatedCandlestickBackground = ({
 
       {/* Grid overlay for chart-like appearance */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-50"
         style={{
           backgroundImage: `
-            linear-gradient(hsla(var(--primary), 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, hsla(var(--primary), 0.1) 1px, transparent 1px)
+            linear-gradient(hsla(var(--primary), 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, hsla(var(--primary), 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '40px 40px',
         }}

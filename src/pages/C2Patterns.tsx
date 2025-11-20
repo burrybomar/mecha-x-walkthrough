@@ -68,7 +68,7 @@ const C2Patterns = () => {
       {/* Animated Background */}
       <AnimatedCandlestickBackground
         variant="mixed"
-        opacity={0.08}
+        opacity={0.25}
         speed="slow"
         imageUrl={reversalImg}
       />
