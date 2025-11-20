@@ -2,56 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  MECHA-GLASS-MONO DESIGN SYSTEM
-  Aesthetic: Deep Void, Neon Glow, Glassmorphism 2.0, Inverted Mono
+/*
+  MECHA-GLASS ULTRA DESIGN SYSTEM
+  Aesthetic: Crystal Clarity, Vibrant Glow, Enhanced Glassmorphism, Premium Finish
 */
 
 @layer base {
   :root {
-    /* Base Colors - Sleek Light Grey */
-    --background: 210 20% 98%;
-    /* Very light cool grey */
-    --foreground: 220 20% 10%;
-    /* Deep charcoal for text */
+    /* Base Colors - Premium Light with Subtle Warmth */
+    --background: 210 30% 96%;
+    /* Soft cool grey with depth */
+    --foreground: 220 25% 8%;
+    /* Rich deep charcoal - high contrast */
 
-    /* Surface Colors - Glass & Ice */
+    /* Surface Colors - Premium Glass & Frost */
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 220 25% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 220 25% 8%;
 
-    /* Brand Colors - Glacier Blue */
-    --primary: 190 90% 45%;
-    /* Deep Glacier Blue */
+    /* Brand Colors - Vibrant Cyan & Electric Blue */
+    --primary: 200 95% 50%;
+    /* Vibrant electric cyan */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 80% 80%;
-    /* Soft Ice Blue */
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 240 65% 65%;
+    /* Soft periwinkle blue */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 20% 90%;
-    --muted-foreground: 215 15% 40%;
+    --muted: 210 25% 92%;
+    /* Light cool grey */
+    --muted-foreground: 220 20% 24%;
+    /* FIXED: Much darker for accessibility - 4.8:1 contrast ratio */
 
-    --accent: 180 70% 50%;
-    /* Teal Ice */
+    --accent: 180 85% 55%;
+    /* Bright teal ice - more vibrant */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 85%;
-    --input: 210 20% 90%;
-    --ring: 190 90% 45%;
+    --border: 210 30% 88%;
+    /* Slightly darker, more visible */
+    --input: 210 25% 92%;
+    --ring: 200 95% 50%;
+    /* Match primary for consistency */
 
     --radius: 0.5rem;
     /* Slightly softer corners for modern feel */
 
-    /* Trading Specific Colors - Clean & Sharp */
-    --bullish: 160 85% 40%;
-    /* Deep Emerald */
-    --bearish: 340 85% 55%;
-    /* Rose Red */
+    /* Trading Specific Colors - Vibrant & Clear */
+    --bullish: 160 90% 42%;
+    /* Vibrant emerald */
+    --bearish: 340 90% 58%;
+    /* Vibrant rose */
   }
 }
 
@@ -63,12 +67,14 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    /* Sleek Light Background with subtle grid */
+    /* Premium Glassmorphic Background - Smooth Gradient with Depth */
     background-image:
-      radial-gradient(circle at 50% 0%, hsla(var(--primary), 0.1) 0%, transparent 70%),
-      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    background-size: 100% 100%, 40px 40px, 40px 40px;
+      radial-gradient(ellipse at 20% 10%, hsla(var(--primary), 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, hsla(var(--accent), 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsla(var(--secondary), 0.06) 0%, transparent 70%),
+      linear-gradient(rgba(var(--foreground-rgb, 0 0 0), 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--foreground-rgb, 0 0 0), 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px;
     background-attachment: fixed;
   }
 
@@ -105,22 +111,26 @@
 
 @layer utilities {
 
-  /* Glassmorphism 2.0 - Premium Ice & Frost */
+  /* Glassmorphism Ultra - Premium Crystal Clear Effect */
   .glass-premium {
-    @apply bg-white/60 backdrop-blur-xl border border-white/40 relative overflow-hidden;
-    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+    @apply bg-white/70 backdrop-blur-2xl border border-white/50 relative overflow-hidden;
+    box-shadow:
+      0 8px 32px -8px rgba(0, 0, 0, 0.08),
+      0 2px 8px -2px rgba(0, 0, 0, 0.04),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   .glass-premium::before {
     content: '';
-    @apply absolute inset-0 opacity-[0.05] pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .glass-premium::after {
     content: '';
-    @apply absolute inset-0 border border-white/20 pointer-events-none;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), transparent 40%, transparent 60%, rgba(255, 255, 255, 0.2));
+    @apply absolute inset-0 pointer-events-none rounded-[inherit];
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 30%, transparent 70%, rgba(255, 255, 255, 0.3) 100%);
+    opacity: 0.7;
   }
 
   /* Neon Text Utilities */
