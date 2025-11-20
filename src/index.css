@@ -3,60 +3,58 @@
 @tailwind utilities;
 
 /*
-  MECHA-GLASS ULTRA DESIGN SYSTEM
-  Aesthetic: Crystal Clarity, Vibrant Glow, Enhanced Glassmorphism, Premium Finish
+  MECHA-GLASS PRO DESIGN SYSTEM
+  Aesthetic: Premium Glassmorphism, Smooth Gradients, Clean & Modern
 */
 
 @layer base {
   :root {
-    /* Base Colors - Deep Vibrant Dark Theme */
-    --background: 230 35% 8%;
-    /* Rich deep navy-purple base */
-    --foreground: 210 40% 98%;
-    /* Bright crisp white text */
+    /* Base Colors - Deep Sophisticated Dark */
+    --background: 240 45% 11%;
+    /* Deep indigo-blue base - perfect for glass effects */
+    --foreground: 0 0% 98%;
+    /* Pure white text for maximum clarity */
 
-    /* Surface Colors - Glass with Depth */
-    --card: 230 30% 12%;
-    /* Slightly lighter than background for layering */
-    --card-foreground: 210 40% 98%;
-    --popover: 230 30% 12%;
-    --popover-foreground: 210 40% 98%;
+    /* Surface Colors - Layered Glass */
+    --card: 240 35% 16%;
+    /* Elevated glass surface */
+    --card-foreground: 0 0% 98%;
+    --popover: 240 35% 16%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Brand Colors - Electric Neon Palette */
-    --primary: 195 100% 55%;
-    /* Bright electric cyan - pops on dark */
-    --primary-foreground: 230 35% 8%;
+    /* Brand Colors - Harmonious Blue-Cyan Palette */
+    --primary: 200 90% 60%;
+    /* Soft bright cyan - clean and modern */
+    --primary-foreground: 240 45% 11%;
 
-    --secondary: 270 80% 65%;
-    /* Electric violet purple */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 260 70% 65%;
+    /* Soft purple - complements primary */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 230 25% 18%;
-    /* Dark grey with purple tint */
-    --muted-foreground: 210 25% 75%;
-    /* Light grey text - excellent contrast */
+    --muted: 240 30% 20%;
+    /* Muted dark surface */
+    --muted-foreground: 220 15% 70%;
+    /* Soft light grey for secondary text */
 
-    --accent: 165 95% 50%;
-    /* Neon teal/cyan - highly visible */
-    --accent-foreground: 230 35% 8%;
+    --accent: 175 80% 55%;
+    /* Aqua teal - vibrant but not harsh */
+    --accent-foreground: 240 45% 11%;
 
-    --destructive: 0 85% 60%;
+    --destructive: 0 80% 62%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 30% 20%;
-    /* Subtle but visible borders */
-    --input: 230 25% 18%;
-    --ring: 195 100% 55%;
-    /* Match primary for consistency */
+    --border: 240 35% 25%;
+    /* Visible but subtle borders */
+    --input: 240 30% 20%;
+    --ring: 200 90% 60%;
 
     --radius: 0.75rem;
-    /* Slightly rounder for premium feel */
 
-    /* Trading Specific Colors - Neon Vibrant */
-    --bullish: 155 95% 48%;
-    /* Neon emerald green */
-    --bearish: 345 95% 62%;
-    /* Neon pink-red */
+    /* Trading Colors - Clean & Clear */
+    --bullish: 150 75% 50%;
+    /* Clean emerald green */
+    --bearish: 345 85% 60%;
+    /* Clean rose red */
   }
 }
 
@@ -66,19 +64,50 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/40 selection:text-foreground;
+    @apply text-foreground antialiased selection:bg-primary/30 selection:text-foreground;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    /* Premium Dark Glassmorphic Background - Vibrant Neon Gradients */
+    /* Premium Glassmorphic Background - Layered Depth */
+    position: relative;
+    background: hsl(var(--background));
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Multi-layer gradient background with smooth color transitions */
     background-image:
-      radial-gradient(ellipse 80% 50% at 20% 0%, hsla(var(--primary), 0.25) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 60% at 80% 100%, hsla(var(--accent), 0.2) 0%, transparent 60%),
-      radial-gradient(ellipse 120% 80% at 50% 50%, hsla(var(--secondary), 0.15) 0%, transparent 70%),
-      radial-gradient(circle at 10% 50%, hsla(270, 100%, 60%, 0.1) 0%, transparent 40%),
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
-    background-attachment: fixed;
-    background-color: hsl(var(--background));
+      /* Top accent glow */
+      radial-gradient(ellipse 60% 40% at 30% 0%, hsla(200, 90%, 60%, 0.15), transparent 60%),
+      /* Bottom accent glow */
+      radial-gradient(ellipse 70% 50% at 70% 100%, hsla(175, 80%, 55%, 0.12), transparent 65%),
+      /* Center purple ambient */
+      radial-gradient(ellipse 100% 80% at 50% 50%, hsla(260, 70%, 65%, 0.08), transparent 75%),
+      /* Subtle grid pattern */
+      linear-gradient(hsla(200, 90%, 60%, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(200, 90%, 60%, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 80px 80px, 80px 80px;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Glassmorphic overlay effect */
+    background:
+      radial-gradient(circle 800px at 20% 30%, hsla(200, 90%, 70%, 0.06), transparent),
+      radial-gradient(circle 600px at 80% 70%, hsla(175, 80%, 60%, 0.05), transparent);
+    backdrop-filter: blur(0px);
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 
   /* Typography - Neon Glow */
@@ -114,59 +143,58 @@
 
 @layer utilities {
 
-  /* Glassmorphism Ultra - Dark Premium Glass Effect */
+  /* Premium Glassmorphism - Clean & Modern */
   .glass-premium {
-    @apply backdrop-blur-2xl border relative overflow-hidden;
+    @apply backdrop-blur-xl border relative overflow-hidden;
     background: linear-gradient(
       135deg,
-      hsla(var(--card), 0.85) 0%,
-      hsla(var(--card), 0.75) 100%
+      hsla(var(--card), 0.9) 0%,
+      hsla(var(--card), 0.8) 100%
     );
-    border-color: hsla(var(--primary), 0.3);
+    border-color: hsla(200, 90%, 60%, 0.2);
     box-shadow:
-      0 8px 32px -8px hsla(var(--primary), 0.4),
-      0 2px 16px -2px hsla(var(--accent), 0.2),
-      inset 0 1px 1px 0 hsla(var(--foreground), 0.1),
-      0 0 0 1px hsla(var(--primary), 0.1);
+      0 8px 32px -4px rgba(0, 0, 0, 0.3),
+      0 0 0 1px hsla(200, 90%, 70%, 0.1),
+      inset 0 1px 0 0 hsla(255, 255, 255, 0.05);
   }
 
   .glass-premium::before {
     content: '';
-    @apply absolute inset-0 opacity-[0.04] pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    @apply absolute inset-0 opacity-[0.02] pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .glass-premium::after {
     content: '';
     @apply absolute inset-0 pointer-events-none rounded-[inherit];
     background: linear-gradient(
-      135deg,
-      hsla(var(--primary), 0.1) 0%,
-      transparent 30%,
-      transparent 70%,
-      hsla(var(--accent), 0.08) 100%
+      150deg,
+      hsla(200, 90%, 70%, 0.05) 0%,
+      transparent 40%,
+      transparent 60%,
+      hsla(175, 80%, 60%, 0.04) 100%
     );
-    opacity: 0.8;
   }
 
-  /* Neon Text Utilities - Enhanced for Dark Theme */
+  /* Clean Text Utilities */
   .text-glow {
     text-shadow:
-      0 0 20px currentColor,
-      0 0 40px currentColor;
+      0 0 15px currentColor,
+      0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
   .text-glow-primary {
     text-shadow:
-      0 0 20px hsla(var(--primary), 0.8),
-      0 0 40px hsla(var(--primary), 0.4),
-      0 0 60px hsla(var(--primary), 0.2);
+      0 0 20px hsla(200, 90%, 60%, 0.6),
+      0 0 35px hsla(200, 90%, 60%, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
   .text-glow-accent {
     text-shadow:
-      0 0 20px hsla(var(--accent), 0.8),
-      0 0 40px hsla(var(--accent), 0.4);
+      0 0 20px hsla(175, 80%, 55%, 0.6),
+      0 0 35px hsla(175, 80%, 55%, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
   /* Mecha Borders */
@@ -205,18 +233,18 @@
 
   0%,
   100% {
-    opacity: 0.7;
+    opacity: 0.8;
     box-shadow:
-      0 0 10px hsla(var(--primary), 0.4),
-      0 0 20px hsla(var(--primary), 0.2);
+      0 0 15px hsla(200, 90%, 60%, 0.3),
+      0 0 30px hsla(200, 90%, 60%, 0.15);
   }
 
   50% {
     opacity: 1;
     box-shadow:
-      0 0 20px hsla(var(--primary), 0.6),
-      0 0 40px hsla(var(--primary), 0.4),
-      0 0 60px hsla(var(--primary), 0.2);
+      0 0 25px hsla(200, 90%, 60%, 0.5),
+      0 0 50px hsla(200, 90%, 60%, 0.25),
+      0 0 75px hsla(200, 90%, 60%, 0.1);
   }
 }
 
