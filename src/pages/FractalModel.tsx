@@ -5,6 +5,9 @@ import { CandlestickButton } from '@/components/CandlestickButton';
 import { CandlestickCard } from '@/components/CandlestickCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { IndicatorExplainer } from '@/components/IndicatorExplainer';
+import { HTFCanvasVisual } from '@/components/HTFCanvasVisual';
+import { FractalNestingVisual } from '@/components/FractalNestingVisual';
 
 const FractalModel = () => {
   const navigate = useNavigate();
@@ -176,6 +179,80 @@ const FractalModel = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Visual Explainers */}
+      <section className="py-8 md:py-16 px-4">
+        <div className="container mx-auto max-w-6xl space-y-8">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 px-4 text-glow"
+          >
+            Visual Breakdown
+          </motion.h2>
+
+          {/* HTF Canvas + LTF Trigger Visual */}
+          <IndicatorExplainer
+            title="HTF Canvas + LTF Trigger"
+            what="The 4H candle provides your directional context while 1H swings give you mechanical confirmation"
+            why="Trading without a higher timeframe canvas is like navigating without a map. The HTF shows where you're going, the LTF shows exactly when to go."
+            howToRead={[
+              {
+                element: "4H CANVAS",
+                meaning: "Your main unit of intraday work - provides structure and direction",
+                action: "Analyze where it opens relative to key swings and HTF liquidity draws",
+              },
+              {
+                element: "LTF HIGHS (H)",
+                meaning: "Swing highs on 1H timeframe that confirm 4H high",
+                action: "Permission to enter SHORT after sweep",
+              },
+              {
+                element: "LTF LOWS (L)",
+                meaning: "Swing lows on 1H timeframe that confirm 4H low",
+                action: "Permission to enter LONG after sweep",
+              },
+              {
+                element: "NESTED STRUCTURE",
+                meaning: "LTF swings occur WITHIN the HTF candle formation",
+                action: "Wait for both to align before assuming expansion",
+              },
+            ]}
+            visualExample={<HTFCanvasVisual />}
+          />
+
+          {/* Fractal Nesting Visual */}
+          <IndicatorExplainer
+            title="Fractal Market Structure"
+            what="Markets move in nested, self-similar patterns across all timeframes"
+            why="What happens on 1H mirrors 4H, which mirrors Daily. By requiring alignment across timeframes, you trade WITH market structure, not against it."
+            howToRead={[
+              {
+                element: "DAILY CANVAS",
+                meaning: "Highest timeframe - sets overall market direction",
+                action: "Know the daily trend before trading intraday",
+              },
+              {
+                element: "4H CANVAS",
+                meaning: "Main intraday canvas - your structural reference",
+                action: "Identify key 4H swings and directional bias",
+              },
+              {
+                element: "1H TRIGGER",
+                meaning: "Lower timeframe confirmation - your entry mechanism",
+                action: "Wait for 1H swing to confirm 4H structure",
+              },
+              {
+                element: "FRACTAL ALIGNMENT",
+                meaning: "All timeframes showing the same directional structure",
+                action: "Only trade when HTF direction + LTF trigger align",
+              },
+            ]}
+            visualExample={<FractalNestingVisual />}
+          />
         </div>
       </section>
 

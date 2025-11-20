@@ -9,6 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { CandlestickCard } from "@/components/CandlestickCard";
+import { IndicatorExplainer } from "@/components/IndicatorExplainer";
+import { FVGVisual } from "@/components/FVGVisual";
+import { OrderBlockVisual } from "@/components/OrderBlockVisual";
+import { MSSVisual } from "@/components/MSSVisual";
 
 interface Term {
   term: string;
@@ -346,6 +350,95 @@ const Glossary = () => {
             </p>
           </div>
         </motion.div>
+
+        {/* Visual Explainers Section */}
+        <section className="py-8 mb-12">
+          <div className="max-w-6xl mx-auto space-y-8">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl font-bold text-center mb-8 px-4 text-glow"
+            >
+              Key Concepts Visualized
+            </motion.h2>
+
+            {/* FVG Visual */}
+            <IndicatorExplainer
+              title="Fair Value Gap (FVG)"
+              what="Price imbalance created during quick moves where candle wicks don't overlap"
+              why="FVGs act as magnets - price often returns to 'fill the gap' creating high-probability entry zones."
+              howToRead={[
+                {
+                  element: "GAP ZONE",
+                  meaning: "Space between candle 1's low and candle 3's high (or vice versa)",
+                  action: "Mark this zone on your chart - price tends to return here",
+                },
+                {
+                  element: "IMBALANCE",
+                  meaning: "Area where no price discovery occurred during the move",
+                  action: "Stronger FVGs have larger gaps - more powerful magnets",
+                },
+                {
+                  element: "FILL",
+                  meaning: "Price returning to trade within the gap zone",
+                  action: "Enter when price reaches FVG and shows rejection",
+                },
+              ]}
+              visualExample={<FVGVisual />}
+            />
+
+            {/* Order Block Visual */}
+            <IndicatorExplainer
+              title="Order Block"
+              what="The last opposing candle before a strong directional move"
+              why="This is where institutional orders were placed - price often returns to test these zones before continuing."
+              howToRead={[
+                {
+                  element: "ORDER BLOCK CANDLE",
+                  meaning: "Last bearish candle before bullish reversal (or vice versa)",
+                  action: "Mark the entire candle body as a potential entry zone",
+                },
+                {
+                  element: "INSTITUTIONAL ORDERS",
+                  meaning: "Smart money placed large orders within this candle's range",
+                  action: "These unfilled orders act as support/resistance",
+                },
+                {
+                  element: "RETEST",
+                  meaning: "Price returning to the order block zone after the initial move",
+                  action: "Enter on the retest with tight stops below/above the OB",
+                },
+              ]}
+              visualExample={<OrderBlockVisual />}
+            />
+
+            {/* MSS Visual */}
+            <IndicatorExplainer
+              title="Market Structure Shift (MSS)"
+              what="When price breaks a key swing point, changing from bullish to bearish structure (or vice versa)"
+              why="MSS signals a potential trend change - institutions switching from distribution to accumulation."
+              howToRead={[
+                {
+                  element: "OLD STRUCTURE",
+                  meaning: "Series of Higher Highs & Higher Lows (bullish) or Lower Highs & Lower Lows (bearish)",
+                  action: "Identify the established swing pattern before the break",
+                },
+                {
+                  element: "STRUCTURE BREAK",
+                  meaning: "Price breaks below previous swing low (bullish→bearish) or above previous swing high (bearish→bullish)",
+                  action: "This candle signals potential trend reversal",
+                },
+                {
+                  element: "NEW STRUCTURE",
+                  meaning: "Confirmation of new trend with fresh swing points",
+                  action: "Look for C2 sweep setups aligned with the new structure",
+                },
+              ]}
+              visualExample={<MSSVisual />}
+            />
+          </div>
+        </section>
 
         {/* Search */}
         <motion.div
