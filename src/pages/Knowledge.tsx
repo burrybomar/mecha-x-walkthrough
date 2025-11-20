@@ -7,6 +7,7 @@ import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
 import { CandlestickCard } from "@/components/CandlestickCard";
 import { CandlestickButton } from "@/components/CandlestickButton";
+import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
 import continuationImg from '@/assets/continuation-sequence.jpg';
 import reversalImg from '@/assets/reversal-sequence.jpg';
 import alignedImg from '@/assets/aligned-sequence.jpg';
@@ -128,7 +129,10 @@ const Knowledge = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-chart-dots relative">
+    <div className="min-h-screen relative">
+      {/* Candlestick Background */}
+      <AnimatedCandlestickBackground variant="mixed" opacity={0.5} speed="slow" />
+      
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left"
