@@ -19,7 +19,7 @@ interface SettingRowProps {
 }
 
 const SettingRow = ({ label, children, tooltip }: SettingRowProps) => (
-  <motion.div 
+  <motion.div
     className="grid grid-cols-[140px_1fr] md:grid-cols-[160px_1fr] items-center gap-3 md:gap-4 py-2 md:py-1.5 hover:bg-muted/30 px-3 rounded transition-all duration-200 group font-mono text-xs"
     initial={{ opacity: 0, x: -10 }}
     animate={{ opacity: 1, x: 0 }}
@@ -44,7 +44,7 @@ interface SettingsGroupProps {
 
 const SettingsGroup = ({ title, description, frameworkLink, children, defaultOpen = false }: SettingsGroupProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  
+
   return (
     <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
       <motion.button
@@ -90,9 +90,10 @@ const Setup = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-market-depth">{/* Header */}
-      <motion.header 
-        className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
+    <div className="min-h-screen bg-transparent">
+      {/* Header */}
+      <motion.header
+        className="sticky top-0 z-40 backdrop-blur-xl border-b border-white/5 bg-black/20 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
@@ -108,7 +109,7 @@ const Setup = () => {
             </CandlestickButton>
             <div className="flex items-center gap-2">
               <SettingsIcon className="w-4 h-4 text-primary" />
-              <span className="font-mono text-xs md:text-sm font-medium">MECHA-X Settings</span>
+              <span className="font-mono text-xs md:text-sm font-medium text-glow">MECHA-X Settings</span>
             </div>
           </div>
         </div>
@@ -125,16 +126,16 @@ const Setup = () => {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-125">
             <CandlestickPattern variant="background" />
           </div>
-          
+
           <div className="relative z-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 font-mono leading-tight px-2">
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 TradingView Indicator
               </span>
               <br />
-              <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
+              <span className="text-white text-2xl md:text-3xl lg:text-4xl">Configuration Guide</span>
             </h1>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono px-4">
+            <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed font-mono px-4">
               Each setting automates a specific part of the 3-sequence mechanical framework. Configure once in TradingView, trade forever.
             </p>
           </div>
@@ -146,19 +147,19 @@ const Setup = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="overflow-hidden border-2 shadow-2xl">
+          <Card className="overflow-hidden border border-white/10 shadow-2xl glass-panel">
             {/* Panel Header */}
-            <div className="bg-muted/50 px-3 md:px-4 py-2.5 md:py-3 border-b border-border flex items-center justify-between">
-              <h3 className="font-semibold text-sm font-mono">Settings</h3>
-              <Badge className="font-mono text-[9px] md:text-[10px]">PineScript v6</Badge>
+            <div className="bg-black/40 px-3 md:px-4 py-2.5 md:py-3 border-b border-white/10 flex items-center justify-between backdrop-blur-sm">
+              <h3 className="font-semibold text-sm font-mono text-white">Settings</h3>
+              <Badge className="font-mono text-[9px] md:text-[10px] bg-primary/20 text-primary border-primary/30">PineScript v6</Badge>
             </div>
 
             {/* Settings Content */}
             <div className="max-h-[70vh] overflow-y-auto overscroll-contain smooth-scroll">
-              
+
               {/* Display */}
-              <SettingsGroup 
-                title="Display" 
+              <SettingsGroup
+                title="Display"
                 frameworkLink="Global"
                 description="Font: Use Monospace for cleaner technical appearance. Text Size: Global sizing for all labels (Auto = responsive based on chart zoom)."
               >
@@ -191,8 +192,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* HTF Setup */}
-              <SettingsGroup 
-                title="HTF Setup" 
+              <SettingsGroup
+                title="HTF Setup"
                 frameworkLink="Fractal Foundation"
                 description="Auto Mode: Intelligently selects HTFs based on chart TF (5m → 1H/4H/Daily). Manual: Configure 4 custom HTF layers with full control."
                 defaultOpen
@@ -248,8 +249,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* HTF Candles */}
-              <SettingsGroup 
-                title="HTF Candles" 
+              <SettingsGroup
+                title="HTF Candles"
                 frameworkLink="Fractal Foundation"
                 description="Customize bull/bear candle colors and wicks. Offset = distance from price. Gap = space between candles. Bias Arrow = optional trend arrow."
               >
@@ -274,8 +275,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* Chart Mapping */}
-              <SettingsGroup 
-                title="Chart Mapping" 
+              <SettingsGroup
+                title="Chart Mapping"
                 frameworkLink="BSL/SSL Levels"
                 description="BSL/SSL: Mark Buyside/Sellside liquidity (highs/lows where stops sit). Dividers: Mark HTF candle opens/closes. EQ: 50% equilibrium levels for discount/premium zones."
               >
@@ -366,8 +367,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* Pattern Detection */}
-              <SettingsGroup 
-                title="Pattern Detection" 
+              <SettingsGroup
+                title="Pattern Detection"
                 frameworkLink="C2 Labels & C3"
                 description="C2: Mark exact reversal candle where sweep reversed. C3: Expansion candle after reversal. SMT: Divergence between correlated assets (Binary = 2 assets, Triad = 3)."
               >
@@ -511,8 +512,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* iFVG */}
-              <SettingsGroup 
-                title="iFVG" 
+              <SettingsGroup
+                title="iFVG"
                 frameworkLink="Entry Zones"
                 description="Inverse Fair Value Gaps - price inefficiencies left during quick reversals. Acts as support/resistance. Often aligns with CISD for best entries."
               >
@@ -533,8 +534,8 @@ const Setup = () => {
               </SettingsGroup>
 
               {/* Sessions */}
-              <SettingsGroup 
-                title="Sessions" 
+              <SettingsGroup
+                title="Sessions"
                 frameworkLink="Session Timing"
                 description="Session markers for timing key moves. Macro Times highlight specific high-probability windows where sweeps and reversals typically occur."
               >

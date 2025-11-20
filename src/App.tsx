@@ -6,8 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { FloatingCandlestickAssistant } from "@/components/FloatingCandlestickAssistant";
+import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Navbar } from "@/components/Navbar";
 
 // Eager load critical pages
 import Index from "./pages/Index";
@@ -37,7 +39,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useSmoothScroll();
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -50,7 +52,9 @@ const App = () => {
         </a>
         <Toaster />
         <Sonner />
+        <AnimatedCandlestickBackground variant="mixed" opacity={0.4} speed="slow" />
         <BrowserRouter>
+          <Navbar />
           <OnboardingTour />
           <FloatingCandlestickAssistant />
           <Suspense

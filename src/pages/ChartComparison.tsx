@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceLine, Area, AreaChart, Label } from 'recharts';
+
+import { SequenceDiagram } from "@/components/diagrams/SequenceDiagram";
 
 const sequences = [
   {
@@ -153,19 +154,19 @@ export default function ChartComparison() {
   const currentSequence = sequences.find(s => s.id === activeSequence);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent text-foreground">
       <div className="container mx-auto px-4 py-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/")}
-          className="mb-6"
+          className="mb-6 hover:bg-primary/10 hover:text-primary"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
         </Button>
 
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Chart Comparison Tool</h1>
+          <h1 className="text-4xl font-bold mb-4 text-glow">Chart Comparison Tool</h1>
           <p className="text-muted-foreground text-lg">
             Compare successful setups with failed examples to understand critical differences
           </p>
@@ -173,26 +174,26 @@ export default function ChartComparison() {
 
         <div className="grid gap-6">
           {/* Sequence Selector */}
-          <Card>
+          <Card className="glass-panel border-white/5">
             <CardContent className="pt-6">
               <Tabs value={activeSequence} onValueChange={setActiveSequence}>
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="continuation">Continuation</TabsTrigger>
-                  <TabsTrigger value="reversal">Reversal</TabsTrigger>
-                  <TabsTrigger value="aligned">Aligned</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-black/20">
+                  <TabsTrigger value="continuation" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Continuation</TabsTrigger>
+                  <TabsTrigger value="reversal" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Reversal</TabsTrigger>
+                  <TabsTrigger value="aligned" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Aligned</TabsTrigger>
                 </TabsList>
               </Tabs>
             </CardContent>
           </Card>
 
           {/* View Mode Toggle */}
-          <Card>
+          <Card className="glass-panel border-white/5">
             <CardContent className="pt-6">
               <div className="flex gap-2">
                 <Button
                   variant={viewMode === "success" ? "default" : "outline"}
                   onClick={() => setViewMode("success")}
-                  className="flex-1"
+                  className={`flex-1 ${viewMode === "success" ? "bg-success/20 text-success hover:bg-success/30 border-success/50" : "border-white/10 hover:bg-white/5"}`}
                 >
                   <CheckCircle2 className="mr-2 h-4 w-4" />
                   Success Only
@@ -200,14 +201,14 @@ export default function ChartComparison() {
                 <Button
                   variant={viewMode === "both" ? "default" : "outline"}
                   onClick={() => setViewMode("both")}
-                  className="flex-1"
+                  className={`flex-1 ${viewMode === "both" ? "bg-primary/20 text-primary hover:bg-primary/30 border-primary/50" : "border-white/10 hover:bg-white/5"}`}
                 >
                   Side by Side
                 </Button>
                 <Button
                   variant={viewMode === "failed" ? "default" : "outline"}
                   onClick={() => setViewMode("failed")}
-                  className="flex-1"
+                  className={`flex-1 ${viewMode === "failed" ? "bg-destructive/20 text-destructive hover:bg-destructive/30 border-destructive/50" : "border-white/10 hover:bg-white/5"}`}
                 >
                   <XCircle className="mr-2 h-4 w-4" />
                   Failed Only
@@ -220,82 +221,23 @@ export default function ChartComparison() {
           {currentSequence && (
             <div className={`grid gap-6 ${viewMode === "both" ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
               {(viewMode === "success" || viewMode === "both") && (
-                <Card className="overflow-hidden">
-                  <div className="bg-success/10 px-6 py-4 border-b border-success/20">
+                <Card className="overflow-hidden border border-success/20 glass-card">
+                  <div className="bg-success/10 px-6 py-4 border-b border-success/20 backdrop-blur-sm">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-5 w-5 text-success" />
-                      <h2 className="text-xl font-semibold">Successful {currentSequence.title}</h2>
+                      <h2 className="text-xl font-semibold text-success">Successful {currentSequence.title}</h2>
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <div className="aspect-video mb-4 bg-gradient-to-br from-success/5 to-success/10 rounded-lg p-4">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={currentSequence.successData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <defs>
-                            <linearGradient id="successGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="hsl(var(--success))" stopOpacity={0.3}/>
-                              <stop offset="95%" stopColor="hsl(var(--success))" stopOpacity={0.05}/>
-                            </linearGradient>
-                          </defs>
-                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" vertical={false} />
-                          <XAxis 
-                            dataKey="time" 
-                            stroke="rgba(148,163,184,0.3)"
-                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
-                            axisLine={false}
-                          />
-                          <YAxis 
-                            stroke="rgba(148,163,184,0.3)"
-                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
-                            domain={['dataMin - 3', 'dataMax + 3']}
-                            axisLine={false}
-                          />
-                          <Area
-                            type="monotone"
-                            dataKey="price"
-                            stroke="hsl(var(--success))"
-                            strokeWidth={3}
-                            fill="url(#successGradient)"
-                            dot={false}
-                          />
-                          {currentSequence.successLevels?.map((level, idx) => (
-                            <ReferenceLine 
-                              key={idx}
-                              y={level.y} 
-                              stroke={level.color}
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                            >
-                              <Label 
-                                value={level.label} 
-                                position="insideTopRight"
-                                fill={level.color}
-                                fontSize={11}
-                                fontWeight="700"
-                                className="drop-shadow-lg"
-                              />
-                            </ReferenceLine>
-                          ))}
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div className="space-y-3 mb-4">
-                      <h3 className="font-semibold text-sm text-muted-foreground">Key Levels Explained:</h3>
-                      {currentSequence.successLevels?.map((level, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs">
-                          <div className="w-3 h-3 rounded-full mt-0.5 flex-shrink-0" style={{ backgroundColor: level.color }} />
-                          <div>
-                            <span className="font-semibold">{level.label}:</span> {level.description}
-                          </div>
-                        </div>
-                      ))}
+                    <div className="aspect-square mb-4 bg-black/20 rounded-lg p-4 border border-white/5">
+                      <SequenceDiagram variant={activeSequence as any} className="w-full h-full" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-success mb-2">✓ What Makes This Work:</h3>
+                      <h3 className="font-semibold text-success mb-2 font-mono uppercase tracking-wider">✓ What Makes This Work:</h3>
                       {currentSequence.successPoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <CheckCircle2 className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                          <p className="text-sm text-foreground/80">{point}</p>
+                          <p className="text-sm text-gray-300 font-mono">{point}</p>
                         </div>
                       ))}
                     </div>
@@ -304,82 +246,23 @@ export default function ChartComparison() {
               )}
 
               {(viewMode === "failed" || viewMode === "both") && (
-                <Card className="overflow-hidden">
-                  <div className="bg-destructive/10 px-6 py-4 border-b border-destructive/20">
+                <Card className="overflow-hidden border border-destructive/20 glass-card">
+                  <div className="bg-destructive/10 px-6 py-4 border-b border-destructive/20 backdrop-blur-sm">
                     <div className="flex items-center gap-2">
                       <XCircle className="h-5 w-5 text-destructive" />
-                      <h2 className="text-xl font-semibold">Failed {currentSequence.title}</h2>
+                      <h2 className="text-xl font-semibold text-destructive">Failed {currentSequence.title}</h2>
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <div className="aspect-video mb-4 bg-gradient-to-br from-destructive/5 to-destructive/10 rounded-lg p-4">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={currentSequence.failedData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                          <defs>
-                            <linearGradient id="failedGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.3}/>
-                              <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0.05}/>
-                            </linearGradient>
-                          </defs>
-                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" vertical={false} />
-                          <XAxis 
-                            dataKey="time" 
-                            stroke="rgba(148,163,184,0.3)"
-                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
-                            axisLine={false}
-                          />
-                          <YAxis 
-                            stroke="rgba(148,163,184,0.3)"
-                            tick={{ fill: 'rgba(148,163,184,0.5)', fontSize: 10 }}
-                            domain={['dataMin - 3', 'dataMax + 3']}
-                            axisLine={false}
-                          />
-                          <Area
-                            type="monotone"
-                            dataKey="price"
-                            stroke="hsl(var(--destructive))"
-                            strokeWidth={3}
-                            fill="url(#failedGradient)"
-                            dot={false}
-                          />
-                          {currentSequence.failedLevels?.map((level, idx) => (
-                            <ReferenceLine 
-                              key={idx}
-                              y={level.y} 
-                              stroke={level.color}
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                            >
-                              <Label 
-                                value={level.label} 
-                                position="insideTopRight"
-                                fill={level.color}
-                                fontSize={11}
-                                fontWeight="700"
-                                className="drop-shadow-lg"
-                              />
-                            </ReferenceLine>
-                          ))}
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div className="space-y-3 mb-4">
-                      <h3 className="font-semibold text-sm text-muted-foreground">Key Levels Explained:</h3>
-                      {currentSequence.failedLevels?.map((level, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs">
-                          <div className="w-3 h-3 rounded-full mt-0.5 flex-shrink-0" style={{ backgroundColor: level.color }} />
-                          <div>
-                            <span className="font-semibold">{level.label}:</span> {level.description}
-                          </div>
-                        </div>
-                      ))}
+                    <div className="aspect-square mb-4 bg-black/20 rounded-lg p-4 border border-white/5">
+                      <SequenceDiagram variant={`${activeSequence}-failed` as any} className="w-full h-full" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-destructive mb-2">✗ Critical Mistakes:</h3>
+                      <h3 className="font-semibold text-destructive mb-2 font-mono uppercase tracking-wider">✗ Critical Mistakes:</h3>
                       {currentSequence.failurePoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <XCircle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                          <p className="text-sm text-foreground/80">{point}</p>
+                          <p className="text-sm text-gray-300 font-mono">{point}</p>
                         </div>
                       ))}
                     </div>
@@ -390,25 +273,25 @@ export default function ChartComparison() {
           )}
 
           {/* Key Takeaways */}
-          <Card>
+          <Card className="glass-panel border-primary/20">
             <CardContent className="pt-6">
-              <h3 className="text-xl font-semibold mb-4">Key Takeaways</h3>
+              <h3 className="text-xl font-semibold mb-4 text-primary">Key Takeaways</h3>
               <div className="space-y-3">
-                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors">
                   <p className="font-medium text-primary mb-1">Pattern Recognition</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-400">
                     Study both successful and failed setups to train your eye for the subtle differences that matter
                   </p>
                 </div>
-                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors">
                   <p className="font-medium text-primary mb-1">Confirmation is Critical</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-400">
                     Failed trades often result from missing confirmations - never skip the LTF swing structure
                   </p>
                 </div>
-                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 hover:bg-primary/10 transition-colors">
                   <p className="font-medium text-primary mb-1">Context Matters</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-400">
                     Always check premium/discount zones, HTF bias, and liquidity context before entering
                   </p>
                 </div>
