@@ -8,6 +8,10 @@ import { AnimatedPriceAction } from "@/components/AnimatedPriceAction";
 import { CandlestickCard } from "@/components/CandlestickCard";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
+import { IndicatorExplainer } from "@/components/IndicatorExplainer";
+import { SequenceFlowVisual } from "@/components/SequenceFlowVisual";
+import { SMTVisual } from "@/components/SMTVisual";
+import { PremiumDiscountVisual } from "@/components/PremiumDiscountVisual";
 import continuationImg from '@/assets/continuation-sequence.jpg';
 import reversalImg from '@/assets/reversal-sequence.jpg';
 import alignedImg from '@/assets/aligned-sequence.jpg';
@@ -314,6 +318,120 @@ const Knowledge = () => {
           );
         })}
       </div>
+
+      {/* Visual Explainers Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-transparent to-muted/20">
+        <div className="container mx-auto max-w-6xl space-y-8">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 px-4 text-glow"
+          >
+            Visual Breakdown: Complete Flow
+          </motion.h2>
+
+          {/* Complete Sequence Flow */}
+          <IndicatorExplainer
+            title="C1 → C2 → C3 → C4 Flow"
+            what="The complete sequence from liquidity formation to target completion"
+            why="Understanding the full flow helps you anticipate each stage and know exactly when to enter and exit."
+            howToRead={[
+              {
+                element: "C1 (Pre-Swing)",
+                meaning: "Establishes the liquidity level (swing high/low)",
+                action: "Mark this level as BSL/SSL - stops accumulate here",
+              },
+              {
+                element: "C2 (Sweep)",
+                meaning: "Wicks through C1 level, closes back inside C1 range",
+                action: "Wait for close confirmation - this is your reversal signal",
+              },
+              {
+                element: "MOMENTUM CANDLES",
+                meaning: "Consecutive candles moving in reversal direction (min 2)",
+                action: "Count these candles - they define your CISD level and momentum range",
+              },
+              {
+                element: "CISD ENTRY",
+                meaning: "Close of last momentum candle = your entry level",
+                action: "Enter when price pulls back to this level and shows rejection",
+              },
+              {
+                element: "C3 (Expansion)",
+                meaning: "Strong directional candle confirming the reversal",
+                action: "C3 validates the pattern - if it fails, exit immediately",
+              },
+              {
+                element: "C4 (Target)",
+                meaning: "CISD projections reached (1x, 2x, 2.5x, 3.5x, 4x)",
+                action: "Take profits at 2x, trail stops for 4x target",
+              },
+            ]}
+            visualExample={<SequenceFlowVisual />}
+          />
+
+          {/* SMT Visual */}
+          <IndicatorExplainer
+            title="SMT: Smart Money Technique"
+            what="Correlated asset divergence analysis to detect institutional manipulation"
+            why="When correlated assets diverge at key levels, it reveals institutional positioning and dramatically increases setup probability."
+            howToRead={[
+              {
+                element: "BINARY MODE (⟐)",
+                meaning: "Compare 2 assets (ES vs NQ) for PSP divergence",
+                action: "If ES sweeps but NQ doesn't = bearish SMT (+10% confidence)",
+              },
+              {
+                element: "TRIAD MODE (⟐⟐)",
+                meaning: "Compare 3 assets (ES vs NQ vs RTY) for full divergence",
+                action: "If both NQ and RTY fail to follow ES sweep = strongest signal (+20%)",
+              },
+              {
+                element: "PSP (Precision Swing Point)",
+                meaning: "One asset makes new high/low, correlated asset doesn't follow",
+                action: "Look for this divergence at key liquidity sweeps",
+              },
+              {
+                element: "2-STAGE CIC",
+                meaning: "Correlation in Correlation - advanced triad analysis",
+                action: "Graduate to this once comfortable with binary mode",
+              },
+            ]}
+            visualExample={<SMTVisual />}
+          />
+
+          {/* Premium/Discount Visual */}
+          <IndicatorExplainer
+            title="Premium/Discount Zones"
+            what="HTF equilibrium analysis showing where price is expensive or cheap"
+            why="Institutional money respects premium/discount zones. Sell premium, buy discount. This gives you directional bias before seeking entries."
+            howToRead={[
+              {
+                element: "EQUILIBRIUM (EQ)",
+                meaning: "50% level of HTF range - the fair value midpoint",
+                action: "Above EQ = premium territory, below EQ = discount territory",
+              },
+              {
+                element: "PREMIUM ZONE",
+                meaning: "Price above EQ (50%) - expensive relative to range",
+                action: "Look for SHORT setups when price is in premium",
+              },
+              {
+                element: "DISCOUNT ZONE",
+                meaning: "Price below EQ (50%) - cheap relative to range",
+                action: "Look for LONG setups when price is in discount",
+              },
+              {
+                element: "HTF ALIGNMENT",
+                meaning: "Using Daily or 4H range to establish premium/discount",
+                action: "Higher timeframe EQ = stronger bias, more reliable entries",
+              },
+            ]}
+            visualExample={<PremiumDiscountVisual />}
+          />
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="py-32 px-4 bg-muted/30">
