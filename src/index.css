@@ -8,50 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark trading theme with gold accents */
-    --background: 0 0% 7%; /* Very dark background */
-    --foreground: 45 100% 95%; /* Light gold/cream text */
+    /* Pure black candlestick theme */
+    --background: 0 0% 0%; /* Pure black background */
+    --foreground: 0 0% 95%; /* Light grey text */
 
-    --card: 0 0% 12%; /* Dark cards */
-    --card-foreground: 45 100% 95%;
+    --card: 0 0% 5%; /* Nearly black cards */
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 45 100% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 45 95% 55%; /* Vibrant gold */
-    --primary-rgb: 240 200 28;
-    --primary-foreground: 0 0% 7%;
+    --primary: 160 70% 55%; /* Cyan-green (bullish candlestick color) */
+    --primary-rgb: 64 217 179;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 40 70% 45%; /* Deep amber */
-    --secondary-foreground: 45 100% 95%;
+    --secondary: 0 80% 60%; /* Red-pink (bearish candlestick color) */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 25%; /* Medium dark grey */
-    --muted-foreground: 0 0% 70%; /* Light grey */
+    --muted: 0 0% 15%; /* Dark grey */
+    --muted-foreground: 0 0% 60%; /* Medium grey */
 
-    --accent: 45 100% 60%; /* Bright gold accent */
-    --accent-foreground: 0 0% 7%;
+    --accent: 180 80% 50%; /* Bright cyan accent */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 80% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 30% 25%; /* Dark gold border */
-    --input: 0 0% 18%;
-    --ring: 45 95% 55%;
+    --border: 0 0% 20%; /* Dark grey border */
+    --input: 0 0% 10%;
+    --ring: 160 70% 55%;
 
     --radius: 1rem;
 
-    /* Unified gradient system - dark gold theme */
-    --gradient-primary: linear-gradient(135deg, hsl(45 95% 55%) 0%, hsl(30 90% 50%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 60%) 0%, hsl(40 70% 45%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 12%) 100%);
+    /* Unified gradient system - candlestick theme */
+    --gradient-primary: linear-gradient(135deg, hsl(160 70% 55%) 0%, hsl(180 80% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(0 80% 60%) 0%, hsl(340 70% 55%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 5%) 100%);
     
-    /* Candlestick colors - vibrant for dark theme */
-    --bullish: 140 70% 55%; /* Bright green */
-    --bullish-foreground: 0 0% 7%;
-    --bearish: 0 85% 60%; /* Bright red */
+    /* Candlestick colors - matching the theme image */
+    --bullish: 160 70% 55%; /* Cyan-green */
+    --bullish-foreground: 0 0% 0%;
+    --bearish: 0 80% 60%; /* Red-pink */
     --bearish-foreground: 0 0% 100%;
-    --candle-wick: 240 5% 64%;
-    --candle-body: 240 4% 16%;
+    --candle-wick: 0 0% 50%;
+    --candle-body: 0 0% 10%;
 
     --sidebar-background: 0 0% 10%;
     --sidebar-foreground: 45 100% 95%;
@@ -64,47 +64,47 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 0 0% 4%; /* Even darker background */
-    --foreground: 45 100% 98%; /* Brighter gold/cream text */
+    --background: 0 0% 0%; /* Pure black for dark mode */
+    --foreground: 0 0% 98%; /* Nearly white text */
 
-    --card: 0 0% 8%; /* Very dark cards */
-    --card-foreground: 45 100% 98%;
+    --card: 0 0% 5%; /* Nearly black cards */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 45 100% 98%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 45 100% 65%; /* Even brighter gold for dark mode */
-    --primary-rgb: 255 220 50;
-    --primary-foreground: 0 0% 4%;
+    --primary: 160 75% 60%; /* Brighter cyan-green */
+    --primary-rgb: 77 230 194;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 40 80% 50%; /* Brighter amber */
-    --secondary-foreground: 45 100% 98%;
+    --secondary: 0 85% 65%; /* Brighter red-pink */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 20%; /* Darker grey */
-    --muted-foreground: 0 0% 75%; /* Lighter grey */
+    --muted: 0 0% 18%; /* Darker grey */
+    --muted-foreground: 0 0% 70%; /* Lighter grey */
 
-    --accent: 45 100% 70%; /* Very bright gold accent */
-    --accent-foreground: 0 0% 4%;
+    --accent: 180 85% 55%; /* Very bright cyan accent */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 206 60% 95%;
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 45 40% 30%; /* Brighter gold border for dark mode */
-    --input: 0 0% 15%;
-    --ring: 45 100% 65%;
+    --border: 0 0% 25%; /* Slightly lighter grey border */
+    --input: 0 0% 12%;
+    --ring: 160 75% 60%;
     
-    /* Unified gradient system - vibrant dark mode */
-    --gradient-primary: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(30 95% 55%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 70%) 0%, hsl(40 80% 50%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 8%) 100%);
+    /* Unified gradient system - vibrant candlestick theme */
+    --gradient-primary: linear-gradient(135deg, hsl(160 75% 60%) 0%, hsl(180 85% 55%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(0 85% 65%) 0%, hsl(340 75% 60%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 5%) 100%);
     
-    /* Candlestick colors - super vibrant dark mode */
-    --bullish: 140 80% 60%; /* Very bright green */
-    --bullish-foreground: 0 0% 4%;
-    --bearish: 0 90% 65%; /* Very bright red */
+    /* Candlestick colors - vibrant matching theme */
+    --bullish: 160 75% 60%; /* Bright cyan-green */
+    --bullish-foreground: 0 0% 0%;
+    --bearish: 0 85% 65%; /* Bright red-pink */
     --bearish-foreground: 0 0% 100%;
-    --candle-wick: 240 5% 84%;
-    --candle-body: 240 5% 96%;
+    --candle-wick: 0 0% 60%;
+    --candle-body: 0 0% 15%;
 
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 45 100% 98%;
