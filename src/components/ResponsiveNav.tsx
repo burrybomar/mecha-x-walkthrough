@@ -44,46 +44,37 @@ export const ResponsiveNav = () => {
           <Search className="w-4 h-4 mr-1" />
           Identify
         </Button>
-        
+
         {/* Learning */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/ohlc-tutorial')} 
-          className="font-mono"
-          aria-label="OHLC Tutorial"
-        >
-          OHLC
-        </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/knowledge')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/knowledge')}
           className="font-mono"
           aria-label="Learn Framework"
         >
           <BookOpen className="w-4 h-4 mr-1" />
           Learn
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/case-studies')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/case-studies')}
           className="font-mono"
           aria-label="Case Studies"
         >
           <FileText className="w-4 h-4 mr-1" />
           Cases
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/chart-comparison')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/chart-examples')}
           className="font-mono"
-          aria-label="Chart Comparison"
+          aria-label="Chart Examples"
         >
           <ChartColumnIncreasing className="w-4 h-4 mr-1" />
-          Compare
+          Charts
         </Button>
         
         {/* Tools */}
