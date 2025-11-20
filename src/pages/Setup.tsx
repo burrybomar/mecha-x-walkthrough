@@ -161,7 +161,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Display"
                 frameworkLink="Global"
-                description="Font: Use Monospace for cleaner technical appearance. Text Size: Global sizing for all labels (Auto = responsive based on chart zoom)."
+                description="Controls visual appearance of all indicator elements. Monospace font ensures clean, technical readability. Text Size adjusts all labels globally—Auto mode adapts to your chart zoom level automatically."
               >
                 <SettingRow label="Font">
                   <Select defaultValue="monospace">
@@ -195,7 +195,7 @@ const Setup = () => {
               <SettingsGroup
                 title="HTF Setup"
                 frameworkLink="Fractal Foundation"
-                description="Auto Mode: Intelligently selects HTFs based on chart TF (5m → 1H/4H/Daily). Manual: Configure 4 custom HTF layers with full control."
+                description="Automates multi-timeframe analysis. Auto Mode: Indicator selects optimal HTFs based on your chart timeframe (trading 5m? Gets 1H/4H/Daily context automatically). Manual Mode: Customize all 4 HTF layers. 'Bars' controls historical depth. 'Map' toggle shows/hides BSL/SSL lines for each timeframe."
                 defaultOpen
               >
                 <SettingRow label="Mode">
@@ -252,7 +252,7 @@ const Setup = () => {
               <SettingsGroup
                 title="HTF Candles"
                 frameworkLink="Fractal Foundation"
-                description="Customize bull/bear candle colors and wicks. Offset = distance from price. Gap = space between candles. Bias Arrow = optional trend arrow."
+                description="Visualize higher timeframe OHLC structure directly on your chart without switching timeframes. Customize colors for bullish/bearish candles and wicks. Offset controls vertical spacing from price. Gap adjusts horizontal spacing between candles. Bias Arrow adds directional indicator for HTF trend."
               >
                 <SettingRow label="Bull">
                   <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
@@ -278,7 +278,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Chart Mapping"
                 frameworkLink="BSL/SSL Levels"
-                description="BSL/SSL: Mark Buyside/Sellside liquidity (highs/lows where stops sit). Dividers: Mark HTF candle opens/closes. EQ: 50% equilibrium levels for discount/premium zones."
+                description="Automatically marks key price structure levels. BSL/SSL: Indicator identifies buyside/sellside liquidity (swing highs/lows where stops accumulate) and draws horizontal lines. Dividers: Marks HTF candle boundaries for session timing. EQ Lines: Displays 50% equilibrium for each HTF range—price above = premium (shorts), below = discount (longs). No manual drawing required."
               >
                 <SettingRow label="BSL/SSL">
                   <Switch defaultChecked />
@@ -321,7 +321,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Liquidity Sweeps"
                 frameworkLink="C2 Detection"
-                description="Valid Sweeps: Confirmed sweeps that held (reversal patterns). Invalid: Failed sweeps (price continued). HTF sweeps are more significant than LTF. Live: Real-time sweep detection as price moves."
+                description="Automatically detects when price sweeps liquidity levels (wicks through BSL/SSL and closes back inside). Valid Sweeps = confirmed reversals that held. Invalid Sweeps = failed attempts where price continued through. LTF = lower timeframe sweeps, HTF = higher timeframe sweeps (more significant). Live mode detects sweeps in real-time mid-candle for immediate awareness."
                 defaultOpen
               >
                 <SettingRow label="Enable">
@@ -370,7 +370,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Pattern Detection"
                 frameworkLink="C2 Labels & C3"
-                description="C2: Mark exact reversal candle where sweep reversed. C3: Expansion candle after reversal. SMT: Divergence between correlated assets (Binary = 2 assets, Triad = 3)."
+                description="Automates C2 reversal pattern recognition. Indicator labels C2 candles (sweep + close inside), C3 expansion candles, and formation types (REV/SNAP/EXP). C2 Box highlights the reversal zone. SMT tracks divergence between correlated assets: Binary mode compares 2 assets (ES vs NQ), Triad mode compares 3 assets for advanced correlation analysis."
               >
                 <SettingRow label="C2">
                   <Switch defaultChecked />
@@ -470,11 +470,62 @@ const Setup = () => {
                 </SettingRow>
               </SettingsGroup>
 
+              {/* C2 Decision Table */}
+              <SettingsGroup
+                title="C2 Decision Table"
+                frameworkLink="C2 Detection"
+                description="Real-time table showing C2 pattern analysis and decision support. Displays formation types (REV/SNAP/EXP), sweep validity, momentum strength, and entry recommendations. Auto-updates as price develops."
+              >
+                <SettingRow label="Enable">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Position">
+                  <Select defaultValue="top-right">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="top-left">Top Left</SelectItem>
+                      <SelectItem value="top-center">Top Center</SelectItem>
+                      <SelectItem value="top-right">Top Right</SelectItem>
+                      <SelectItem value="middle-left">Middle Left</SelectItem>
+                      <SelectItem value="middle-center">Middle Center</SelectItem>
+                      <SelectItem value="middle-right">Middle Right</SelectItem>
+                      <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                      <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                      <SelectItem value="bottom-right">Bottom Right</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Size">
+                  <Select defaultValue="normal">
+                    <SelectTrigger className="h-7 text-xs font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tiny">Tiny</SelectItem>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="large">Large</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Show Formation Type">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Show Confidence">
+                  <Switch defaultChecked />
+                </SettingRow>
+                <SettingRow label="Auto-Hide Invalid">
+                  <Switch />
+                </SettingRow>
+              </SettingsGroup>
+
               {/* CISD */}
               <SettingsGroup
                 title="CISD"
                 frameworkLink="Entry Zones"
-                description="Change in State of Delivery - marks when market shifts from one phase to another. Your entry level. Targets = comma-separated multipliers (1x, 2-2.5x, 3.5-4x)."
+                description="Automatically calculates your entry level and profit targets. After C2 sweep, indicator identifies momentum candles and marks CISD level (close of last momentum candle). This becomes your entry zone. Targets are auto-projected as multipliers of momentum range: 1x (breakeven move), 2-2.5x (partial profit), 3.5-4x (full target). No manual calculation needed."
                 defaultOpen
               >
                 <SettingRow label="Enable">
@@ -515,7 +566,7 @@ const Setup = () => {
               <SettingsGroup
                 title="iFVG"
                 frameworkLink="Entry Zones"
-                description="Inverse Fair Value Gaps - price inefficiencies left during quick reversals. Acts as support/resistance. Often aligns with CISD for best entries."
+                description="Automatically marks Inverse Fair Value Gaps—price imbalances created during quick moves. These gaps act as support/resistance zones where price often returns. Indicator highlights iFVGs that align with CISD levels, giving you high-probability entry zones without manual identification."
               >
                 <SettingRow label="Enable">
                   <Switch defaultChecked />
@@ -537,7 +588,7 @@ const Setup = () => {
               <SettingsGroup
                 title="Sessions"
                 frameworkLink="Session Timing"
-                description="Session markers for timing key moves. Macro Times highlight specific high-probability windows where sweeps and reversals typically occur."
+                description="Automatically displays session boundaries (ASIA/LONDON/NYAM/NYPM) and highlights them on your chart. Macro Times marks specific high-probability windows (Silver Bullet hours like 10:00 AM ET) where liquidity sweeps and reversals have highest success rates. Takes the guesswork out of session timing."
               >
                 <SettingRow label="Enable">
                   <Switch defaultChecked />
