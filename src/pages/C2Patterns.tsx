@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SequenceStepsExplainer } from "@/components/SequenceStepsExplainer";
 import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
+import reversalImg from '@/assets/reversal-sequence.jpg';
+import continuationImg from '@/assets/continuation-sequence.jpg';
 
 const C2Patterns = () => {
   const navigate = useNavigate();
@@ -64,7 +66,12 @@ const C2Patterns = () => {
   return (
     <div className="min-h-screen bg-market-depth relative">
       {/* Animated Background */}
-      <AnimatedCandlestickBackground variant="mixed" opacity={0.08} speed="slow" />
+      <AnimatedCandlestickBackground
+        variant="mixed"
+        opacity={0.08}
+        speed="slow"
+        imageUrl={reversalImg}
+      />
 
       {/* Header */}
       <motion.header 
@@ -218,11 +225,13 @@ const C2Patterns = () => {
 
           <SequenceStepsExplainer
             variant="bullish"
+            patternImage={reversalImg}
             className="mb-16"
           />
 
           <SequenceStepsExplainer
             variant="bearish"
+            patternImage={continuationImg}
             className="mb-8"
           />
         </div>
