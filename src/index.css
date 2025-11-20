@@ -9,53 +9,54 @@
 
 @layer base {
   :root {
-    /* Base Colors - Premium Light with Subtle Warmth */
-    --background: 210 30% 96%;
-    /* Soft cool grey with depth */
-    --foreground: 220 25% 8%;
-    /* Rich deep charcoal - high contrast */
+    /* Base Colors - Deep Vibrant Dark Theme */
+    --background: 230 35% 8%;
+    /* Rich deep navy-purple base */
+    --foreground: 210 40% 98%;
+    /* Bright crisp white text */
 
-    /* Surface Colors - Premium Glass & Frost */
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 8%;
+    /* Surface Colors - Glass with Depth */
+    --card: 230 30% 12%;
+    /* Slightly lighter than background for layering */
+    --card-foreground: 210 40% 98%;
+    --popover: 230 30% 12%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Brand Colors - Vibrant Cyan & Electric Blue */
-    --primary: 200 95% 50%;
-    /* Vibrant electric cyan */
-    --primary-foreground: 0 0% 100%;
+    /* Brand Colors - Electric Neon Palette */
+    --primary: 195 100% 55%;
+    /* Bright electric cyan - pops on dark */
+    --primary-foreground: 230 35% 8%;
 
-    --secondary: 240 65% 65%;
-    /* Soft periwinkle blue */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 270 80% 65%;
+    /* Electric violet purple */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 25% 92%;
-    /* Light cool grey */
-    --muted-foreground: 220 20% 24%;
-    /* FIXED: Much darker for accessibility - 4.8:1 contrast ratio */
+    --muted: 230 25% 18%;
+    /* Dark grey with purple tint */
+    --muted-foreground: 210 25% 75%;
+    /* Light grey text - excellent contrast */
 
-    --accent: 180 85% 55%;
-    /* Bright teal ice - more vibrant */
-    --accent-foreground: 0 0% 100%;
+    --accent: 165 95% 50%;
+    /* Neon teal/cyan - highly visible */
+    --accent-foreground: 230 35% 8%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 30% 88%;
-    /* Slightly darker, more visible */
-    --input: 210 25% 92%;
-    --ring: 200 95% 50%;
+    --border: 230 30% 20%;
+    /* Subtle but visible borders */
+    --input: 230 25% 18%;
+    --ring: 195 100% 55%;
     /* Match primary for consistency */
 
-    --radius: 0.5rem;
-    /* Slightly softer corners for modern feel */
+    --radius: 0.75rem;
+    /* Slightly rounder for premium feel */
 
-    /* Trading Specific Colors - Vibrant & Clear */
-    --bullish: 160 90% 42%;
-    /* Vibrant emerald */
-    --bearish: 340 90% 58%;
-    /* Vibrant rose */
+    /* Trading Specific Colors - Neon Vibrant */
+    --bullish: 155 95% 48%;
+    /* Neon emerald green */
+    --bearish: 345 95% 62%;
+    /* Neon pink-red */
   }
 }
 
@@ -65,17 +66,19 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground;
+    @apply bg-background text-foreground antialiased selection:bg-primary/40 selection:text-foreground;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    /* Premium Glassmorphic Background - Smooth Gradient with Depth */
+    /* Premium Dark Glassmorphic Background - Vibrant Neon Gradients */
     background-image:
-      radial-gradient(ellipse at 20% 10%, hsla(var(--primary), 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 90%, hsla(var(--accent), 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, hsla(var(--secondary), 0.06) 0%, transparent 70%),
-      linear-gradient(rgba(var(--foreground-rgb, 0 0 0), 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--foreground-rgb, 0 0 0), 0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+      radial-gradient(ellipse 80% 50% at 20% 0%, hsla(var(--primary), 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 60% at 80% 100%, hsla(var(--accent), 0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 80% at 50% 50%, hsla(var(--secondary), 0.15) 0%, transparent 70%),
+      radial-gradient(circle at 10% 50%, hsla(270, 100%, 60%, 0.1) 0%, transparent 40%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
     background-attachment: fixed;
+    background-color: hsl(var(--background));
   }
 
   /* Typography - Neon Glow */
@@ -111,35 +114,59 @@
 
 @layer utilities {
 
-  /* Glassmorphism Ultra - Premium Crystal Clear Effect */
+  /* Glassmorphism Ultra - Dark Premium Glass Effect */
   .glass-premium {
-    @apply bg-white/70 backdrop-blur-2xl border border-white/50 relative overflow-hidden;
+    @apply backdrop-blur-2xl border relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsla(var(--card), 0.85) 0%,
+      hsla(var(--card), 0.75) 100%
+    );
+    border-color: hsla(var(--primary), 0.3);
     box-shadow:
-      0 8px 32px -8px rgba(0, 0, 0, 0.08),
-      0 2px 8px -2px rgba(0, 0, 0, 0.04),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
+      0 8px 32px -8px hsla(var(--primary), 0.4),
+      0 2px 16px -2px hsla(var(--accent), 0.2),
+      inset 0 1px 1px 0 hsla(var(--foreground), 0.1),
+      0 0 0 1px hsla(var(--primary), 0.1);
   }
 
   .glass-premium::before {
     content: '';
-    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    @apply absolute inset-0 opacity-[0.04] pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .glass-premium::after {
     content: '';
     @apply absolute inset-0 pointer-events-none rounded-[inherit];
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 30%, transparent 70%, rgba(255, 255, 255, 0.3) 100%);
-    opacity: 0.7;
+    background: linear-gradient(
+      135deg,
+      hsla(var(--primary), 0.1) 0%,
+      transparent 30%,
+      transparent 70%,
+      hsla(var(--accent), 0.08) 100%
+    );
+    opacity: 0.8;
   }
 
-  /* Neon Text Utilities */
+  /* Neon Text Utilities - Enhanced for Dark Theme */
   .text-glow {
-    text-shadow: 0 0 10px currentColor;
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 40px currentColor;
   }
 
   .text-glow-primary {
-    text-shadow: 0 0 15px hsla(var(--primary), 0.5);
+    text-shadow:
+      0 0 20px hsla(var(--primary), 0.8),
+      0 0 40px hsla(var(--primary), 0.4),
+      0 0 60px hsla(var(--primary), 0.2);
+  }
+
+  .text-glow-accent {
+    text-shadow:
+      0 0 20px hsla(var(--accent), 0.8),
+      0 0 40px hsla(var(--accent), 0.4);
   }
 
   /* Mecha Borders */
@@ -178,13 +205,18 @@
 
   0%,
   100% {
-    opacity: 0.5;
-    box-shadow: 0 0 5px hsla(var(--primary), 0.2);
+    opacity: 0.7;
+    box-shadow:
+      0 0 10px hsla(var(--primary), 0.4),
+      0 0 20px hsla(var(--primary), 0.2);
   }
 
   50% {
     opacity: 1;
-    box-shadow: 0 0 20px hsla(var(--primary), 0.4);
+    box-shadow:
+      0 0 20px hsla(var(--primary), 0.6),
+      0 0 40px hsla(var(--primary), 0.4),
+      0 0 60px hsla(var(--primary), 0.2);
   }
 }
 
