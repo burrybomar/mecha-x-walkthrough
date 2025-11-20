@@ -22,9 +22,9 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    /* Brand Colors - Minimal Amber Accent */
-    --primary: 45 85% 65%;
-    /* Muted amber - strategic accent only */
+    /* Brand Colors - Dramatic Electric Cyan */
+    --primary: 190 100% 50%;
+    /* Electric cyan - dramatic high-tech accent */
     --primary-foreground: 0 0% 6%;
 
     --secondary: 0 0% 20%;
@@ -46,7 +46,7 @@
     --border: 0 0% 18%;
     /* Subtle monochrome borders */
     --input: 0 0% 14%;
-    --ring: 45 85% 65%;
+    --ring: 190 100% 50%;
 
     --radius: 0.25rem;
     /* Sharp, minimal corners */
@@ -87,8 +87,8 @@
       /* Grid - minimal */
       linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      /* Subtle amber accent glow - very minimal */
-      radial-gradient(ellipse 40% 30% at 85% 15%, hsla(45, 85%, 65%, 0.03), transparent 60%);
+      /* Dramatic cyan glow - high-tech atmosphere */
+      radial-gradient(ellipse 40% 30% at 85% 15%, hsla(190, 100%, 50%, 0.05), transparent 60%);
     background-size: 120px 120px, 120px 120px, 40px 40px, 40px 40px, 100% 100%;
     background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
   }
@@ -188,8 +188,8 @@
 
   .text-glow-primary {
     text-shadow:
-      0 0 20px hsla(45, 85%, 65%, 0.4),
-      0 0 35px hsla(45, 85%, 65%, 0.2),
+      0 0 20px hsla(190, 100%, 50%, 0.6),
+      0 0 35px hsla(190, 100%, 50%, 0.3),
       0 2px 8px rgba(0, 0, 0, 0.6);
   }
 
@@ -246,7 +246,7 @@
     box-shadow:
       0 0 20px rgba(255, 255, 255, 0.2),
       0 0 40px rgba(255, 255, 255, 0.1),
-      0 0 60px hsla(45, 85%, 65%, 0.05);
+      0 0 60px hsla(190, 100%, 50%, 0.08);
   }
 }
 
