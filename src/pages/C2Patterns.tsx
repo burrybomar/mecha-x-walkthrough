@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { SequenceStepsExplainer } from "@/components/SequenceStepsExplainer";
+import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
 
 const C2Patterns = () => {
   const navigate = useNavigate();
@@ -60,7 +62,10 @@ const C2Patterns = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-market-depth">
+    <div className="min-h-screen bg-market-depth relative">
+      {/* Animated Background */}
+      <AnimatedCandlestickBackground variant="mixed" opacity={0.08} speed="slow" />
+
       {/* Header */}
       <motion.header 
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
@@ -191,8 +196,40 @@ const C2Patterns = () => {
         </div>
       </section>
 
+      {/* Sequence Explainer - Bullish */}
+      <section className="py-16 px-4 border-t border-border relative">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-mono">
+              <span className="bg-gradient-to-r from-bullish via-primary to-bullish bg-clip-text text-transparent">
+                C1→C2→C3→C4 Sequence
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Understanding the complete candle sequence from setup to execution.
+              Below are visual examples showing bullish and bearish reversals.
+            </p>
+          </motion.div>
+
+          <SequenceStepsExplainer
+            variant="bullish"
+            className="mb-16"
+          />
+
+          <SequenceStepsExplainer
+            variant="bearish"
+            className="mb-8"
+          />
+        </div>
+      </section>
+
       {/* Next Steps */}
-      <section className="py-16 px-4 border-t border-border">
+      <section className="py-16 px-4 border-t border-border relative">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 font-mono">Apply These Patterns</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

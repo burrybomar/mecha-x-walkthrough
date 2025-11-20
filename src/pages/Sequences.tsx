@@ -104,10 +104,20 @@ const Sequences = () => {
                 Sequence States
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Every trade falls into one of these three categories. Understanding which sequence 
+            <p className="text-xl text-muted-foreground leading-relaxed mb-4">
+              Every trade falls into one of these three categories. Understanding which sequence
               you're in determines your entry timing and risk management.
             </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-sm">
+              <span className="text-primary font-semibold">Quick Reference Guide</span>
+              <span className="text-muted-foreground">•</span>
+              <button
+                onClick={() => navigate('/knowledge')}
+                className="text-primary hover:underline font-medium"
+              >
+                See Full Methodology →
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
