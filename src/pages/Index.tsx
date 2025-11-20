@@ -106,7 +106,7 @@ const Index = () => {
               </a>
             </div>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/30" />
-            <span>Multi-timeframe trading specialist</span>
+            <span>Pinescript coder • Learned from Ttrades, GxT, ICT, elevntrades</span>
           </motion.div>
 
           {/* Clear Learning CTAs */}
@@ -145,22 +145,19 @@ const Index = () => {
           <LearningCard
             icon={<Target className="w-8 h-8 text-primary" />}
             title="Setup & Configuration"
-            desc="Install MECHA-X on TradingView and configure settings for optimal detection in just 10 minutes."
-            duration="~10 min"
+            desc="Install MECHA-X on TradingView and configure settings for optimal detection."
             delay={0.2}
           />
           <LearningCard
             icon={<Layers className="w-8 h-8 text-secondary" />}
             title="Understand Sequences"
             desc="Master C1, C2, and C3 patterns with visual training and real chart examples."
-            duration="~30 min"
             delay={0.4}
           />
           <LearningCard
             icon={<TrendingUp className="w-8 h-8 text-accent" />}
             title="Execute Trades"
             desc="Learn precise entry protocols with defined risk parameters and exit strategies."
-            duration="~20 min"
             delay={0.6}
           />
         </div>
@@ -457,7 +454,7 @@ const Index = () => {
   );
 };
 
-const LearningCard = ({ icon, title, desc, duration, delay }: { icon: any, title: string, desc: string, duration: string, delay: number }) => {
+const LearningCard = ({ icon, title, desc, delay }: { icon: any, title: string, desc: string, delay: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -475,8 +472,7 @@ const LearningCard = ({ icon, title, desc, duration, delay }: { icon: any, title
         <p className="text-muted-foreground leading-relaxed flex-grow">
           {desc}
         </p>
-        <div className="mt-auto pt-4 flex items-center justify-between w-full">
-          <span className="text-xs font-mono text-primary/70">{duration}</span>
+        <div className="mt-auto pt-4 flex items-center justify-end w-full">
           <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
       </div>
