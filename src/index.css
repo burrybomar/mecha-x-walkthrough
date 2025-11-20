@@ -8,112 +8,112 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Fresh blue/teal palette - modern & sleek */
-    --background: 0 0% 99%; /* #FCFCFC neutral white */
-    --foreground: 203 33% 22%; /* #243C4C dark blue */
+    /* Dark trading theme with gold accents */
+    --background: 0 0% 7%; /* Very dark background */
+    --foreground: 45 100% 95%; /* Light gold/cream text */
 
-    --card: 0 0% 100%; /* pure white for cards */
-    --card-foreground: 203 33% 22%;
+    --card: 0 0% 12%; /* Dark cards */
+    --card-foreground: 45 100% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 203 33% 22%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 45 100% 95%;
 
-    --primary: 204 45% 55%; /* Brighter blue for more visibility */
-    --primary-rgb: 82 137 173;
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 95% 55%; /* Vibrant gold */
+    --primary-rgb: 240 200 28;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 206 60% 95%; /* #e9f2fa light blue */
-    --secondary-foreground: 203 33% 22%;
+    --secondary: 40 70% 45%; /* Deep amber */
+    --secondary-foreground: 45 100% 95%;
 
-    --muted: 189 21% 86%; /* #d6e3e6 light grey-blue */
-    --muted-foreground: 203 18% 50%; /* #698696 */
+    --muted: 0 0% 25%; /* Medium dark grey */
+    --muted-foreground: 0 0% 70%; /* Light grey */
 
-    --accent: 171 45% 65%; /* More vibrant teal */
-    --accent-foreground: 203 33% 22%;
+    --accent: 45 100% 60%; /* Bright gold accent */
+    --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 189 13% 71%; /* #ACBCBF grey-blue */
-    --input: 189 21% 86%;
-    --ring: 204 36% 50%;
+    --border: 45 30% 25%; /* Dark gold border */
+    --input: 0 0% 18%;
+    --ring: 45 95% 55%;
 
     --radius: 1rem;
 
-    /* Unified gradient system - enhanced */
-    --gradient-primary: linear-gradient(135deg, hsl(204 45% 55%) 0%, hsl(202 70% 70%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(171 45% 65%) 0%, hsl(204 45% 55%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(206 60% 98%) 100%);
+    /* Unified gradient system - dark gold theme */
+    --gradient-primary: linear-gradient(135deg, hsl(45 95% 55%) 0%, hsl(30 90% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 60%) 0%, hsl(40 70% 45%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 12%) 100%);
     
-    /* Candlestick colors - enhanced visibility */
-    --bullish: 160 55% 48%; /* Brighter teal-green */
-    --bullish-foreground: 0 0% 100%;
-    --bearish: 8 75% 58%; /* Brighter warm red */
+    /* Candlestick colors - vibrant for dark theme */
+    --bullish: 140 70% 55%; /* Bright green */
+    --bullish-foreground: 0 0% 7%;
+    --bearish: 0 85% 60%; /* Bright red */
     --bearish-foreground: 0 0% 100%;
     --candle-wick: 240 5% 64%;
     --candle-body: 240 4% 16%;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 203 33% 22%;
-    --sidebar-primary: 204 36% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 206 60% 95%;
-    --sidebar-accent-foreground: 203 33% 22%;
-    --sidebar-border: 189 13% 71%;
-    --sidebar-ring: 204 36% 50%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 45 100% 95%;
+    --sidebar-primary: 45 95% 55%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 40 70% 45%;
+    --sidebar-accent-foreground: 45 100% 95%;
+    --sidebar-border: 45 30% 25%;
+    --sidebar-ring: 45 95% 55%;
   }
 
   .dark {
-    --background: 203 35% 12%; /* #10212c dark blue */
-    --foreground: 206 60% 95%; /* #e9f2fa light */
+    --background: 0 0% 4%; /* Even darker background */
+    --foreground: 45 100% 98%; /* Brighter gold/cream text */
 
-    --card: 203 33% 18%; /* darker blue */
-    --card-foreground: 206 60% 95%;
+    --card: 0 0% 8%; /* Very dark cards */
+    --card-foreground: 45 100% 98%;
 
-    --popover: 203 33% 18%;
-    --popover-foreground: 206 60% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 45 100% 98%;
 
-    --primary: 202 70% 70%; /* Even brighter blue for dark mode */
-    --primary-rgb: 107 176 221;
-    --primary-foreground: 203 33% 22%;
+    --primary: 45 100% 65%; /* Even brighter gold for dark mode */
+    --primary-rgb: 255 220 50;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 203 35% 36%; /* #3a647f */
-    --secondary-foreground: 206 60% 95%;
+    --secondary: 40 80% 50%; /* Brighter amber */
+    --secondary-foreground: 45 100% 98%;
 
-    --muted: 203 18% 50%; /* #698696 */
-    --muted-foreground: 189 21% 86%;
+    --muted: 0 0% 20%; /* Darker grey */
+    --muted-foreground: 0 0% 75%; /* Lighter grey */
 
-    --accent: 171 50% 70%; /* Brighter teal for dark mode */
-    --accent-foreground: 203 33% 22%;
+    --accent: 45 100% 70%; /* Very bright gold accent */
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 206 60% 95%;
 
-    --border: 203 18% 50%;
-    --input: 203 35% 36%;
-    --ring: 202 63% 65%;
+    --border: 45 40% 30%; /* Brighter gold border for dark mode */
+    --input: 0 0% 15%;
+    --ring: 45 100% 65%;
     
-    /* Unified gradient system - enhanced dark mode */
-    --gradient-primary: linear-gradient(135deg, hsl(202 70% 70%) 0%, hsl(171 50% 70%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(171 50% 70%) 0%, hsl(202 70% 70%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(203 33% 18%) 0%, hsl(203 35% 16%) 100%);
+    /* Unified gradient system - vibrant dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(30 95% 55%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 70%) 0%, hsl(40 80% 50%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 8%) 100%);
     
-    /* Candlestick colors - enhanced dark mode */
-    --bullish: 160 60% 55%; /* Much brighter teal-green for dark bg */
-    --bullish-foreground: 203 35% 12%;
-    --bearish: 8 75% 62%; /* Much brighter warm red for dark bg */
-    --bearish-foreground: 203 35% 12%;
+    /* Candlestick colors - super vibrant dark mode */
+    --bullish: 140 80% 60%; /* Very bright green */
+    --bullish-foreground: 0 0% 4%;
+    --bearish: 0 90% 65%; /* Very bright red */
+    --bearish-foreground: 0 0% 100%;
     --candle-wick: 240 5% 84%;
     --candle-body: 240 5% 96%;
 
-    --sidebar-background: 203 33% 18%;
-    --sidebar-foreground: 206 60% 95%;
-    --sidebar-primary: 202 63% 65%;
-    --sidebar-primary-foreground: 203 33% 22%;
-    --sidebar-accent: 203 35% 36%;
-    --sidebar-accent-foreground: 206 60% 95%;
-    --sidebar-border: 203 18% 50%;
-    --sidebar-ring: 202 63% 65%;
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 45 100% 98%;
+    --sidebar-primary: 45 100% 65%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 40 80% 50%;
+    --sidebar-accent-foreground: 45 100% 98%;
+    --sidebar-border: 45 40% 30%;
+    --sidebar-ring: 45 100% 65%;
   }
 }
 
@@ -189,75 +189,13 @@ All colors MUST be HSL.
     font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
   }
 
-  /* Enhanced candlestick background pattern */
-  .bg-candlestick-pattern {
-    background-image: 
-      /* Main grid - highly visible */
-      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px),
-      linear-gradient(0deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
-    background-size: 50px 50px;
-    position: relative;
-  }
-
-  .bg-candlestick-pattern::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    /* Enhanced candlestick SVG with strong visibility */
-    background-image: url("data:image/svg+xml,%3Csvg width='150' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%235289AD' opacity='0.4' stroke-width='2'%3E%3Cline x1='15' y1='20' x2='15' y2='70'/%3E%3Crect x='11' y='35' width='8' height='25' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='40' y1='15' x2='40' y2='75'/%3E%3Crect x='36' y='28' width='8' height='32' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='65' y1='25' x2='65' y2='65'/%3E%3Crect x='61' y='35' width='8' height='18' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='90' y1='10' x2='90' y2='70'/%3E%3Crect x='86' y='22' width='8' height='38' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='115' y1='20' x2='115' y2='75'/%3E%3Crect x='111' y='40' width='8' height='20' fill='%235289AD' opacity='0.3'/%3E%3Cline x1='140' y1='15' x2='140' y2='65'/%3E%3Crect x='136' y='28' width='8' height='25' fill='%235289AD' opacity='0.3'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat;
-    pointer-events: none;
-    animation: subtle-float 60s ease-in-out infinite;
-  }
-
-  /* Trading grid background - visible chart-like pattern */
-  .bg-trading-grid {
-    background-color: hsl(var(--background));
-    background-image: 
-      linear-gradient(rgba(var(--primary-rgb) / 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--primary-rgb) / 0.08) 1px, transparent 1px),
-      radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.15) 0%, transparent 70%),
-      radial-gradient(circle at 20% 80%, hsl(var(--accent) / 0.12) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.1) 0%, transparent 50%);
-    background-size: 
-      60px 60px,
-      60px 60px,
-      100% 100%,
-      100% 100%,
-      100% 100%;
-    background-position: 0 0, 0 0, center, center, center;
-  }
-
-  /* Dotted chart background - data point inspired */
-  .bg-chart-dots {
-    background-color: hsl(var(--background));
-    background-image: 
-      radial-gradient(circle, hsl(var(--primary) / 0.25) 2px, transparent 2px),
-      radial-gradient(circle at 30% 70%, hsl(var(--accent) / 0.2) 0%, transparent 50%),
-      radial-gradient(circle at 70% 30%, hsl(var(--primary) / 0.18) 0%, transparent 50%),
-      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary) / 0.3) 100%);
-    background-size: 
-      30px 30px,
-      100% 100%,
-      100% 100%,
-      100% 100%;
-    background-position: 0 0, center, center, center;
-  }
-
-  /* Market depth pattern - layered gradients */
+  /* Simplified backgrounds - let candlestick images dominate */
+  .bg-candlestick-pattern,
+  .bg-trading-grid,
+  .bg-chart-dots,
   .bg-market-depth {
     background-color: hsl(var(--background));
-    background-image:
-      radial-gradient(circle, hsl(var(--primary) / 0.15) 2px, transparent 2px),
-      radial-gradient(circle at 40% 60%, hsl(var(--primary) / 0.25) 0%, transparent 40%),
-      radial-gradient(circle at 60% 40%, hsl(var(--accent) / 0.2) 0%, transparent 40%),
-      linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.4) 100%);
-    background-size:
-      40px 40px,
-      100% 100%,
-      100% 100%,
-      100% 100%;
-    background-position: 0 0, center, center, center;
+    position: relative;
   }
 
   @keyframes subtle-float {

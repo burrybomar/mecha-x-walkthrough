@@ -23,12 +23,12 @@ export const AnimatedCandlestickBackground = ({
   // Animation duration based on speed
   const duration = speed === 'slow' ? 60 : speed === 'medium' ? 40 : 20;
 
-  // Gradient overlays to ensure text visibility (lighter for more image visibility)
+  // Minimal gradient overlay - let the image dominate
   const gradientOverlay = variant === 'bullish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.70) 50%, hsla(var(--background), 0.85) 100%)'
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.35) 50%, hsla(var(--background), 0.50) 100%)'
     : variant === 'bearish'
-    ? 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.70) 50%, hsla(var(--background), 0.85) 100%)'
-    : 'linear-gradient(180deg, hsla(var(--background), 0.85) 0%, hsla(var(--background), 0.75) 50%, hsla(var(--background), 0.85) 100%)';
+    ? 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.35) 50%, hsla(var(--background), 0.50) 100%)'
+    : 'linear-gradient(180deg, hsla(var(--background), 0.50) 0%, hsla(var(--background), 0.40) 50%, hsla(var(--background), 0.50) 100%)';
 
   if (!mounted) return null;
 
@@ -47,7 +47,7 @@ export const AnimatedCandlestickBackground = ({
           style={{
             backgroundImage: `url(${imageUrl})`,
             opacity: opacity,
-            filter: 'blur(0.5px)',
+            filter: 'blur(0px)',
           }}
           initial={{ y: 0, scale: 1 }}
           animate={{
@@ -106,17 +106,7 @@ export const AnimatedCandlestickBackground = ({
         }}
       />
 
-      {/* Grid overlay for chart-like appearance */}
-      <div
-        className="absolute inset-0 opacity-50"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsla(var(--primary), 0.15) 1px, transparent 1px),
-            linear-gradient(90deg, hsla(var(--primary), 0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-        }}
-      />
+      {/* Removed grid overlay - let the candlestick image be the main visual */}
     </div>
   );
 };
