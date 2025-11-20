@@ -15,12 +15,14 @@ interface SequenceStep {
 interface SequenceStepsExplainerProps {
   variant: 'bullish' | 'bearish';
   patternImage?: string; // User's candlestick pattern image
+  visualComponent?: React.ReactNode; // Alternative to image
   className?: string;
 }
 
 export const SequenceStepsExplainer = ({
   variant,
   patternImage,
+  visualComponent,
   className = '',
 }: SequenceStepsExplainerProps) => {
   const bullishSteps: SequenceStep[] = [
@@ -98,7 +100,7 @@ export const SequenceStepsExplainer = ({
   return (
     <div className={`relative ${className}`}>
       {/* Visual Pattern Display */}
-      {patternImage && (
+      {(patternImage || visualComponent) && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -110,11 +112,10 @@ export const SequenceStepsExplainer = ({
             {/* Ensure text is visible over the image */}
             <div className="absolute top-4 left-4 z-20">
               <Badge
-                className={`text-lg px-4 py-2 font-bold ${
-                  variant === 'bullish'
+                className={`text-lg px-4 py-2 font-bold ${variant === 'bullish'
                     ? 'bg-bullish/90 text-bullish-foreground'
                     : 'bg-bearish/90 text-bearish-foreground'
-                }`}
+                  }`}
               >
                 {variant === 'bullish' ? (
                   <>
@@ -128,15 +129,23 @@ export const SequenceStepsExplainer = ({
               </Badge>
             </div>
 
-            {/* Pattern Image with overlay for text visibility */}
-            <div className="relative">
-              <img
-                src={patternImage}
-                alt={`${variant} C1-C2-C3-C4 Pattern`}
-                className="w-full h-auto"
-              />
-              {/* Subtle gradient overlay to improve label visibility */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />
+            {/* Pattern Display */}
+            <div className="relative flex justify-center items-center min-h-[300px]">
+              {visualComponent ? (
+                <div className="w-full h-full">
+                  {visualComponent}
+                </div>
+              ) : (
+                <>
+                  <img
+                    src={patternImage}
+                    alt={`${variant} C1-C2-C3-C4 Pattern`}
+                    className="w-full h-auto"
+                  />
+                  {/* Subtle gradient overlay to improve label visibility */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />
+                </>
+              )}
             </div>
           </div>
         </motion.div>

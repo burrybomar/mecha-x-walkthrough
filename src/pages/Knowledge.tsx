@@ -32,10 +32,10 @@ const Knowledge = () => {
         concept: "The core mechanical pattern. C1 establishes liquidity, C2 sweeps it and closes back inside, C3 expands away confirming reversal.",
         why: "This is how institutions operate: sweep retail stops at key levels, then reverse direction. The most common sequence.",
         how: [
-          "C1: Pre-swing candle forming the liquidity level (swing high/low)",
-          "C2: Sweep candle that breaks C1's high/low with wick, closes back inside C1's range",
-          "C3: Expansion candle confirming reversal direction",
-          "Three formation types: C2-REV (standard), C2-SNAP (aggressive close), C2-EXP (continuation bias)"
+          "C1 (Liquidity): Pre-swing candle forming the liquidity level (swing high/low)",
+          "C2 (The Sweep): Sweep candle that breaks C1's high/low with wick, closes back inside C1's range",
+          "C3 (Confirmation): Expansion candle confirming reversal direction. Creates the 'C3 Zone' for re-entry.",
+          "Logic > Pattern: It's not just a shape. It's a liquidity event. No sweep of a valid swing = No C2."
         ],
         rule: "NO sweep = NO trade. C2 must close back inside C1's range. Entry at CISD zone (order block or iFVG where structure broke)."
       }
@@ -114,6 +114,24 @@ const Knowledge = () => {
     },
     {
       id: 6,
+      icon: Clock,
+      title: "Time & Sessions",
+      subtitle: "Time > Price > Pattern",
+      color: "from-blue-500 to-indigo-500",
+      content: {
+        concept: "Algorithms operate on specific time schedules. Price action during 'Killzones' is valid; price action during dead hours is noise.",
+        why: "Volatility is injected at specific times. Trading outside these windows increases risk of manipulation and chop.",
+        how: [
+          "ASIA (20:00-00:00): Accumulation / Range building. Often sets the initial range.",
+          "LONDON (02:00-05:00): Manipulation / Judas Swing. Often creates the false move before the real trend.",
+          "NY AM (06:00-10:00): Expansion / Trend. The main move of the day.",
+          "NY PM (13:00-16:00): Retracement / Continuation. Second leg of the move."
+        ],
+        rule: "Only execute during Killzones. If a C2 forms at 12:30 PM (lunch), ignore it. Time is the first filter."
+      }
+    },
+    {
+      id: 7,
       icon: TrendingUp,
       title: "Trade Management",
       subtitle: "Execution: OSOK (One Shot One Kill)",
@@ -136,7 +154,7 @@ const Knowledge = () => {
     <div className="min-h-screen relative">
       {/* Candlestick Background */}
       <AnimatedCandlestickBackground variant="mixed" opacity={0.5} speed="slow" />
-      
+
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left"
@@ -144,7 +162,7 @@ const Knowledge = () => {
       />
 
       {/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -170,7 +188,7 @@ const Knowledge = () => {
       <section className="py-20 px-4 relative overflow-hidden">
         {/* Animated Price Action Background */}
         <AnimatedPriceAction />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,7 +203,7 @@ const Knowledge = () => {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Everything flows together. Each step builds on the previous. 
+            Everything flows together. Each step builds on the previous.
             Read this once, linearly, to understand how the entire system connects.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -217,8 +235,8 @@ const Knowledge = () => {
                 <div className={`flex flex-col md:flex-row items-center gap-8 ${isEven ? '' : 'md:flex-row-reverse'}`}>
                   {/* Animated Candlestick */}
                   <div className="hidden lg:block flex-shrink-0 relative w-32 h-64">
-                    <CandlestickScroll 
-                      stepNumber={step.id} 
+                    <CandlestickScroll
+                      stepNumber={step.id}
                       isBullish={step.id % 2 !== 0}
                     />
                   </div>
@@ -448,14 +466,14 @@ const Knowledge = () => {
             Master the three sequences. See them in action on real charts.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
+            <Button
               size="lg"
               onClick={() => navigate('/c2-patterns')}
               className="text-lg px-10 py-6 rounded-full"
             >
               C2 Pattern Types
             </Button>
-            <Button 
+            <Button
               size="lg"
               variant="outline"
               onClick={() => navigate('/chart-examples')}
@@ -463,7 +481,7 @@ const Knowledge = () => {
             >
               Chart Examples
             </Button>
-            <Button 
+            <Button
               size="lg"
               variant="outline"
               onClick={() => navigate('/setup')}

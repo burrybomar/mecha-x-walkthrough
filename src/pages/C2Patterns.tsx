@@ -6,8 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SequenceStepsExplainer } from "@/components/SequenceStepsExplainer";
 import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
-import reversalImg from '@/assets/reversal-sequence.jpg';
-import continuationImg from '@/assets/continuation-sequence.jpg';
+import { SequenceDiagram } from "@/components/diagrams/SequenceDiagram";
 
 const C2Patterns = () => {
   const navigate = useNavigate();
@@ -70,11 +69,10 @@ const C2Patterns = () => {
         variant="mixed"
         opacity={0.65}
         speed="slow"
-        imageUrl={reversalImg}
       />
 
       {/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -225,13 +223,13 @@ const C2Patterns = () => {
 
           <SequenceStepsExplainer
             variant="bullish"
-            patternImage={reversalImg}
+            visualComponent={<SequenceDiagram variant="reversal" />}
             className="mb-16"
           />
 
           <SequenceStepsExplainer
             variant="bearish"
-            patternImage={continuationImg}
+            visualComponent={<SequenceDiagram variant="continuation" />}
             className="mb-8"
           />
         </div>

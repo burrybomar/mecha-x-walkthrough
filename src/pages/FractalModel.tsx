@@ -153,11 +153,11 @@ const FractalModel = () => {
                   </p>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-foreground">Roles of the LTF Swing:</h4>
+                    <h4 className="font-semibold text-foreground">Roles of the LTF Swing (C2):</h4>
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="text-bearish mt-1">•</span>
-                        <span>Confirms the 4H high/low in a Reversal</span>
+                        <span>Confirms the 4H high/low with a mechanical C2 Sweep</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-bearish mt-1">•</span>

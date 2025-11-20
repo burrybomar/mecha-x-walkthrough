@@ -8,30 +8,25 @@ import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { CandlestickCard } from "@/components/CandlestickCard";
 
-// Import chart images
-import htfChart from "@/assets/htf-chart-edge.png";
-import htfLevel from "@/assets/htf-level-clean.png";
-import htfSweeps from "@/assets/htf-sweeps-chart.png";
-import htfKeyLevel from "@/assets/htf-key-level-diagram.png";
-import liquiditySweep from "@/assets/liquidity-sweep-clean.png";
-import bslSslChart from "@/assets/bsl-ssl-chart.png";
-import c2Chart from "@/assets/c2-labels-chart.png";
-import swingPattern from "@/assets/swing-low-confirmation-new.jpg";
-import cisdChart from "@/assets/cisd-chart.png";
-import cisdLtf from "@/assets/ltf-entry-confirmation.jpg";
-import setupZones from "@/assets/trade-setups-h4.jpg";
-import distributionSetups from "@/assets/distribution-setups.png";
-import h4Distribution from "@/assets/h4-distribution-formations.jpg";
-import smtLtf from "@/assets/smt-ltf-chart.png";
-import candleClosure from "@/assets/closing-within-pattern.jpg";
-import closingComplete from "@/assets/closing-within-complete.jpg";
-import h1M15WithinH4 from "@/assets/h1-m15-within-h4.jpg";
-import scalperObjective from "@/assets/scalper-objective.jpg";
+// Import Visual Components
+import { PremiumDiscountVisual } from "@/components/PremiumDiscountVisual";
+import { HTFCanvasVisual } from "@/components/HTFCanvasVisual";
+import { HTFSweepDiagram } from "@/components/HTFSweepDiagram";
+import { BSLSSLVisual } from "@/components/BSLSSLVisual";
+import { C2Visual } from "@/components/visuals/C2Visual";
+import { MSSVisual } from "@/components/MSSVisual";
+import { CISDVisual } from "@/components/CISDVisual";
+import { OrderBlockVisual } from "@/components/OrderBlockVisual";
+import { DistributionVisual } from "@/components/visuals/DistributionVisual";
+import { SMTVisual } from "@/components/SMTVisual";
+import { CandleClosureVisual } from "@/components/visuals/CandleClosureVisual";
+import { FractalNestingVisual } from "@/components/FractalNestingVisual";
+import { ScalperObjectiveVisual } from "@/components/visuals/ScalperObjectiveVisual";
 
 interface ChartExample {
   title: string;
   category: "HTF Analysis" | "Liquidity" | "Patterns" | "Entry Zones" | "Sessions";
-  image: string;
+  visual: React.ReactNode;
   description: string;
   keyPoints: string[];
   frameworkStep: string;
@@ -41,7 +36,7 @@ const examples: ChartExample[] = [
   {
     title: "HTF Context & Bias",
     category: "HTF Analysis",
-    image: htfChart,
+    visual: <PremiumDiscountVisual />,
     description: "Higher timeframe showing premium/discount zones and key liquidity levels that guide our directional bias.",
     keyPoints: [
       "Daily high = BSL target for bearish setups",
@@ -54,7 +49,7 @@ const examples: ChartExample[] = [
   {
     title: "Clean HTF Level",
     category: "HTF Analysis",
-    image: htfLevel,
+    visual: <HTFCanvasVisual />,
     description: "Identifying untouched HTF levels that act as magnets for price and reversal zones.",
     keyPoints: [
       "Horizontal level shows key HTF resistance",
@@ -67,7 +62,7 @@ const examples: ChartExample[] = [
   {
     title: "HTF Sweep Pattern",
     category: "Liquidity",
-    image: htfSweeps,
+    visual: <HTFSweepDiagram />,
     description: "Price sweeping HTF highs/lows to grab liquidity before reversing in true direction.",
     keyPoints: [
       "Wick through HTF high grabs BSL",
@@ -80,7 +75,7 @@ const examples: ChartExample[] = [
   {
     title: "Key Level Diagram",
     category: "HTF Analysis",
-    image: htfKeyLevel,
+    visual: <HTFCanvasVisual />,
     description: "Visual breakdown of how price interacts with key HTF levels and creates trading opportunities.",
     keyPoints: [
       "Structure of highs and lows",
@@ -93,7 +88,7 @@ const examples: ChartExample[] = [
   {
     title: "Perfect Liquidity Sweep",
     category: "Liquidity",
-    image: liquiditySweep,
+    visual: <BSLSSLVisual />,
     description: "Clean example of liquidity sweep with clear wick through level and immediate reversal.",
     keyPoints: [
       "Sharp wick grabs stops above high",
@@ -106,7 +101,7 @@ const examples: ChartExample[] = [
   {
     title: "BSL/SSL Levels",
     category: "Liquidity",
-    image: bslSslChart,
+    visual: <BSLSSLVisual />,
     description: "Identifying both Buy Side and Sell Side Liquidity pools for potential sweep targets.",
     keyPoints: [
       "BSL = stops above recent highs",
@@ -119,7 +114,7 @@ const examples: ChartExample[] = [
   {
     title: "C2 Pattern Labels",
     category: "Patterns",
-    image: c2Chart,
+    visual: <C2Visual />,
     description: "C2 (Change of Character) patterns labeled on chart showing confirmed reversals after sweeps.",
     keyPoints: [
       "3-candle reversal pattern",
@@ -132,7 +127,7 @@ const examples: ChartExample[] = [
   {
     title: "Swing Low Pattern",
     category: "Patterns",
-    image: swingPattern,
+    visual: <MSSVisual />,
     description: "Structure of swing lows and how they form SSL that gets swept for long setups.",
     keyPoints: [
       "Series of lower lows builds SSL",
@@ -145,7 +140,7 @@ const examples: ChartExample[] = [
   {
     title: "CISD Entry Zone",
     category: "Entry Zones",
-    image: cisdChart,
+    visual: <CISDVisual />,
     description: "Change in State of Delivery zone marked—where price broke structure and your entry forms.",
     keyPoints: [
       "Mark where structure broke",
@@ -158,7 +153,7 @@ const examples: ChartExample[] = [
   {
     title: "CISD on LTF",
     category: "Entry Zones",
-    image: cisdLtf,
+    visual: <CISDVisual />,
     description: "Lower timeframe view of CISD zone showing precise entry wick and rejection.",
     keyPoints: [
       "Zoom to 5m/15m for precision",
@@ -171,7 +166,7 @@ const examples: ChartExample[] = [
   {
     title: "Setup Zones Clean",
     category: "Entry Zones",
-    image: setupZones,
+    visual: <OrderBlockVisual />,
     description: "Multiple CISD setup zones marked showing optimal entry levels after different sweeps.",
     keyPoints: [
       "Multiple valid zones after each sweep",
@@ -184,7 +179,7 @@ const examples: ChartExample[] = [
   {
     title: "Distribution Setup",
     category: "Sessions",
-    image: distributionSetups,
+    visual: <DistributionVisual />,
     description: "How major participants distribute at premium levels during specific session windows.",
     keyPoints: [
       "Price ranges at highs = distribution",
@@ -197,7 +192,7 @@ const examples: ChartExample[] = [
   {
     title: "H4 Distribution Candle",
     category: "Sessions",
-    image: h4Distribution,
+    visual: <DistributionVisual />,
     description: "H4 session window showing distribution phase and final delivery move.",
     keyPoints: [
       "2-6 PM EST = H4 delivery window",
@@ -210,7 +205,7 @@ const examples: ChartExample[] = [
   {
     title: "SMT Divergence (LTF)",
     category: "Patterns",
-    image: smtLtf,
+    visual: <SMTVisual />,
     description: "Correlation divergence between assets revealing OHLC manipulation.",
     keyPoints: [
       "Compare ES vs NQ during setup",
@@ -223,7 +218,7 @@ const examples: ChartExample[] = [
   {
     title: "Candle Closure Confirmation",
     category: "Patterns",
-    image: candleClosure,
+    visual: <CandleClosureVisual />,
     description: "How candle body closes relative to sweep levels determines setup validity.",
     keyPoints: [
       "Wick sweeps HTF level",
@@ -236,7 +231,7 @@ const examples: ChartExample[] = [
   {
     title: "Complete Closing Within Pattern",
     category: "Patterns",
-    image: closingComplete,
+    visual: <CandleClosureVisual />,
     description: "Full pattern showing closing within behavior after H4 distribution candle sweep.",
     keyPoints: [
       "H4 distribution candle closes above sweep",
@@ -249,7 +244,7 @@ const examples: ChartExample[] = [
   {
     title: "Multi-Timeframe Confluence",
     category: "Entry Zones",
-    image: h1M15WithinH4,
+    visual: <FractalNestingVisual />,
     description: "H1 previous candle run, M15 stop hunt, and M15 FVG all within the H4 distribution candle.",
     keyPoints: [
       "H1 run establishes larger context",
@@ -262,7 +257,7 @@ const examples: ChartExample[] = [
   {
     title: "Scalper's Primary Objective",
     category: "Sessions",
-    image: scalperObjective,
+    visual: <ScalperObjectiveVisual />,
     description: "The ultimate scalping target: catching the very next H4 candle distribution move.",
     keyPoints: [
       "Previous H4 sets up next move",
@@ -280,7 +275,7 @@ const ChartExamples = () => {
 
   return (
     <div className="min-h-screen bg-chart-dots">{/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -314,7 +309,7 @@ const ChartExamples = () => {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-125">
             <CandlestickPattern variant="background" />
           </div>
-          
+
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
@@ -333,7 +328,7 @@ const ChartExamples = () => {
         <div className="space-y-16">
           {categories.map((category, catIdx) => {
             const categoryExamples = examples.filter(e => e.category === category);
-            
+
             return (
               <motion.section
                 key={category}
@@ -346,7 +341,7 @@ const ChartExamples = () => {
                   <Layers className="w-8 h-8 text-primary" />
                   {category}
                 </h2>
-                
+
                 <div className="grid gap-8 md:grid-cols-2">
                   {categoryExamples.map((example, idx) => (
                     <motion.div
@@ -356,38 +351,36 @@ const ChartExamples = () => {
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1 }}
                     >
-                      <CandlestickCard 
+                      <CandlestickCard
                         variant={idx % 2 === 0 ? "bullish" : "bearish"}
                         wickHeight="md"
                         className="h-full"
                       >
-                        <Card className="overflow-hidden hover:shadow-2xl transition-shadow border-0">
-                          {/* Image */}
-                          <div className="relative aspect-video bg-muted overflow-hidden group">
-                            <img 
-                              src={example.image} 
-                              alt={example.title}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                            <Badge 
-                              className="absolute top-3 right-3 font-mono text-xs"
+                        <Card className="overflow-hidden hover:shadow-2xl transition-shadow border-0 h-full flex flex-col">
+                          {/* Visual Component */}
+                          <div className="relative aspect-video bg-black/40 overflow-hidden group flex items-center justify-center p-4">
+                            <div className="w-full h-full transform transition-transform duration-500 group-hover:scale-105">
+                              {example.visual}
+                            </div>
+                            <Badge
+                              className="absolute top-3 right-3 font-mono text-xs z-10"
                               variant="secondary"
                             >
                               {example.frameworkStep}
                             </Badge>
                           </div>
-                          
+
                           {/* Content */}
-                          <div className="p-6">
+                          <div className="p-6 flex-1 flex flex-col">
                             <h3 className="text-xl md:text-2xl font-bold mb-3 font-mono">
                               {example.title}
                             </h3>
-                            
+
                             <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
                               {example.description}
                             </p>
-                            
-                            <div className="space-y-2">
+
+                            <div className="space-y-2 mt-auto">
                               {example.keyPoints.map((point, i) => (
                                 <div key={i} className="flex items-start gap-2">
                                   <Target className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
