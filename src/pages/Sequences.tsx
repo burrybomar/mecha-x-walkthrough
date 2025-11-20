@@ -77,7 +77,7 @@ const Sequences = () => {
           <div className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono mb-2">
             MODULE: SEQUENCE_ID
           </div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/50">
             TRADING <span className="text-primary text-glow-primary">SEQUENCES</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -159,14 +159,14 @@ const Sequences = () => {
 
                       {/* Visual */}
                       <div className="space-y-4 h-full flex flex-col">
-                        <div className="overflow-hidden border border-primary/30 rounded-lg bg-black/40 flex-grow relative min-h-[400px] shadow-2xl">
+                        <div className="overflow-hidden border border-primary/30 rounded-lg bg-card/40 flex-grow relative min-h-[400px] shadow-2xl">
                           <SequenceDiagram
                             variant={seq.id as any}
                             className="w-full h-full absolute inset-0"
                           />
 
                           {/* Overlay UI */}
-                          <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/80 backdrop-blur border border-primary/30 rounded text-xs font-mono text-primary">
+                          <div className="absolute bottom-4 right-4 px-3 py-1 bg-card/80 backdrop-blur border border-primary/30 rounded text-xs font-mono text-primary">
                             LIVE_FEED :: ACTIVE
                           </div>
                         </div>

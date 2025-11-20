@@ -41,19 +41,19 @@ const FractalModel = () => {
             <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 rounded-full mb-4 md:mb-6 border border-primary/20">
               <span className="text-primary font-mono font-semibold text-xs md:text-sm">Core Concept</span>
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 px-4 text-white">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 px-4 text-foreground">
               The Fractal Principle:<br />
               <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 4H Canvas + 1H Trigger
               </span>
             </h1>
-            <p className="text-base md:text-xl text-gray-300 leading-relaxed px-4 mb-4">
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed px-4 mb-4">
               Market truth: A durable directional move requires a swing point.
               The market does not reverse from "nowhere". Mecha-X makes this a hard rule.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-sm hover:bg-accent/20 transition-colors cursor-pointer">
               <span className="text-accent font-semibold">Deep Dive</span>
-              <span className="text-gray-400">•</span>
+              <span className="text-muted-foreground">•</span>
               <button
                 onClick={() => navigate('/knowledge')}
                 className="text-accent hover:underline font-medium"
@@ -70,7 +70,7 @@ const FractalModel = () => {
         <div className="container mx-auto max-w-4xl">
           <Alert className="border-bearish/30 bg-bearish/10 glass-panel">
             <AlertCircle className="h-4 w-4 md:h-5 md:w-5 text-bearish" />
-            <AlertDescription className="text-sm md:text-lg font-medium text-gray-200">
+            <AlertDescription className="text-sm md:text-lg font-medium text-foreground/80">
               <strong className="text-bearish">Non-Negotiable Rule:</strong> No swing, no trade.
               The 4H "small wick" must be validated by an LTF swing before you assume expansion.
             </AlertDescription>
@@ -99,16 +99,16 @@ const FractalModel = () => {
                   <div className="p-2 rounded-lg bg-bullish/20">
                     <Layers className="w-6 h-6 text-bullish" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">The 4H Canvas</h3>
+                  <h3 className="text-2xl font-bold text-foreground">The 4H Canvas</h3>
                 </div>
                 <div className="space-y-4">
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     The 4H candle is your main unit of intraday work. It provides the structure and context for everything you do.
                   </p>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-white">You Care About:</h4>
-                    <ul className="space-y-2 text-gray-400">
+                    <h4 className="font-semibold text-foreground">You Care About:</h4>
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="text-bullish mt-1">•</span>
                         <span>Where it opens relative to key swings</span>
@@ -125,7 +125,7 @@ const FractalModel = () => {
                   </div>
 
                   <div className="p-4 bg-bullish/10 rounded-lg border border-bullish/20 mt-4">
-                    <p className="text-sm font-medium text-gray-200">
+                    <p className="text-sm font-medium text-foreground/90">
                       A clean, small opposing wick plus a strong body fits Mecha-X logic for expansion.
                     </p>
                   </div>
@@ -141,17 +141,17 @@ const FractalModel = () => {
                   <div className="p-2 rounded-lg bg-bearish/20">
                     <Target className="w-6 h-6 text-bearish" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">The LTF Trigger</h3>
+                  <h3 className="text-2xl font-bold text-foreground">The LTF Trigger</h3>
                 </div>
                 <div className="space-y-4">
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     The Lower Timeframe swing (typically 1H or 15m) is your mechanical confirmation.
                     This is what gives you permission to enter.
                   </p>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-white">Roles of the LTF Swing:</h4>
-                    <ul className="space-y-2 text-gray-400">
+                    <h4 className="font-semibold text-foreground">Roles of the LTF Swing:</h4>
+                    <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="text-bearish mt-1">•</span>
                         <span>Confirms the 4H high/low in a Reversal</span>
@@ -168,7 +168,7 @@ const FractalModel = () => {
                   </div>
 
                   <div className="p-4 bg-bearish/10 rounded-lg border border-bearish/20 mt-4">
-                    <p className="text-sm font-medium text-gray-200">
+                    <p className="text-sm font-medium text-foreground/90">
                       Only after this swing prints do you have permission to attack the move.
                     </p>
                   </div>
@@ -198,7 +198,7 @@ const FractalModel = () => {
                     <TrendingUp className="w-5 h-5" />
                     1. Structural Clarity
                   </h3>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     The 4H gives you the "big picture" direction, while the LTF shows you exactly where
                     the market is creating the mechanical turn. No guessing, no "vibes" - just structure.
                   </p>
@@ -211,7 +211,7 @@ const FractalModel = () => {
                     <Target className="w-5 h-5" />
                     2. Risk Management Built-In
                   </h3>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     The LTF swing automatically gives you your invalidation point. If the swing breaks,
                     your thesis is wrong. This creates natural, logical stop placement.
                   </p>
@@ -224,7 +224,7 @@ const FractalModel = () => {
                     <Layers className="w-5 h-5" />
                     3. Fractal Nature of Markets
                   </h3>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     Markets move in nested patterns. What happens on the 1H scale mirrors what happens on the 4H.
                     By requiring both to align, you're trading WITH market structure, not against it.
                   </p>
@@ -244,11 +244,11 @@ const FractalModel = () => {
                 <div className="inline-block p-4 bg-bearish/20 rounded-full">
                   <AlertCircle className="w-12 h-12 text-bearish" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                   The Job Is Not To Guess
                 </h2>
-                <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                  Your job as a trader is not to guess tops or bottoms. It's to <strong className="text-white">recognize when
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  Your job as a trader is not to guess tops or bottoms. It's to <strong className="text-foreground">recognize when
                     the market has printed the structural turn it needs to move</strong>.
                 </p>
                 <p className="text-lg font-medium text-bearish">
@@ -263,8 +263,8 @@ const FractalModel = () => {
       {/* Next Steps */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-8 text-white">Ready to Apply This?</h2>
-          <p className="text-lg text-gray-400 mb-8">
+          <h2 className="text-3xl font-bold mb-8 text-foreground">Ready to Apply This?</h2>
+          <p className="text-lg text-muted-foreground mb-8">
             Now that you understand the fractal model, learn how it plays out in the three core sequences.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

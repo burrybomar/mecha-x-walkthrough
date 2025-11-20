@@ -177,7 +177,7 @@ export default function ChartComparison() {
           <Card className="glass-panel border-white/5">
             <CardContent className="pt-6">
               <Tabs value={activeSequence} onValueChange={setActiveSequence}>
-                <TabsList className="grid w-full grid-cols-3 bg-black/20">
+                <TabsList className="grid w-full grid-cols-3 bg-muted/20">
                   <TabsTrigger value="continuation" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Continuation</TabsTrigger>
                   <TabsTrigger value="reversal" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Reversal</TabsTrigger>
                   <TabsTrigger value="aligned" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Aligned</TabsTrigger>
@@ -229,7 +229,7 @@ export default function ChartComparison() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <div className="aspect-square mb-4 bg-black/20 rounded-lg p-4 border border-white/5">
+                    <div className="aspect-square mb-4 bg-muted/20 rounded-lg p-4 border border-white/5">
                       <SequenceDiagram variant={activeSequence as any} className="w-full h-full" />
                     </div>
                     <div className="space-y-2">
@@ -237,7 +237,7 @@ export default function ChartComparison() {
                       {currentSequence.successPoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <CheckCircle2 className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                          <p className="text-sm text-gray-300 font-mono">{point}</p>
+                          <p className="text-sm text-muted-foreground font-mono">{point}</p>
                         </div>
                       ))}
                     </div>
@@ -254,7 +254,7 @@ export default function ChartComparison() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <div className="aspect-square mb-4 bg-black/20 rounded-lg p-4 border border-white/5">
+                    <div className="aspect-square mb-4 bg-muted/20 rounded-lg p-4 border border-white/5">
                       <SequenceDiagram variant={`${activeSequence}-failed` as any} className="w-full h-full" />
                     </div>
                     <div className="space-y-2">
@@ -262,7 +262,7 @@ export default function ChartComparison() {
                       {currentSequence.failurePoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <XCircle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                          <p className="text-sm text-gray-300 font-mono">{point}</p>
+                          <p className="text-sm text-muted-foreground font-mono">{point}</p>
                         </div>
                       ))}
                     </div>

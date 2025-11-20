@@ -24,39 +24,39 @@ const OHLCTutorial = () => {
       title: "OHLC Basics - Large Body",
       description: "Understanding Open, High, Low, Close",
       candles: [
-        { open: 45, high: 77, low: 42, close: 75, label: "Bullish" }
+        { open: 40, high: 82, low: 38, close: 80, label: "Bullish" }
       ],
-      explanation: "A candlestick shows four key prices: Open (where price started), High (highest price reached), Low (lowest price reached), and Close (where price ended). A bullish candle (green) closes above its open. This candle has a large body (45-75) with small wicks, showing strong buying momentum.",
-      highlights: ["Open = 45", "High = 77 (small upper wick)", "Low = 42 (small lower wick)", "Close = 75 (strong close)"]
+      explanation: "A candlestick shows four key prices: Open (where price started), High (highest price reached), Low (lowest price reached), and Close (where price ended). A bullish candle (green) closes above its open. This candle has a large body (40-80) with very small wicks, showing dominant buying momentum.",
+      highlights: ["Open = 40", "High = 82 (tiny upper wick)", "Low = 38 (tiny lower wick)", "Close = 80 (strong close)"]
     },
     {
       title: "Large Body Bearish",
       description: "Price closes well below open",
       candles: [
-        { open: 75, high: 78, low: 43, close: 45, label: "Bearish" }
+        { open: 80, high: 82, low: 38, close: 40, label: "Bearish" }
       ],
-      explanation: "A bearish candle (red) closes below its open. This candle has a large body (75-45) with small wicks, showing strong selling pressure. The small wicks indicate little fight from buyers.",
-      highlights: ["Open = 75", "High = 78 (small upper wick)", "Low = 43 (small lower wick)", "Close = 45 (strong rejection)"]
+      explanation: "A bearish candle (red) closes below its open. This candle has a large body (80-40) with small wicks, showing strong selling pressure. The small wicks indicate little fight from buyers.",
+      highlights: ["Open = 80", "High = 82 (small upper wick)", "Low = 38 (small lower wick)", "Close = 40 (strong rejection)"]
     },
     {
       title: "Long Wick Rejection",
       description: "Small body with long wicks = rejection",
       candles: [
-        { open: 58, high: 92, low: 28, close: 62, label: "Rejection" }
+        { open: 48, high: 85, low: 45, close: 52, label: "Rejection" }
       ],
-      explanation: "Long wicks with small body indicate strong rejection. This candle tried to reach 92 (upper wick) but was rejected. It also tested 28 (lower wick) and rejected. The small body (58-62) shows indecision but the wicks show sellers above and buyers below are defending levels.",
-      highlights: ["Long upper wick = 92 rejected", "Long lower wick = 28 rejected", "Small body = 58-62 indecision", "Key reversal signal"]
+      explanation: "Long wicks with small body indicate strong rejection. This candle tried to reach 85 (upper wick) but was rejected heavily. The small body (48-52) shows indecision, but the long upper wick confirms sellers are defending higher prices.",
+      highlights: ["Long upper wick = 85 rejected", "Small lower wick", "Small body = 48-52 indecision", "Bearish rejection signal"]
     },
     {
       title: "Liquidity Sweep Pattern",
       description: "Wick through level, close back inside",
       candles: [
-        { open: 50, high: 58, low: 47, close: 56, label: "C1" },
-        { open: 56, high: 75, low: 54, close: 55, label: "C2 Sweep" },
-        { open: 55, high: 57, low: 38, close: 40, label: "C3" }
+        { open: 50, high: 60, low: 45, close: 58, label: "C1 High" },
+        { open: 58, high: 75, low: 55, close: 56, label: "C2 Sweep" },
+        { open: 56, high: 58, low: 35, close: 40, label: "C3 Drop" }
       ],
-      explanation: "C1 forms a high at 58. C2 sweeps above C1's high with a long upper wick to 75 (grabbing BSL), then closes back at 55 (inside C1's range). C3 confirms the reversal by expanding down to 38. This is the core bearish price action setup.",
-      highlights: ["C1 high = 58 (liquidity level)", "C2 sweeps to 75, closes 55", "C3 drops to 38 (confirmation)", "Wick + rejection = valid sweep"]
+      explanation: "C1 forms a high at 60. C2 sweeps well above C1's high to 75 (grabbing BSL), then closes back down at 56 (inside C1's range). This 'fake-out' is the sweep. C3 confirms by expanding aggressively downward to 40.",
+      highlights: ["C1 high = 60 (liquidity level)", "C2 sweeps to 75, closes 56", "C3 drops to 40 (confirmation)", "Classic bearish sweep"]
     },
     {
       title: "Bullish Reversal Sweep",
@@ -99,7 +99,7 @@ const OHLCTutorial = () => {
   return (
     <div className="min-h-screen bg-trading-grid">
       {/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -168,7 +168,7 @@ const OHLCTutorial = () => {
                     <h2 className="text-2xl font-bold mb-2">{currentLessonData.title}</h2>
                     <p className="text-muted-foreground">{currentLessonData.description}</p>
                   </div>
-                  
+
                   <InteractiveCandleChart candles={currentLessonData.candles} />
                 </div>
 
@@ -223,13 +223,12 @@ const OHLCTutorial = () => {
               <button
                 key={i}
                 onClick={() => setCurrentLesson(i)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i === currentLesson 
-                    ? "bg-primary w-8" 
-                    : i < currentLesson 
-                    ? "bg-bullish" 
+                className={`w-2 h-2 rounded-full transition-all ${i === currentLesson
+                  ? "bg-primary w-8"
+                  : i < currentLesson
+                    ? "bg-bullish"
                     : "bg-border"
-                }`}
+                  }`}
               />
             ))}
           </div>
