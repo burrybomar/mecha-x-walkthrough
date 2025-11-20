@@ -3,58 +3,59 @@
 @tailwind utilities;
 
 /*
-  MECHA-GLASS PRO DESIGN SYSTEM
-  Aesthetic: Premium Glassmorphism, Smooth Gradients, Clean & Modern
+  MECHA-MONO ABSTRACT DESIGN SYSTEM
+  Aesthetic: Reverse Monochrome, Minimal, Abstract Geometric, High Contrast
 */
 
 @layer base {
   :root {
-    /* Base Colors - Deep Sophisticated Dark */
-    --background: 240 45% 11%;
-    /* Deep indigo-blue base - perfect for glass effects */
+    /* Base Colors - Pure Monochrome Foundation */
+    --background: 0 0% 6%;
+    /* Deep pure black - absolute minimal */
     --foreground: 0 0% 98%;
-    /* Pure white text for maximum clarity */
+    /* Crisp white - maximum contrast */
 
-    /* Surface Colors - Layered Glass */
-    --card: 240 35% 16%;
-    /* Elevated glass surface */
+    /* Surface Colors - Elevated Darkness */
+    --card: 0 0% 10%;
+    /* Elevated charcoal surface */
     --card-foreground: 0 0% 98%;
-    --popover: 240 35% 16%;
+    --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    /* Brand Colors - Harmonious Blue-Cyan Palette */
-    --primary: 200 90% 60%;
-    /* Soft bright cyan - clean and modern */
-    --primary-foreground: 240 45% 11%;
+    /* Brand Colors - Minimal Amber Accent */
+    --primary: 45 85% 65%;
+    /* Muted amber - strategic accent only */
+    --primary-foreground: 0 0% 6%;
 
-    --secondary: 260 70% 65%;
-    /* Soft purple - complements primary */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 20%;
+    /* Dark grey - subtle differentiation */
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 240 30% 20%;
-    /* Muted dark surface */
-    --muted-foreground: 220 15% 70%;
-    /* Soft light grey for secondary text */
+    --muted: 0 0% 14%;
+    /* Subtle grey surface */
+    --muted-foreground: 0 0% 65%;
+    /* Medium grey text - high contrast */
 
-    --accent: 175 80% 55%;
-    /* Aqua teal - vibrant but not harsh */
-    --accent-foreground: 240 45% 11%;
+    --accent: 0 0% 95%;
+    /* Bright white accent - reversal */
+    --accent-foreground: 0 0% 6%;
 
-    --destructive: 0 80% 62%;
+    --destructive: 0 70% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 35% 25%;
-    /* Visible but subtle borders */
-    --input: 240 30% 20%;
-    --ring: 200 90% 60%;
+    --border: 0 0% 18%;
+    /* Subtle monochrome borders */
+    --input: 0 0% 14%;
+    --ring: 45 85% 65%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
+    /* Sharp, minimal corners */
 
-    /* Trading Colors - Clean & Clear */
-    --bullish: 150 75% 50%;
-    /* Clean emerald green */
-    --bearish: 345 85% 60%;
-    /* Clean rose red */
+    /* Trading Colors - Minimal Contrast */
+    --bullish: 0 0% 85%;
+    /* Light grey for bullish */
+    --bearish: 0 0% 40%;
+    /* Dark grey for bearish */
   }
 }
 
@@ -64,9 +65,9 @@
   }
 
   body {
-    @apply text-foreground antialiased selection:bg-primary/30 selection:text-foreground;
+    @apply text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    /* Premium Glassmorphic Background - Layered Depth */
+    /* Abstract Monochrome Background - Geometric Minimalism */
     position: relative;
     background: hsl(var(--background));
     overflow-x: hidden;
@@ -78,18 +79,18 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Multi-layer gradient background with smooth color transitions */
+    /* Abstract geometric pattern layer */
     background-image:
-      /* Top accent glow */
-      radial-gradient(ellipse 60% 40% at 30% 0%, hsla(200, 90%, 60%, 0.15), transparent 60%),
-      /* Bottom accent glow */
-      radial-gradient(ellipse 70% 50% at 70% 100%, hsla(175, 80%, 55%, 0.12), transparent 65%),
-      /* Center purple ambient */
-      radial-gradient(ellipse 100% 80% at 50% 50%, hsla(260, 70%, 65%, 0.08), transparent 75%),
-      /* Subtle grid pattern */
-      linear-gradient(hsla(200, 90%, 60%, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, hsla(200, 90%, 60%, 0.03) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 80px 80px, 80px 80px;
+      /* Diagonal lines - abstract */
+      linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.015) 48%, rgba(255, 255, 255, 0.015) 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.01) 48%, rgba(255, 255, 255, 0.01) 52%, transparent 52%),
+      /* Grid - minimal */
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      /* Subtle amber accent glow - very minimal */
+      radial-gradient(ellipse 40% 30% at 85% 15%, hsla(45, 85%, 65%, 0.03), transparent 60%);
+    background-size: 120px 120px, 120px 120px, 40px 40px, 40px 40px, 100% 100%;
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
   }
 
   body::after {
@@ -98,11 +99,12 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Glassmorphic overlay effect */
+    /* Abstract geometric shapes overlay */
     background:
-      radial-gradient(circle 800px at 20% 30%, hsla(200, 90%, 70%, 0.06), transparent),
-      radial-gradient(circle 600px at 80% 70%, hsla(175, 80%, 60%, 0.05), transparent);
-    backdrop-filter: blur(0px);
+      /* Large abstract rectangles - very subtle */
+      linear-gradient(90deg, transparent 0%, transparent 20%, rgba(255, 255, 255, 0.008) 20%, rgba(255, 255, 255, 0.008) 22%, transparent 22%),
+      linear-gradient(0deg, transparent 0%, transparent 60%, rgba(255, 255, 255, 0.005) 60%, rgba(255, 255, 255, 0.005) 62%, transparent 62%);
+    opacity: 0.6;
   }
 
   body > * {
@@ -143,58 +145,58 @@
 
 @layer utilities {
 
-  /* Premium Glassmorphism - Clean & Modern */
+  /* Monochrome Glass - Minimal & Sharp */
   .glass-premium {
-    @apply backdrop-blur-xl border relative overflow-hidden;
+    @apply backdrop-blur-md border relative overflow-hidden;
     background: linear-gradient(
       135deg,
-      hsla(var(--card), 0.9) 0%,
-      hsla(var(--card), 0.8) 100%
+      hsla(var(--card), 0.95) 0%,
+      hsla(var(--card), 0.9) 100%
     );
-    border-color: hsla(200, 90%, 60%, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
     box-shadow:
-      0 8px 32px -4px rgba(0, 0, 0, 0.3),
-      0 0 0 1px hsla(200, 90%, 70%, 0.1),
-      inset 0 1px 0 0 hsla(255, 255, 255, 0.05);
+      0 8px 32px -4px rgba(0, 0, 0, 0.6),
+      0 1px 2px 0 rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
   }
 
   .glass-premium::before {
     content: '';
-    @apply absolute inset-0 opacity-[0.02] pointer-events-none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    @apply absolute inset-0 opacity-[0.015] pointer-events-none;
+    /* Minimal noise texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .glass-premium::after {
     content: '';
-    @apply absolute inset-0 pointer-events-none rounded-[inherit];
+    @apply absolute top-0 left-0 right-0 h-px pointer-events-none;
+    /* Sharp top highlight only */
     background: linear-gradient(
-      150deg,
-      hsla(200, 90%, 70%, 0.05) 0%,
-      transparent 40%,
-      transparent 60%,
-      hsla(175, 80%, 60%, 0.04) 100%
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
     );
   }
 
-  /* Clean Text Utilities */
+  /* Minimal Text Utilities */
   .text-glow {
     text-shadow:
-      0 0 15px currentColor,
-      0 2px 8px rgba(0, 0, 0, 0.4);
+      0 0 12px rgba(255, 255, 255, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.6);
   }
 
   .text-glow-primary {
     text-shadow:
-      0 0 20px hsla(200, 90%, 60%, 0.6),
-      0 0 35px hsla(200, 90%, 60%, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+      0 0 20px hsla(45, 85%, 65%, 0.4),
+      0 0 35px hsla(45, 85%, 65%, 0.2),
+      0 2px 8px rgba(0, 0, 0, 0.6);
   }
 
   .text-glow-accent {
     text-shadow:
-      0 0 20px hsla(175, 80%, 55%, 0.6),
-      0 0 35px hsla(175, 80%, 55%, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+      0 0 8px rgba(255, 255, 255, 0.5),
+      0 2px 8px rgba(0, 0, 0, 0.6);
   }
 
   /* Mecha Borders */
@@ -233,18 +235,18 @@
 
   0%,
   100% {
-    opacity: 0.8;
+    opacity: 0.9;
     box-shadow:
-      0 0 15px hsla(200, 90%, 60%, 0.3),
-      0 0 30px hsla(200, 90%, 60%, 0.15);
+      0 0 10px rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(255, 255, 255, 0.05);
   }
 
   50% {
     opacity: 1;
     box-shadow:
-      0 0 25px hsla(200, 90%, 60%, 0.5),
-      0 0 50px hsla(200, 90%, 60%, 0.25),
-      0 0 75px hsla(200, 90%, 60%, 0.1);
+      0 0 20px rgba(255, 255, 255, 0.2),
+      0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 60px hsla(45, 85%, 65%, 0.05);
   }
 }
 
