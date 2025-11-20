@@ -58,27 +58,30 @@ const Index = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-md text-primary text-xs font-mono uppercase tracking-widest mb-6"
           >
             <Terminal className="w-3 h-3 animate-pulse" />
-            <span>System Online // v2.0.5</span>
+            <span>TradingView Indicator // v2.0.5</span>
           </motion.div>
 
           {/* Main Title with Glitch Effect */}
           <div className="relative">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
-              DOMINATE THE
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+              MECHA-X
               <br />
-              <span className="text-glow-primary text-primary">MARKETS</span>
+              <span className="text-glow-primary text-primary">INDICATOR</span>
             </h1>
             <div className="absolute -inset-1 bg-primary/20 blur-3xl -z-10 opacity-20 animate-pulse-glow" />
           </div>
 
           <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light tracking-wide"
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto font-light tracking-wide leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Master the <span className="text-foreground font-semibold">Mecha-X</span> execution model.
-            Precision entries. Algorithmic logic.
+            Automate <span className="text-foreground font-semibold">4H profiling</span> on TradingView with unmatched precision.
+            <br />
+            Auto-detect sweeps, C2 patterns, CISD zones, and targets.
+            <br className="hidden md:block" />
+            <span className="text-primary font-semibold">No manual work. Just trade.</span>
           </motion.p>
 
           {/* CTA Buttons */}
@@ -210,21 +213,21 @@ const Index = () => {
           className="max-w-5xl mx-auto text-center"
         >
           <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 px-4">
-            Why This Framework Works
+            Why Mecha-X Works
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-16">
             {[
               {
-                title: "Price Action Logic",
-                desc: "Follow OHLC structure and candle closures, not lagging indicators"
+                title: "Full Automation",
+                desc: "Indicator detects sweeps, C2 patterns, CISD zones, and targets automatically—zero manual drawing"
               },
               {
-                title: "Multi-Timeframe Sync",
-                desc: "HTF context guides LTF execution—perfect harmony"
+                title: "Real-Time Detection",
+                desc: "Live sweep monitoring, formation type classification (REV/SNAP/EXP), and instant alerts as setups develop"
               },
               {
-                title: "Mechanical Process",
-                desc: "Clear if/then rules eliminate guesswork and emotion"
+                title: "Multi-Timeframe Intelligence",
+                desc: "Auto mode selects optimal HTFs based on your chart. See Daily/4H context without switching timeframes"
               }
             ].map((item, i) => (
               <motion.div
