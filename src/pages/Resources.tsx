@@ -12,7 +12,7 @@ interface Resource {
   title: string;
   description: string;
   category: "Tools" | "Learning" | "Community" | "Practice";
-  icon: any;
+  icon: React.ElementType;
   link?: string;
   badge?: string;
 }
@@ -112,7 +112,7 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen bg-chart-dots">{/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -161,7 +161,7 @@ const Resources = () => {
         <div className="space-y-12 mb-16">
           {categories.map((category, catIdx) => {
             const categoryResources = resources.filter(r => r.category === category);
-            
+
             return (
               <motion.section
                 key={category}
@@ -174,11 +174,11 @@ const Resources = () => {
                   <span className="w-2 h-8 bg-primary rounded-full" />
                   {category}
                 </h2>
-                
+
                 <div className="grid gap-4 md:grid-cols-2">
                   {categoryResources.map((resource, idx) => {
                     const IconComponent = resource.icon;
-                    
+
                     return (
                       <motion.div
                         key={resource.title}
@@ -201,11 +201,11 @@ const Resources = () => {
                               </Badge>
                             )}
                           </div>
-                          
+
                           <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
                             {resource.description}
                           </p>
-                          
+
                           {resource.link && (
                             resource.link.startsWith('http') ? (
                               <Button variant="outline" size="sm" className="w-full gap-2 font-mono" asChild>
@@ -242,7 +242,7 @@ const Resources = () => {
             <p className="text-muted-foreground mb-8">
               Build foundations before risking real money.
             </p>
-            
+
             <div className="space-y-3">
               {learningPath.map((item, idx) => (
                 <motion.div

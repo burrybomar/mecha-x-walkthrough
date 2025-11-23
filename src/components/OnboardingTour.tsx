@@ -10,7 +10,7 @@ interface TourStep {
   description: string;
   target: string; // CSS selector
   position: 'top' | 'bottom' | 'left' | 'right' | 'center';
-  icon: any;
+  icon: React.ElementType;
   highlightColor: 'bullish' | 'bearish' | 'primary';
 }
 
@@ -100,10 +100,10 @@ export const OnboardingTour = () => {
   const getCurrentStepElement = () => {
     const step = tourSteps[currentStep];
     if (step.target === 'body') return null;
-    
+
     const element = document.querySelector(step.target);
     if (!element) return null;
-    
+
     return element.getBoundingClientRect();
   };
 
@@ -111,7 +111,7 @@ export const OnboardingTour = () => {
     const rect = getCurrentStepElement();
     const step = tourSteps[currentStep];
     const isMobile = window.innerWidth < 768;
-    
+
     // On mobile, always center the tooltip for better UX
     if (isMobile || !rect || step.position === 'center') {
       return {
@@ -123,7 +123,7 @@ export const OnboardingTour = () => {
     }
 
     const spacing = 20;
-    let position: any = {};
+    let position: React.CSSProperties = {};
 
     switch (step.position) {
       case 'top':
@@ -162,7 +162,7 @@ export const OnboardingTour = () => {
   const getHighlightStyle = () => {
     const rect = getCurrentStepElement();
     const isMobile = window.innerWidth < 768;
-    
+
     // On mobile, don't show the highlight box
     if (isMobile || !rect) return null;
 
@@ -174,7 +174,7 @@ export const OnboardingTour = () => {
     };
   };
 
-  const handleSwipe = (event: any, info: any) => {
+  const handleSwipe = (_event: MouseEvent | TouchEvent | PointerEvent, info: import('framer-motion').PanInfo) => {
     // Swipe right to advance, swipe left to skip
     if (info.offset.x > 100 || info.velocity.x > 500) {
       handleNext();
@@ -209,24 +209,22 @@ export const OnboardingTour = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className={`absolute rounded-xl border-4 ${
-              step.highlightColor === 'bullish'
+            className={`absolute rounded-xl border-4 ${step.highlightColor === 'bullish'
                 ? 'border-bullish shadow-[0_0_30px_rgba(var(--bullish),0.3)]'
                 : step.highlightColor === 'bearish'
-                ? 'border-bearish shadow-[0_0_30px_rgba(var(--bearish),0.3)]'
-                : 'border-primary shadow-[0_0_30px_rgba(var(--primary),0.3)]'
-            }`}
+                  ? 'border-bearish shadow-[0_0_30px_rgba(var(--bearish),0.3)]'
+                  : 'border-primary shadow-[0_0_30px_rgba(var(--primary),0.3)]'
+              }`}
             style={highlightStyle}
           >
             {/* Animated border pulse */}
             <motion.div
-              className={`absolute inset-0 rounded-xl ${
-                step.highlightColor === 'bullish'
+              className={`absolute inset-0 rounded-xl ${step.highlightColor === 'bullish'
                   ? 'bg-bullish/10'
                   : step.highlightColor === 'bearish'
-                  ? 'bg-bearish/10'
-                  : 'bg-primary/10'
-              }`}
+                    ? 'bg-bearish/10'
+                    : 'bg-primary/10'
+                }`}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
@@ -253,18 +251,17 @@ export const OnboardingTour = () => {
               <div className="w-12 h-1 bg-muted-foreground/20 rounded-full" />
             </div>
           )}
-          
+
           <Card className="p-4 md:p-6 border-2 border-primary/30 shadow-2xl bg-card/95 backdrop-blur-md">
             {/* Header */}
             <div className="flex items-start justify-between mb-3 md:mb-4">
               <div className="flex items-center gap-2 md:gap-3">
-                <div className={`p-1.5 md:p-2 rounded-lg ${
-                  step.highlightColor === 'bullish'
+                <div className={`p-1.5 md:p-2 rounded-lg ${step.highlightColor === 'bullish'
                     ? 'bg-bullish/20 text-bullish'
                     : step.highlightColor === 'bearish'
-                    ? 'bg-bearish/20 text-bearish'
-                    : 'bg-primary/20 text-primary'
-                }`}>
+                      ? 'bg-bearish/20 text-bearish'
+                      : 'bg-primary/20 text-primary'
+                  }`}>
                   <Icon className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div>
@@ -296,13 +293,12 @@ export const OnboardingTour = () => {
                 {tourSteps.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`h-1.5 md:h-2 rounded-full transition-all ${
-                      idx === currentStep
+                    className={`h-1.5 md:h-2 rounded-full transition-all ${idx === currentStep
                         ? 'w-6 md:w-8 bg-primary'
                         : idx < currentStep
-                        ? 'w-1.5 md:w-2 bg-primary/50'
-                        : 'w-1.5 md:w-2 bg-muted'
-                    }`}
+                          ? 'w-1.5 md:w-2 bg-primary/50'
+                          : 'w-1.5 md:w-2 bg-muted'
+                      }`}
                   />
                 ))}
               </div>
@@ -334,15 +330,14 @@ export const OnboardingTour = () => {
           {/* Pointer arrow for non-center tooltips - hide on mobile */}
           {step.position !== 'center' && (
             <div
-              className={`hidden md:block absolute w-4 h-4 bg-card border-2 border-primary/30 rotate-45 ${
-                step.position === 'top'
+              className={`hidden md:block absolute w-4 h-4 bg-card border-2 border-primary/30 rotate-45 ${step.position === 'top'
                   ? 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
                   : step.position === 'bottom'
-                  ? 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2'
-                  : step.position === 'left'
-                  ? 'right-0 top-1/2 -translate-y-1/2 translate-x-1/2'
-                  : 'left-0 top-1/2 -translate-y-1/2 -translate-x-1/2'
-              }`}
+                    ? 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2'
+                    : step.position === 'left'
+                      ? 'right-0 top-1/2 -translate-y-1/2 translate-x-1/2'
+                      : 'left-0 top-1/2 -translate-y-1/2 -translate-x-1/2'
+                }`}
             />
           )}
         </motion.div>

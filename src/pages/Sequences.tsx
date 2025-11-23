@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 
 const sequences = [
   {
-    id: 'continuation',
+    id: 'continuation' as const,
     title: 'Continuation',
     description: 'Trend following setup identifying pullbacks in established trends.',
     steps: [
@@ -27,7 +27,7 @@ const sequences = [
     ]
   },
   {
-    id: 'reversal',
+    id: 'reversal' as const,
     title: 'Reversal',
     description: 'Counter-trend setup catching market turning points.',
     steps: [
@@ -43,7 +43,7 @@ const sequences = [
     ]
   },
   {
-    id: 'aligned',
+    id: 'aligned' as const,
     title: 'Aligned',
     description: 'High probability setup where HTF and LTF align.',
     steps: [
@@ -163,7 +163,7 @@ const Sequences = () => {
                           <div className="space-y-4 h-full flex flex-col">
                             <div className="overflow-hidden border border-primary/30 rounded-lg bg-card/40 flex-grow relative min-h-[400px] shadow-2xl">
                               <SequenceDiagram
-                                variant={seq.id as any}
+                                variant={seq.id}
                                 className="w-full h-full absolute inset-0"
                               />
 

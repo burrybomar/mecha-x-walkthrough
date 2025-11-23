@@ -13,7 +13,7 @@ const caseStudies = [
     id: 'continuation',
     sequence: 'Continuation',
     market: 'Equity Index',
-    color: 'bullish',
+    color: 'bullish' as const,
     icon: TrendingUp,
     narrative: [
       'Daily points to equal highs as main draw',
@@ -37,7 +37,7 @@ const caseStudies = [
     id: 'reversal',
     sequence: 'Reversal',
     market: 'Gold (XAU/USD)',
-    color: 'bearish',
+    color: 'bearish' as const,
     icon: RefreshCw,
     narrative: [
       'Weekly/daily both support bullish expansion from Tuesday LOD profile',
@@ -61,7 +61,7 @@ const caseStudies = [
     id: 'aligned',
     sequence: 'Aligned',
     market: 'Equity Index in Consolidation',
-    color: 'primary',
+    color: 'primary' as const,
     icon: ArrowUpRight,
     narrative: [
       'Market in range; external high likely to be tagged before external low',
@@ -119,7 +119,7 @@ const CaseStudies = () => {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Real setups from equity indices, gold, and FX. See how each sequence 
+              Real setups from equity indices, gold, and FX. See how each sequence
               unfolds with mechanical precision.
             </p>
           </motion.div>
@@ -152,24 +152,22 @@ const CaseStudies = () => {
                   className="space-y-8"
                 >
                   {/* Header Card */}
-                  <CandlestickCard variant={study.color as any} wickHeight="md">
+                  <CandlestickCard variant={study.color} wickHeight="md">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
-                          <Badge className={`mb-3 ${
-                            study.color === 'bullish' ? 'bg-bullish text-bullish-foreground' :
-                            study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
-                            'bg-primary text-primary-foreground'
-                          }`}>
+                          <Badge className={`mb-3 ${study.color === 'bullish' ? 'bg-bullish text-bullish-foreground' :
+                              study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
+                                'bg-primary text-primary-foreground'
+                            }`}>
                             {study.sequence} Sequence
                           </Badge>
                           <CardTitle className="text-3xl">{study.market}</CardTitle>
                         </div>
-                        <study.icon className={`w-12 h-12 ${
-                          study.color === 'bullish' ? 'text-bullish' :
-                          study.color === 'bearish' ? 'text-bearish' :
-                          'text-primary'
-                        }`} />
+                        <study.icon className={`w-12 h-12 ${study.color === 'bullish' ? 'text-bullish' :
+                            study.color === 'bearish' ? 'text-bearish' :
+                              'text-primary'
+                          }`} />
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -230,11 +228,10 @@ const CaseStudies = () => {
                           <p className="text-sm text-muted-foreground mb-1">Target</p>
                           <p className="font-medium">{study.setup.target}</p>
                         </div>
-                        <div className={`p-3 rounded-lg border-2 ${
-                          study.color === 'bullish' ? 'bg-bullish/10 border-bullish/30' :
-                          study.color === 'bearish' ? 'bg-bearish/10 border-bearish/30' :
-                          'bg-primary/10 border-primary/30'
-                        }`}>
+                        <div className={`p-3 rounded-lg border-2 ${study.color === 'bullish' ? 'bg-bullish/10 border-bullish/30' :
+                            study.color === 'bearish' ? 'bg-bearish/10 border-bearish/30' :
+                              'bg-primary/10 border-primary/30'
+                          }`}>
                           <p className="text-sm font-medium">
                             Stop: Protected by LTF swing
                           </p>
