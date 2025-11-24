@@ -4,15 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CandlestickPattern } from "@/components/CandlestickPattern";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { CandlestickButton } from "@/components/CandlestickButton";
-import { CandlestickCard } from "@/components/CandlestickCard";
 import { IndicatorExplainer } from "@/components/IndicatorExplainer";
 import { FVGVisual } from "@/components/FVGVisual";
 import { OrderBlockVisual } from "@/components/OrderBlockVisual";
 import { MSSVisual } from "@/components/MSSVisual";
+import { CandlestickCard } from "@/components/CandlestickCard"; // Keep this import if CandlestickCard is used elsewhere, otherwise remove.
+import { Card } from "@/components/ui/card"; // Keep this import if Card is used elsewhere, otherwise remove.
+import { Badge } from "@/components/ui/badge"; // Keep this import if Badge is used elsewhere, otherwise remove.
+
 
 interface Term {
   term: string;
@@ -176,10 +182,10 @@ const terms: Term[] = [
     example: "Price at 50% of Daily range = neutral, wait for clear zone."
   },
   {
-    term: "Silver Bullet Hour",
+    term: "Key Session Phases",
     category: "Execution",
-    definition: "Specific hours with highest probability setups. PRIMARY: 10:00 AM ET (NYAM H2). Secondary: 03:00 AM ET (LON H2) and 14:00 PM ET (NYPM H1). These are marked with ⚡.",
-    example: "10:00 AM ET Silver Bullet hour: C2 sweep occurs, highest probability entry window."
+    definition: "Specific timing windows with highest probability setups. London Expansion (02:00-05:00 ET) and NY Continuation/Reversal (08:00-11:00 ET).",
+    example: "London Expansion phase often provides the cleanest C2 sweeps of Asia liquidity."
   },
   {
     term: "ASIA Session",
@@ -190,20 +196,20 @@ const terms: Term[] = [
   {
     term: "LONDON Session",
     category: "Timeframes",
-    definition: "02:00-05:00 ET. Expansion phase where sweeps begin. Silver Bullet at 03:00 ET ⚡.",
-    example: "LONDON opens at 02:00 ET, sweeps ASIA highs at 03:00 Silver Bullet hour."
+    definition: "02:00-05:00 ET. Expansion phase where sweeps begin. Focus on Asia High/Low sweeps.",
+    example: "LONDON opens at 02:00 ET, often sweeps ASIA highs to induce shorts before reversing."
   },
   {
     term: "NYAM Session",
     category: "Timeframes",
-    definition: "06:00-09:00 ET. New York AM session. PRIMARY Silver Bullet at 10:00 ET ⚡. Highest probability trading window.",
-    example: "NYAM session: 10:00 AM Silver Bullet hour produces cleanest C2 sweeps."
+    definition: "06:00-09:00 ET. New York AM session. Primary execution window for continuation or reversal models.",
+    example: "NYAM session: 09:30-11:00 ET window produces high probability setups aligning with daily bias."
   },
   {
     term: "NYPM Session",
     category: "Timeframes",
-    definition: "13:00-16:00 ET. New York PM session. Afternoon Silver Bullet at 14:00 ET ⚡. Final push into targets.",
-    example: "NYPM session: 14:00 PM Silver Bullet hour delivers final move to target."
+    definition: "13:00-16:00 ET. New York PM session. Final push into targets or end-of-day reversals.",
+    example: "NYPM session: Late day moves often target remaining liquidity pools."
   },
   {
     term: "One Shot One Kill",
@@ -222,8 +228,8 @@ const terms: Term[] = [
   {
     term: "Macro Time",
     category: "Timeframes",
-    definition: "Specific timing windows (2-5 AM, 8-11 AM, 1-3 PM EST) where major price movements execute. Session models based on these OHLC patterns.",
-    example: "2-5 AM = London open manipulation, 9:30-12 = NYC reversal."
+    definition: "Refers to Higher Timeframe (Weekly/Monthly) context. In the settings, 'Macro' tooltips indicate features relevant to these longer-term cycles, distinct from intraday session timing.",
+    example: "Weekly Open/Close lines are considered Macro structure."
   },
   {
     term: "Distribution",
@@ -278,8 +284,8 @@ const terms: Term[] = [
   {
     term: "Session Models",
     category: "Timeframes",
-    definition: "Multi-session patterns showing how sessions interact. ASIA→LON (manipulation → expansion), LON→NY (setup → delivery), NY 4H (New York-only patterns).",
-    example: "ASIA→LON model: Asia builds range 4900-4920, London sweeps high at 03:00 Silver Bullet."
+    definition: "Multi-session patterns showing how sessions interact. 4H ASIA REVERSAL (Asia sweep + reverse), 4H LONDON REVERSAL (London sweep + reverse), 4H NY REVERSAL (NY continuation/reversal).",
+    example: "4H ASIA REVERSAL: Price sweeps Asia High, then reverses lower during London/NY."
   }
 ];
 
@@ -288,7 +294,7 @@ const Glossary = () => {
   const [search, setSearch] = useState("");
 
   const categories = Array.from(new Set(terms.map(t => t.category)));
-  
+
   const filteredTerms = terms.filter(term =>
     term.term.toLowerCase().includes(search.toLowerCase()) ||
     term.acronym?.toLowerCase().includes(search.toLowerCase()) ||
@@ -302,7 +308,7 @@ const Glossary = () => {
 
   return (
     <div className="min-h-screen bg-trading-grid">{/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -334,9 +340,9 @@ const Glossary = () => {
         >
           {/* Background Candlestick Pattern */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-150">
-            <CandlestickPattern variant="background" />
+            {/* Background pattern removed to reduce visual noise */}
           </div>
-          
+
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
@@ -463,7 +469,7 @@ const Glossary = () => {
         <div className="space-y-12">
           {Object.entries(groupedTerms).map(([category, categoryTerms], idx) => {
             if (categoryTerms.length === 0) return null;
-            
+
             return (
               <motion.section
                 key={category}
@@ -475,51 +481,39 @@ const Glossary = () => {
                   <span className="w-2 h-8 bg-primary rounded-full" />
                   {category}
                 </h2>
-                
-                <div className="grid gap-4">
+
+                <Accordion type="single" collapsible className="w-full">
                   {categoryTerms.map((term, termIdx) => (
-                    <motion.div
-                      key={term.term}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + termIdx * 0.05 }}
-                    >
-                      <CandlestickCard 
-                        variant={termIdx % 2 === 0 ? "bullish" : "bearish"}
-                        wickHeight="sm"
-                      >
-                        <Card className="p-4 md:p-6 hover:shadow-lg transition-shadow border-0">
-                          <div className="flex flex-col md:flex-row md:items-start gap-4">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-3">
-                                <h3 className="text-lg md:text-xl font-bold font-mono">
-                                  {term.term}
-                                </h3>
-                                {term.acronym && (
-                                  <Badge variant="secondary" className="font-mono text-xs">
-                                    {term.acronym}
-                                  </Badge>
-                                )}
-                              </div>
-                              
-                              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
-                                {term.definition}
+                    <AccordionItem key={term.term} value={term.term} className="border-b border-white/10">
+                      <AccordionTrigger className="hover:no-underline py-4">
+                        <div className="flex items-center gap-3 text-left">
+                          <span className="text-lg font-mono font-semibold text-foreground/90">
+                            {term.term}
+                          </span>
+                          {term.acronym && (
+                            <span className="px-2 py-0.5 rounded bg-primary/10 text-primary text-xs font-mono border border-primary/20">
+                              {term.acronym}
+                            </span>
+                          )}
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="pb-4 pl-4 border-l-2 border-primary/20 ml-2 space-y-3">
+                          <p className="text-muted-foreground leading-relaxed">
+                            {term.definition}
+                          </p>
+                          {term.example && (
+                            <div className="p-3 rounded-lg bg-accent/5 border border-accent/20">
+                              <p className="text-sm font-mono">
+                                <span className="font-bold text-accent">Example:</span> {term.example}
                               </p>
-                              
-                              {term.example && (
-                                <div className="p-3 rounded-lg bg-accent/10 border border-accent/30">
-                                  <p className="text-xs md:text-sm font-mono">
-                                    <span className="font-bold text-accent">Example:</span> {term.example}
-                                  </p>
-                                </div>
-                              )}
                             </div>
-                          </div>
-                        </Card>
-                      </CandlestickCard>
-                    </motion.div>
+                          )}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
                   ))}
-                </div>
+                </Accordion>
               </motion.section>
             );
           })}

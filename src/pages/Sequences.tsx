@@ -1,68 +1,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CandlestickButton } from '@/components/CandlestickButton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { SequenceDiagram } from '@/components/diagrams/SequenceDiagram';
 import { FloatingCandle } from '@/components/decorative/FloatingCandle';
 import { ArrowRight, CheckCircle2, AlertTriangle, XCircle, Info, Terminal, TrendingUp } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { InteractiveSequenceViewer } from '@/components/InteractiveSequenceViewer';
 
-const sequences = [
-  {
-    id: 'continuation' as const,
-    title: 'Continuation',
-    description: 'Trend following setup identifying pullbacks in established trends.',
-    steps: [
-      'Identify HTF directional bias (Premium/Discount)',
-      'Wait for LTF C2 Sweep that aligns with HTF',
-      'Ensure no major counter-trend structure exists',
-      'Enter on CISD confirmation'
-    ],
-    rules: [
-      'Trend must be clearly defined on HTF',
-      'LTF sweep must close back inside range',
-      'Best executed during Silver Bullet hours'
-    ]
-  },
-  {
-    id: 'reversal' as const,
-    title: 'Reversal',
-    description: 'Counter-trend setup catching market turning points.',
-    steps: [
-      'Identify C1 Liquidity (Swing High/Low)',
-      'Wait for C2 Sweep (Must close inside C1 range)',
-      'Wait for C3 Expansion to confirm direction',
-      'Enter at CISD (Change in State of Delivery)'
-    ],
-    rules: [
-      'NO sweep = NO trade (C2 must sweep C1)',
-      'C2 must close INSIDE the range (Rejection)',
-      'Stop loss goes above/below C2 sweep wick'
-    ]
-  },
-  {
-    id: 'aligned' as const,
-    title: 'Aligned',
-    description: 'High probability setup where HTF and LTF align.',
-    steps: [
-      'Daily/4H Bias is clearly defined',
-      '1H/15m Structure aligns with HTF',
-      'Price sweeps liquidity into HTF POI',
-      'Triple Timeframe Alignment (Daily + 4H + 1H)'
-    ],
-    rules: [
-      'Do not trade against HTF bias',
-      'Wait for complete fractal alignment',
-      'Highest probability setup type (A+)'
-    ]
-  }
-];
+
 
 const Sequences = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('continuation');
 
   return (
     <div className="min-h-screen bg-transparent text-foreground p-4 md:p-8 relative overflow-hidden">
@@ -85,106 +33,7 @@ const Sequences = () => {
           </p>
         </header>
 
-        <Tabs defaultValue="continuation" className="w-full" onValueChange={setActiveTab}>
-          <div className="flex justify-center mb-8">
-            <TabsList className="glass-premium p-1 h-auto rounded-none border-primary/20">
-              {sequences.map((seq) => (
-                <TabsTrigger
-                  key={seq.id}
-                  value={seq.id}
-                  className="px-6 py-3 rounded-none data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-mono uppercase tracking-wider transition-all"
-                >
-                  {seq.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
-
-          <div className="mt-8">
-            <AnimatePresence mode="wait">
-              {sequences.map((seq) => (
-                seq.id === activeTab ? (
-                  <TabsContent key={seq.id} value={seq.id} className="mt-0" forceMount>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="glass-premium p-6 md:p-8 rounded-xl border-primary/10 relative overflow-hidden">
-                        {/* Background Glow */}
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10 pointer-events-none" />
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                          {/* Content */}
-                          <div className="space-y-6">
-                            <div>
-                              <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
-                                {seq.title} Sequence
-                                <div className="h-px flex-grow bg-gradient-to-r from-primary/50 to-transparent" />
-                              </h2>
-                              <p className="text-lg text-muted-foreground">{seq.description}</p>
-                            </div>
-
-                            <div className="space-y-4">
-                              <div className="bg-card/30 p-4 rounded-lg border border-white/5">
-                                <h3 className="text-sm font-mono text-primary mb-3 flex items-center gap-2">
-                                  <Terminal className="w-4 h-4" /> EXECUTION PROTOCOL
-                                </h3>
-                                <ul className="space-y-2">
-                                  {seq.steps.map((step, idx) => (
-                                    <li key={idx} className="flex items-start gap-3 text-sm">
-                                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold mt-0.5">
-                                        {idx + 1}
-                                      </span>
-                                      <span className="text-foreground/90">{step}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              <div className="bg-card/30 p-4 rounded-lg border border-white/5">
-                                <h3 className="text-sm font-mono text-secondary mb-3 flex items-center gap-2">
-                                  <AlertTriangle className="w-4 h-4" /> CRITICAL RULES
-                                </h3>
-                                <ul className="space-y-2">
-                                  {seq.rules.map((rule, idx) => (
-                                    <li key={idx} className="flex items-start gap-3 text-sm">
-                                      <CheckCircle2 className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
-                                      <span className="text-foreground/80">{rule}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Visual */}
-                          <div className="space-y-4 h-full flex flex-col">
-                            <div className="overflow-hidden border border-primary/30 rounded-lg bg-card/40 flex-grow relative min-h-[400px] shadow-2xl">
-                              <SequenceDiagram
-                                variant={seq.id}
-                                className="w-full h-full absolute inset-0"
-                              />
-
-                              {/* Overlay UI */}
-                              <div className="absolute bottom-4 right-4 px-3 py-1 bg-card/80 backdrop-blur border border-primary/30 rounded text-xs font-mono text-primary">
-                                LIVE_FEED :: ACTIVE
-                              </div>
-                            </div>
-                            <p className="text-xs text-muted-foreground text-center font-mono uppercase tracking-wider opacity-50">
-                              // MECHA-X SEQUENCE VISUALIZATION
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </TabsContent>
-                ) : null
-              ))}
-            </AnimatePresence>
-          </div>
-        </Tabs>
+        <InteractiveSequenceViewer />
 
         <div className="mt-12 flex justify-between items-center">
           <Link to="/">

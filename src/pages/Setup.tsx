@@ -15,6 +15,8 @@ import { IndicatorExplainer } from "@/components/IndicatorExplainer";
 import { BSLSSLVisual } from "@/components/BSLSSLVisual";
 import { C2LabelDecoder } from "@/components/C2LabelDecoder";
 import { CISDVisual } from "@/components/CISDVisual";
+import { SMTVisual } from "@/components/SMTVisual";
+import { HTFVisual } from "@/components/HTFVisual";
 
 interface SettingRowProps {
   label: string;
@@ -163,22 +165,20 @@ const Setup = () => {
             <div className="flex items-center justify-center gap-2">
               <Button
                 onClick={() => setActiveTab("learn")}
-                className={`gap-2 font-mono ${
-                  activeTab === "learn"
-                    ? "bg-primary text-black hover:bg-primary/90 shadow-[0_0_20px_rgba(0,255,255,0.4)]"
-                    : "bg-transparent border-2 border-primary/30 text-primary hover:bg-primary/10"
-                }`}
+                className={`gap-2 font-mono ${activeTab === "learn"
+                  ? "bg-primary text-black hover:bg-primary/90 shadow-[0_0_20px_rgba(0,255,255,0.4)]"
+                  : "bg-transparent border-2 border-primary/30 text-primary hover:bg-primary/10"
+                  }`}
               >
                 <BookOpen className="w-4 h-4" />
                 How To Read
               </Button>
               <Button
                 onClick={() => setActiveTab("settings")}
-                className={`gap-2 font-mono ${
-                  activeTab === "settings"
-                    ? "bg-primary text-black hover:bg-primary/90 shadow-[0_0_20px_rgba(0,255,255,0.4)]"
-                    : "bg-transparent border-2 border-primary/30 text-primary hover:bg-primary/10"
-                }`}
+                className={`gap-2 font-mono ${activeTab === "settings"
+                  ? "bg-primary text-black hover:bg-primary/90 shadow-[0_0_20px_rgba(0,255,255,0.4)]"
+                  : "bg-transparent border-2 border-primary/30 text-primary hover:bg-primary/10"
+                  }`}
               >
                 <SettingsIcon className="w-4 h-4" />
                 Settings Reference
@@ -281,6 +281,56 @@ const Setup = () => {
               visualExample={<CISDVisual />}
             />
 
+            {/* SMT Explainer */}
+            <IndicatorExplainer
+              title="SMT Divergence"
+              what="Smart Money Technique. A crack in correlation between related assets (e.g., ES making a Higher High while NQ makes a Lower High)."
+              why="Reveals manipulation. When one asset fails to confirm the move of another, it signals weakness/reversal. The 'Lie' reveals the true direction."
+              howToRead={[
+                {
+                  element: "BINARY (PSP)",
+                  meaning: "Primary Swing Point - Comparing 2 assets (e.g., ES vs NQ)",
+                  action: "If one sweeps and the other doesn't = Divergence. High probability reversal signal.",
+                },
+                {
+                  element: "TRIAD (CIC)",
+                  meaning: "Correlated Intermarket Confluence - Comparing 3 assets (ES, NQ, RTY)",
+                  action: "Strongest signal. When 2 assets diverge from the leader, the reversal is imminent.",
+                },
+                {
+                  element: "THE LIE",
+                  meaning: "The asset that failed to make the new high/low",
+                  action: "This asset is showing the 'true' hand of the market. Follow its direction.",
+                },
+              ]}
+              visualExample={<SMTVisual />}
+            />
+
+            {/* HTF Context Explainer */}
+            <IndicatorExplainer
+              title="HTF Context Layers"
+              what="Higher Timeframe candles overlaid on your current chart."
+              why="Trading without context is gambling. This feature lets you see the 4H or Daily trend while trading on the 1m or 5m chart, keeping you aligned with the 'Big Picture'."
+              howToRead={[
+                {
+                  element: "GHOST CANDLES",
+                  meaning: "Large background candles representing the Higher Timeframe (HTF)",
+                  action: "Trade in the direction of the HTF candle color. If 4H is green, look for longs.",
+                },
+                {
+                  element: "WICK ZONES",
+                  meaning: "The highs and lows of the HTF candle",
+                  action: "These are key support/resistance levels. Expect reactions here.",
+                },
+                {
+                  element: "ALIGNMENT",
+                  meaning: "When LTF structure matches HTF direction",
+                  action: "A+ Setup. Execute with confidence.",
+                },
+              ]}
+              visualExample={<HTFVisual />}
+            />
+
             {/* Quick Action */}
             <Card className="p-6 border-primary/20 bg-gradient-to-br from-primary/10 to-transparent">
               <div className="flex items-start gap-4">
@@ -323,268 +373,220 @@ const Setup = () => {
               {/* Settings Content */}
               <div className="max-h-[70vh] overflow-y-auto overscroll-contain smooth-scroll">
 
-              {/* Display */}
-              <SettingsGroup
-                title="Display"
-                frameworkLink="Global"
-                description="Controls visual appearance of all indicator elements. Monospace font ensures clean, technical readability. Text Size adjusts all labels globally—Auto mode adapts to your chart zoom level automatically."
-              >
-                <SettingRow label="Font">
-                  <Select defaultValue="monospace">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="default">Default</SelectItem>
-                      <SelectItem value="monospace">Monospace ✓</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="Text Size">
-                  <Select defaultValue="normal">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="tiny">Tiny</SelectItem>
-                      <SelectItem value="small">Small</SelectItem>
-                      <SelectItem value="normal">Normal</SelectItem>
-                      <SelectItem value="large">Large</SelectItem>
-                      <SelectItem value="huge">Huge</SelectItem>
-                      <SelectItem value="auto">Auto</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-              </SettingsGroup>
+                {/* Display */}
+                <SettingsGroup
+                  title="Display"
+                  frameworkLink="Global"
+                  description="Controls visual appearance of all indicator elements. Monospace font ensures clean, technical readability. Text Size adjusts all labels globally—Auto mode adapts to your chart zoom level automatically."
+                >
+                  <SettingRow label="Font">
+                    <Select defaultValue="monospace">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="default">Default</SelectItem>
+                        <SelectItem value="monospace">Monospace ✓</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                  <SettingRow label="Text Size">
+                    <Select defaultValue="normal">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="tiny">Tiny</SelectItem>
+                        <SelectItem value="small">Small</SelectItem>
+                        <SelectItem value="normal">Normal</SelectItem>
+                        <SelectItem value="large">Large</SelectItem>
+                        <SelectItem value="huge">Huge</SelectItem>
+                        <SelectItem value="auto">Auto</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                </SettingsGroup>
 
-              {/* HTF Setup */}
-              <SettingsGroup
-                title="HTF Setup"
-                frameworkLink="Fractal Foundation"
-                description="Automates multi-timeframe analysis. Auto Mode: Indicator selects optimal HTFs based on your chart timeframe (trading 5m? Gets 1H/4H/Daily context automatically). Manual Mode: Customize all 4 HTF layers. 'Bars' controls historical depth. 'Map' toggle shows/hides BSL/SSL lines for each timeframe."
-                defaultOpen
-              >
-                <SettingRow label="Mode">
-                  <Select defaultValue="auto">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="auto">Auto ✓</SelectItem>
-                      <SelectItem value="manual">Manual</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
+                {/* HTF Setup */}
+                <SettingsGroup
+                  title="HTF Setup"
+                  frameworkLink="Fractal Foundation"
+                  description="Automates multi-timeframe analysis. Auto Mode: Indicator selects optimal HTFs based on your chart timeframe (trading 5m? Gets 1H/4H/Daily context automatically). Manual Mode: Customize all 4 HTF layers. 'Bars' controls historical depth. 'Map' toggle shows/hides BSL/SSL lines for each timeframe."
+                  defaultOpen
+                >
+                  <SettingRow label="Mode">
+                    <Select defaultValue="auto">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="auto">Auto ✓</SelectItem>
+                        <SelectItem value="manual">Manual</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
 
-                <div className="mt-2 mb-1 px-3">
-                  <p className="text-xs font-medium text-muted-foreground font-mono">Manual TF Layers</p>
-                </div>
+                  <div className="mt-2 mb-1 px-3">
+                    <p className="text-xs font-medium text-muted-foreground font-mono">Manual TF Layers</p>
+                  </div>
 
-                {[
-                  { num: 1, tfDisplay: "15m", bars: 10, enabled: true, map: true },
-                  { num: 2, tfDisplay: "1H", bars: 10, enabled: true, map: true },
-                  { num: 3, tfDisplay: "4H", bars: 10, enabled: true, map: true },
-                  { num: 4, tfDisplay: "1D", bars: 10, enabled: true, map: true }
-                ].map((config) => (
-                  <div key={config.num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
-                    <SettingRow label={`TF ${config.num}`}>
-                      <Switch defaultChecked={config.enabled} />
-                    </SettingRow>
-                    <SettingRow label="Timeframe">
-                      <Select defaultValue={config.tfDisplay}>
+                  {[
+                    { num: 1, tfDisplay: "15m", bars: 10, enabled: true, map: true },
+                    { num: 2, tfDisplay: "1H", bars: 10, enabled: true, map: true },
+                    { num: 3, tfDisplay: "4H", bars: 10, enabled: true, map: true },
+                    { num: 4, tfDisplay: "1D", bars: 10, enabled: true, map: true }
+                  ].map((config) => (
+                    <div key={config.num} className="space-y-0.5 bg-muted/20 my-1 py-1.5 rounded">
+                      <SettingRow label={`TF ${config.num}`}>
+                        <Switch defaultChecked={config.enabled} />
+                      </SettingRow>
+                      <SettingRow label="Timeframe">
+                        <Select defaultValue={config.tfDisplay}>
+                          <SelectTrigger className="h-7 text-xs font-mono">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="15m">15m</SelectItem>
+                            <SelectItem value="1H">1H</SelectItem>
+                            <SelectItem value="4H">4H</SelectItem>
+                            <SelectItem value="1D">1D</SelectItem>
+                            <SelectItem value="1W">1W</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </SettingRow>
+                      <SettingRow label="Bars">
+                        <Input type="number" defaultValue={config.bars} className="h-7 text-xs w-20 font-mono" />
+                      </SettingRow>
+                      <SettingRow label="Map">
+                        <Switch defaultChecked={config.map} />
+                      </SettingRow>
+                    </div>
+                  ))}
+                </SettingsGroup>
+
+                {/* HTF Candles */}
+                <SettingsGroup
+                  title="HTF Candles"
+                  frameworkLink="Fractal Foundation"
+                  description="Visualize higher timeframe OHLC structure directly on your chart without switching timeframes. Customize colors for bullish/bearish candles and wicks. Offset controls vertical spacing from price. Gap adjusts horizontal spacing between candles. Width controls candle body thickness. Bias indicators show HTF directional strength. Pane labels customize text display within candle panes."
+                >
+                  <SettingRow label="Bull">
+                    <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                  <SettingRow label="Bear">
+                    <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                  <SettingRow label="Wick">
+                    <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                  <SettingRow label="Offset">
+                    <Input type="number" defaultValue={25} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
+                  <SettingRow label="Gap">
+                    <Input type="number" defaultValue={2} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
+                  <SettingRow label="Width">
+                    <Select defaultValue="small">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="tiny">Tiny</SelectItem>
+                        <SelectItem value="small">Small</SelectItem>
+                        <SelectItem value="normal">Normal</SelectItem>
+                        <SelectItem value="large">Large</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                  <SettingRow label="Bias +">
+                    <div className="flex items-center gap-2">
+                      <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Bias ↓">
+                    <div className="flex items-center gap-2">
+                      <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Pane labels">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="inside">
                         <SelectTrigger className="h-7 text-xs font-mono">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="15m">15m</SelectItem>
-                          <SelectItem value="1H">1H</SelectItem>
-                          <SelectItem value="4H">4H</SelectItem>
-                          <SelectItem value="1D">1D</SelectItem>
-                          <SelectItem value="1W">1W</SelectItem>
+                          <SelectItem value="inside">Inside</SelectItem>
+                          <SelectItem value="outside">Outside</SelectItem>
+                          <SelectItem value="none">None</SelectItem>
                         </SelectContent>
                       </Select>
-                    </SettingRow>
-                    <SettingRow label="Bars">
-                      <Input type="number" defaultValue={config.bars} className="h-7 text-xs w-20 font-mono" />
-                    </SettingRow>
-                    <SettingRow label="Map">
-                      <Switch defaultChecked={config.map} />
-                    </SettingRow>
-                  </div>
-                ))}
-              </SettingsGroup>
-
-              {/* HTF Candles */}
-              <SettingsGroup
-                title="HTF Candles"
-                frameworkLink="Fractal Foundation"
-                description="Visualize higher timeframe OHLC structure directly on your chart without switching timeframes. Customize colors for bullish/bearish candles and wicks. Offset controls vertical spacing from price. Gap adjusts horizontal spacing between candles. Width controls candle body thickness. Bias indicators show HTF directional strength. Pane labels customize text display within candle panes."
-              >
-                <SettingRow label="Bull">
-                  <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Bear">
-                  <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Wick">
-                  <Input type="color" defaultValue="#000000" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Offset">
-                  <Input type="number" defaultValue={25} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
-                <SettingRow label="Gap">
-                  <Input type="number" defaultValue={2} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
-                <SettingRow label="Width">
-                  <Select defaultValue="small">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="tiny">Tiny</SelectItem>
-                      <SelectItem value="small">Small</SelectItem>
-                      <SelectItem value="normal">Normal</SelectItem>
-                      <SelectItem value="large">Large</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="Bias +">
-                  <div className="flex items-center gap-2">
-                    <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="Bias ↓">
-                  <div className="flex items-center gap-2">
-                    <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="Pane labels">
-                  <div className="flex items-center gap-2">
-                    <Select defaultValue="inside">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="inside">Inside</SelectItem>
-                        <SelectItem value="outside">Outside</SelectItem>
-                        <SelectItem value="none">None</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-              </SettingsGroup>
-
-              {/* Chart Mapping */}
-              <SettingsGroup
-                title="Chart Mapping"
-                frameworkLink="BSL/SSL Levels"
-                description="Automatically marks key price structure levels. BSL/SSL: Indicator identifies buyside/sellside liquidity (swing highs/lows where stops accumulate) and draws horizontal lines. Dividers: Marks HTF candle boundaries for session timing. Auto mode intelligently selects which timeframes to display. EQ Lines: Displays 50% equilibrium for each HTF range—price above = premium (shorts), below = discount (longs). HTF Intervals provides additional timeframe granularity."
-              >
-                <SettingRow label="BSL/SSL">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2 w-full">
-                    <Select defaultValue="solid">
-                      <SelectTrigger className="h-7 text-xs font-mono flex-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solid">━━━</SelectItem>
-                        <SelectItem value="dashed">----</SelectItem>
-                        <SelectItem value="dotted">····</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
-                    <Switch />
-                    <div className="flex items-center gap-1">
-                      <Switch defaultChecked />
-                      <span className="text-xs font-mono">L</span>
+                      <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
                     </div>
-                  </div>
-                </SettingRow>
-                <SettingRow label="↑ Count">
-                  <Input type="number" defaultValue={2} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
-                <SettingRow label="↓ Count">
-                  <Input type="number" defaultValue={2} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
+                  </SettingRow>
+                </SettingsGroup>
 
-                <div className="mt-2 mb-1 px-3">
-                  <p className="text-xs font-medium text-muted-foreground font-mono">Dividers</p>
-                </div>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2">
+                {/* Chart Mapping */}
+                <SettingsGroup
+                  title="Chart Mapping"
+                  frameworkLink="BSL/SSL Levels"
+                  description="Automatically marks key price structure levels. BSL/SSL: Indicator identifies buyside/sellside liquidity (swing highs/lows where stops accumulate) and draws horizontal lines. Bias: Tracks BSL/SSL sequences to determine bullish/bearish bias (e.g., BSL sweep -> SSL target = Bearish Bias). Dividers: Marks HTF candle boundaries for session timing. Auto mode intelligently selects which timeframes to display. EQ Lines: Displays 50% equilibrium for each HTF range."
+                >
+                  <SettingRow label="BSL/SSL">
                     <Switch defaultChecked />
-                    <span className="text-xs font-mono text-muted-foreground">Auto</span>
-                    <Switch />
-                  </div>
-                </SettingRow>
-                <SettingRow label="≤1H">
-                  <div className="flex items-center gap-2">
-                    <Select defaultValue="solid">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solid">━━━</SelectItem>
-                        <SelectItem value="dashed">----</SelectItem>
-                        <SelectItem value="dotted">····</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="4-8H">
-                  <Select defaultValue="dashed">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="solid">━━━</SelectItem>
-                      <SelectItem value="dashed">----</SelectItem>
-                      <SelectItem value="dotted">····</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="1D">
-                  <div className="flex items-center gap-2">
-                    <Select defaultValue="solid">
-                      <SelectTrigger className="h-7 text-xs font-mono flex-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solid">━━━</SelectItem>
-                        <SelectItem value="dashed">----</SelectItem>
-                        <SelectItem value="dotted">····</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Switch />
-                  </div>
-                </SettingRow>
-                <SettingRow label="1W+">
-                  <div className="flex items-center gap-2">
-                    <Select defaultValue="solid">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solid">━━━</SelectItem>
-                        <SelectItem value="dashed">----</SelectItem>
-                        <SelectItem value="dotted">····</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
-                  </div>
-                </SettingRow>
+                  </SettingRow>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2 w-full">
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono flex-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                          <SelectItem value="dotted">····</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                      <Switch />
+                      <div className="flex items-center gap-1">
+                        <Switch defaultChecked />
+                        <span className="text-xs font-mono">L</span>
+                      </div>
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="↑ Count">
+                    <Input type="number" defaultValue={2} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
+                  <SettingRow label="↓ Count">
+                    <Input type="number" defaultValue={2} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
 
-                <div className="mt-2 mb-1 px-3">
-                  <p className="text-xs font-medium text-muted-foreground font-mono">EQ</p>
-                </div>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2">
-                    <Switch defaultChecked />
+                  <div className="mt-2 mb-1 px-3">
+                    <p className="text-xs font-medium text-muted-foreground font-mono">Dividers</p>
+                  </div>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2">
+                      <Switch defaultChecked />
+                      <span className="text-xs font-mono text-muted-foreground">Auto</span>
+                      <Switch />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="≤1H">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                          <SelectItem value="dotted">····</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="4-8H">
                     <Select defaultValue="dashed">
                       <SelectTrigger className="h-7 text-xs font-mono">
                         <SelectValue />
@@ -595,45 +597,272 @@ const Setup = () => {
                         <SelectItem value="dotted">····</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                  </SettingRow>
+                  <SettingRow label="1D">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono flex-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                          <SelectItem value="dotted">····</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Switch />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="1W+">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                          <SelectItem value="dotted">····</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                    </div>
+                  </SettingRow>
+
+                  <div className="mt-2 mb-1 px-3">
+                    <p className="text-xs font-medium text-muted-foreground font-mono">EQ</p>
                   </div>
-                </SettingRow>
-                <SettingRow label="Count">
-                  <Input type="number" defaultValue={3} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
-                <SettingRow label="HTF Intervals">
-                  <Switch defaultChecked />
-                </SettingRow>
-              </SettingsGroup>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2">
+                      <Switch defaultChecked />
+                      <Select defaultValue="dashed">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                          <SelectItem value="dotted">····</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Count">
+                    <Input type="number" defaultValue={3} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
+                  <SettingRow label="HTF Intervals">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                </SettingsGroup>
 
-              {/* Liquidity Sweeps */}
-              <SettingsGroup
-                title="Liquidity Sweeps"
-                frameworkLink="C2 Detection"
-                description="Automatically detects when price sweeps liquidity levels (wicks through BSL/SSL and closes back inside). Valid Sweeps = confirmed reversals that held. Invalid Sweeps = failed attempts where price continued through. LTF = lower timeframe sweeps, HTF = higher timeframe sweeps (more significant). Live mode detects sweeps in real-time mid-candle for immediate awareness. Max Breaks limits how many consecutive sweep failures are tolerated before pattern invalidation."
-                defaultOpen
-              >
-                <SettingRow label="Enable">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="LTF">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="HTF">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="Live">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="Max Breaks">
-                  <Input type="number" defaultValue={5} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
+                {/* Liquidity Sweeps */}
+                <SettingsGroup
+                  title="Liquidity Sweeps"
+                  frameworkLink="C2 Detection"
+                  description="Automatically detects when price sweeps liquidity levels (wicks through BSL/SSL and closes back inside). Valid Sweeps = confirmed reversals that held. Invalid Sweeps = failed attempts where price continued through. LTF = lower timeframe sweeps, HTF = higher timeframe sweeps (more significant). Live mode detects sweeps in real-time mid-candle for immediate awareness. Max Breaks limits how many consecutive sweep failures are tolerated before pattern invalidation."
+                  defaultOpen
+                >
+                  <SettingRow label="Enable">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                  <SettingRow label="LTF">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                  <SettingRow label="HTF">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                  <SettingRow label="Live">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                  <SettingRow label="Max Breaks">
+                    <Input type="number" defaultValue={5} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
 
-                <div className="mt-2 mb-1 px-3">
-                  <p className="text-xs font-medium text-muted-foreground font-mono">Valid</p>
-                </div>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2">
+                  <div className="mt-2 mb-1 px-3">
+                    <p className="text-xs font-medium text-muted-foreground font-mono">Valid</p>
+                  </div>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={2} className="h-7 text-xs w-16 font-mono" />
+                      <Switch />
+                    </div>
+                  </SettingRow>
+
+                  <div className="mt-2 mb-1 px-3">
+                    <p className="text-xs font-medium text-muted-foreground font-mono">Invalid</p>
+                  </div>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-muted-foreground">LTF</span>
+                      <Switch />
+                      <span className="text-xs font-mono text-muted-foreground">HTF</span>
+                      <Switch />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Style">
+                    <Select defaultValue="dashed">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="solid">━━━</SelectItem>
+                        <SelectItem value="dashed">----</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                  <SettingRow label="">
+                    <div className="flex items-center gap-2">
+                      <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
+                      <Switch />
+                    </div>
+                  </SettingRow>
+                </SettingsGroup>
+
+                {/* Pattern Detection */}
+                <SettingsGroup
+                  title="Pattern Detection"
+                  frameworkLink="C2 Labels & C3"
+                  description="Automates C2 reversal pattern recognition. Indicator labels C2 candles (sweep + close inside), C3 expansion candles, and formation types (REV/SNAP/EXP). C2 Box highlights the reversal zone. SMT tracks divergence: Binary (PSP - Primary Swing Point) compares 2 assets, Triad (CIC - Correlated Intermarket Confluence) compares 3 assets for advanced confirmation."
+                >
+                  <SettingRow label="C2">
+                    <div className="flex items-center gap-2">
+                      <Switch defaultChecked />
+                      <Select defaultValue="small">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="tiny">Tiny</SelectItem>
+                          <SelectItem value="small">Small</SelectItem>
+                          <SelectItem value="normal">Normal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="C3">
+                    <Switch />
+                  </SettingRow>
+                  <SettingRow label="C3 Box">
+                    <div className="flex items-center gap-2">
+                      <Switch defaultChecked />
+                      <span className="text-xs">↑</span>
+                      <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
+                      <span className="text-xs">↓</span>
+                      <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="SMT">
+                    <Select defaultValue="triad">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="binary">Binary</SelectItem>
+                        <SelectItem value="triad">Triad</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                  <SettingRow label="Asset Override">
+                    <Input placeholder="ES,NQ" className="h-7 text-xs font-mono" />
+                  </SettingRow>
+                  <SettingRow label="Asset 3 (Triad)">
+                    <Input placeholder="RTY" className="h-7 text-xs font-mono" />
+                  </SettingRow>
+                </SettingsGroup>
+
+                {/* C2 Decision Table */}
+                <SettingsGroup
+                  title="C2 Decision Table"
+                  frameworkLink="C2 Detection"
+                  description="Real-time table showing C2 pattern analysis and decision support. Displays formation types (REV/SNAP/EXP), Session Models (Asia/London/NY Reversals), sweep validity, momentum strength, and entry recommendations. Compact Mode condenses the display. Max Rows controls history depth."
+                >
+                  <SettingRow label="Table Position">
+                    <Select defaultValue="top-right">
+                      <SelectTrigger className="h-7 text-xs font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="top-left">Top Left</SelectItem>
+                        <SelectItem value="top-center">Top Center</SelectItem>
+                        <SelectItem value="top-right">Top Right</SelectItem>
+                        <SelectItem value="middle-left">Middle Left</SelectItem>
+                        <SelectItem value="middle-center">Middle Center</SelectItem>
+                        <SelectItem value="middle-right">Middle Right</SelectItem>
+                        <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                        <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                        <SelectItem value="bottom-right">Bottom Right</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </SettingRow>
+                  <SettingRow label="Compact Mode">
+                    <Switch />
+                  </SettingRow>
+                  <SettingRow label="Max Rows">
+                    <Input type="number" defaultValue={6} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
+                  </SettingRow>
+                </SettingsGroup>
+
+                {/* CISD */}
+                <SettingsGroup
+                  title="CISD"
+                  frameworkLink="Entry Zones"
+                  description="Automatically calculates your entry level and profit targets. After C2 sweep, indicator identifies momentum candles and marks CISD level (close of last momentum candle). This becomes your entry zone. Projections: 2.0x and 2.5x targets are highlighted with a shade zone to indicate the primary take-profit area. Targets are auto-projected as multipliers of momentum range: 1x (breakeven), 2-2.5x (partial), 3.5-4x (full)."
+                  defaultOpen
+                >
+                  <SettingRow label="Enable">
+                    <div className="flex items-center gap-2">
+                      <Switch defaultChecked />
+                      <Select defaultValue="solid">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="solid">━━━</SelectItem>
+                          <SelectItem value="dashed">----</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input type="number" defaultValue={2} className="h-7 text-xs w-16 font-mono" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Bull">
+                    <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                  <SettingRow label="Bear">
+                    <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                  <SettingRow label="Pane labels">
+                    <div className="flex items-center gap-2">
+                      <Input defaultValue="CISD" className="h-7 text-xs font-mono flex-1" />
+                      <Select defaultValue="tiny">
+                        <SelectTrigger className="h-7 text-xs font-mono w-20">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="tiny">Tiny</SelectItem>
+                          <SelectItem value="small">Small</SelectItem>
+                          <SelectItem value="normal">Normal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <span className="text-xs">↑</span>
+                      <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
+                      <span className="text-xs">↓</span>
+                      <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="Targets">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                  <SettingRow label="Style">
                     <Select defaultValue="solid">
                       <SelectTrigger className="h-7 text-xs font-mono">
                         <SelectValue />
@@ -643,244 +872,65 @@ const Setup = () => {
                         <SelectItem value="dashed">----</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Input type="number" defaultValue={2} className="h-7 text-xs w-16 font-mono" />
-                    <Switch />
-                  </div>
-                </SettingRow>
+                  </SettingRow>
+                  <SettingRow label="Pane labels">
+                    <div className="flex items-center gap-2">
+                      <Select defaultValue="tiny">
+                        <SelectTrigger className="h-7 text-xs font-mono">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="tiny">Tiny</SelectItem>
+                          <SelectItem value="small">Small</SelectItem>
+                          <SelectItem value="normal">Normal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <span className="text-xs">↑</span>
+                      <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
+                      <span className="text-xs">↓</span>
+                      <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
+                    </div>
+                  </SettingRow>
+                  <SettingRow label="↑ Targets">
+                    <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
+                  </SettingRow>
+                  <SettingRow label="↓ Targets">
+                    <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
+                  </SettingRow>
+                </SettingsGroup>
 
-                <div className="mt-2 mb-1 px-3">
-                  <p className="text-xs font-medium text-muted-foreground font-mono">Invalid</p>
-                </div>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono text-muted-foreground">LTF</span>
-                    <Switch />
-                    <span className="text-xs font-mono text-muted-foreground">HTF</span>
-                    <Switch />
-                  </div>
-                </SettingRow>
-                <SettingRow label="Style">
-                  <Select defaultValue="dashed">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="solid">━━━</SelectItem>
-                      <SelectItem value="dashed">----</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="">
-                  <div className="flex items-center gap-2">
-                    <Input type="number" defaultValue={1} className="h-7 text-xs w-16 font-mono" />
-                    <Switch />
-                  </div>
-                </SettingRow>
-              </SettingsGroup>
-
-              {/* Pattern Detection */}
-              <SettingsGroup
-                title="Pattern Detection"
-                frameworkLink="C2 Labels & C3"
-                description="Automates C2 reversal pattern recognition. Indicator labels C2 candles (sweep + close inside), C3 expansion candles, and formation types (REV/SNAP/EXP). C2 Box highlights the reversal zone with customizable colors for bullish/bearish scenarios. SMT tracks divergence between correlated assets: Binary mode compares 2 assets (ES vs NQ), Triad mode compares 3 assets for advanced correlation analysis."
-              >
-                <SettingRow label="C2">
-                  <div className="flex items-center gap-2">
+                {/* FVG */}
+                <SettingsGroup
+                  title="FVG"
+                  frameworkLink="Entry Zones"
+                  description="Automatically marks Fair Value Gaps—price imbalances created during quick moves. These gaps act as support/resistance zones where price often returns. Bullish FVGs appear below price as potential long entry zones. Bearish FVGs appear above price as potential short entry zones. Indicator highlights FVGs that align with CISD levels for high-probability entries."
+                >
+                  <SettingRow label="Show">
                     <Switch defaultChecked />
-                    <Select defaultValue="small">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="tiny">Tiny</SelectItem>
-                        <SelectItem value="small">Small</SelectItem>
-                        <SelectItem value="normal">Normal</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </SettingRow>
-                <SettingRow label="C3">
-                  <Switch />
-                </SettingRow>
-                <SettingRow label="C3 Box">
-                  <div className="flex items-center gap-2">
-                    <Switch defaultChecked />
-                    <span className="text-xs">↑</span>
+                  </SettingRow>
+                  <SettingRow label="Bull">
                     <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
-                    <span className="text-xs">↓</span>
-                    <Input type="color" defaultValue="#ff0000" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="SMT">
-                  <Select defaultValue="triad">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="binary">Binary</SelectItem>
-                      <SelectItem value="triad">Triad</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="Asset Override">
-                  <Input placeholder="ES,NQ" className="h-7 text-xs font-mono" />
-                </SettingRow>
-                <SettingRow label="Asset 3 (Triad)">
-                  <Input placeholder="RTY" className="h-7 text-xs font-mono" />
-                </SettingRow>
-              </SettingsGroup>
+                  </SettingRow>
+                  <SettingRow label="Bear">
+                    <Input type="color" defaultValue="#8b4513" className="h-7 w-16 cursor-pointer" />
+                  </SettingRow>
+                </SettingsGroup>
 
-              {/* C2 Decision Table */}
-              <SettingsGroup
-                title="C2 Decision Table"
-                frameworkLink="C2 Detection"
-                description="Real-time table showing C2 pattern analysis and decision support. Displays formation types (REV/SNAP/EXP), sweep validity, momentum strength, and entry recommendations. Compact Mode condenses the display for smaller charts. Max Rows controls how many recent patterns are shown simultaneously."
-              >
-                <SettingRow label="Table Position">
-                  <Select defaultValue="top-right">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="top-left">Top Left</SelectItem>
-                      <SelectItem value="top-center">Top Center</SelectItem>
-                      <SelectItem value="top-right">Top Right</SelectItem>
-                      <SelectItem value="middle-left">Middle Left</SelectItem>
-                      <SelectItem value="middle-center">Middle Center</SelectItem>
-                      <SelectItem value="middle-right">Middle Right</SelectItem>
-                      <SelectItem value="bottom-left">Bottom Left</SelectItem>
-                      <SelectItem value="bottom-center">Bottom Center</SelectItem>
-                      <SelectItem value="bottom-right">Bottom Right</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="Compact Mode">
-                  <Switch />
-                </SettingRow>
-                <SettingRow label="Max Rows">
-                  <Input type="number" defaultValue={6} min={1} max={20} className="h-7 text-xs w-20 font-mono" />
-                </SettingRow>
-              </SettingsGroup>
-
-              {/* CISD */}
-              <SettingsGroup
-                title="CISD"
-                frameworkLink="Entry Zones"
-                description="Automatically calculates your entry level and profit targets. After C2 sweep, indicator identifies momentum candles and marks CISD level (close of last momentum candle). This becomes your entry zone. Pane labels add customizable text to CISD zones. Targets are auto-projected as multipliers of momentum range: 1x (breakeven move), 2-2.5x (partial profit), 3.5-4x (full target). No manual calculation needed."
-                defaultOpen
-              >
-                <SettingRow label="Enable">
-                  <div className="flex items-center gap-2">
+                {/* Alerts */}
+                <SettingsGroup
+                  title="Alerts"
+                  frameworkLink="Notifications"
+                  description="Automated TradingView alerts for key pattern formations and failures. Formation alerts trigger when valid C2 patterns complete with all criteria met (sweep + close inside + momentum confirmation). Failure alerts notify when active patterns invalidate (stop hit or pattern breakdown). Configure once, receive instant notifications for every setup."
+                >
+                  <SettingRow label="Formation">
                     <Switch defaultChecked />
-                    <Select defaultValue="solid">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solid">━━━</SelectItem>
-                        <SelectItem value="dashed">----</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Input type="number" defaultValue={2} className="h-7 text-xs w-16 font-mono" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="Bull">
-                  <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Bear">
-                  <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Pane labels">
-                  <div className="flex items-center gap-2">
-                    <Input defaultValue="CISD" className="h-7 text-xs font-mono flex-1" />
-                    <Select defaultValue="tiny">
-                      <SelectTrigger className="h-7 text-xs font-mono w-20">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="tiny">Tiny</SelectItem>
-                        <SelectItem value="small">Small</SelectItem>
-                        <SelectItem value="normal">Normal</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <span className="text-xs">↑</span>
-                    <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
-                    <span className="text-xs">↓</span>
-                    <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="Targets">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="Style">
-                  <Select defaultValue="solid">
-                    <SelectTrigger className="h-7 text-xs font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="solid">━━━</SelectItem>
-                      <SelectItem value="dashed">----</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </SettingRow>
-                <SettingRow label="Pane labels">
-                  <div className="flex items-center gap-2">
-                    <Select defaultValue="tiny">
-                      <SelectTrigger className="h-7 text-xs font-mono">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="tiny">Tiny</SelectItem>
-                        <SelectItem value="small">Small</SelectItem>
-                        <SelectItem value="normal">Normal</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <span className="text-xs">↑</span>
-                    <Input type="color" defaultValue="#5db3ff" className="h-7 w-16 cursor-pointer" />
-                    <span className="text-xs">↓</span>
-                    <Input type="color" defaultValue="#ff6b9d" className="h-7 w-16 cursor-pointer" />
-                  </div>
-                </SettingRow>
-                <SettingRow label="↑ Targets">
-                  <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
-                </SettingRow>
-                <SettingRow label="↓ Targets">
-                  <Input defaultValue="1,2,2.5,3.5,4" className="h-7 text-xs font-mono" />
-                </SettingRow>
-              </SettingsGroup>
+                  </SettingRow>
+                  <SettingRow label="Failure">
+                    <Switch defaultChecked />
+                  </SettingRow>
+                </SettingsGroup>
 
-              {/* FVG */}
-              <SettingsGroup
-                title="FVG"
-                frameworkLink="Entry Zones"
-                description="Automatically marks Fair Value Gaps—price imbalances created during quick moves. These gaps act as support/resistance zones where price often returns. Bullish FVGs appear below price as potential long entry zones. Bearish FVGs appear above price as potential short entry zones. Indicator highlights FVGs that align with CISD levels for high-probability entries."
-              >
-                <SettingRow label="Show">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="Bull">
-                  <Input type="color" defaultValue="#00ff00" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-                <SettingRow label="Bear">
-                  <Input type="color" defaultValue="#8b4513" className="h-7 w-16 cursor-pointer" />
-                </SettingRow>
-              </SettingsGroup>
-
-              {/* Alerts */}
-              <SettingsGroup
-                title="Alerts"
-                frameworkLink="Notifications"
-                description="Automated TradingView alerts for key pattern formations and failures. Formation alerts trigger when valid C2 patterns complete with all criteria met (sweep + close inside + momentum confirmation). Failure alerts notify when active patterns invalidate (stop hit or pattern breakdown). Configure once, receive instant notifications for every setup."
-              >
-                <SettingRow label="Formation">
-                  <Switch defaultChecked />
-                </SettingRow>
-                <SettingRow label="Failure">
-                  <Switch defaultChecked />
-                </SettingRow>
-              </SettingsGroup>
-
-            </div>
+              </div>
 
               {/* Panel Footer */}
               <div className="bg-black/60 px-4 py-4 border-t border-primary/20">

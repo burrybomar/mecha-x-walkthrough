@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Activity, Layers, ShieldCheck, LineChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
 
 const Index = () => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center space-y-12">
-            <div className="space-y-6 max-w-3xl">
+        <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center space-y-12 relative overflow-hidden">
+            <AnimatedCandlestickBackground variant="mixed" speed="slow" />
+            <div className="space-y-6 max-w-3xl relative z-10">
                 <h1 className="text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
                     MECHA-X
                 </h1>
@@ -34,7 +36,7 @@ const Index = () => {
                         </div>
                         <h3 className="text-xl font-semibold">Knowledge Base</h3>
                         <p className="text-muted-foreground">
-                            Core concepts, C2/C3 patterns, and the logic behind the liquidity sweeps.
+                            Core concepts, C2/C3 patterns, FVG Detection, and SMT Divergence logic.
                         </p>
                     </div>
                 </Link>
@@ -46,7 +48,7 @@ const Index = () => {
                         </div>
                         <h3 className="text-xl font-semibold">Fractal Model</h3>
                         <p className="text-muted-foreground">
-                            Understanding the 4H Canvas and LTF Triggers. Multi-timeframe alignment.
+                            Understanding the 4H Canvas and Session-Based Models (Asia, London, NY).
                         </p>
                     </div>
                 </Link>
@@ -70,7 +72,7 @@ const Index = () => {
                         </div>
                         <h3 className="text-xl font-semibold">C2 Patterns</h3>
                         <p className="text-muted-foreground">
-                            Deep dive into the specific C2 sweep variations and their mechanical rules.
+                            Deep dive into C2 sweep variations, PSP & CIC SMT types, and mechanical rules.
                         </p>
                     </div>
                 </Link>
