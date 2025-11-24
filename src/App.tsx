@@ -17,7 +17,6 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 // Lazy load secondary pages for better performance
-const Knowledge = lazy(() => import("./pages/Knowledge"));
 const Setup = lazy(() => import("./pages/Setup"));
 const Glossary = lazy(() => import("./pages/Glossary"));
 const ChartExamples = lazy(() => import("./pages/ChartExamples"));
@@ -65,7 +64,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/knowledge" element={<Knowledge />} />
               <Route path="/fractal-model" element={<FractalModel />} />
               <Route path="/sequences" element={<Sequences />} />
               <Route path="/sequence-identifier" element={<SequenceIdentifier />} />

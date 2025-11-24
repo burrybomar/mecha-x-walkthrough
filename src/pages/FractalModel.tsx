@@ -58,10 +58,10 @@ const FractalModel = () => {
               <span className="text-accent font-semibold">Deep Dive</span>
               <span className="text-muted-foreground">•</span>
               <button
-                onClick={() => navigate('/knowledge')}
+                onClick={() => navigate('/sequences')}
                 className="text-accent hover:underline font-medium"
               >
-                See Full Framework →
+                See Mechanics →
               </button>
             </div>
           </motion.div>

@@ -29,26 +29,14 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
-                <Link to="/knowledge" className="group">
-                    <div className="glass-card p-6 rounded-xl border border-white/10 hover:border-primary/50 transition-all duration-300 h-full text-left space-y-4">
-                        <div className="p-3 rounded-lg bg-primary/10 w-fit group-hover:bg-primary/20 transition-colors">
-                            <BookOpen className="w-6 h-6 text-primary" />
-                        </div>
-                        <h3 className="text-xl font-semibold">Knowledge Base</h3>
-                        <p className="text-muted-foreground">
-                            Core concepts, C2/C3 patterns, FVG Detection, and SMT Divergence logic.
-                        </p>
-                    </div>
-                </Link>
-
                 <Link to="/fractal-model" className="group">
                     <div className="glass-card p-6 rounded-xl border border-white/10 hover:border-primary/50 transition-all duration-300 h-full text-left space-y-4">
                         <div className="p-3 rounded-lg bg-blue-500/10 w-fit group-hover:bg-blue-500/20 transition-colors">
                             <Layers className="w-6 h-6 text-blue-500" />
                         </div>
-                        <h3 className="text-xl font-semibold">Fractal Model</h3>
+                        <h3 className="text-xl font-semibold">The Framework</h3>
                         <p className="text-muted-foreground">
-                            Understanding the 4H Canvas and Session-Based Models (Asia, London, NY).
+                            Master the Fractal Model: 4H Canvas + 1H Trigger. The core theory.
                         </p>
                     </div>
                 </Link>
@@ -88,8 +76,8 @@ const Index = () => {
                         </p>
                     </div>
                 </Link>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

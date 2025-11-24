@@ -81,11 +81,11 @@ const C2Patterns = () => {
           <div className="flex items-center justify-between">
             <CandlestickButton
               variant="bullish"
-              onClick={() => navigate("/knowledge")}
+              onClick={() => navigate("/sequences")}
               className="text-xs"
             >
               <ArrowLeft className="w-3 h-3 mr-1" />
-              Back to Knowledge
+              Back to Sequences
             </CandlestickButton>
             <div className="text-sm font-mono text-muted-foreground">
               C2 Pattern Types

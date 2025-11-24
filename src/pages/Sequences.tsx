@@ -41,9 +41,9 @@ const Sequences = () => {
               &lt; RETURN_HOME
             </Button>
           </Link>
-          <Link to="/chart-comparison">
+          <Link to="/sequence-identifier">
             <Button className="font-mono bg-primary text-primary-foreground hover:bg-primary/90 rounded-none">
-              ANALYZE_DATA &gt;
+              IDENTIFY_SEQUENCE &gt;
             </Button>
           </Link>
         </div>

@@ -153,8 +153,8 @@ const FAQ = () => {
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
 
   const categories = Array.from(new Set(faqs.map(f => f.category)));
-  
-  const filteredFAQs = filterCategory 
+
+  const filteredFAQs = filterCategory
     ? faqs.filter(f => f.category === filterCategory)
     : faqs;
 
@@ -165,7 +165,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-trading-grid">{/* Header */}
-      <motion.header 
+      <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -199,7 +199,7 @@ const FAQ = () => {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none scale-150">
             <CandlestickPattern variant="background" />
           </div>
-          
+
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
@@ -246,7 +246,7 @@ const FAQ = () => {
         <div className="space-y-8">
           {Object.entries(groupedFAQs).map(([category, categoryFAQs], catIdx) => {
             if (categoryFAQs.length === 0) return null;
-            
+
             return (
               <motion.section
                 key={category}
@@ -255,12 +255,12 @@ const FAQ = () => {
                 transition={{ delay: 0.2 + catIdx * 0.1 }}
               >
                 <h2 className="text-2xl md:text-3xl font-bold mb-4 font-mono">{category}</h2>
-                
+
                 <div className="space-y-3">
                   {categoryFAQs.map((faq, faqIdx) => {
                     const globalIdx = faqs.indexOf(faq);
                     const isOpen = openIndex === globalIdx;
-                    
+
                     return (
                       <motion.div
                         key={globalIdx}
@@ -268,7 +268,7 @@ const FAQ = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + faqIdx * 0.05 }}
                       >
-                        <CandlestickCard 
+                        <CandlestickCard
                           variant={faqIdx % 2 === 0 ? "bullish" : "bearish"}
                           wickHeight="sm"
                         >
@@ -290,7 +290,7 @@ const FAQ = () => {
                                 <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                               </motion.div>
                             </button>
-                            
+
                             <motion.div
                               initial={false}
                               animate={{
@@ -329,7 +329,7 @@ const FAQ = () => {
             Review the full framework documentation for deeper understanding.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button onClick={() => navigate('/knowledge')} size="lg">
+            <Button onClick={() => navigate('/fractal-model')} size="lg">
               Read Framework
             </Button>
             <Button onClick={() => navigate('/setup')} variant="outline" size="lg">

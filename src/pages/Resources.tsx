@@ -33,12 +33,12 @@ const resources: Resource[] = [
     link: "https://www.tradingview.com"
   },
   {
-    title: "Knowledge Base",
-    description: "Framework documentation. Bookmark for reference.",
+    title: "The Framework",
+    description: "Core theory: 4H Canvas + 1H Trigger. Start here.",
     category: "Learning",
     icon: BookOpen,
     badge: "Start Here",
-    link: "/knowledge"
+    link: "/fractal-model"
   },
   {
     title: "Setup Configuration",
@@ -101,7 +101,7 @@ const Resources = () => {
   ];
 
   const learningPath = [
-    { step: 1, task: "Read complete Knowledge Base", time: "2-3 hours" },
+    { step: 1, task: "Study the Framework (Fractal Model)", time: "1-2 hours" },
     { step: 2, task: "Configure MECHA-X indicator", time: "30 mins" },
     { step: 3, task: "Study Chart Examples gallery", time: "1-2 hours" },
     { step: 4, task: "Mark up 20 historical setups", time: "3-4 hours" },
