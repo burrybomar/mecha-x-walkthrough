@@ -215,7 +215,7 @@ const FAQ = () => {
                         transition={{ delay: 0.3 + faqIdx * 0.05 }}
                       >
                         <CandlestickCard
-                          variant="neutral"
+                          variant="bullish"
                           wickHeight="sm"
                         >
                           <Card className="overflow-hidden border-0">

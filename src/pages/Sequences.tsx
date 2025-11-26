@@ -23,7 +23,7 @@ const Sequences = () => {
         <header className="mb-12 text-center space-y-6">
           <div className="flex items-center justify-center gap-4 mb-8">
             <CandlestickButton
-              variant="neutral"
+              variant="bullish"
               onClick={() => navigate('/fractal-model')}
               className="gap-2 text-sm"
             >
