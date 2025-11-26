@@ -74,7 +74,7 @@ export const Framework = () => {
                             },
                             {
                                 step: "C2",
-                                role: "Sweeps C1. Must fail to close inside C1's range.",
+                                role: "Sweeps C1. Must Close Inside C1 Range.",
                                 shows: "⚡ label with formation type, time, direction"
                             },
                             {

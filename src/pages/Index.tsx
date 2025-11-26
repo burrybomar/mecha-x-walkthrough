@@ -55,13 +55,7 @@ const Index = () => {
                         link="/alerts"
                         color="orange-400"
                     />
-                    <FeatureCard
-                        icon={Settings}
-                        title="Configuration"
-                        description="Master the inputs. Auto-HTF modes, visual settings, and customization."
-                        link="/setup"
-                        color="gray-400"
-                    />
+
                 </div>
                 <HowToRead />
                 <UseCases />

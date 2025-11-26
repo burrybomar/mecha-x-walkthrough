@@ -190,15 +190,7 @@ const Features = () => {
                 </div>
             </FeatureSection>
 
-            {/* Footer CTA */}
-            <section className="py-24 px-4 text-center">
-                <h2 className="text-3xl font-bold mb-8">Ready to configure?</h2>
-                <Link to="/setup">
-                    <Button className="h-12 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold">
-                        Go to Setup Guide
-                    </Button>
-                </Link>
-            </section>
+
 
             <div className="relative z-10">
                 <Footer />

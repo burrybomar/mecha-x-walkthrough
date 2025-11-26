@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState, useCallback } from 'react';
 import candlestickTheme from '@/assets/candlestick-theme.jpg';
 
 interface AnimatedCandlestickBackgroundProps {
@@ -9,6 +9,14 @@ interface AnimatedCandlestickBackgroundProps {
   imageUrl?: string;
 }
 
+interface SpawnedCandle {
+  id: number;
+  x: number;
+  y: number;
+  variant: 'bullish' | 'bearish';
+  scale: number;
+}
+
 export const AnimatedCandlestickBackground = ({
   variant = 'mixed',
   opacity = 0.35,
@@ -16,6 +24,7 @@ export const AnimatedCandlestickBackground = ({
   imageUrl,
 }: AnimatedCandlestickBackgroundProps) => {
   const [mounted, setMounted] = useState(false);
+  const [candles, setCandles] = useState<SpawnedCandle[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -34,19 +43,53 @@ export const AnimatedCandlestickBackground = ({
       ? 'linear-gradient(180deg, hsla(var(--background), 0.25) 0%, hsla(var(--background), 0.10) 50%, hsla(var(--background), 0.25) 100%)'
       : 'linear-gradient(180deg, hsla(var(--background), 0.25) 0%, hsla(var(--background), 0.15) 50%, hsla(var(--background), 0.25) 100%)';
 
+  const handleInteraction = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    // Limit spawn rate and count
+    if (Math.random() > 0.3 || candles.length > 15) return;
+
+    let clientX, clientY;
+    if ('touches' in e) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else {
+      clientX = (e as React.MouseEvent).clientX;
+      clientY = (e as React.MouseEvent).clientY;
+    }
+
+    const newCandle: SpawnedCandle = {
+      id: Date.now(),
+      x: clientX,
+      y: clientY,
+      variant: Math.random() > 0.5 ? 'bullish' : 'bearish',
+      scale: 0.5 + Math.random() * 0.5,
+    };
+
+    setCandles(prev => [...prev, newCandle]);
+
+    // Cleanup
+    setTimeout(() => {
+      setCandles(prev => prev.filter(c => c.id !== newCandle.id));
+    }, 2000);
+  }, [candles.length]);
+
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+    <div
+      className="fixed inset-0 overflow-hidden z-[-1]"
+      onMouseMove={handleInteraction}
+      onClick={handleInteraction}
+      onTouchMove={handleInteraction}
+    >
       {/* Light gradient overlay - barely there */}
       <div
-        className="absolute inset-0 z-10"
+        className="absolute inset-0 z-10 pointer-events-none"
         style={{ background: gradientOverlay }}
       />
 
       {/* Static background image - Stable and high quality */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform pointer-events-none"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           opacity: opacity,
@@ -54,6 +97,33 @@ export const AnimatedCandlestickBackground = ({
         }}
       />
 
+      {/* Spawned Candles */}
+      <AnimatePresence>
+        {candles.map((candle) => (
+          <motion.div
+            key={candle.id}
+            initial={{ opacity: 0, scale: 0, y: candle.y, x: candle.x }}
+            animate={{
+              opacity: [0, 0.8, 0],
+              scale: candle.scale,
+              y: candle.variant === 'bullish' ? candle.y - 100 : candle.y + 100,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute pointer-events-none z-20"
+          >
+            <div
+              className={`w-2 h-12 rounded-sm ${candle.variant === 'bullish'
+                  ? 'bg-bullish shadow-[0_0_15px_rgba(34,197,94,0.5)]'
+                  : 'bg-bearish shadow-[0_0_15px_rgba(239,68,68,0.5)]'
+                }`}
+            >
+              <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-[1px] h-20 ${candle.variant === 'bullish' ? 'bg-bullish' : 'bg-bearish'
+                }`} />
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
 
       {/* Noise Texture Overlay */}
       <div
@@ -66,7 +136,7 @@ export const AnimatedCandlestickBackground = ({
 
       {/* Subtle radial accents - don't overpower the main image */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
         style={{
           background:
             variant === 'bullish'
@@ -86,7 +156,7 @@ export const AnimatedCandlestickBackground = ({
       />
 
       <motion.div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
         style={{
           background:
             variant === 'bullish'

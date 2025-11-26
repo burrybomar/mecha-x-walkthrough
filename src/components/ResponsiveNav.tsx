@@ -56,49 +56,14 @@ export const ResponsiveNav = () => {
           <BookOpen className="w-4 h-4 mr-1" />
           Learn
         </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/case-studies')}
-          className="font-mono"
-          aria-label="Case Studies"
-        >
-          <FileText className="w-4 h-4 mr-1" />
-          Cases
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/chart-examples')}
-          className="font-mono"
-          aria-label="Chart Examples"
-        >
-          <ChartColumnIncreasing className="w-4 h-4 mr-1" />
-          Charts
-        </Button>
+
 
         {/* Tools */}
 
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/setup')}
-          className="font-mono"
-          aria-label="Setup Indicators"
-        >
-          Setup
-        </Button>
+
 
         {/* Reference */}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/glossary')}
-          className="font-mono"
-          aria-label="Trading Glossary"
-        >
-          Glossary
-        </Button>
+
         <Button
           variant="ghost"
           size="sm"

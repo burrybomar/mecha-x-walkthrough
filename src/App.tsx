@@ -18,16 +18,14 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 // Lazy load secondary pages for better performance
-const Setup = lazy(() => import("./pages/Setup"));
-const Glossary = lazy(() => import("./pages/Glossary"));
-const ChartExamples = lazy(() => import("./pages/ChartExamples"));
+
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Resources = lazy(() => import("./pages/Resources"));
 const TradeJournal = lazy(() => import("./pages/TradeJournal"));
 const FractalModel = lazy(() => import("./pages/FractalModel"));
 const Sequences = lazy(() => import("./pages/Sequences"));
 const SequenceIdentifier = lazy(() => import("./pages/SequenceIdentifier"));
-const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+
 const C2Patterns = lazy(() => import("./pages/C2Patterns"));
 const Features = lazy(() => import("./pages/Features"));
 const Knowledge = lazy(() => import("./pages/Knowledge"));
@@ -69,13 +67,11 @@ const App = () => {
               <Route path="/fractal-model" element={<FractalModel />} />
               <Route path="/sequences" element={<Sequences />} />
               <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
+
               <Route path="/c2-patterns" element={<C2Patterns />} />
               <Route path="/features" element={<Features />} />
               <Route path="/knowledge" element={<Knowledge />} />
-              <Route path="/setup" element={<Setup />} />
-              <Route path="/glossary" element={<Glossary />} />
-              <Route path="/chart-examples" element={<ChartExamples />} />
+
               <Route path="/faq" element={<FAQ />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/trade-journal" element={<ProtectedRoute><TradeJournal /></ProtectedRoute>} />
