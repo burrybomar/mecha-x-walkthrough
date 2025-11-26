@@ -1,27 +1,32 @@
-# Visuals & Settings Update Walkthrough
+# Visual Overhaul: Glacier Minimalist
 
-I have addressed the user's feedback regarding the "generic" sequence visuals and the inaccurate settings documentation.
+I have completely redone the website's visual theme to match your request for an "artistic, minimalist, candlestick-oriented" design with a "Glacier Blue" and "Light Grey" palette.
 
-## Changes Made
+## Key Changes
 
-### 1. New Sequence Visuals (`src/components/visuals/MechaSequenceVisual.tsx`)
+### 1. New Color Palette & Theme (`src/index.css`)
 
-- Created a high-fidelity SVG-based component to visualize the three core sequences:
-  - **Reversal**: Shows C1 Swing High/Low, C2 Sweep (with gradient highlight), and C3 Expansion with CISD entry level.
-  - **Continuation**: Shows HTF context (ghost candle), Impulse, Pullback, and Continuation Trigger.
-  - **Aligned**: Shows HTF Bias arrow, LTF structure alignment, and "A+ Setup" indicator.
-- Replaced the generic `SequenceDiagram` in `InteractiveSequenceViewer.tsx` with this new component.
+- **Background**: Very light cool grey/white (`hsl(210, 20%, 98%)`) for a clean, minimalist canvas.
+- **Text**: Deep charcoal/black (`hsl(220, 20%, 10%)`) for maximum visibility and contrast.
+- **Primary**: "Glacier Blue" (`hsl(200, 60%, 60%)`) - a calm, icy blue used for branding and bullish indicators.
+- **Secondary**: Light grey (`hsl(210, 20%, 90%)`) for subtle UI elements.
+- **Glassmorphism**: Implemented a new `.glass-panel` class with a "frosted glass" look (white with high blur and subtle border), replacing the old dark glass style.
 
-### 2. Configuration Update (`src/components/landing/Configuration.tsx`)
+### 2. New Background (`src/components/visuals/MinimalistCandleBackground.tsx`)
 
-- **Removed**: The generic table layout.
-- **Added**: A grid layout of "Settings Groups" that matches the actual PineScript inputs found in `reference/Mecha-X.pine`.
-- **Specifics**:
-  - Added "POI Validation" group with "POI Filter", "NWOG", "MWDR", "FVG".
-  - Added "Display", "HTF Setup", "HTF Candles", "Chart Mapping", "Liquidity Sweeps", "Pattern Detection", and "CISD" groups.
-  - Added a note about the critical "POI Filter" input.
+- Created a custom HTML5 Canvas component.
+- **Visuals**: Draws thin, artistic candlesticks that gently float upwards.
+- **Colors**: Uses the Glacier Blue (bullish) and Light Grey (bearish) palette.
+- **Animation**: Subtle pulsing and movement to create a "living" background without being distracting.
+- **Integration**: Added to `App.tsx` to render globally behind all content.
+
+### 3. Typography
+
+- **Font**: Switched to `JetBrains Mono` / `Fira Code` (monospace) for the entire site to give it a technical, trading-focused feel.
+- **Headings**: Bold, uppercase, and strictly black for impact.
 
 ## Verification
 
-- **Visuals**: The sequences now look like the actual trading setup (candles, wicks, levels) rather than abstract boxes.
-- **Settings**: The configuration section now accurately reflects the tool's actual inputs, avoiding confusion for the user.
+- **Aesthetic**: The site now feels much lighter, cleaner, and more "premium" with the glacier theme.
+- **Readability**: Black text on light backgrounds ensures excellent readability.
+- **Interactivity**: The background provides a dynamic, state-of-the-art feel.

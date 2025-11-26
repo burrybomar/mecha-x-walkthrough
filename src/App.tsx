@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { MinimalistCandleBackground } from "./components/visuals/MinimalistCandleBackground";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -47,7 +48,7 @@ const App = () => {
         </a>
         <Toaster />
         <Sonner />
-        <AnimatedCandlestickBackground variant="mixed" opacity={0.4} speed="slow" />
+        <MinimalistCandleBackground />
         <BrowserRouter>
           <Navbar />
           <OnboardingTour />
