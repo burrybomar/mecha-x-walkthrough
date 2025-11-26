@@ -152,7 +152,7 @@ const CaseStudies = () => {
                   className="space-y-8"
                 >
                   {/* Header Card */}
-                  <CandlestickCard variant={study.color} wickHeight="md">
+                  <CandlestickCard variant={study.color === 'primary' ? 'bullish' : study.color} wickHeight="md">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
