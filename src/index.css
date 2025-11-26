@@ -10,7 +10,7 @@
 @layer base {
   :root {
     /* Base Colors - Glacier Minimalist Foundation */
-    /* Glacier Palette */
+    /* Glacier Palette - High Contrast Adjustments */
     --background: 210 33% 95%;
     /* #E9F2FA - Lightest Blue */
     --foreground: 206 47% 12%;
@@ -26,8 +26,9 @@
     --popover-foreground: 206 47% 12%;
     /* #10212C */
 
-    --primary: 204 36% 50%;
-    /* #5289AD - Glacier Blue */
+    /* Darkened Primary for Text Visibility */
+    --primary: 204 46% 40%;
+    /* Darker Glacier Blue for Text */
     --primary-foreground: 210 33% 95%;
     /* #E9F2FA */
 
@@ -38,31 +39,30 @@
 
     --muted: 200 13% 71%;
     /* #ACBCBF - Muted Grey */
-    --muted-foreground: 200 10% 42%;
-    /* #667072 - Darker Grey */
+    --muted-foreground: 200 20% 30%;
+    /* Darker Grey for better contrast */
 
-    --accent: 206 66% 82%;
-    /* #B2D4F0 - Light Blue Accent */
-    --accent-foreground: 206 47% 12%;
-    /* #10212C */
+    /* Darkened Accent for Text Visibility */
+    --accent: 206 50% 40%;
+    /* Darker Blue Accent for Text */
+    --accent-foreground: 210 33% 95%;
+    /* #E9F2FA */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 200 13% 71%;
-    /* #ACBCBF */
-    --input: 200 13% 71%;
-    /* #ACBCBF */
-    --ring: 204 36% 50%;
-    /* #5289AD */
+    --border: 200 20% 60%;
+    /* Darker border for visibility */
+    --input: 200 20% 60%;
+    --ring: 204 46% 40%;
 
     --radius: 0.5rem;
 
     /* Custom Trading Colors */
-    --bullish: 204 36% 50%;
-    /* #5289AD - Glacier Blue */
-    --bearish: 200 10% 42%;
-    /* #667072 - Neutral Grey */
+    --bullish: 204 46% 40%;
+    /* Darker Glacier Blue */
+    --bearish: 200 20% 30%;
+    /* Darker Neutral Grey */
     --neutral: 200 16% 82%;
     /* #D6E3E6 */
   }
@@ -74,10 +74,12 @@
   }
 
   body {
-    @apply text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
+    @apply bg-transparent text-foreground font-sans;
+    line-height: var(--tw-line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     /* Monospace as requested */
-    background: hsl(var(--background));
     overflow-x: hidden;
   }
 
