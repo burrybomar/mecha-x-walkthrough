@@ -73,8 +73,8 @@ const Sequences = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-2">The Trigger (C2)</h3>
                 <p className="text-muted-foreground mb-4">
-                  The <strong>Sweep & Rejection</strong>. Price grabs the IRL but fails to close beyond it.
-                  This confirms the "Trap" is set.
+                  The <strong>Sweep & Rejection</strong>. Price grabs the IRL but <strong className="text-foreground">MUST close back INSIDE</strong> the range.
+                  If it closes outside, it is a breakout, not a sweep.
                 </p>
                 <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
                   <span className="text-accent font-mono font-bold block mb-1">MECHA-X SHOWS:</span>
@@ -90,8 +90,9 @@ const Sequences = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-2">The Confirmation (C3)</h3>
                 <p className="text-muted-foreground mb-4">
-                  The <strong>Expansion</strong>. Price moves away from the trap.
-                  We wait for the C3 candle to close to confirm the reversal is real.
+                  The <strong>Expansion</strong>. We do not wait for the close.
+                  <br />
+                  <strong className="text-foreground">Enter on C3 Open</strong> for continuation. The C2 sweep was the confirmation.
                 </p>
                 <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
                   <span className="text-purple-400 font-mono font-bold block mb-1">MECHA-X SHOWS:</span>

@@ -163,7 +163,31 @@ const FractalModel = () => {
               </p>
             </CardContent>
           </Card>
-
+          {/* LTF Trigger */}
+          <div className="glass-card p-6 rounded-xl border border-accent/20 relative overflow-hidden group hover:border-accent/40 transition-all">
+            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-accent/10">
+                  <Target className="w-5 h-5 md:w-6 md:h-6 text-accent" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold">The 1H Trigger (IRL)</h3>
+              </div>
+              <p className="text-muted-foreground mb-6 text-sm md:text-base">
+                Inside the 4H candle, we look for a <strong className="text-foreground">1H Sweep (IRL)</strong>.
+                Price must sweep and <strong className="text-foreground">close back inside</strong>.
+                <br />
+                <span className="text-xs text-accent mt-2 block">Entry: On the Open of the next candle (C3).</span>
+              </p>
+              <div className="h-40 md:h-48 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                  <div className="w-full h-px bg-accent/50 rotate-12" />
+                  <div className="w-full h-px bg-accent/50 -rotate-12" />
+                </div>
+                <span className="font-mono text-accent text-lg">1H SWEEP + CLOSE INSIDE</span>
+              </div>
+            </div>
+          </div>
           <Card className="glass-panel border-primary/30 hover:bg-white/5 transition-colors">
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-primary">

@@ -29,6 +29,7 @@ const Sequences = lazy(() => import("./pages/Sequences"));
 const SequenceIdentifier = lazy(() => import("./pages/SequenceIdentifier"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const C2Patterns = lazy(() => import("./pages/C2Patterns"));
+const Features = lazy(() => import("./pages/Features"));
 const Knowledge = lazy(() => import("./pages/Knowledge"));
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => {
               <Route path="/sequence-identifier" element={<SequenceIdentifier />} />
               <Route path="/case-studies" element={<CaseStudies />} />
               <Route path="/c2-patterns" element={<C2Patterns />} />
+              <Route path="/features" element={<Features />} />
               <Route path="/knowledge" element={<Knowledge />} />
               <Route path="/setup" element={<Setup />} />
               <Route path="/glossary" element={<Glossary />} />
