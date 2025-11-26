@@ -40,7 +40,6 @@ const navSections = [
     items: [
       { icon: ArrowUpRight, label: 'Three Sequences', path: '/sequences', color: 'primary' },
       { icon: Search, label: 'Sequence Identifier', path: '/sequence-identifier', color: 'bullish' },
-      { icon: FileText, label: 'Case Studies', path: '/case-studies', color: 'primary' },
     ],
   },
   {
@@ -49,8 +48,6 @@ const navSections = [
     label: 'Tools',
     items: [
       { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'bullish' },
-      { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'primary' },
-      { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'bullish' },
     ],
   },
   {
@@ -58,7 +55,6 @@ const navSections = [
     icon: Info,
     label: 'Reference',
     items: [
-      { icon: BookText, label: 'Glossary', path: '/glossary', color: 'primary' },
       { icon: HelpCircle, label: 'FAQ', path: '/faq', color: 'bullish' },
     ],
   },
@@ -148,8 +144,8 @@ export const MobileNav = () => {
                               >
                                 <span
                                   className={`p-1.5 rounded-md ${item.color === 'bullish'
-                                      ? 'bg-bullish/10 text-bullish'
-                                      : 'bg-primary/10 text-primary'
+                                    ? 'bg-bullish/10 text-bullish'
+                                    : 'bg-primary/10 text-primary'
                                     }`}
                                 >
                                   <ItemIcon className="w-4 h-4" />

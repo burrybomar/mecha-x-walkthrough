@@ -21,11 +21,23 @@ interface FeatureShowcaseProps {
 
 export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ features }) => {
     return (
-        <div className="py-24 space-y-32">
+        <motion.div
+            className="py-24 space-y-32"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+                visible: {
+                    transition: {
+                        staggerChildren: 0.3
+                    }
+                }
+            }}
+        >
             {features.map((feature, index) => (
                 <FeatureSection key={feature.id} feature={feature} index={index} />
             ))}
-        </div>
+        </motion.div>
     );
 };
 

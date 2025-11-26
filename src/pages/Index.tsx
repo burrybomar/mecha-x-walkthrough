@@ -3,6 +3,7 @@ import { ArrowRight, BarChart2, Layers, Zap, Target, MousePointer2 } from 'lucid
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { AnimatedCandlestickBackground } from '@/components/AnimatedCandlestickBackground';
+import { StarfieldBackground } from '@/components/visuals/StarfieldBackground';
 import { FeatureShowcase } from '@/components/landing/FeatureShowcase';
 import { Badge } from '@/components/ui/badge';
 
@@ -105,6 +106,7 @@ const features = [
 const Index = () => {
     return (
         <div className="min-h-screen bg-transparent text-foreground relative overflow-hidden">
+            <StarfieldBackground />
             <AnimatedCandlestickBackground variant="mixed" speed="slow" />
 
             {/* Hero Section - Out of this World */}
@@ -119,8 +121,8 @@ const Index = () => {
                         SYSTEM STATUS: ONLINE
                     </Badge>
 
-                    <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
-                        MECHA-X
+                    <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] cursor-default">
+                        <GlitchText text="MECHA-X" />
                     </h1>
 
                     <p className="text-xl md:text-3xl text-muted-foreground max-w-3xl mx-auto font-light leading-relaxed">
@@ -176,6 +178,11 @@ const Index = () => {
                             We stripped away the noise. No lagging indicators. No magic bands.
                             Just pure <span className="text-foreground font-bold">Price Action Logic</span> codified into a mechanical system.
                         </p>
+                    </div>
+
+                    {/* Scenario Visualization - The "Wow" Factor */}
+                    <div className="pt-16">
+                        <ScenarioVisualizer />
                     </div>
                 </div>
             </section>
