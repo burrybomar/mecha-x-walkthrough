@@ -6,6 +6,8 @@ import { AnimatedCandlestickBackground } from '@/components/AnimatedCandlestickB
 import { StarfieldBackground } from '@/components/visuals/StarfieldBackground';
 import { FeatureShowcase } from '@/components/landing/FeatureShowcase';
 import { Badge } from '@/components/ui/badge';
+import { GlitchText } from '@/components/visuals/GlitchText';
+import { ScenarioVisualizer } from '@/components/visuals/ScenarioVisualizer';
 
 // Visual Placeholders (Replace with actual visual components later)
 const HTFVisual = () => (
