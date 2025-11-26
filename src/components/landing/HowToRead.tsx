@@ -57,48 +57,6 @@ export const HowToRead = () => {
                     ))}
                 </div>
 
-                <div className="glass-panel p-8 rounded-xl border border-white/10 font-mono text-sm overflow-x-auto">
-                    <h3 className="text-xl font-bold mb-6 font-sans">Quick Reference</h3>
-                    <pre className="text-muted-foreground">
-                        {`┌─────────────────────────────────────────────────────────────────┐
-│                    MECHA-X LABEL GUIDE                         │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  C2 LABELS                                                      │
-│  ─────────                                                      │
-│  ⚡H→S↓        Swept HIGH, SNAP formation, bearish              │
-│  ⚡L→R↑        Swept LOW, REV formation, bullish                │
-│  ⚡H→E↓        Swept HIGH, EXP formation, bearish               │
-│                                                                 │
-│  LIQUIDITY LINES                                                │
-│  ───────────────                                                │
-│  4H BSL         Buy Side Liquidity (high) on 4H                 │
-│  1H SSL ✓       Sell Side Liquidity swept & rejected            │
-│                                                                 │
-│  EQUILIBRIUM                                                    │
-│  ───────────                                                │
-│  4H-HAMMER EQ   EQ of 4H hammer (invalidation level)            │
-│  1H-REG EQ      EQ of regular 1H candle                         │
-│                                                                 │
-│  CISD                                                           │
-│  ────                                                           │
-│  CISD+ 4H       Bullish CISD on 4H                              │
-│  ▲RB            Retest quality: Rebalanced (best)               │
-│  ▼RC(2)         Retest quality: Reclaimed, 2nd occurrence       │
-│                                                                 │
-│  PROJECTIONS                                                    │
-│  ───────────                                                    │
-│  -2x 4H         Bearish 2x extension on 4H                      │
-│  +3.5x 1H       Bullish 3.5x extension on 1H                    │
-│                                                                 │
-│  SMT                                                            │
-│  ───                                                            │
-│  SMT+ [NQ]      Bullish divergence vs NQ                        │
-│  SMT- [NQ·YM]   Bearish divergence vs NQ and YM                 │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘`}
-                    </pre>
-                </div>
             </div>
         </section>
     );

@@ -61,7 +61,7 @@ export const Features = () => {
                     description={
                         <>
                             <p>
-                                Mecha-X maps the market structure for you. It identifies <strong>1H BSL/SSL as Internal Range Liquidity (IRL)</strong> and <strong>4H/Daily BSL/SSL as External Range Liquidity (ERL)</strong>.
+                                Mecha-X <strong>automatically maps</strong> the market structure for you. It identifies <strong>1H BSL/SSL as Internal Range Liquidity (IRL)</strong> and <strong>4H/Daily BSL/SSL as External Range Liquidity (ERL)</strong>.
                             </p>
                             <div className="grid grid-cols-2 gap-4 mt-4 mb-4">
                                 <div className="bg-secondary/50 p-3 rounded border border-black/5">
@@ -74,7 +74,7 @@ export const Features = () => {
                                 </div>
                             </div>
                             <p>
-                                <strong>The POI Filter:</strong> It doesn't just show sweeps. It filters for C2 candles that sweep key levels like <strong>NWOG, FVG, or MWDR</strong>, ensuring you only focus on high-probability setups.
+                                <strong>Automated POI Filter:</strong> It doesn't just show sweeps. It <strong>automatically filters</strong> for C2 candles that sweep key levels like <strong>NWOG, FVG, or MWDR</strong>, ensuring you only focus on high-probability setups.
                             </p>
                         </>
                     }

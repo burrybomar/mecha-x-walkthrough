@@ -226,66 +226,16 @@ const terms: Term[] = [
     example: "Price makes lower low then breaks previous lower high = MSS up."
   },
   {
-    term: "Macro Time",
-    category: "Timeframes",
-    definition: "Refers to Higher Timeframe (Weekly/Monthly) context. In the settings, 'Macro' tooltips indicate features relevant to these longer-term cycles, distinct from intraday session timing.",
-    example: "Weekly Open/Close lines are considered Macro structure."
-  },
-  {
-    term: "Distribution",
-    category: "Concepts",
-    definition: "Major participants selling into retail buying. Happens at premium levels. Precedes bearish moves.",
-    example: "Price ranges at highs while volume increases = distribution phase."
-  },
-  {
-    term: "Accumulation",
-    category: "Concepts",
-    definition: "Major participants buying into retail selling. Happens at discount levels. Precedes bullish moves.",
-    example: "Price ranges at lows while volume increases = accumulation phase."
-  },
-  {
-    term: "Double Purge",
-    acronym: "⟐",
-    category: "Patterns",
-    definition: "When both BSL and SSL liquidity levels are swept and rejected on the same HTF candle, creating a high-probability reversal setup. The ⟐ symbol indicates count of double purges detected.",
-    example: "Price sweeps high, reverses to sweep low, then reverses again = ⟐ double purge."
-  },
-  {
-    term: "SMR Entry",
-    acronym: "✓",
-    category: "Execution",
-    definition: "Sweep, Mitigate, Reverse confirmed entry. When a liquidity sweep is followed by mitigation of the CISD zone and price reverses in the expected direction. The ✓ symbol tracks confirmed SMR entries.",
-    example: "SSL swept → price returns to OB → reverses up = ✓ SMR entry confirmed."
-  },
-  {
-    term: "HTF Interval Labels",
-    category: "Zones",
-    definition: "Timestamp labels displayed on HTF candles showing timeframe and exact time in America/New_York timezone. Helps identify specific candle opens/closes for session timing.",
-    example: "Label reads '4H 09:30' = 4-hour candle opened at 9:30 AM EST."
-  },
-  {
-    term: "Divider Hierarchy",
-    category: "Zones",
-    definition: "Auto-scaled line styling based on timeframe importance. Short-term (≤1H) = dotted, Intraday (4-8H) = dashed, Daily = solid gray, Weekly+ = solid orange.",
-    example: "Solid orange line = Weekly open/close, Dotted line = 15m candle boundary."
-  },
-  {
-    term: "Real-Time Sweep Detection",
-    category: "Patterns",
-    definition: "Live monitoring that identifies liquidity sweeps as they occur, not just on candle close. Updates sweep status intrabar for immediate awareness of potential reversals.",
-    example: "Price wicks through SSL mid-candle, 'Live' detection flags potential sweep immediately."
-  },
-  {
     term: "Strike System",
     category: "Patterns",
-    definition: "Allows sweeps to temporarily break without invalidation. Default: 3 strikes allowed. If price closes back inside range, sweep recovers. After max strikes = permanent death ✗.",
-    example: "Sweep breaks temporarily, price closes back inside = strike 1. Recovers. After 3 strikes with no recovery = sweep permanently invalidated."
+    definition: "Allows sweeps to temporarily break without invalidation. Default: 3 strikes allowed.",
+    example: "Sweep breaks temporarily, price closes back inside = strike 1."
   },
   {
     term: "Session Models",
     category: "Timeframes",
-    definition: "Multi-session patterns showing how sessions interact. 4H ASIA REVERSAL (Asia sweep + reverse), 4H LONDON REVERSAL (London sweep + reverse), 4H NY REVERSAL (NY continuation/reversal).",
-    example: "4H ASIA REVERSAL: Price sweeps Asia High, then reverses lower during London/NY."
+    definition: "Patterns showing how sessions interact (e.g., Asia Reversal, London Expansion).",
+    example: "Asia High sweep followed by London reversal."
   }
 ];
 

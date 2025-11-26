@@ -28,32 +28,32 @@ export const SequenceStepsExplainer = ({
   const bullishSteps: SequenceStep[] = [
     {
       candle: 'C1',
-      title: 'Pre-Swing Candle (IRL)',
-      description: 'Establishes the Internal Range Liquidity (IRL). This is the "Bait" that needs to be swept.',
+      title: 'The Setup (POI Tap)',
+      description: 'The candle that TAPS into a Key Level (FVG, NWOG, MWDR). This establishes the range and the "Bait".',
       color: 'hsl(var(--muted))',
       textColor: 'hsl(var(--muted-foreground))',
       icon: 'neutral',
     },
     {
       candle: 'C2',
-      title: 'Sweep Candle (Trigger)',
-      description: 'Sweeps the IRL (C1 Low). This is the engagement of liquidity. Must close back INSIDE to confirm the reversal.',
+      title: 'The Trigger (Sweep)',
+      description: 'Sweeps the High/Low of C1. This is the engagement. Aggressive entry on LTF confirmation here.',
       color: 'hsl(var(--bearish))',
       textColor: 'hsl(var(--bearish-foreground))',
       icon: 'bearish',
     },
     {
       candle: 'C3',
-      title: 'Expansion Candle (Confirmation)',
-      description: 'Momentum candle expanding towards External Range Liquidity (ERL). Confirms the C2 sweep was valid.',
+      title: 'The Confirmation (Expansion)',
+      description: 'Momentum candle moving away from the sweep. Conservative entry on the OPEN of this candle.',
       color: 'hsl(var(--bullish))',
       textColor: 'hsl(var(--bullish-foreground))',
       icon: 'bullish',
     },
     {
       candle: 'C4',
-      title: 'Continuation (Delivery)',
-      description: 'Price delivers to the ERL target (4H/Daily BSL). Trade runs to CISD projections.',
+      title: 'The Delivery (Continuation)',
+      description: 'Price delivers to the Target (CISD Projections). The trade is now in management mode.',
       color: 'hsl(var(--bullish))',
       textColor: 'hsl(var(--bullish-foreground))',
       icon: 'bullish',
@@ -209,29 +209,29 @@ export const SequenceStepsExplainer = ({
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">NO SWEEP = NO TRADE:</strong> C2 MUST sweep IRL (C1).
-              No engagement of liquidity = No reason to reverse.
+              <strong className="text-foreground">POI IS KEY:</strong> C1 MUST tap a Key Level (FVG, NWOG, MWDR).
+              No POI tap = No valid sequence.
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">CLOSE INSIDE:</strong> C2 must close back inside
-              C1's range. A close beyond C1 = failed reversal (Expansion).
+              <strong className="text-foreground">THE SWEEP:</strong> C2 must sweep C1's High/Low.
+              This validates the engagement of liquidity.
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">POI FILTER:</strong> High probability setups occur at
-              Key Levels (NWOG, FVG, MWDR).
+              <strong className="text-foreground">CISD TARGETS:</strong> Targets are projected from the
+              Change in State of Delivery (CISD), not just random levels.
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">HTF ALIGNMENT:</strong> Ensure the 1H Sweep (IRL) aligns
-              with the 4H/Daily Draw (ERL).
+              <strong className="text-foreground">AUTOMATED PRECISION:</strong> Mecha-X automatically
+              identifies these exact conditions for you.
             </span>
           </li>
         </ul>

@@ -30,6 +30,10 @@ const Sequences = () => {
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Master the mechanical flow: <span className="text-primary font-medium">Sweep IRL (1H) → Target ERL (4H/Daily)</span>.
+            <br />
+            <span className="text-sm text-muted-foreground mt-2 block">
+              Entry: Aggressive on C2 (LTF) or Conservative on C3 Open.
+            </span>
           </p>
         </header>
 
