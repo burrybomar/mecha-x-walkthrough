@@ -17,7 +17,7 @@ const FeatureSection = ({ title, subtitle, description, children, align = "left"
             </div>
         </div>
         <div className={`relative ${align === "right" ? "lg:col-start-1" : ""}`}>
-            <div className="glass-panel p-2 rounded-xl border border-white/10 overflow-hidden">
+            <div className="glass-panel p-2 rounded-xl border border-black/5 overflow-hidden">
                 {children}
             </div>
         </div>
@@ -64,11 +64,11 @@ export const Features = () => {
                                 When an HTF candle sweeps the high or low of the previous candle, Mecha-X marks it.
                             </p>
                             <div className="grid grid-cols-2 gap-4 mt-4 mb-4">
-                                <div className="bg-white/5 p-3 rounded">
+                                <div className="bg-secondary/50 p-3 rounded border border-black/5">
                                     <div className="font-bold text-primary">BSL</div>
                                     <div className="text-xs">Buy Side Liquidity</div>
                                 </div>
-                                <div className="bg-white/5 p-3 rounded">
+                                <div className="bg-secondary/50 p-3 rounded border border-black/5">
                                     <div className="font-bold text-primary">SSL</div>
                                     <div className="text-xs">Sell Side Liquidity</div>
                                 </div>
@@ -135,7 +135,7 @@ export const Features = () => {
                             <p>
                                 If you're trading ES and NQ makes a higher high while ES fails to — that's divergence. Mecha-X tracks this automatically.
                             </p>
-                            <div className="mt-4 p-4 bg-white/5 rounded-lg font-mono text-sm">
+                            <div className="mt-4 p-4 bg-secondary/50 rounded-lg font-mono text-sm border border-black/5">
                                 <div>SMT-</div>
                                 <div>[NQ·YM]</div>
                                 <div className="text-muted-foreground mt-2 text-xs">

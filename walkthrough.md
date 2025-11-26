@@ -25,6 +25,11 @@ I have completely redone the website's visual theme to match your request for an
 - **Font**: Switched to `JetBrains Mono` / `Fira Code` (monospace) for the entire site to give it a technical, trading-focused feel.
 - **Headings**: Bold, uppercase, and strictly black for impact.
 
+### 4. Polish & Contrast Fixes
+
+- **Hero Section**: Updated text gradients to use dark colors (`from-foreground` etc.) so they are clearly visible on the light background.
+- **Features Section**: Replaced invisible white-on-white backgrounds with `bg-secondary/50` and `border-black/5` to ensure cards and labels pop correctly.
+
 ## Verification
 
 - **Aesthetic**: The site now feels much lighter, cleaner, and more "premium" with the glacier theme.
