@@ -9,18 +9,19 @@ import { CandlestickButton } from "@/components/CandlestickButton";
 import { CandlestickCard } from "@/components/CandlestickCard";
 
 // Import Visual Components
-import { PremiumDiscountVisual } from "@/components/PremiumDiscountVisual";
-import { HTFCanvasVisual } from "@/components/HTFCanvasVisual";
-import { HTFSweepDiagram } from "@/components/HTFSweepDiagram";
-import { BSLSSLVisual } from "@/components/BSLSSLVisual";
+// Import Visual Components
+import { PremiumDiscountVisual } from "@/components/visuals/PremiumDiscountVisual";
+import { HTFCanvasVisual } from "@/components/visuals/HTFCanvasVisual";
+import { HTFSweepDiagram } from "@/components/visuals/HTFSweepDiagram";
+import { BSLSSLVisual } from "@/components/visuals/BSLSSLVisual";
 import { C2Visual } from "@/components/visuals/C2Visual";
-import { MSSVisual } from "@/components/MSSVisual";
-import { CISDVisual } from "@/components/CISDVisual";
-import { OrderBlockVisual } from "@/components/OrderBlockVisual";
+import { MSSVisual } from "@/components/visuals/MSSVisual";
+import { CISDVisual } from "@/components/visuals/CISDVisual";
+import { OrderBlockVisual } from "@/components/visuals/OrderBlockVisual";
 import { DistributionVisual } from "@/components/visuals/DistributionVisual";
-import { SMTVisual } from "@/components/SMTVisual";
+import { SMTVisual } from "@/components/visuals/SMTVisual";
 import { CandleClosureVisual } from "@/components/visuals/CandleClosureVisual";
-import { FractalNestingVisual } from "@/components/FractalNestingVisual";
+import { FractalNestingVisual } from "@/components/visuals/FractalNestingVisual";
 import { ScalperObjectiveVisual } from "@/components/visuals/ScalperObjectiveVisual";
 
 interface ChartExample {

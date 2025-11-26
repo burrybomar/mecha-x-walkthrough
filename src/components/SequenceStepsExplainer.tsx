@@ -100,21 +100,21 @@ export const SequenceStepsExplainer = ({
   return (
     <div className={`relative ${className}`}>
       {/* Visual Pattern Display */}
-      {(patternImage || visualComponent) && (
+      {(visualComponent || patternImage) && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl max-w-4xl mx-auto"
+          className="mb-12 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl max-w-4xl mx-auto bg-black/40 backdrop-blur-sm"
         >
-          <div className="relative bg-black/95 p-8">
+          <div className="relative p-8">
             {/* Ensure text is visible over the image */}
             <div className="absolute top-4 left-4 z-20">
               <Badge
                 className={`text-lg px-4 py-2 font-bold ${variant === 'bullish'
-                    ? 'bg-bullish/90 text-bullish-foreground'
-                    : 'bg-bearish/90 text-bearish-foreground'
+                  ? 'bg-bullish/90 text-bullish-foreground'
+                  : 'bg-bearish/90 text-bearish-foreground'
                   }`}
               >
                 {variant === 'bullish' ? (
@@ -140,7 +140,7 @@ export const SequenceStepsExplainer = ({
                   <img
                     src={patternImage}
                     alt={`${variant} C1-C2-C3-C4 Pattern`}
-                    className="w-full h-auto"
+                    className="w-full h-auto rounded-lg"
                   />
                   {/* Subtle gradient overlay to improve label visibility */}
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />

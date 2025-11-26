@@ -12,11 +12,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CandlestickPattern } from "@/components/CandlestickPattern";
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { IndicatorExplainer } from "@/components/IndicatorExplainer";
-import { BSLSSLVisual } from "@/components/BSLSSLVisual";
+import { BSLSSLVisual } from "@/components/visuals/BSLSSLVisual";
 import { C2LabelDecoder } from "@/components/C2LabelDecoder";
-import { CISDVisual } from "@/components/CISDVisual";
-import { SMTVisual } from "@/components/SMTVisual";
-import { HTFVisual } from "@/components/HTFVisual";
+import { CISDVisual } from "@/components/visuals/CISDVisual";
+import { SMTVisual } from "@/components/visuals/SMTVisual";
+import { HTFVisual } from "@/components/visuals/HTFVisual";
 
 interface SettingRowProps {
   label: string;
