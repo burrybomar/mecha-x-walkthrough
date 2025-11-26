@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, HelpCircle, ChevronDown } from "lucide-react";
+import { ArrowLeft, HelpCircle, ChevronDown, AlertTriangle, BookOpen, Target, Zap, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
@@ -11,139 +11,69 @@ import { CandlestickCard } from "@/components/CandlestickCard";
 interface FAQItem {
   question: string;
   answer: string;
-  category: "Getting Started" | "Framework" | "Execution" | "Risk" | "Technical";
+  category: "Logic & Framework" | "Execution & Rules" | "Risk & Reality";
 }
 
 const faqs: FAQItem[] = [
   {
-    question: "Which timeframes should I use for HTF analysis?",
-    answer: "For HTF context, use Daily and 4H charts. These show where major price structure is positioned and where key liquidity sits. Your entry timeframe (LTF) should be 5m, 15m, or 1H depending on your chart timeframe. If you're on 5m chart, your HTF is 1H/4H/Daily. The indicator's Auto Mode handles this automatically.",
-    category: "Getting Started"
+    question: "Does this system guarantee profits?",
+    answer: "Absolutely not. No system, indicator, or framework guarantees profits. Mecha-X provides a structured, logical way to interpret market data and identify high-probability conditions. Profitability is a result of your personal execution, risk management, and psychological discipline, not the tool itself.",
+    category: "Risk & Reality"
   },
   {
-    question: "How do I know if I'm in premium or discount?",
-    answer: "Find the HTF range (Daily high to Daily low). Calculate 50% (equilibrium). If price is above 50% = premium zone (look for shorts). If below 50% = discount zone (look for longs). Between 40-60% = neutral, avoid trading. The indicator marks these zones automatically with EQ lines.",
-    category: "Framework"
+    question: "What is the core logic of the Mecha-X Framework?",
+    answer: "The framework is built on the logic that price moves from a Key Level (KL) to a Draw on Liquidity (DL). We do not guess reversals; we wait for price to engage a Key Level (Sweep) and then confirm a reversal via mechanical candle formations (C1-C2-C3).",
+    category: "Logic & Framework"
   },
   {
-    question: "What if there's no liquidity sweep?",
-    answer: "NO SWEEP = NO TRADE. This is a strict rule. Without a liquidity sweep, you have no trigger and no confirmation that major participants are active. Wait patiently for a clear wick through BSL/SSL with immediate reversal. Don't force trades.",
-    category: "Framework"
+    question: "Why is 'waiting for a sweep' non-negotiable?",
+    answer: "A sweep of liquidity (BSL/SSL) represents the engagement of a Key Level. Without this engagement, there is no logical reason to anticipate a reversal. Entering without a sweep is guessing. The sweep is the initiation of the sequence.",
+    category: "Logic & Framework"
   },
   {
-    question: "Can I enter without C2 sweep?",
-    answer: "Not recommended. C2 is the sweep candle in the 3-candle model (C1→C2→C3). It must sweep C1's level and close back inside C1's range. Entering without a proper C2 sweep dramatically reduces win rate. The sweep confirmation is worth the wait—it filters out false signals.",
-    category: "Execution"
+    question: "What does 'Mechanical' actually mean?",
+    answer: "'Mechanical' means the rules for identification are binary: either a condition is met, or it is not. For example, a C2 candle either closes inside the range (confirmed) or it doesn't (unconfirmed). This removes subjective guessing from the analysis, but you must still execute the trade.",
+    category: "Logic & Framework"
   },
   {
-    question: "Where exactly do I place my stop loss?",
-    answer: "Stop loss goes just beyond the sweep level. If sweep was a high (BSL), stop goes slightly above that high. If sweep was a low (SSL), stop goes slightly below that low. This ensures you're out if the sweep fails. Never widen your stop—if hit, accept the loss.",
-    category: "Execution"
+    question: "Is this a signal service?",
+    answer: "No. Mecha-X is a market analysis tool. It highlights when mechanical conditions are present on the chart. It does not tell you to buy or sell. You are responsible for your own entry, stop loss, and take profit decisions based on your trading plan.",
+    category: "Risk & Reality"
   },
   {
-    question: "What's a realistic win rate with this system?",
-    answer: "With proper execution, expect 45-55% win rate with 1:3 to 1:5 risk/reward ratio. This makes you highly profitable. You don't need 80% win rate—you need high RR. Three 1:3 winners covers six losers. Focus on quality setups, not quantity.",
-    category: "Risk"
+    question: "What if a confirmed setup fails?",
+    answer: "Setups will fail. The market is probabilistic, not deterministic. A confirmed C2 reversal can still be invalidated. This is why we use stop losses. A failed setup is simply information—it often indicates the market is seeking liquidity at a different level.",
+    category: "Risk & Reality"
   },
   {
-    question: "How many trades should I take per day?",
-    answer: "Quality over quantity. 0-2 high-quality setups per day is ideal. Most profitable traders take 2-5 trades per WEEK. The Silver Bullet hours (especially 10:00 AM ET) provide your best setups. Don't force trades outside these windows. Being selective is your edge.",
-    category: "Risk"
+    question: "How does Time/Session impact the logic?",
+    answer: "Time provides the 'when'. The framework aligns price action with specific session characteristics (e.g., Asia setting the range, London creating the reversal, New York providing continuation). Trading mechanically means waiting for the right setup at the right time.",
+    category: "Execution & Rules"
   },
   {
-    question: "Can I use this on stocks or only futures/forex?",
-    answer: "The framework works on any liquid market: ES/NQ futures, forex majors (EUR/USD, GBP/USD), Bitcoin, and liquid stocks. Avoid low-volume stocks or exotic pairs—liquidity is key. The more liquid the market, the cleaner the sweeps and patterns.",
-    category: "Getting Started"
+    question: "What is the 'Invalidation' point?",
+    answer: "Every trade idea must have a point where it is proven wrong. In this framework, invalidation is typically the Equilibrium (EQ) of the expansion candle or the sweep level itself. If price violates these levels, the logic for the trade is broken, and the position should be closed.",
+    category: "Execution & Rules"
   },
   {
-    question: "What's the minimum account size needed?",
-    answer: "You can start with any size, but $1000-$5000 is practical for futures. With 1-2% risk per trade, this gives you proper risk management without overexposure. Focus on percentage gains, not dollar amounts. A 10% month on $2000 builds consistency same as 10% on $20,000.",
-    category: "Risk"
+    question: "Can I use this on any timeframe?",
+    answer: "Yes, the logic is fractal. A sweep and reversal on a 1-minute chart follows the same mechanics as on a Weekly chart. However, higher timeframes (Daily/4H) generally carry more weight and are less susceptible to noise.",
+    category: "Logic & Framework"
   },
   {
-    question: "How long does it take to become consistently profitable?",
-    answer: "Realistically, 3-6 months of focused practice with proper journaling. First month: learn to identify setups. Second month: paper trade 50+ setups. Third month: small live positions. Months 4-6: build consistency. Don't rush—this is a career skill, not a get-rich-quick scheme.",
-    category: "Getting Started"
+    question: "Do I need to use SMT Divergence?",
+    answer: "SMT (Smart Money Technique) is a powerful confluence, but it is not strictly required for every setup. The core mechanical sequence (Sweep + C2 Closure + CISD) is the primary driver. SMT adds probability but should not be used as a standalone trigger.",
+    category: "Execution & Rules"
   },
   {
-    question: "Do I need SMT divergence for every trade?",
-    answer: "No, SMT is optional but powerful. Think of it as +10-20% confidence boost. If you have HTF bias + sweep + C2 + CISD, that's enough. SMT (comparing ES vs NQ or correlated pairs) is the cherry on top, not a requirement. Use it when available.",
-    category: "Framework"
+    question: "What is the difference between this and standard Price Action?",
+    answer: "Standard price action can be subjective (e.g., 'that looks like a pin bar'). Mecha-X defines specific criteria for every candle in the sequence (C1, C2, C3) and their relationship to the previous candle's range. It quantifies the price action.",
+    category: "Logic & Framework"
   },
   {
-    question: "What if price doesn't come back to my CISD zone?",
-    answer: "Then you missed that trade—and that's okay. Never chase. If price doesn't pull back to your entry zone within reasonable time (4-6 candles), the setup is invalid. Wait for the next one. Chasing leads to poor entries and losses.",
-    category: "Execution"
-  },
-  {
-    question: "How do I handle multiple CISD zones on one sweep?",
-    answer: "Choose the CISD zone closest to the sweep level. This is typically the highest probability entry because it's the most recent structure break. If that fails, you can watch the next zone down, but avoid overcomplicating with too many backup plans.",
-    category: "Execution"
-  },
-  {
-    question: "Should I trade both long and short setups?",
-    answer: "Yes, but let HTF bias guide you. In a Daily uptrend, focus on long setups. In Daily downtrend, focus on shorts. You can take counter-trend trades (short in uptrend) but only at extreme premium with clear sweeps. Bias > personal preference.",
-    category: "Framework"
-  },
-  {
-    question: "What's the best way to practice without losing money?",
-    answer: "1) Paper trade on TradingView with Replay feature. 2) Mark up 50+ historical examples to train your eye. 3) Trade micro contracts (MES/MNQ) for $50-$100 risk per trade. 4) Journal EVERY setup whether you take it or not. Consistent review builds pattern recognition.",
-    category: "Getting Started"
-  },
-  {
-    question: "My indicator shows too many or too few levels. How to fix?",
-    answer: "In Auto Mode, the indicator adapts to your chart TF. If too cluttered, increase 'Bars' count in HTF Setup (reduces historical levels shown). If too sparse, decrease it. Manual Mode gives full control—choose your specific HTFs. Start with defaults and adjust gradually.",
-    category: "Technical"
-  },
-  {
-    question: "Can I scale into positions or add to winners?",
-    answer: "Not recommended with this framework. OSOK (One Shot One Kill) principle means one entry per setup. Adding to winners sounds good but often leads to overtrading and giving back profits. Trust your initial entry—if it's right, your RR takes care of the rest.",
-    category: "Execution"
-  },
-  {
-    question: "What if sweep happens outside Silver Bullet hours?",
-    answer: "You can still trade it if all other conditions are met, but probability is lower. Silver Bullet hours (10:00 AM ET primary, 03:00 AM and 14:00 PM secondary) are highest probability because that's when liquidity sweeps cluster based on OHLC patterns. Late-night or off-hours sweeps work but with reduced confidence. Be more selective.",
-    category: "Framework"
-  },
-  {
-    question: "How do I know when to move my stop to breakeven?",
-    answer: "When price hits 1x CISD projection (meaning you're up by the momentum range amount), move stop to your entry price. This locks in a breakeven worst case. Then let your runner position work toward 2x projection (take 50%) and 4x projection (final exit) stress-free.",
-    category: "Risk"
-  },
-  {
-    question: "What's the #1 mistake beginners make with this framework?",
-    answer: "Trading without confirmed sweep. Beginners see CISD zones or C2 patterns and enter prematurely without waiting for a proper liquidity sweep. Remember: HTF Context → Session Timing → SWEEP → C2 → CISD → Enter. Never skip the sweep. It's your trigger for everything.",
-    category: "Framework"
-  },
-  {
-    question: "What's the difference between C2 and CISD?",
-    answer: "C2 is the sweep candle that breaks C1's high/low and closes back inside. After C2, momentum candles form moving in the reversal direction. CISD is the CLOSE of the last momentum candle in that series. So C2 triggers the move, CISD is where you enter on the pullback.",
-    category: "Framework"
-  },
-  {
-    question: "How many momentum candles do I need for valid CISD?",
-    answer: "Minimum 2 consecutive candles moving in the reversal direction after C2 sweep. More momentum candles = stronger setup. Count them: if C2 sweeps low, count the green candles moving up until they stop. The close of the last one = CISD level.",
-    category: "Framework"
-  },
-  {
-    question: "What if a sweep breaks but then price comes back?",
-    answer: "The strike system allows up to 3 breaks (default). If price closes back inside range after a break, the sweep recovers. After 3 strikes with no recovery, it's permanently invalidated (✗). This prevents you from abandoning valid setups due to temporary noise.",
-    category: "Technical"
-  },
-  {
-    question: "When should I use Triad mode vs Binary mode for SMT?",
-    answer: "Binary is simpler (2 assets like ES vs NQ). Triad is advanced (3 assets, tracks correlation strength). Start with Binary for +10% confidence. Graduate to Triad once comfortable for +20% confidence when both secondary assets diverge (⟐⟐ full triad).",
-    category: "Framework"
-  },
-  {
-    question: "What's the difference between REV, SNAP, and EXP formation types?",
-    answer: "Formation types show C2 reversal strength. REV = standard (C2 closes inside C1 range). SNAP = strongest (C2 closes near opposite extreme, within 30% of C1's opposite end). EXP = weak reversal, likely continuation (C2 body engulfs C1 and closes beyond). SNAP formations have highest probability.",
-    category: "Framework"
-  },
-  {
-    question: "Do I need SMT to take a trade?",
-    answer: "No, SMT is OPTIONAL confluence. The core setup is: HTF context + Session timing + C1→C2→C3 pattern + CISD confirmation. SMT (Binary or Triad) adds confidence but is not required. Think of it as the cherry on top, not the foundation.",
-    category: "Framework"
+    question: "Why do you focus on 'Inaction'?",
+    answer: "Because the market is not always in a high-probability state. Most of the time, price is in a 'seek' phase (moving between levels). The 'destroy' phase (reversal/expansion) happens less often. Waiting for the clear mechanical setup is how you protect your capital.",
+    category: "Risk & Reality"
   }
 ];
 
@@ -164,7 +94,8 @@ const FAQ = () => {
   }, {} as Record<string, FAQItem[]>);
 
   return (
-    <div className="min-h-screen bg-trading-grid">{/* Header */}
+    <div className="min-h-screen bg-trading-grid">
+      {/* Header */}
       <motion.header
         className="sticky top-0 z-40 backdrop-blur-xl border-b border-border bg-background/95 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
@@ -203,13 +134,13 @@ const FAQ = () => {
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 font-mono">
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Questions
+                Logic &
               </span>
               <br />
-              <span className="text-foreground text-3xl md:text-5xl">Answered</span>
+              <span className="text-foreground text-3xl md:text-5xl">Reality</span>
             </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-              Everything you need to know about the framework, execution, and trading.
+              No false promises. Just the mechanics of the framework.
             </p>
           </div>
         </motion.div>
@@ -254,7 +185,12 @@ const FAQ = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + catIdx * 0.1 }}
               >
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 font-mono">{category}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 font-mono flex items-center gap-2">
+                  {category === "Logic & Framework" && <Target className="w-6 h-6 text-primary" />}
+                  {category === "Execution & Rules" && <Zap className="w-6 h-6 text-yellow-500" />}
+                  {category === "Risk & Reality" && <Shield className="w-6 h-6 text-red-500" />}
+                  {category}
+                </h2>
 
                 <div className="space-y-3">
                   {categoryFAQs.map((faq, faqIdx) => {
@@ -269,7 +205,7 @@ const FAQ = () => {
                         transition={{ delay: 0.3 + faqIdx * 0.05 }}
                       >
                         <CandlestickCard
-                          variant={faqIdx % 2 === 0 ? "bullish" : "bearish"}
+                          variant="neutral"
                           wickHeight="sm"
                         >
                           <Card className="overflow-hidden border-0">
@@ -324,16 +260,16 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="mt-16 text-center p-8 rounded-2xl bg-muted/30 border border-border"
         >
-          <h3 className="text-2xl font-bold mb-3 font-mono">Still have questions?</h3>
+          <h3 className="text-2xl font-bold mb-3 font-mono">Dive Deeper</h3>
           <p className="text-muted-foreground mb-6">
-            Review the full framework documentation for deeper understanding.
+            Understand the logic before you trade the setup.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button onClick={() => navigate('/fractal-model')} size="lg">
               Read Framework
             </Button>
-            <Button onClick={() => navigate('/setup')} variant="outline" size="lg">
-              Setup Guide
+            <Button onClick={() => navigate('/knowledge')} variant="outline" size="lg">
+              Learn Sequences
             </Button>
           </div>
         </motion.div>

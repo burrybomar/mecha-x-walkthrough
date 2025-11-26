@@ -8,28 +8,28 @@ import {
 export const FAQSection = () => {
     const faqs = [
         {
-            q: "What is this framework based on?",
-            a: "The mechanical sequence concepts come from TTrades, MMXM Trader's Next Day Model, and Eleven_Trades' 4H Candle Profiling. Mecha-X is a visualization tool built by OmarxQQQ that plots these concepts on the chart."
+            q: "Does this indicator give buy/sell signals?",
+            a: "No. Mecha-X is a market structure visualization tool. It highlights mechanical conditions (Sweeps, C2 Closures) based on the framework. You must execute the trade based on your own plan and risk management."
         },
         {
-            q: "Does it repaint?",
-            a: "No. Once a C2 is confirmed on a closed HTF candle, it doesn't change. Real-time mode shows developing patterns that may change before the candle closes."
+            q: "What is the 'Mechanical' Sequence?",
+            a: "It is the repetitive cycle of price delivery: Expansion → Retracement → Reversal → Expansion. Mecha-X identifies exactly where price is within this cycle using objective candle definitions."
         },
         {
-            q: "What markets does it work on?",
-            a: "Any market on TradingView. The mechanical sequence is fractal — the same rules apply across timeframes and instruments."
+            q: "Does it work on all markets?",
+            a: "Yes. The logic of liquidity (Draw on Liquidity) and market structure is fractal and applies to all liquid markets, including Forex, Futures, Crypto, and Indices."
         },
         {
-            q: "What timeframes should I use?",
-            a: "Auto mode handles this. The framework is designed to be fractal: the same HTF → LTF confirmation logic works at any scale."
+            q: "Is this a 'Get Rich Quick' system?",
+            a: "Absolutely not. Trading carries significant risk. This framework provides a logical way to interpret data, but profitability requires discipline, patience, and strict risk management."
         },
         {
-            q: "Why no \"signals\" or \"alerts for entries\"?",
-            a: "Mecha-X shows you the mechanical sequence. It doesn't tell you to buy or sell. The framework teaches that you need to understand what you're looking at, not follow arrows."
+            q: "Do I need to know the educators mentioned?",
+            a: "While Mecha-X visualizes the concepts, we highly recommend studying the source material (TTrades, MMXM Trader, Eleven_Trades) to understand the 'why' behind the logic."
         },
         {
-            q: "Is this the same as [other methodology]?",
-            a: "No. While the educators who teach these concepts may have learned from similar sources, Mecha-X specifically visualizes the TTrades/MMXM/Eleven_Trades approach to the mechanical sequence. It's not an \"ICT indicator\" or \"SMC indicator\" — it's a visualization of this specific framework."
+            q: "Does the indicator repaint?",
+            a: "No. Once a Higher Time Frame (HTF) candle closes and a condition (like a C2 sweep) is confirmed, it is permanent. Real-time mode shows developing patterns, but confirmed labels do not change."
         }
     ];
 

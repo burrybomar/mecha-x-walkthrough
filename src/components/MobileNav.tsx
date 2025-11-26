@@ -48,7 +48,6 @@ const navSections = [
     icon: Wrench,
     label: 'Tools',
     items: [
-      { icon: ListChecks, label: 'Pre-Trade Checklist', path: '/checklist', color: 'primary' },
       { icon: FileText, label: 'Trade Journal', path: '/trade-journal', color: 'bullish' },
       { icon: Settings, label: 'Setup Indicators', path: '/setup', color: 'primary' },
       { icon: TrendingUp, label: 'Chart Examples', path: '/chart-examples', color: 'bullish' },
@@ -148,11 +147,10 @@ export const MobileNav = () => {
                                 }
                               >
                                 <span
-                                  className={`p-1.5 rounded-md ${
-                                    item.color === 'bullish'
+                                  className={`p-1.5 rounded-md ${item.color === 'bullish'
                                       ? 'bg-bullish/10 text-bullish'
                                       : 'bg-primary/10 text-primary'
-                                  }`}
+                                    }`}
                                 >
                                   <ItemIcon className="w-4 h-4" />
                                 </span>

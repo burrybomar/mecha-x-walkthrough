@@ -157,16 +157,16 @@ const CaseStudies = () => {
                       <div className="flex items-start justify-between">
                         <div>
                           <Badge className={`mb-3 ${study.color === 'bullish' ? 'bg-bullish text-bullish-foreground' :
-                              study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
-                                'bg-primary text-primary-foreground'
+                            study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
+                              'bg-primary text-primary-foreground'
                             }`}>
                             {study.sequence} Sequence
                           </Badge>
                           <CardTitle className="text-3xl">{study.market}</CardTitle>
                         </div>
                         <study.icon className={`w-12 h-12 ${study.color === 'bullish' ? 'text-bullish' :
-                            study.color === 'bearish' ? 'text-bearish' :
-                              'text-primary'
+                          study.color === 'bearish' ? 'text-bearish' :
+                            'text-primary'
                           }`} />
                       </div>
                     </CardHeader>
@@ -229,8 +229,8 @@ const CaseStudies = () => {
                           <p className="font-medium">{study.setup.target}</p>
                         </div>
                         <div className={`p-3 rounded-lg border-2 ${study.color === 'bullish' ? 'bg-bullish/10 border-bullish/30' :
-                            study.color === 'bearish' ? 'bg-bearish/10 border-bearish/30' :
-                              'bg-primary/10 border-primary/30'
+                          study.color === 'bearish' ? 'bg-bearish/10 border-bearish/30' :
+                            'bg-primary/10 border-primary/30'
                           }`}>
                           <p className="text-sm font-medium">
                             Stop: Protected by LTF swing
@@ -307,12 +307,7 @@ const CaseStudies = () => {
             >
               Identify Your Sequence
             </CandlestickButton>
-            <CandlestickButton
-              variant="bearish"
-              onClick={() => navigate('/checklist')}
-            >
-              View Trading Checklist
-            </CandlestickButton>
+
           </div>
         </div>
       </section>

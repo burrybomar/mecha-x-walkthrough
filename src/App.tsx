@@ -20,7 +20,6 @@ import NotFound from "./pages/NotFound";
 const Setup = lazy(() => import("./pages/Setup"));
 const Glossary = lazy(() => import("./pages/Glossary"));
 const ChartExamples = lazy(() => import("./pages/ChartExamples"));
-const Checklist = lazy(() => import("./pages/Checklist"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Resources = lazy(() => import("./pages/Resources"));
 const TradeJournal = lazy(() => import("./pages/TradeJournal"));
@@ -74,7 +73,6 @@ const App = () => {
               <Route path="/setup" element={<Setup />} />
               <Route path="/glossary" element={<Glossary />} />
               <Route path="/chart-examples" element={<ChartExamples />} />
-              <Route path="/checklist" element={<Checklist />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/trade-journal" element={<ProtectedRoute><TradeJournal /></ProtectedRoute>} />

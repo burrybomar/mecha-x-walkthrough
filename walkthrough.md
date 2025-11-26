@@ -1,27 +1,27 @@
-# Mobile Fixes & Knowledge Page Walkthrough
+# FAQ Content Redo Walkthrough
 
-I have addressed the mobile responsiveness issues on the Identify page and created the new interactive Knowledge page.
+I have completely rewritten the FAQ content to address the user's concerns about misleading claims and false promises. The new content focuses strictly on the mechanical logic of the framework and the reality of trading.
 
 ## Changes Made
 
-### 1. Mobile Responsiveness (SequenceIdentifier.tsx)
+### 1. Main FAQ Page (`src/pages/FAQ.tsx`)
 
-- **Progress Bar**: Changed the fixed width (`w-12`) segments to flexible width (`flex-1`) with a max-width constraint. This ensures the progress bar scales properly on smaller screens without overflowing.
-- **Padding**: Reduced the card content padding from `p-8` to `p-6` on mobile devices to maximize usable space.
+- **Removed**: All mentions of specific win rates (e.g., "45-55%"), specific trade frequencies (e.g., "2-5 trades per week"), and guarantees of profitability.
+- **Added**:
+  - **"Risk & Reality" Category**: Explicitly states that no system guarantees profits and that the tool is for analysis, not signals.
+  - **"Logic & Framework" Category**: Explains the core concepts (KL to DL, Sweep necessity, Mechanical definitions) without hype.
+  - **"Execution & Rules" Category**: Focuses on the mechanics of invalidation, time alignment, and SMT as a confluence tool.
+- **Visuals**: Updated icons to match the new categories (Target, Zap, Shield).
 
-### 2. New Knowledge Page (src/pages/Knowledge.tsx)
+### 2. Landing Page FAQ Section (`src/components/landing/FAQSection.tsx`)
 
-- **Interactive Tabs**: Implemented a tabbed interface for the 5 phases of the Mecha-X sequence.
-- **Content Integration**: Incorporated the user's provided text, including the specific terminology substitutions (IRL = 1H BSL/SSL, etc.).
-- **Visuals**: Added icons and card-based layouts to make the content digestible and engaging.
-- **Navigation**: Added "Previous Phase" and "Next Phase" buttons for linear progression.
-
-### 3. Routing (App.tsx)
-
-- Added the `/knowledge` route to `App.tsx` to resolve the 404 error when clicking "Start Learning" from the home page.
+- **Rewrote Questions**:
+  - "Is this a buy/sell signal indicator?" -> Explicit "No".
+  - "Is this a 'Get Rich Quick' system?" -> Explicit "Absolutely not".
+- **Focus**: Emphasized that the tool visualizes market structure and that the user is responsible for execution.
 
 ## Verification
 
-- **Mobile Check**: The progress bar in `SequenceIdentifier` now uses `flex-1`, ensuring it fits on any screen width.
-- **Link Check**: The `/knowledge` route is now defined, matching the link in `Index.tsx`.
-- **Content Check**: The `Knowledge` page contains all 5 phases with the correct definitions and interactive elements.
+- **Content Check**: The new text is grounded, logical, and devoid of marketing fluff or financial advice.
+- **Structure Check**: The FAQ page still functions with its category filters and accordion layout.
+- **Consistency**: The message is now consistent across both the main page and the landing page section.

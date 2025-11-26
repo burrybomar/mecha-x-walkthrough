@@ -14,30 +14,30 @@ export const ResponsiveNav = () => {
       {/* Desktop Navigation - Hidden on mobile */}
       <nav className="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
         {/* Framework Core */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/fractal-model')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/fractal-model')}
           className="font-mono"
           aria-label="Fractal Model"
         >
           <RefreshCw className="w-4 h-4 mr-1" />
           Model
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/sequences')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/sequences')}
           className="font-mono"
           aria-label="Three Sequences"
         >
           <ArrowUpRight className="w-4 h-4 mr-1" />
           Sequences
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/sequence-identifier')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/sequence-identifier')}
           className="font-mono"
           aria-label="Sequence Identifier"
         >
@@ -76,41 +76,33 @@ export const ResponsiveNav = () => {
           <ChartColumnIncreasing className="w-4 h-4 mr-1" />
           Charts
         </Button>
-        
+
         {/* Tools */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/checklist')} 
-          className="font-mono"
-          aria-label="Pre-Trade Checklist"
-        >
-          Checklist
-        </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/setup')} 
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/setup')}
           className="font-mono"
           aria-label="Setup Indicators"
         >
           Setup
         </Button>
-        
+
         {/* Reference */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/glossary')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/glossary')}
           className="font-mono"
           aria-label="Trading Glossary"
         >
           Glossary
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => navigate('/faq')} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/faq')}
           className="font-mono"
           aria-label="Frequently Asked Questions"
         >

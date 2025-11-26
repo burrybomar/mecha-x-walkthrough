@@ -61,13 +61,7 @@ const resources: Resource[] = [
     icon: BookOpen,
     link: "/glossary"
   },
-  {
-    title: "Pre-Trade Checklist",
-    description: "Checklist, session timing, risk rules.",
-    category: "Practice",
-    icon: Download,
-    link: "/checklist"
-  },
+
   {
     title: "Trade Journal",
     description: "Log setups: HTF bias, sweep type, entry, exit, RR.",
