@@ -8,6 +8,7 @@ import { FeatureShowcase } from '@/components/landing/FeatureShowcase';
 import { Badge } from '@/components/ui/badge';
 import { GlitchText } from '@/components/visuals/GlitchText';
 import { ScenarioVisualizer } from '@/components/visuals/ScenarioVisualizer';
+import { InteractiveHeroBackground } from '@/components/visuals/InteractiveHeroBackground';
 
 // Visual Placeholders (Replace with actual visual components later)
 const HTFVisual = () => (
@@ -113,6 +114,7 @@ const Index = () => {
 
             {/* Hero Section - Out of this World */}
             <section className="relative min-h-screen flex flex-col items-center justify-center px-4 text-center z-10">
+                <InteractiveHeroBackground />
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
