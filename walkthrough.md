@@ -1,27 +1,27 @@
-# FAQ Content Redo Walkthrough
+# Visuals & Settings Update Walkthrough
 
-I have completely rewritten the FAQ content to address the user's concerns about misleading claims and false promises. The new content focuses strictly on the mechanical logic of the framework and the reality of trading.
+I have addressed the user's feedback regarding the "generic" sequence visuals and the inaccurate settings documentation.
 
 ## Changes Made
 
-### 1. Main FAQ Page (`src/pages/FAQ.tsx`)
+### 1. New Sequence Visuals (`src/components/visuals/MechaSequenceVisual.tsx`)
 
-- **Removed**: All mentions of specific win rates (e.g., "45-55%"), specific trade frequencies (e.g., "2-5 trades per week"), and guarantees of profitability.
-- **Added**:
-  - **"Risk & Reality" Category**: Explicitly states that no system guarantees profits and that the tool is for analysis, not signals.
-  - **"Logic & Framework" Category**: Explains the core concepts (KL to DL, Sweep necessity, Mechanical definitions) without hype.
-  - **"Execution & Rules" Category**: Focuses on the mechanics of invalidation, time alignment, and SMT as a confluence tool.
-- **Visuals**: Updated icons to match the new categories (Target, Zap, Shield).
+- Created a high-fidelity SVG-based component to visualize the three core sequences:
+  - **Reversal**: Shows C1 Swing High/Low, C2 Sweep (with gradient highlight), and C3 Expansion with CISD entry level.
+  - **Continuation**: Shows HTF context (ghost candle), Impulse, Pullback, and Continuation Trigger.
+  - **Aligned**: Shows HTF Bias arrow, LTF structure alignment, and "A+ Setup" indicator.
+- Replaced the generic `SequenceDiagram` in `InteractiveSequenceViewer.tsx` with this new component.
 
-### 2. Landing Page FAQ Section (`src/components/landing/FAQSection.tsx`)
+### 2. Configuration Update (`src/components/landing/Configuration.tsx`)
 
-- **Rewrote Questions**:
-  - "Is this a buy/sell signal indicator?" -> Explicit "No".
-  - "Is this a 'Get Rich Quick' system?" -> Explicit "Absolutely not".
-- **Focus**: Emphasized that the tool visualizes market structure and that the user is responsible for execution.
+- **Removed**: The generic table layout.
+- **Added**: A grid layout of "Settings Groups" that matches the actual PineScript inputs found in `reference/Mecha-X.pine`.
+- **Specifics**:
+  - Added "POI Validation" group with "POI Filter", "NWOG", "MWDR", "FVG".
+  - Added "Display", "HTF Setup", "HTF Candles", "Chart Mapping", "Liquidity Sweeps", "Pattern Detection", and "CISD" groups.
+  - Added a note about the critical "POI Filter" input.
 
 ## Verification
 
-- **Content Check**: The new text is grounded, logical, and devoid of marketing fluff or financial advice.
-- **Structure Check**: The FAQ page still functions with its category filters and accordion layout.
-- **Consistency**: The message is now consistent across both the main page and the landing page section.
+- **Visuals**: The sequences now look like the actual trading setup (candles, wicks, levels) rather than abstract boxes.
+- **Settings**: The configuration section now accurately reflects the tool's actual inputs, avoiding confusion for the user.

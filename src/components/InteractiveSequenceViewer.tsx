@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, RefreshCw, ArrowUpRight, Play, Pause, Terminal, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
-import { SequenceDiagram } from './diagrams/SequenceDiagram';
+import { MechaSequenceVisual } from './visuals/MechaSequenceVisual';
 
 const sequences = [
     {
@@ -231,7 +231,7 @@ export const InteractiveSequenceViewer = () => {
                                         ? 'border-bearish/20 bg-bearish/5'
                                         : 'border-primary/20 bg-primary/5'
                                     }`}>
-                                    <SequenceDiagram
+                                    <MechaSequenceVisual
                                         variant={sequence.id as "continuation" | "reversal" | "aligned"}
                                         className="w-full h-full absolute inset-0"
                                     />
