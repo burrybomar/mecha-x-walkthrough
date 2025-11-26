@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export const C2LabelsVisual = () => {
     // C1-C2-C3-C4 Sequence Data (Bearish Reversal Example)
     const candles = [
-        { id: "C1", label: "Liquidity", high: 80, open: 60, close: 75, low: 55, type: "bullish" },
+        { id: "C1", label: "IRL (Bait)", high: 80, open: 60, close: 75, low: 55, type: "bullish" },
         { id: "C2", label: "Sweep", high: 85, open: 75, close: 65, low: 60, type: "bearish", sweep: true }, // Sweeps 80, closes inside
         { id: "C3", label: "Expansion", high: 65, open: 65, close: 45, low: 40, type: "bearish" },
         { id: "C4", label: "Continuation", high: 48, open: 45, close: 30, low: 25, type: "bearish" },
@@ -29,7 +29,7 @@ export const C2LabelsVisual = () => {
                     stroke="hsl(var(--muted-foreground))" strokeWidth="1" strokeDasharray="4 4"
                     opacity="0.5"
                 />
-                <text x="780" y={400 - 80 * 4 - 10} fill="hsl(var(--muted-foreground))" textAnchor="end" fontSize="12">C1 High (Liquidity)</text>
+                <text x="780" y={400 - 80 * 4 - 10} fill="hsl(var(--muted-foreground))" textAnchor="end" fontSize="12">C1 High (IRL)</text>
 
                 {candles.map((candle, i) => {
                     const x = 150 + i * 150;

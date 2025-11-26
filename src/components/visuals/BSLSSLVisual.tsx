@@ -37,7 +37,7 @@ export const BSLSSLVisual = () => {
                     animate={{ pathLength: 1, opacity: 0.5 }}
                     transition={{ duration: 1 }}
                 />
-                <text x="780" y={400 - bslLevel * 4 - 10} fill="hsl(var(--bullish))" textAnchor="end" fontSize="14" fontWeight="bold">BSL (Liquidity)</text>
+                <text x="780" y={400 - bslLevel * 4 - 10} fill="hsl(var(--bullish))" textAnchor="end" fontSize="14" fontWeight="bold">BSL (IRL)</text>
 
                 {/* SSL Line */}
                 <motion.line
@@ -47,7 +47,7 @@ export const BSLSSLVisual = () => {
                     animate={{ pathLength: 1, opacity: 0.5 }}
                     transition={{ duration: 1, delay: 0.5 }}
                 />
-                <text x="780" y={400 - sslLevel * 4 + 20} fill="hsl(var(--bearish))" textAnchor="end" fontSize="14" fontWeight="bold">SSL (Liquidity)</text>
+                <text x="780" y={400 - sslLevel * 4 + 20} fill="hsl(var(--bearish))" textAnchor="end" fontSize="14" fontWeight="bold">SSL (IRL)</text>
 
                 {/* Candles */}
                 {candles.map((candle, i) => {

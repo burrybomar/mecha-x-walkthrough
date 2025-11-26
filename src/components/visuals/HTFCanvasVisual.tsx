@@ -49,7 +49,7 @@ export const HTFCanvasVisual = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            4H CANVAS
+            4H CANVAS (ERL)
           </motion.text>
         </motion.g>
 
