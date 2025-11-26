@@ -1,30 +1,46 @@
-# Visual Refinements: Glacier Theme & Interactivity
+# Visual Refinements & Logic Integration
 
-I have refined the "Glacier Minimalist" theme based on your feedback, restoring interactivity and fixing the header clashing issues.
+I have refined the "Glacier Minimalist" theme and integrated the specific Mecha-X trading logic into the website's narrative.
 
 ## Key Changes
 
-### 1. New Interactive Background (`src/components/visuals/GlacierBackground.tsx`)
+### 1. Logic Integration (`Framework.tsx` & `Features.tsx`)
 
-- **Interactive**: Added a mouse-following "spotlight" effect that connects particles in a network, restoring the "alive" feel you missed.
-- **Palette**: Uses the exact colors from your provided palette (Glacier Blue `#5289AD`, Light Blue `#B2D4F0`, etc.).
-- **Visibility**: Increased opacity to **0.8** and darkened particles to ensure they stand out clearly against the light background.
-- **Performance**: Built with HTML5 Canvas for smooth 60fps animation without heavy SVG DOM elements.
+- **Mapping**: Explicitly defined **1H BSL/SSL as IRL** and **4H/Daily BSL/SSL as ERL**.
+- **POI Filters**: Explained how the indicator filters for C2s at key levels like **NWOG, FVG, and MWDR**.
+- **Context**: Added sections on **Timeframe Alignment** (1H/4H/Daily alignment) and **Time-Based Sweeps** (e.g., 10pm sweep of 6pm low for Asia/London plays).
 
-### 2. Navbar Polish (`src/components/Navbar.tsx`)
+### 2. Visual Polish
 
-- **Frosted Ice Theme**: Switched from dark glass to a light, frosted glass effect (`bg-white/70` with `backdrop-blur-xl`).
-- **Clarity**: Removed the "dirty" look by ensuring it blends seamlessly with the light background.
-- **Contrast**: Enforced black text and primary-colored accents for perfect readability.
+- **Interactive Background**: Restored the "living" network effect with the `GlacierBackground` component, now with **0.8 opacity** for better visibility.
+- **Frosted Ice Navbar**: Implemented a light glassmorphism theme (`bg-white/70`) to fix clashing.
+- **High Contrast**: Enforced deep blue/black text (`#10212C`) and darkened primary colors for readability.
 
-### 3. Global Palette Update (`src/index.css`)
+## Recent Updates
 
-- **Exact Match**: Updated all CSS variables to match the hex codes from your provided palette image.
-- **High Contrast**: `foreground` is now `#10212C` (Darkest Blue) instead of generic black.
-- **Transparency**: Reduced opacity of glass panels (`bg-white/30`) to let the background animation shine through.
+### Content Refactoring (Mecha-X Logic)
+
+- **Global Logic Integration**: Updated all key pages to consistently use Mecha-X terminology:
+  - **IRL/ERL Mapping**: Defined 1H BSL/SSL as Internal Range Liquidity (IRL) and 4H/Daily BSL/SSL as External Range Liquidity (ERL).
+  - **POI Filters**: Added explanations for NWOG, FVG, and MWDR as critical filters for validating sweeps.
+  - **Contextual Labels**: Integrated "Timeframe Alignment" and "Time-Based Sweeps" into the narrative.
+- **Page-Specific Updates**:
+  - `Sequences.tsx`: Updated header to "Sweep IRL (1H) → Target ERL (4H/Daily)".
+  - `FractalModel.tsx`: Renamed sections to "The 4H Canvas (ERL)" and "The 1H Trigger (IRL)".
+  - `Setup.tsx`: Updated BSL/SSL, C2 Patterns, and HTF Context sections with specific Mecha-X actions and meanings.
+  - `FAQ.tsx`: Added questions about IRL vs ERL and POI filters.
+  - `ChartExamples.tsx`: Refactored examples to highlight ERL targets and IRL sweeps.
+  - `SequenceStepsExplainer.tsx`: Updated step descriptions to explicitly mention IRL/ERL and POI filters in the "Golden Rules".
+- **Missing Files**: Noted that `OHLCTutorial.tsx` and `ChartComparison.tsx` are not present in the current codebase and were skipped.
+
+### Visual Overhaul
+
+- **Glacier Theme**: Implemented "Mecha-Glass-Mono" aesthetic with `GlacierBackground`.
+- **Transparency**: Updated `App.tsx` and `index.css` to ensure transparent backgrounds for glassmorphism effects.
+- **Navbar**: Polished Navbar with "Frosted Ice" theme and high-contrast text.
 
 ## Verification
 
-- **Interactivity**: Move your mouse around the background to see the network connections form.
-- **Header**: Scroll down to see the "Frosted Ice" effect on the navbar.
-- **Colors**: The entire site now adheres strictly to the "Glacier" palette.
+- **Read**: Check the "Point A to Point B" section in the Framework to see the new IRL/ERL and POI logic.
+- **Interact**: Move your mouse to see the background network effect.
+- **Review**: Verify that the "Features" section now speaks the specific language of the Mecha-X script.

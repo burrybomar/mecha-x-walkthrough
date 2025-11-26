@@ -198,24 +198,24 @@ const Setup = () => {
           >
             {/* BSL/SSL Explainer */}
             <IndicatorExplainer
-              title="BSL/SSL Lines"
-              what="Horizontal lines marking swing highs (BSL) and swing lows (SSL) where stop losses accumulate"
-              why="Smart money targets these levels to hunt stops before reversing. The indicator auto-identifies them so you know where sweeps will occur."
+              title="BSL/SSL Lines (Liquidity)"
+              what="Horizontal lines marking Internal (IRL) and External (ERL) liquidity levels."
+              why="Price moves from IRL to ERL. The indicator maps these levels so you know where the 'Sweep' (IRL) and 'Target' (ERL) are."
               howToRead={[
                 {
                   element: "CYAN LINE (BSL)",
-                  meaning: "Buyside Liquidity - Long stop losses sitting above this high",
-                  action: "Watch for price to wick above (sweep) then close back inside for bearish reversal",
+                  meaning: "Buyside Liquidity - Long stops (IRL or ERL)",
+                  action: "Watch for 1H BSL sweep (IRL) to target 4H SSL (ERL)",
                 },
                 {
                   element: "RED LINE (SSL)",
-                  meaning: "Sellside Liquidity - Short stop losses sitting below this low",
-                  action: "Watch for price to wick below (sweep) then close back inside for bullish reversal",
+                  meaning: "Sellside Liquidity - Short stops (IRL or ERL)",
+                  action: "Watch for 1H SSL sweep (IRL) to target 4H BSL (ERL)",
                 },
                 {
                   element: "COUNT (1-20)",
-                  meaning: "How many recent highs/lows to mark",
-                  action: "More lines = more potential sweep levels, fewer = cleaner chart",
+                  meaning: "Depth of structure",
+                  action: "More lines = more potential IRL/ERL levels",
                 },
               ]}
               visualExample={<BSLSSLVisual />}
@@ -224,28 +224,28 @@ const Setup = () => {
             {/* C2 Pattern Labels */}
             <IndicatorExplainer
               title="C2 Pattern Labels"
-              what="Text labels that appear on candles showing confirmed liquidity sweep patterns"
-              why="Manually identifying sweep patterns is tedious and error-prone. The indicator auto-labels every valid setup with its formation type."
+              what="Labels for confirmed sweeps of IRL (Internal Range Liquidity)."
+              why="We only trade when price sweeps IRL and closes back inside. The indicator filters these based on your settings (NWOG, FVG, etc)."
               howToRead={[
                 {
                   element: "C2-REV",
-                  meaning: "Sweep + Close Inside + Reversal momentum",
-                  action: "Wait for C3 confirmation candle, enter on CISD pullback",
+                  meaning: "Standard Sweep + Reversal",
+                  action: "Valid trigger if aligned with HTF Context (ERL Target)",
                 },
                 {
                   element: "C2-SNAP",
-                  meaning: "Violent immediate reversal after sweep - highest probability",
-                  action: "Aggressive entry - strongest setups, tight stops",
+                  meaning: "Violent Reversal (High Probability)",
+                  action: "Aggressive entry - often happens at key POIs (NWOG/MWDR)",
                 },
                 {
                   element: "C2-EXP",
-                  meaning: "Sweep followed by range expansion (continuation)",
-                  action: "Skip or trade continuation - not traditional reversal",
+                  meaning: "Expansion (Continuation)",
+                  action: "Price is moving towards ERL. Join the flow.",
                 },
                 {
                   element: "C3",
-                  meaning: "Expansion candle after C2 - confirms direction",
-                  action: "Entry trigger when C3 closes - pattern is valid",
+                  meaning: "Confirmation Candle",
+                  action: "Validates the C2 sweep. Entry is on the pullback (CISD).",
                 },
               ]}
               visualExample={<C2LabelDecoder />}
@@ -308,24 +308,24 @@ const Setup = () => {
 
             {/* HTF Context Explainer */}
             <IndicatorExplainer
-              title="HTF Context Layers"
-              what="Higher Timeframe candles overlaid on your current chart."
-              why="Trading without context is gambling. This feature lets you see the 4H or Daily trend while trading on the 1m or 5m chart, keeping you aligned with the 'Big Picture'."
+              title="HTF Context (The Canvas)"
+              what="4H/Daily candles overlaid on your chart."
+              why="The 4H candle is your Canvas. It defines the External Range Liquidity (ERL). You trade 1H sweeps (IRL) in the direction of the 4H expansion."
               howToRead={[
                 {
                   element: "GHOST CANDLES",
-                  meaning: "Large background candles representing the Higher Timeframe (HTF)",
-                  action: "Trade in the direction of the HTF candle color. If 4H is green, look for longs.",
+                  meaning: "4H/Daily structure (The Canvas)",
+                  action: "Trade with the color. Green 4H = Look for Longs (SSL Sweeps).",
                 },
                 {
                   element: "WICK ZONES",
-                  meaning: "The highs and lows of the HTF candle",
-                  action: "These are key support/resistance levels. Expect reactions here.",
+                  meaning: "HTF Highs/Lows (ERL)",
+                  action: "These are your Targets (Draw on Liquidity).",
                 },
                 {
                   element: "ALIGNMENT",
-                  meaning: "When LTF structure matches HTF direction",
-                  action: "A+ Setup. Execute with confidence.",
+                  meaning: "1H Structure aligning with 4H Expansion",
+                  action: "A+ Setup. Full margin execution.",
                 },
               ]}
               visualExample={<HTFVisual />}

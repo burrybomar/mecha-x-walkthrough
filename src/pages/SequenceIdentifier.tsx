@@ -17,10 +17,10 @@ const questions: Question[] = [
   {
     id: 'htf_narrative',
     question: '1. What is your HTF (Daily/Weekly) narrative?',
-    help: 'Understanding the bigger picture helps identify which sequence will likely play out.',
+    help: 'Understanding the bigger picture helps identify the External Range Liquidity (ERL) target.',
     options: [
-      { value: 'continuation', label: 'Clear directional bias - expecting continuation', hint: 'e.g., strong trend, recent driver confirmed direction' },
-      { value: 'reversal', label: 'Expecting reversal from key level', hint: 'e.g., at weekly high/low, major support/resistance' },
+      { value: 'continuation', label: 'Clear directional bias - expecting expansion to ERL', hint: 'e.g., strong trend targeting a 4H/Daily High/Low' },
+      { value: 'reversal', label: 'Expecting reversal from ERL', hint: 'e.g., price just swept a major HTF level' },
       { value: 'consolidation', label: 'Consolidation/range-bound', hint: 'e.g., trading between external highs/lows' },
     ],
   },
@@ -58,8 +58,8 @@ const questions: Question[] = [
   },
   {
     id: 'ltf_confirmation',
-    question: '5. Do you have LTF swing confirmation for THIS 4H candle?',
-    help: 'The LTF swing is your mechanical entry trigger. No swing = no trade.',
+    question: '5. Do you have LTF swing confirmation (IRL Sweep)?',
+    help: 'The 1H/15m swing is your mechanical entry trigger. No IRL Sweep = No Trade.',
     options: [
       { value: 'yes_reversal', label: 'Yes - Fresh LTF reversal swing (created new high/low)', hint: 'This 4H made its own turning point' },
       { value: 'yes_inherited', label: 'Yes - Inherited from prior 4H', hint: 'Using the previous 4H swing' },

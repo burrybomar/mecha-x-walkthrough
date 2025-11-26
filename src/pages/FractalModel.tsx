@@ -47,12 +47,12 @@ const FractalModel = () => {
             <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 px-4 text-foreground">
               The Fractal Principle:<br />
               <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                4H Canvas + 1H Trigger
+                1H IRL → 4H ERL
               </span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground leading-relaxed px-4 mb-4">
-              Market truth: A durable directional move requires a swing point.
-              The market does not reverse from "nowhere". Mecha-X makes this a hard rule.
+              Market truth: Price moves from Internal Range Liquidity (IRL) to External Range Liquidity (ERL).
+              Mecha-X maps this: <strong>1H Sweeps (IRL) target 4H/Daily Draws (ERL)</strong>.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-sm hover:bg-accent/20 transition-colors cursor-pointer">
               <span className="text-accent font-semibold">Deep Dive</span>
@@ -102,11 +102,11 @@ const FractalModel = () => {
                   <div className="p-2 rounded-lg bg-bullish/20">
                     <Layers className="w-6 h-6 text-bullish" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">The 4H Canvas</h3>
+                  <h3 className="text-2xl font-bold text-foreground">The 4H Canvas (ERL)</h3>
                 </div>
                 <div className="space-y-4">
                   <p className="text-muted-foreground leading-relaxed">
-                    The 4H candle is your main unit of intraday work. It provides the structure and context for everything you do.
+                    The 4H/Daily structure provides your <strong>External Range Liquidity (ERL)</strong>. This is the Draw on Liquidity (DL) you are targeting.
                   </p>
 
                   <div className="space-y-3">
@@ -114,23 +114,13 @@ const FractalModel = () => {
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="text-bullish mt-1">•</span>
-                        <span>Where it opens relative to key swings</span>
+                        <span>Where is the 4H/Daily Draw (ERL)?</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-bullish mt-1">•</span>
-                        <span>Whether it's likely to print a small wick (clean expansion)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-bullish mt-1">•</span>
-                        <span>Its relationship to HTF narrative and liquidity draws</span>
+                        <span>Is the 4H candle expanding towards it?</span>
                       </li>
                     </ul>
-                  </div>
-
-                  <div className="p-4 bg-bullish/10 rounded-lg border border-bullish/20 mt-4">
-                    <p className="text-sm font-medium text-foreground/90">
-                      A clean, small opposing wick plus a strong body fits Mecha-X logic for expansion.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -144,20 +134,20 @@ const FractalModel = () => {
                   <div className="p-2 rounded-lg bg-bearish/20">
                     <Target className="w-6 h-6 text-bearish" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">The LTF Trigger</h3>
+                  <h3 className="text-2xl font-bold text-foreground">The 1H Trigger (IRL)</h3>
                 </div>
                 <div className="space-y-4">
                   <p className="text-muted-foreground leading-relaxed">
-                    The Lower Timeframe swing (typically 1H or 15m) is your mechanical confirmation.
-                    This is what gives you permission to enter.
+                    The 1H swing provides your <strong>Internal Range Liquidity (IRL)</strong>.
+                    We wait for a sweep of 1H IRL (the C2) to trigger the move to ERL.
                   </p>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-foreground">Roles of the LTF Swing (C2):</h4>
+                    <h4 className="font-semibold text-foreground">Roles of the 1H Swing (C2):</h4>
                     <ul className="space-y-2 text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="text-bearish mt-1">•</span>
-                        <span>Confirms the 4H high/low with a mechanical C2 Sweep</span>
+                        <span>Sweeps IRL to fuel the move to ERL</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-bearish mt-1">•</span>

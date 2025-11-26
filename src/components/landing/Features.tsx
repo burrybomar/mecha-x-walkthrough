@@ -55,26 +55,26 @@ export const Features = () => {
                 </FeatureSection>
 
                 <FeatureSection
-                    title="Sweep Detection & BSL/SSL Lines"
-                    subtitle="The C2 moment"
+                    title="Sweep Detection & Mapping"
+                    subtitle="IRL vs ERL"
                     align="right"
                     description={
                         <>
                             <p>
-                                When an HTF candle sweeps the high or low of the previous candle, Mecha-X marks it.
+                                Mecha-X maps the market structure for you. It identifies <strong>1H BSL/SSL as Internal Range Liquidity (IRL)</strong> and <strong>4H/Daily BSL/SSL as External Range Liquidity (ERL)</strong>.
                             </p>
                             <div className="grid grid-cols-2 gap-4 mt-4 mb-4">
                                 <div className="bg-secondary/50 p-3 rounded border border-black/5">
-                                    <div className="font-bold text-primary">BSL</div>
-                                    <div className="text-xs">Buy Side Liquidity</div>
+                                    <div className="font-bold text-primary">IRL</div>
+                                    <div className="text-xs">Internal Range (1H)</div>
                                 </div>
                                 <div className="bg-secondary/50 p-3 rounded border border-black/5">
-                                    <div className="font-bold text-primary">SSL</div>
-                                    <div className="text-xs">Sell Side Liquidity</div>
+                                    <div className="font-bold text-primary">ERL</div>
+                                    <div className="text-xs">External Range (4H/D)</div>
                                 </div>
                             </div>
                             <p>
-                                <strong>The Strike System:</strong> Not every sweep holds. Mecha-X tracks when price breaks back through to prevent you from holding onto a dead setup.
+                                <strong>The POI Filter:</strong> It doesn't just show sweeps. It filters for C2 candles that sweep key levels like <strong>NWOG, FVG, or MWDR</strong>, ensuring you only focus on high-probability setups.
                             </p>
                         </>
                     }
@@ -83,23 +83,23 @@ export const Features = () => {
                 </FeatureSection>
 
                 <FeatureSection
-                    title="C2 Formation Labels"
-                    subtitle="Not all sweeps are equal"
+                    title="Context Labels & Alignment"
+                    subtitle="Time & Structure"
                     description={
                         <>
-                            <p>The framework distinguishes how C2 closes relative to C1:</p>
+                            <p>Mecha-X provides the context you need to pull the trigger:</p>
                             <ul className="space-y-4 mt-4">
                                 <li>
-                                    <strong className="text-primary">SNAP (⚡H→S↓)</strong>
-                                    <br />Swept and immediately rejected to the opposite extreme. Highest conviction.
+                                    <strong className="text-primary">Timeframe Alignment</strong>
+                                    <br />See instantly if the 1H, 4H, and Daily C2s are all aligning in the same direction.
                                 </li>
                                 <li>
-                                    <strong className="text-primary">REV (⚡L→R↑)</strong>
-                                    <br />Swept and closed back inside the range. Standard reversal.
+                                    <strong className="text-primary">Time-Based Sweeps</strong>
+                                    <br />Identify specific scenarios like a <strong>10pm sweep of a 6pm low</strong>—the classic setup for an Asia reversal leading into a London expansion.
                                 </li>
                                 <li>
-                                    <strong className="text-primary">EXP (⚡H→E↓)</strong>
-                                    <br />Swept and body engulfed C1's entire range. This is expansion, not reversal.
+                                    <strong className="text-primary">Formation Type</strong>
+                                    <br />Distinguish between high-conviction <strong>SNAP</strong> (⚡H→S↓) and standard <strong>REV</strong> (⚡L→R↑) formations.
                                 </li>
                             </ul>
                         </>
@@ -107,6 +107,7 @@ export const Features = () => {
                 >
                     <C2LabelsVisual />
                 </FeatureSection>
+
 
                 <FeatureSection
                     title="CISD — Change in State of Delivery"
@@ -147,7 +148,7 @@ export const Features = () => {
                 >
                     <SMTVisual />
                 </FeatureSection>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 };

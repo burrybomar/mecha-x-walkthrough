@@ -22,7 +22,17 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What is the core logic of the Mecha-X Framework?",
-    answer: "The framework is built on the logic that price moves from a Key Level (KL) to a Draw on Liquidity (DL). We do not guess reversals; we wait for price to engage a Key Level (Sweep) and then confirm a reversal via mechanical candle formations (C1-C2-C3).",
+    answer: "The framework is built on the logic that price moves from Internal Range Liquidity (IRL) to External Range Liquidity (ERL). We wait for a sweep of IRL (1H) to target ERL (4H/Daily).",
+    category: "Logic & Framework"
+  },
+  {
+    question: "What is IRL vs ERL?",
+    answer: "IRL (Internal Range Liquidity) is the liquidity inside the current trading range (e.g., 1H highs/lows). ERL (External Range Liquidity) is the target outside the range (e.g., 4H/Daily highs/lows). We sweep IRL to go to ERL.",
+    category: "Logic & Framework"
+  },
+  {
+    question: "Why do I need POI Filters (NWOG, FVG)?",
+    answer: "Not all sweeps are valid. A sweep that happens at a Key Level like a New Week Opening Gap (NWOG) or a Fair Value Gap (FVG) is much higher probability. These filters validate the C2 trigger.",
     category: "Logic & Framework"
   },
   {

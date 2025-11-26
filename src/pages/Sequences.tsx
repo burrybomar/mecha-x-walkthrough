@@ -29,7 +29,7 @@ const Sequences = () => {
             TRADING <span className="text-primary text-glow-primary">SEQUENCES</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Master the three core patterns of the Mecha-X system.
+            Master the mechanical flow: <span className="text-primary font-medium">Sweep IRL (1H) → Target ERL (4H/Daily)</span>.
           </p>
         </header>
 

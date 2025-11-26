@@ -28,32 +28,32 @@ export const SequenceStepsExplainer = ({
   const bullishSteps: SequenceStep[] = [
     {
       candle: 'C1',
-      title: 'Pre-Swing Candle',
-      description: 'Establishes the liquidity level (swing low). This creates the target for the sweep.',
+      title: 'Pre-Swing Candle (IRL)',
+      description: 'Establishes the Internal Range Liquidity (IRL). This is the "Bait" that needs to be swept.',
       color: 'hsl(var(--muted))',
       textColor: 'hsl(var(--muted-foreground))',
       icon: 'neutral',
     },
     {
       candle: 'C2',
-      title: 'Sweep Candle',
-      description: 'Breaks below C1 low with its wick (liquidity sweep), then closes back INSIDE C1 range. This is the reversal signal.',
+      title: 'Sweep Candle (Trigger)',
+      description: 'Sweeps the IRL (C1 Low). This is the engagement of liquidity. Must close back INSIDE to confirm the reversal.',
       color: 'hsl(var(--bearish))',
       textColor: 'hsl(var(--bearish-foreground))',
       icon: 'bearish',
     },
     {
       candle: 'C3',
-      title: 'Expansion Candle',
-      description: 'Momentum candle moving in the NEW direction (bullish). Confirms the reversal is legitimate.',
+      title: 'Expansion Candle (Confirmation)',
+      description: 'Momentum candle expanding towards External Range Liquidity (ERL). Confirms the C2 sweep was valid.',
       color: 'hsl(var(--bullish))',
       textColor: 'hsl(var(--bullish-foreground))',
       icon: 'bullish',
     },
     {
       candle: 'C4',
-      title: 'Continuation',
-      description: 'Further expansion continuing the bullish move. Trade runs to CISD projections (2x, 2.5x, 4x).',
+      title: 'Continuation (Delivery)',
+      description: 'Price delivers to the ERL target (4H/Daily BSL). Trade runs to CISD projections.',
       color: 'hsl(var(--bullish))',
       textColor: 'hsl(var(--bullish-foreground))',
       icon: 'bullish',
@@ -209,29 +209,29 @@ export const SequenceStepsExplainer = ({
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">NO SWEEP = NO TRADE:</strong> C2 MUST break C1's
-              high/low with its wick. If there's no sweep, there's no setup.
+              <strong className="text-foreground">NO SWEEP = NO TRADE:</strong> C2 MUST sweep IRL (C1).
+              No engagement of liquidity = No reason to reverse.
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
               <strong className="text-foreground">CLOSE INSIDE:</strong> C2 must close back inside
-              C1's range. A close beyond C1 = failed reversal.
+              C1's range. A close beyond C1 = failed reversal (Expansion).
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">CISD ENTRY:</strong> Enter at the CISD zone (Close
-              price of the last momentum candle). Use CISD projections for targets.
+              <strong className="text-foreground">POI FILTER:</strong> High probability setups occur at
+              Key Levels (NWOG, FVG, MWDR).
             </span>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary font-bold mt-0.5">•</span>
             <span className="leading-relaxed">
-              <strong className="text-foreground">HTF CONFIRMATION:</strong> Always verify HTF
-              context. Don't counter-trade the higher timeframe narrative.
+              <strong className="text-foreground">HTF ALIGNMENT:</strong> Ensure the 1H Sweep (IRL) aligns
+              with the 4H/Daily Draw (ERL).
             </span>
           </li>
         </ul>

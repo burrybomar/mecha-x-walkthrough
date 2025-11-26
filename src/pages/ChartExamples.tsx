@@ -35,28 +35,28 @@ interface ChartExample {
 
 const examples: ChartExample[] = [
   {
-    title: "HTF Context & Bias",
+    title: "HTF Context & Bias (ERL)",
     category: "HTF Analysis",
     visual: <PremiumDiscountVisual />,
-    description: "Higher timeframe showing premium/discount zones and key liquidity levels that guide our directional bias.",
+    description: "Higher timeframe structure defining the External Range Liquidity (ERL). This is your Draw on Liquidity.",
     keyPoints: [
-      "Daily high = BSL target for bearish setups",
-      "Price in premium zone → look for shorts",
-      "Previous week low = discount zone for longs",
-      "HTF order blocks marked for reversal areas"
+      "Daily high = ERL target for bullish expansion",
+      "Price in premium zone → seek shorts to discount ERL",
+      "Previous week low = ERL target for bears",
+      "HTF order blocks = Reversal POIs"
     ],
     frameworkStep: "Fractal Foundation"
   },
   {
-    title: "Clean HTF Level",
+    title: "Clean HTF Level (ERL)",
     category: "HTF Analysis",
     visual: <HTFCanvasVisual />,
-    description: "Identifying untouched HTF levels that act as magnets for price and reversal zones.",
+    description: "Identifying untouched HTF levels (ERL) that act as magnets for price.",
     keyPoints: [
-      "Horizontal level shows key HTF resistance",
-      "Multiple touches = strong level",
-      "Gap between current price and level = target",
-      "Await sweep of this level for reversal setup"
+      "Horizontal level shows key ERL",
+      "Multiple touches = strong engineering",
+      "Gap between price and level = The Draw",
+      "Target this level after an IRL sweep"
     ],
     frameworkStep: "Fractal Foundation"
   },
@@ -64,12 +64,12 @@ const examples: ChartExample[] = [
     title: "HTF Sweep Pattern",
     category: "Liquidity",
     visual: <HTFSweepDiagram />,
-    description: "Price sweeping HTF highs/lows to grab liquidity before reversing in true direction.",
+    description: "Price sweeping HTF highs/lows (IRL) to grab liquidity before reversing to ERL.",
     keyPoints: [
-      "Wick through HTF high grabs BSL",
+      "Wick through High grabs BSL (IRL)",
       "Immediate strong reversal candle",
       "Close back inside range confirms sweep",
-      "This is your trigger to look for entries"
+      "Trigger to target opposing ERL"
     ],
     frameworkStep: "C2 Detection"
   },
@@ -77,10 +77,10 @@ const examples: ChartExample[] = [
     title: "Key Level Diagram",
     category: "HTF Analysis",
     visual: <HTFCanvasVisual />,
-    description: "Visual breakdown of how price interacts with key HTF levels and creates trading opportunities.",
+    description: "Visual breakdown of how price interacts with key HTF levels (ERL) and creates trading opportunities.",
     keyPoints: [
       "Structure of highs and lows",
-      "Where liquidity sits (BSL/SSL)",
+      "Where liquidity sits (IRL vs ERL)",
       "Expected sweep zones",
       "Reversal areas after sweep"
     ],
@@ -90,9 +90,9 @@ const examples: ChartExample[] = [
     title: "Perfect Liquidity Sweep",
     category: "Liquidity",
     visual: <BSLSSLVisual />,
-    description: "Clean example of liquidity sweep with clear wick through level and immediate reversal.",
+    description: "Clean example of an IRL liquidity sweep with clear wick through level and immediate reversal.",
     keyPoints: [
-      "Sharp wick grabs stops above high",
+      "Sharp wick grabs stops (IRL)",
       "Body closes back inside range",
       "Strong rejection = valid sweep",
       "Next step: find C2 confirmation"
@@ -103,12 +103,12 @@ const examples: ChartExample[] = [
     title: "BSL/SSL Levels",
     category: "Liquidity",
     visual: <BSLSSLVisual />,
-    description: "Identifying both Buy Side and Sell Side Liquidity pools for potential sweep targets.",
+    description: "Identifying Internal (IRL) and External (ERL) liquidity pools.",
     keyPoints: [
-      "BSL = stops above recent highs",
-      "SSL = stops below recent lows",
-      "Price seeks these levels before reversing",
-      "Higher TF liquidity more significant"
+      "BSL = stops above recent highs (IRL/ERL)",
+      "SSL = stops below recent lows (IRL/ERL)",
+      "Price sweeps IRL to target ERL",
+      "Higher TF liquidity = ERL"
     ],
     frameworkStep: "BSL/SSL Levels"
   },

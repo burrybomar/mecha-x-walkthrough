@@ -11,31 +11,31 @@ export const Framework = () => {
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                         The entire mechanical sequence reduces to a simple flow:
-                        <span className="text-primary font-medium"> price moving from a Key Level (KL) to a Draw on Liquidity (DL)</span>.
+                        <span className="text-primary font-medium"> mapping BSL/SSL to identify the flow from Internal (IRL) to External (ERL) liquidity</span>.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-semibold">Three Universal Models</h3>
+                            <h3 className="text-2xl font-semibold">The Core Logic: Mapping & Filtering</h3>
                             <ul className="space-y-6">
                                 <li className="space-y-2">
-                                    <div className="font-bold text-lg text-primary">1. IRL → ERL</div>
+                                    <div className="font-bold text-lg text-primary">1. Mapping (IRL vs ERL)</div>
                                     <p className="text-muted-foreground">
-                                        Internal Range Liquidity to External Range Liquidity. Price trades deep into the internal range (a gap, an old level), then targets the opposing boundary. The breakout model.
+                                        We map structure by defining <strong className="text-foreground">1H BSL/SSL as Internal Range Liquidity (IRL)</strong> and <strong className="text-foreground">4H/Daily BSL/SSL as External Range Liquidity (ERL)</strong>. This creates the roadmap: Price seeks ERL after sweeping IRL.
                                     </p>
                                 </li>
                                 <li className="space-y-2">
-                                    <div className="font-bold text-lg text-primary">2. ERL → IRL</div>
+                                    <div className="font-bold text-lg text-primary">2. The POI Filter</div>
                                     <p className="text-muted-foreground">
-                                        External Range Liquidity to Internal Range Liquidity. Price sweeps the external boundary, fails to continue, and gets pulled back into the range. The mean reversion model.
+                                        We don't trade every sweep. We look for C1-C2-C3 sequences forming specifically at key levels: <strong className="text-foreground">NWOG (New Week Opening Gap), FVG (Fair Value Gap), or MWDR (Midnight/Weekly DR)</strong>. These are the filters that validate the setup.
                                     </p>
                                 </li>
                                 <li className="space-y-2">
-                                    <div className="font-bold text-lg text-primary">3. Manipulation Range</div>
+                                    <div className="font-bold text-lg text-primary">3. Context & Alignment</div>
                                     <p className="text-muted-foreground">
-                                        Price dips below a clear swing low, takes out stops, then snaps back sharply and closes above. The trap. Often followed by aggressive expansion to the opposing high.
+                                        Context is King. We use labels to see <strong className="text-foreground">Timeframe Alignment</strong> (e.g., 1H, 4H, and Daily C2s all aligning) and <strong className="text-foreground">Time-Based Sweeps</strong> (e.g., 10pm sweep of a 6pm low) to anticipate Asia reversals or London expansions.
                                     </p>
                                 </li>
                             </ul>
