@@ -13,8 +13,8 @@ import {
 import { CandlestickButton } from "@/components/CandlestickButton";
 import { IndicatorExplainer } from "@/components/IndicatorExplainer";
 import { FVGVisual } from "@/components/FVGVisual";
-import { OrderBlockVisual } from "@/components/OrderBlockVisual";
-import { MSSVisual } from "@/components/MSSVisual";
+import { OrderBlockVisual } from "@/components/visuals/OrderBlockVisual";
+import { MSSVisual } from "@/components/visuals/MSSVisual";
 import { CandlestickCard } from "@/components/CandlestickCard"; // Keep this import if CandlestickCard is used elsewhere, otherwise remove.
 import { Card } from "@/components/ui/card"; // Keep this import if Card is used elsewhere, otherwise remove.
 import { Badge } from "@/components/ui/badge"; // Keep this import if Badge is used elsewhere, otherwise remove.
