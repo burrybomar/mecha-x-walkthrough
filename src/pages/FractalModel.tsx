@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft, Layers, Target, Clock, ArrowRight, GitMerge } from 'lucide-react';
+import { ArrowLeft, Layers, Target, TrendingUp, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CandlestickButton } from '@/components/CandlestickButton';
 import { HTFCanvasVisual } from '@/components/visuals/HTFCanvasVisual';
 import { FractalNestingVisual } from '@/components/visuals/FractalNestingVisual';
+import { IndicatorExplainer } from '@/components/IndicatorExplainer';
+import { Card, CardContent } from '@/components/ui/card';
 
 const FractalModel = () => {
   const navigate = useNavigate();
@@ -48,24 +50,12 @@ const FractalModel = () => {
               <br /><br />
               Mecha-X automates this by mapping the <span className="text-primary">1H Sweeps (The Bait)</span> that target the <span className="text-accent">4H/Daily Draws (The Target)</span>.
             </p>
-                      </li>
-                    </ul>
-                  </div>
+          </motion.div>
+        </div>
+      </section>
 
-                  <div className="p-4 bg-bearish/10 rounded-lg border border-bearish/20 mt-4">
-                    <p className="text-sm font-medium text-foreground/90">
-                      Only after this swing prints do you have permission to attack the move.
-                    </p>
-                  </div>
-                </div >
-              </div >
-            </div >
-          </div >
-        </div >
-      </section >
-
-  {/* Visual Explainers */ }
-  < section className = "py-8 md:py-16 px-4" >
+      {/* Visual Explainers */}
+      <section className="py-8 md:py-16 px-4">
     <div className="container mx-auto max-w-6xl space-y-8">
       <motion.h2
         initial={{ opacity: 0 }}
@@ -135,11 +125,11 @@ const FractalModel = () => {
         ]}
         visualExample={<FractalNestingVisual />}
       />
-    </div>
-      </section >
+      </div>
+      </section>
 
-  {/* Why This Works */ }
-  < section className = "py-16 px-4" >
+      {/* Why This Works */}
+      <section className="py-16 px-4">
     <div className="container mx-auto max-w-4xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -191,11 +181,11 @@ const FractalModel = () => {
           </Card>
         </div>
       </motion.div>
-    </div>
-      </section >
+      </div>
+      </section>
 
-  {/* The Hard Rule */ }
-  < section className = "py-16 px-4" >
+      {/* The Hard Rule */}
+      <section className="py-16 px-4">
     <div className="container mx-auto max-w-4xl">
       <Card className="glass-card border-2 border-bearish/30 bg-gradient-to-br from-bearish/10 to-transparent">
         <CardContent className="p-8 md:p-12">
@@ -216,35 +206,35 @@ const FractalModel = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
-      </section >
-
-  {/* Next Steps */ }
-  < section className = "py-16 px-4" >
-    <div className="container mx-auto max-w-4xl text-center">
-      <h2 className="text-3xl font-bold mb-8 text-foreground">Ready to Apply This?</h2>
-      <p className="text-lg text-muted-foreground mb-8">
-        Now that you understand the fractal model, learn how it plays out in the three core sequences.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <CandlestickButton
-          variant="bullish"
-          onClick={() => navigate('/sequences')}
-          className="gap-2"
-        >
-          Learn the 3 Sequences
-          <TrendingUp className="w-4 h-4" />
-        </CandlestickButton>
-        <CandlestickButton
-          variant="bearish"
-          onClick={() => navigate('/case-studies')}
-        >
-          View Case Studies
-        </CandlestickButton>
       </div>
+      </section>
+
+      {/* Next Steps */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold mb-8 text-foreground">Ready to Apply This?</h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Now that you understand the fractal model, learn how it plays out in the three core sequences.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <CandlestickButton
+              variant="bullish"
+              onClick={() => navigate('/sequences')}
+              className="gap-2"
+            >
+              Learn the 3 Sequences
+              <TrendingUp className="w-4 h-4" />
+            </CandlestickButton>
+            <CandlestickButton
+              variant="bearish"
+              onClick={() => navigate('/case-studies')}
+            >
+              View Case Studies
+            </CandlestickButton>
+          </div>
+        </div>
+      </section>
     </div>
-      </section >
-    </div >
   );
 };
 
