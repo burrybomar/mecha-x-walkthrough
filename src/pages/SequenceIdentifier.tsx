@@ -254,17 +254,16 @@ const SequenceIdentifier = () => {
                       <span className="text-sm text-muted-foreground">
                         Question {currentQuestion + 1} of {questions.length}
                       </span>
-                      <div className="flex gap-2">
+                      <div className="flex gap-1 md:gap-2 flex-1 justify-end ml-4">
                         {questions.map((_, idx) => (
                           <div
                             key={idx}
-                            className={`h-2 w-12 rounded-full transition-all ${
-                              idx < currentQuestion
-                                ? 'bg-primary'
-                                : idx === currentQuestion
+                            className={`h-2 flex-1 max-w-[3rem] rounded-full transition-all ${idx < currentQuestion
+                              ? 'bg-primary'
+                              : idx === currentQuestion
                                 ? 'bg-primary/50'
                                 : 'bg-muted'
-                            }`}
+                              }`}
                           />
                         ))}
                       </div>
@@ -318,25 +317,22 @@ const SequenceIdentifier = () => {
                   const content = getResultContent(result);
                   const Icon = content.icon;
                   return (
-                    <Card className={`border-2 ${
-                      content.color === 'bullish' ? 'border-bullish/30 bg-bullish/5' :
+                    <Card className={`border-2 ${content.color === 'bullish' ? 'border-bullish/30 bg-bullish/5' :
                       content.color === 'bearish' ? 'border-bearish/30 bg-bearish/5' :
-                      content.color === 'primary' ? 'border-primary/30 bg-primary/5' :
-                      'border-muted/30 bg-muted/5'
-                    }`}>
-                      <CardContent className="p-8 md:p-12 text-center space-y-6">
-                        <div className={`inline-block p-4 rounded-full ${
-                          content.color === 'bullish' ? 'bg-bullish/20' :
+                        content.color === 'primary' ? 'border-primary/30 bg-primary/5' :
+                          'border-muted/30 bg-muted/5'
+                      }`}>
+                      <CardContent className="p-6 md:p-12 text-center space-y-6">
+                        <div className={`inline-block p-4 rounded-full ${content.color === 'bullish' ? 'bg-bullish/20' :
                           content.color === 'bearish' ? 'bg-bearish/20' :
-                          content.color === 'primary' ? 'bg-primary/20' :
-                          'bg-muted/20'
-                        }`}>
-                          <Icon className={`w-12 h-12 ${
-                            content.color === 'bullish' ? 'text-bullish' :
+                            content.color === 'primary' ? 'bg-primary/20' :
+                              'bg-muted/20'
+                          }`}>
+                          <Icon className={`w-12 h-12 ${content.color === 'bullish' ? 'text-bullish' :
                             content.color === 'bearish' ? 'text-bearish' :
-                            content.color === 'primary' ? 'text-primary' :
-                            'text-muted-foreground'
-                          }`} />
+                              content.color === 'primary' ? 'text-primary' :
+                                'text-muted-foreground'
+                            }`} />
                         </div>
 
                         <div>
@@ -344,11 +340,10 @@ const SequenceIdentifier = () => {
                             {content.title}
                           </h2>
                           {content.confidence && (
-                            <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4 ${
-                              content.confidence.includes('High') ? 'bg-bullish/20 text-bullish' :
+                            <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4 ${content.confidence.includes('High') ? 'bg-bullish/20 text-bullish' :
                               content.confidence.includes('Medium') ? 'bg-primary/20 text-primary' :
-                              'bg-muted/40 text-muted-foreground'
-                            }`}>
+                                'bg-muted/40 text-muted-foreground'
+                              }`}>
                               {content.confidence}
                             </div>
                           )}
