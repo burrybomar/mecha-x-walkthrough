@@ -6,8 +6,8 @@ import { CandlestickCard } from '@/components/CandlestickCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { IndicatorExplainer } from '@/components/IndicatorExplainer';
-import { HTFCanvasVisual } from '@/components/HTFCanvasVisual';
-import { FractalNestingVisual } from '@/components/FractalNestingVisual';
+import { HTFCanvasVisual } from '@/components/visuals/HTFCanvasVisual';
+import { FractalNestingVisual } from '@/components/visuals/FractalNestingVisual';
 
 const FractalModel = () => {
   const navigate = useNavigate();
