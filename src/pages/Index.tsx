@@ -1,4 +1,3 @@
-```
 import { AnimatedCandlestickBackground } from "@/components/AnimatedCandlestickBackground";
 import { Hero } from "@/components/landing/Hero";
 import { Framework } from "@/components/landing/Framework";
@@ -8,8 +7,8 @@ import { Configuration } from "@/components/landing/Configuration";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { LearnAccess } from "@/components/landing/LearnAccess";
 import { Footer } from "@/components/landing/Footer";
-import { FeatureCard } from "@/components/landing/FeatureCard"; // Added import for FeatureCard
-import { Layers, Target, Activity, ArrowRight, AlertCircle, Settings } from "lucide-react"; // Added imports for Lucide icons
+import { FeatureCard } from "@/components/landing/FeatureCard";
+import { Layers, Target, Activity, ArrowRight, AlertCircle, Settings } from "lucide-react";
 
 const Index = () => {
     return (
@@ -79,4 +78,3 @@ const Index = () => {
 };
 
 export default Index;
-```
