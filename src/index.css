@@ -10,40 +10,61 @@
 @layer base {
   :root {
     /* Base Colors - Glacier Minimalist Foundation */
-    --background: 210 20% 98%; /* Very light cool grey/white */
-    --foreground: 220 20% 10%; /* Deep charcoal/black for text visibility */
+    /* Glacier Palette */
+    --background: 210 33% 95%;
+    /* #E9F2FA - Lightest Blue */
+    --foreground: 206 47% 12%;
+    /* #10212C - Darkest Blue (Text) */
 
-    /* Surface Colors - Frosty Glass */
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --card: 210 33% 95%;
+    /* #E9F2FA */
+    --card-foreground: 206 47% 12%;
+    /* #10212C */
 
-    /* Brand Colors - Glacier Blue */
-    --primary: 200 60% 60%; /* Glacier Blue - Calm, icy, professional */
-    --primary-foreground: 0 0% 100%;
+    --popover: 210 33% 95%;
+    /* #E9F2FA */
+    --popover-foreground: 206 47% 12%;
+    /* #10212C */
 
-    --secondary: 210 20% 90%; /* Light grey for subtle elements */
-    --secondary-foreground: 220 20% 10%;
+    --primary: 204 36% 50%;
+    /* #5289AD - Glacier Blue */
+    --primary-foreground: 210 33% 95%;
+    /* #E9F2FA */
 
-    --muted: 210 20% 94%;
-    --muted-foreground: 220 10% 40%; /* Medium grey for secondary text */
+    --secondary: 200 16% 82%;
+    /* #D6E3E6 - Light Grey Blue */
+    --secondary-foreground: 206 47% 12%;
+    /* #10212C */
 
-    --accent: 200 50% 90%; /* Very light blue accent */
-    --accent-foreground: 220 20% 10%;
+    --muted: 200 13% 71%;
+    /* #ACBCBF - Muted Grey */
+    --muted-foreground: 200 10% 42%;
+    /* #667072 - Darker Grey */
 
-    --destructive: 0 70% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --accent: 206 66% 82%;
+    /* #B2D4F0 - Light Blue Accent */
+    --accent-foreground: 206 47% 12%;
+    /* #10212C */
 
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 200 60% 60%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --radius: 0.5rem; /* Slightly softer corners for modern feel */
+    --border: 200 13% 71%;
+    /* #ACBCBF */
+    --input: 200 13% 71%;
+    /* #ACBCBF */
+    --ring: 204 36% 50%;
+    /* #5289AD */
 
-    /* Trading Colors - Artistic Pastel */
-    --bullish: 200 60% 60%; /* Glacier Blue */
-    --bearish: 0 0% 70%; /* Neutral Grey */
+    --radius: 0.5rem;
+
+    /* Custom Trading Colors */
+    --bullish: 204 36% 50%;
+    /* #5289AD - Glacier Blue */
+    --bearish: 200 10% 42%;
+    /* #667072 - Neutral Grey */
+    --neutral: 200 16% 82%;
+    /* #D6E3E6 */
   }
 }
 
@@ -54,28 +75,37 @@
 
   body {
     @apply text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace; /* Monospace as requested */
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    /* Monospace as requested */
     background: hsl(var(--background));
     overflow-x: hidden;
   }
 
   /* Typography */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-black; /* Ensure headings are black */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight text-black;
+    /* Ensure headings are black */
   }
 }
 
 @layer utilities {
+
   /* Glacier Glassmorphism */
   .glass-panel {
     @apply backdrop-blur-xl border border-white/40 shadow-sm relative overflow-hidden;
-    background: rgba(255, 255, 255, 0.6); /* Frosted glass look */
-    box-shadow: 
+    background: rgba(255, 255, 255, 0.6);
+    /* Frosted glass look */
+    box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.05),
       0 2px 4px -1px rgba(0, 0, 0, 0.03),
       inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
-  
+
   .glass-card {
     @apply backdrop-blur-lg border border-white/50 shadow-sm transition-all duration-300 hover:shadow-md;
     background: rgba(255, 255, 255, 0.7);
@@ -90,7 +120,7 @@
   .bg-glacier-gradient {
     background: linear-gradient(135deg, hsl(200, 60%, 95%) 0%, hsl(210, 20%, 98%) 100%);
   }
-  
+
   .text-gradient-glacier {
     background-clip: text;
     -webkit-background-clip: text;

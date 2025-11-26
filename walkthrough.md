@@ -1,37 +1,28 @@
-# Visual Overhaul: Glacier Minimalist
+# Visual Refinements: Glacier Theme & Interactivity
 
-I have completely redone the website's visual theme to match your request for an "artistic, minimalist, candlestick-oriented" design with a "Glacier Blue" and "Light Grey" palette.
+I have refined the "Glacier Minimalist" theme based on your feedback, restoring interactivity and fixing the header clashing issues.
 
 ## Key Changes
 
-### 1. New Color Palette & Theme (`src/index.css`)
+### 1. New Interactive Background (`src/components/visuals/GlacierBackground.tsx`)
 
-- **Background**: Very light cool grey/white (`hsl(210, 20%, 98%)`) for a clean, minimalist canvas.
-- **Text**: Deep charcoal/black (`hsl(220, 20%, 10%)`) for maximum visibility and contrast.
-- **Primary**: "Glacier Blue" (`hsl(200, 60%, 60%)`) - a calm, icy blue used for branding and bullish indicators.
-- **Secondary**: Light grey (`hsl(210, 20%, 90%)`) for subtle UI elements.
-- **Glassmorphism**: Implemented a new `.glass-panel` class with a "frosted glass" look (white with high blur and subtle border), replacing the old dark glass style.
+- **Interactive**: Added a mouse-following "spotlight" effect that connects particles in a network, restoring the "alive" feel you missed.
+- **Palette**: Uses the exact colors from your provided palette (Glacier Blue `#5289AD`, Light Blue `#B2D4F0`, etc.).
+- **Performance**: Built with HTML5 Canvas for smooth 60fps animation without heavy SVG DOM elements.
 
-### 2. New Background (`src/components/visuals/MinimalistCandleBackground.tsx`)
+### 2. Navbar Polish (`src/components/Navbar.tsx`)
 
-- Created a custom HTML5 Canvas component.
-- **Visuals**: Draws thin, artistic candlesticks that gently float upwards.
-- **Colors**: Uses the Glacier Blue (bullish) and Light Grey (bearish) palette.
-- **Animation**: Subtle pulsing and movement to create a "living" background without being distracting.
-- **Integration**: Added to `App.tsx` to render globally behind all content.
+- **Frosted Ice Theme**: Switched from dark glass to a light, frosted glass effect (`bg-white/70` with `backdrop-blur-xl`).
+- **Clarity**: Removed the "dirty" look by ensuring it blends seamlessly with the light background.
+- **Contrast**: Enforced black text and primary-colored accents for perfect readability.
 
-### 3. Typography
+### 3. Global Palette Update (`src/index.css`)
 
-- **Font**: Switched to `JetBrains Mono` / `Fira Code` (monospace) for the entire site to give it a technical, trading-focused feel.
-- **Headings**: Bold, uppercase, and strictly black for impact.
-
-### 4. Polish & Contrast Fixes
-
-- **Hero Section**: Updated text gradients to use dark colors (`from-foreground` etc.) so they are clearly visible on the light background.
-- **Features Section**: Replaced invisible white-on-white backgrounds with `bg-secondary/50` and `border-black/5` to ensure cards and labels pop correctly.
+- **Exact Match**: Updated all CSS variables to match the hex codes from your provided palette image.
+- **High Contrast**: `foreground` is now `#10212C` (Darkest Blue) instead of generic black, providing a softer but still high-contrast reading experience.
 
 ## Verification
 
-- **Aesthetic**: The site now feels much lighter, cleaner, and more "premium" with the glacier theme.
-- **Readability**: Black text on light backgrounds ensures excellent readability.
-- **Interactivity**: The background provides a dynamic, state-of-the-art feel.
+- **Interactivity**: Move your mouse around the background to see the network connections form.
+- **Header**: Scroll down to see the "Frosted Ice" effect on the navbar.
+- **Colors**: The entire site now adheres strictly to the "Glacier" palette.
