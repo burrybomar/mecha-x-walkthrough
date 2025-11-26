@@ -125,90 +125,23 @@ const Sequences = () => {
           </p>
         </header>
 
-        {/* Interactive Viewer */}
-        <div className="mb-16">
+        {/* Interactive Viewer - The Star of the Show */}
+        <div className="mb-24">
           <InteractiveSequenceViewer />
         </div>
 
-        {/* Step-by-Step Breakdown */}
-        <div className="grid md:grid-cols-2 gap-12 mb-20">
-          <div className="space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold shrink-0">1</div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">The Setup (C1)</h3>
-                <p className="text-muted-foreground mb-4">
-                  We identify the <strong>Internal Range Liquidity (IRL)</strong>. This is the "Bait".
-                  Price must tap into a POI (NWOG, MWDR, FVG) or simply sweep a 1H High/Low.
-                </p>
-                <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
-                  <span className="text-primary font-mono font-bold block mb-1">MECHA-X SHOWS:</span>
-                  BSL/SSL Lines, POI Boxes (NWOG/MWDR).
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent font-bold shrink-0">2</div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">The Trigger (C2)</h3>
-                <p className="text-muted-foreground mb-4">
-                  The <strong>Sweep & Rejection</strong>. Price grabs the IRL but <strong className="text-foreground">MUST close back INSIDE</strong> the range.
-                  If it closes outside, it is a breakout, not a sweep.
-                </p>
-                <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
-                  <span className="text-accent font-mono font-bold block mb-1">MECHA-X SHOWS:</span>
-                  ⚡ Label (REV/SNAP/EXP) + Timeframe Alignment.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 font-bold shrink-0">3</div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">The Confirmation (C3)</h3>
-                <p className="text-muted-foreground mb-4">
-                  The <strong>Expansion</strong>. We do not wait for the close.
-                  <br />
-                  <strong className="text-foreground">Enter on C3 Open</strong> for continuation. The C2 sweep was the confirmation.
-                </p>
-                <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
-                  <span className="text-purple-400 font-mono font-bold block mb-1">MECHA-X SHOWS:</span>
-                  C3 Zone Box + CISD Projections.
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 font-bold shrink-0">4</div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">The Delivery (C4)</h3>
-                <p className="text-muted-foreground mb-4">
-                  The <strong>Target (ERL)</strong>. Price delivers to the opposing liquidity.
-                  This is where we exit.
-                </p>
-                <div className="bg-white/5 p-4 rounded-lg border border-white/10 text-sm">
-                  <span className="text-green-400 font-mono font-bold block mb-1">MECHA-X SHOWS:</span>
-                  2.0x / 2.5x Projection Targets.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Case Studies Section */}
-        <section className="py-16 border-t border-white/5">
+        {/* Case Studies Section - Execution Module */}
+        <section className="py-12 border-t border-white/5">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Real World Examples</h2>
+            <Badge variant="outline" className="mb-4 border-primary/20 text-primary">LIVE EXECUTION</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Market Context</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              See how the sequence plays out in live market conditions.
+              Real world application of the sequence logic.
             </p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-12 bg-secondary/20">
               {caseStudies.map((study) => (
                 <TabsTrigger
                   key={study.id}
@@ -224,115 +157,82 @@ const Sequences = () => {
             {caseStudies.map((study) => (
               <TabsContent key={study.id} value={study.id}>
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-8"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid lg:grid-cols-3 gap-6"
                 >
-                  {/* Header Card */}
-                  <CandlestickCard variant={study.color === 'primary' ? 'bullish' : study.color} wickHeight="md">
+                  {/* Column 1: Context */}
+                  <CandlestickCard variant={study.color === 'primary' ? 'bullish' : study.color} wickHeight="sm" className="lg:col-span-1">
                     <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <Badge className={`mb-3 ${study.color === 'bullish' ? 'bg-bullish text-bullish-foreground' :
-                            study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
-                              'bg-primary text-primary-foreground'
-                            }`}>
-                            {study.sequence} Sequence
-                          </Badge>
-                          <CardTitle className="text-3xl">{study.market}</CardTitle>
-                        </div>
-                        <study.icon className={`w-12 h-12 ${study.color === 'bullish' ? 'text-bullish' :
-                          study.color === 'bearish' ? 'text-bearish' :
-                            'text-primary'
-                          }`} />
-                      </div>
+                      <Badge className={`w-fit mb-2 ${study.color === 'bullish' ? 'bg-bullish text-bullish-foreground' :
+                        study.color === 'bearish' ? 'bg-bearish text-bearish-foreground' :
+                          'bg-primary text-primary-foreground'
+                        }`}>
+                        {study.market}
+                      </Badge>
+                      <CardTitle className="text-2xl">{study.sequence} Setup</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold text-lg mb-3">HTF Narrative</h4>
-                          <ul className="space-y-2">
-                            {study.narrative.map((point, idx) => (
-                              <li key={idx} className="flex items-start gap-2">
-                                <span className="text-primary mt-1">→</span>
-                                <span className="text-muted-foreground">{point}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
+                      <h4 className="font-semibold text-sm text-muted-foreground mb-3 uppercase tracking-wider">Narrative</h4>
+                      <ul className="space-y-3">
+                        {study.narrative.map((point, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm">
+                            <span className="text-primary mt-1">→</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </CardContent>
                   </CandlestickCard>
 
-                  {/* Setup Details */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card className="border-primary/30">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <Clock className="w-5 h-5 text-primary" />
-                          Setup Timeline
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Time</p>
-                          <p className="font-medium">{study.setup.time}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">LTF Swing Formation</p>
-                          <p className="font-medium">{study.setup.ltfSwing}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">4H Structure</p>
-                          <p className="font-medium">{study.setup.fourH}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="border-primary/30">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <Target className="w-5 h-5 text-primary" />
-                          Execution Plan
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Entry Trigger</p>
-                          <p className="font-medium">{study.setup.entry}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Target</p>
-                          <p className="font-medium">{study.setup.target}</p>
-                        </div>
-                        <div className={`p-3 rounded-lg border-2 ${study.color === 'bullish' ? 'bg-bullish/10 border-bullish/30' :
-                          study.color === 'bearish' ? 'bg-bearish/10 border-bearish/30' :
-                            'bg-primary/10 border-primary/30'
-                          }`}>
-                          <p className="text-sm font-medium">
-                            Stop: Protected by LTF swing
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Key Takeaways */}
-                  <Card className="border-2 border-primary/30 bg-primary/5">
+                  {/* Column 2: The Plan */}
+                  <Card className="lg:col-span-1 border-primary/20 bg-secondary/5">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Target className="w-5 h-5 text-primary" />
+                        Execution Plan
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Time</p>
+                          <p className="font-mono font-medium text-sm">{study.setup.time}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Target</p>
+                          <p className="font-mono font-medium text-sm">{study.setup.target}</p>
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t border-white/5">
+                        <p className="text-xs text-muted-foreground mb-1">Entry Trigger</p>
+                        <p className="font-medium text-sm">{study.setup.entry}</p>
+                      </div>
+                      <div className={`p-3 rounded border ${study.color === 'bullish' ? 'bg-bullish/5 border-bullish/20 text-bullish' :
+                        study.color === 'bearish' ? 'bg-bearish/5 border-bearish/20 text-bearish' :
+                          'bg-primary/5 border-primary/20 text-primary'
+                        }`}>
+                        <p className="text-xs font-bold uppercase">
+                          Invalidation: Protected by LTF swing
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Column 3: Logic */}
+                  <Card className="lg:col-span-1 border-primary/20 bg-secondary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
                         <AlertTriangle className="w-5 h-5 text-primary" />
-                        Key Mecha-X Logic
+                        Why It Worked
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3">
                         {study.keyPoints.map((point, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex-shrink-0">
-                              {idx + 1}
-                            </span>
+                          <li key={idx} className="flex items-start gap-3 text-sm">
+                            <span className="font-mono text-primary font-bold">0{idx + 1}</span>
                             <span className="text-muted-foreground">{point}</span>
                           </li>
                         ))}
