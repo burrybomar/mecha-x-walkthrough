@@ -20,9 +20,9 @@ export const GlacierBackground: React.FC<GlacierBackgroundProps> = ({ opacity = 
 
         // Glacier Palette Colors - Darkened for visibility on light background
         const colors = [
-            'hsla(204, 46%, 40%, 0.6)', // Darker Glacier Blue
-            'hsla(206, 50%, 40%, 0.4)', // Darker Accent
-            'hsla(200, 20%, 30%, 0.3)', // Darker Grey
+            'hsla(204, 46%, 30%, 0.8)', // Deep Glacier Blue
+            'hsla(206, 50%, 30%, 0.6)', // Deep Accent
+            'hsla(200, 20%, 20%, 0.5)', // Dark Charcoal
         ];
 
         class Particle {

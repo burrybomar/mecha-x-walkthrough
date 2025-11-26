@@ -48,7 +48,7 @@ const App = () => {
         </a>
         <Toaster />
         <Sonner />
-        <GlacierBackground />
+        <GlacierBackground opacity={0.8} />
         <BrowserRouter>
           <Navbar />
           <OnboardingTour />

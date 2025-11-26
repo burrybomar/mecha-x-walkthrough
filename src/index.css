@@ -100,17 +100,18 @@
   /* Glacier Glassmorphism */
   .glass-panel {
     @apply backdrop-blur-xl border border-white/40 shadow-sm relative overflow-hidden;
-    background: rgba(255, 255, 255, 0.6);
-    /* Frosted glass look */
+    background: rgba(255, 255, 255, 0.3);
+    /* More transparent frosted glass */
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.05),
       0 2px 4px -1px rgba(0, 0, 0, 0.03),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      inset 0 0 0 1px rgba(255, 255, 255, 0.3);
   }
 
   .glass-card {
     @apply backdrop-blur-lg border border-white/50 shadow-sm transition-all duration-300 hover:shadow-md;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.4);
+    /* More transparent for cards */
   }
 
   /* Text Visibility Utilities */

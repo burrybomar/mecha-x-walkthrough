@@ -8,6 +8,7 @@ I have refined the "Glacier Minimalist" theme based on your feedback, restoring 
 
 - **Interactive**: Added a mouse-following "spotlight" effect that connects particles in a network, restoring the "alive" feel you missed.
 - **Palette**: Uses the exact colors from your provided palette (Glacier Blue `#5289AD`, Light Blue `#B2D4F0`, etc.).
+- **Visibility**: Increased opacity to **0.8** and darkened particles to ensure they stand out clearly against the light background.
 - **Performance**: Built with HTML5 Canvas for smooth 60fps animation without heavy SVG DOM elements.
 
 ### 2. Navbar Polish (`src/components/Navbar.tsx`)
@@ -19,7 +20,8 @@ I have refined the "Glacier Minimalist" theme based on your feedback, restoring 
 ### 3. Global Palette Update (`src/index.css`)
 
 - **Exact Match**: Updated all CSS variables to match the hex codes from your provided palette image.
-- **High Contrast**: `foreground` is now `#10212C` (Darkest Blue) instead of generic black, providing a softer but still high-contrast reading experience.
+- **High Contrast**: `foreground` is now `#10212C` (Darkest Blue) instead of generic black.
+- **Transparency**: Reduced opacity of glass panels (`bg-white/30`) to let the background animation shine through.
 
 ## Verification
 
